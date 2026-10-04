@@ -1,0 +1,8 @@
+mkdir -p my-site
+echo "<h1>My own site</h1>" > my-site/index.html
+docker run -d --name mysite -p 8082:80 \
+  --mount type=bind,source="$(pwd)/my-site",target=/usr/share/nginx/html,readonly \
+  nginx:1.30-alpine
+---
+d3ce7e3fbbe827570b926864e02323049bdeb9a0b70a0d66a9b7b4bb57588842
+# exit 0

@@ -1,0 +1,6 @@
+docker rm web2
+docker run -d --name web2 -p 8081:80 nginx:1.30-alpine
+---
+web2
+44193daffa6ff2d9f0946b5b60862d1ab2b66d4602febb6d2a3aa84d89c00697
+# exit 0

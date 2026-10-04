@@ -1,0 +1,32 @@
+docker compose down
+docker compose -f docker-compose.fixed.yml up -d
+---
+ Container ts06-web-1 Stopping 
+ Container ts06-web-1 Stopped 
+ Container ts06-web-1 Removing 
+ Container ts06-web-1 Removed 
+ Container ts06-api-1 Stopping 
+ Container ts06-api-1 Stopped 
+ Container ts06-api-1 Removing 
+ Container ts06-api-1 Removed 
+ Container ts06-db-1 Stopping 
+ Container ts06-db-1 Stopped 
+ Container ts06-db-1 Removing 
+ Container ts06-db-1 Removed 
+ Network ts06_default Removing 
+ Network ts06_default Removed 
+ Network ts06_default Creating 
+ Network ts06_default Created 
+ Container ts06-db-1 Creating 
+ Container ts06-db-1 Created 
+ Container ts06-api-1 Creating 
+ Container ts06-api-1 Created 
+ Container ts06-web-1 Creating 
+ Container ts06-web-1 Created 
+ Container ts06-db-1 Starting 
+ Container ts06-db-1 Started 
+ Container ts06-api-1 Starting 
+ Container ts06-api-1 Started 
+ Container ts06-web-1 Starting 
+ Container ts06-web-1 Started 
+# exit 0

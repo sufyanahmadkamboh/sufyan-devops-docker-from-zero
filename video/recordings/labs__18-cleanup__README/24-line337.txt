@@ -1,0 +1,4 @@
+docker run --rm -v lab18-db:/data -v "$(pwd)":/backup alpine:3.24 tar xzf /backup/lab18-db.tar.gz -C /data
+---
+
+# exit 0

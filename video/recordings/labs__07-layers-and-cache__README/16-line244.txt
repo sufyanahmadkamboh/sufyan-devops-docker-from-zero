@@ -1,0 +1,7 @@
+docker rmi simple-app:step3 simple-app:step5
+---
+Untagged: simple-app:step3
+Deleted: sha256:d484086a417ba4ecabc80fa9d3999b1c1e70fcdfc1778cf9e3e7965b88fdb5cb
+Untagged: simple-app:step5
+Deleted: sha256:a899f46b397dd30c0fe6e90b745c2169ab990b4d23fc8dd72afafe652b27c2d6
+# exit 0

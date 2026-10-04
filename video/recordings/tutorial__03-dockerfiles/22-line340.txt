@@ -1,0 +1,6 @@
+mkdir -p junk
+head -c 50000000 /dev/zero > junk/big.bin
+printf 'DB_PASSWORD=super-secret-do-not-ship\n' > .env
+---
+
+# exit 0

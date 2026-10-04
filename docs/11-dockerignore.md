@@ -83,7 +83,7 @@ docker build --progress=plain -f dockerfile-steps/02.Dockerfile -t ignore-test:b
 
 ```text
 #3 transferring context: 2B done
-#4 transferring context: 60.02MB 2.4s done
+#5 transferring context: 60.02MB 2.2s done
 ```
 
 Look inside the image:

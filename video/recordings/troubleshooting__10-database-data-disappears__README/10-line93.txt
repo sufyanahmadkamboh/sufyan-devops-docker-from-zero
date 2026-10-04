@@ -1,0 +1,6 @@
+docker volume ls
+---
+DRIVER    VOLUME NAME
+local     1c985bc582a7848c9e51ef9e22bf1ed67f6dd5a3df1e4b5967061acac21dd3ba
+local     163983c8c445be5cf1a0792737ee534cbe1ccb2b1dade237bd0c1666025e54fe
+# exit 0

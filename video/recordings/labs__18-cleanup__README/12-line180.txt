@@ -1,0 +1,6 @@
+docker volume ls
+---
+DRIVER    VOLUME NAME
+local     71a6c043c5eeac9d158ec3251f9af7029cb77b0670569e36d712529d61883967
+local     lab18-keep
+# exit 0

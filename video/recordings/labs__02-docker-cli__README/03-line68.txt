@@ -1,0 +1,10 @@
+docker info --format 'Server version: {{.ServerVersion}}
+Operating system: {{.OperatingSystem}}
+Containers: {{.Containers}} (running: {{.ContainersRunning}})
+Images: {{.Images}}'
+---
+Server version: 29.4.3
+Operating system: Docker Desktop
+Containers: 1 (running: 1)
+Images: 32
+# exit 0

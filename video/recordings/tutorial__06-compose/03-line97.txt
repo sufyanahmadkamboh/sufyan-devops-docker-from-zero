@@ -1,0 +1,6 @@
+docker compose config --services
+---
+db
+api
+web
+# exit 0

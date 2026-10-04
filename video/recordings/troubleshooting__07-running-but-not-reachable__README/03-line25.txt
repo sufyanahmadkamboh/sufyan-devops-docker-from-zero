@@ -1,0 +1,4 @@
+docker run -d --name simple -p 5000:5000 -e HOST=127.0.0.1 simple-app:1.0
+---
+d22e9006c775b809663c0e2449e43a1c9f692a43556eb87a2296bf7d1668e65e
+# exit 0

@@ -1,0 +1,19 @@
+docker top web
+---
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+root                1713482             1713459             0                   05:17               ?                   00:00:00            nginx: master process nginx -g daemon off;
+statd               1713536             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713537             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713538             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713539             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713540             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713541             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713542             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713543             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713544             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713545             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713546             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713547             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713548             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713549             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+# exit 0

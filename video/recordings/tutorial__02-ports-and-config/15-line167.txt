@@ -1,0 +1,4 @@
+docker ps -a --filter name=web4 --format '{{.Names}}: {{.Status}}'
+---
+web4: Created
+# exit 0

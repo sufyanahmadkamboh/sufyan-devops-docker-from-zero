@@ -1,0 +1,9 @@
+docker build -q -t board-api examples/multi-container-app/api
+docker build -q -t board-web examples/multi-container-app/web
+docker images --format '{{.Repository}}:{{.Tag}}' | grep board
+---
+sha256:cb22e09bad85f6087d7a3489651fca4af4dbc0a9b6ecbb37f0d0ba79867a967a
+sha256:203565b63fdf403c5234088fa417fbf814674adbe2bab84ff43149fa79249ad3
+board-web:latest
+board-api:latest
+# exit 0

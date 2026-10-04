@@ -1,0 +1,4 @@
+docker run -d --name build-ok -p 5000:5000 build-demo:fixed
+---
+b41e472722002a31b0319558a215a1c14b676c9fb8819db40778058f78d35e77
+# exit 0

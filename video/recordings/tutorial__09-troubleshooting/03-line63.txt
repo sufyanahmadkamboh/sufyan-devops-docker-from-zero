@@ -1,0 +1,4 @@
+docker run -d --name ts01 -p 5000:5000 ts01
+---
+10cad33942efe4d4e3a8980ec0c50717595602851d22672fdb8f4147dd5da9f2
+# exit 0

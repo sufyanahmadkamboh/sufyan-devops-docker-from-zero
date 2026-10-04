@@ -1,0 +1,5 @@
+docker build --progress=plain -f dockerfile-steps/02.Dockerfile -t simple-app:clean . 2>&1 | grep 'transferring context'
+---
+#3 transferring context: 295B done
+#4 transferring context: 63B done
+# exit 0

@@ -1,0 +1,57 @@
+docker compose -f docker-compose.hub.yml up -d
+---
+ Image sufibaba6629/docker-from-zero-web:1.0.0 Pulling 
+ Image sufibaba6629/docker-from-zero-api:1.0.0 Pulling 
+ d89f95dd3c30 Pulling fs layer 0B
+ f768e9e7b3b9 Pulling fs layer 0B
+ 1f87100fbfdb Pulling fs layer 0B
+ 57cddc056f1a Pulling fs layer 0B
+ 1f07688907fd Pulling fs layer 0B
+ 3fc17301b11e Pulling fs layer 0B
+ e77a8cdaf490 Download complete 0B
+ 3fc17301b11e Download complete 0B
+ 1f87100fbfdb Download complete 0B
+ d89f95dd3c30 Download complete 0B
+ 3fc17301b11e Extracting 1B
+ f768e9e7b3b9 Download complete 0B
+ 0a9c71539df3 Download complete 0B
+ 1f07688907fd Download complete 0B
+ 3fc17301b11e Pull complete 0B
+ 1f07688907fd Pull complete 0B
+ Image sufibaba6629/docker-from-zero-web:1.0.0 Pulled 
+ 57cddc056f1a Downloading 2.097MB
+ 57cddc056f1a Downloading 4.194MB
+ 57cddc056f1a Downloading 7.34MB
+ 57cddc056f1a Downloading 10.49MB
+ 57cddc056f1a Download complete 0B
+ 57cddc056f1a Extracting 1B
+ 57cddc056f1a Extracting 1B
+ 57cddc056f1a Extracting 1B
+ d89f95dd3c30 Pull complete 0B
+ 57cddc056f1a Pull complete 0B
+ 1f87100fbfdb Pull complete 0B
+ f768e9e7b3b9 Pull complete 0B
+ Image sufibaba6629/docker-from-zero-api:1.0.0 Pulled 
+ Network capstone_frontend Creating 
+ Network capstone_frontend Created 
+ Network capstone_backend Creating 
+ Network capstone_backend Created 
+ Volume capstone_db-data Creating 
+ Volume capstone_db-data Created 
+ Container capstone-db-1 Creating 
+ Container capstone-db-1 Created 
+ Container capstone-api-1 Creating 
+ Container capstone-api-1 Created 
+ Container capstone-web-1 Creating 
+ Container capstone-web-1 Created 
+ Container capstone-db-1 Starting 
+ Container capstone-db-1 Started 
+ Container capstone-db-1 Waiting 
+ Container capstone-db-1 Healthy 
+ Container capstone-api-1 Starting 
+ Container capstone-api-1 Started 
+ Container capstone-api-1 Waiting 
+ Container capstone-api-1 Healthy 
+ Container capstone-web-1 Starting 
+ Container capstone-web-1 Started 
+# exit 0

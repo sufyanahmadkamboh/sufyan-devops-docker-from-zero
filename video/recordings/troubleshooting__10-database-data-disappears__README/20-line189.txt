@@ -1,0 +1,11 @@
+docker compose -f docker-compose.old-tutorial.yml up -d
+---
+ Network ts10b_default Creating 
+ Network ts10b_default Created 
+ Volume ts10b_db-data Creating 
+ Volume ts10b_db-data Created 
+ Container ts10b-db-1 Creating 
+ Container ts10b-db-1 Created 
+ Container ts10b-db-1 Starting 
+ Container ts10b-db-1 Started 
+# exit 0

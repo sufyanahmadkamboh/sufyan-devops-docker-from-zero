@@ -1,0 +1,5 @@
+docker volume inspect notes note --format '{{.Name}}  created {{.CreatedAt}}'
+---
+notes  created 2026-10-04T04:58:11Z
+note  created 2026-10-04T04:58:12Z
+# exit 0

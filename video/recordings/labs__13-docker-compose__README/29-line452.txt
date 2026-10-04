@@ -1,0 +1,7 @@
+docker compose ps -a
+---
+NAME                        IMAGE                     COMMAND                  SERVICE   CREATED         STATUS                     PORTS
+multi-container-app-api-1   multi-container-app-api   "gunicorn --bind 0.0…"   api       8 seconds ago   Up 7 seconds               5000/tcp
+multi-container-app-db-1    postgres:18-alpine        "docker-entrypoint.s…"   db        8 seconds ago   Exited (0) 4 seconds ago   
+multi-container-app-web-1   multi-container-app-web   "/docker-entrypoint.…"   web       8 seconds ago   Up 7 seconds               0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
+# exit 0

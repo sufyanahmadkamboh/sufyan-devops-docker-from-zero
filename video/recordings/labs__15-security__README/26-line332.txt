@@ -1,0 +1,12 @@
+docker rm -f ro hardened leaky tidy fortress 2>/dev/null || true
+docker rmi simple-app:root
+cd ../..
+---
+ro
+hardened
+leaky
+tidy
+fortress
+Untagged: simple-app:root
+Deleted: sha256:df16f3124f69729afd45409cd3c1cb5f30ee2b83c6373d91d255d34e1778536f
+# exit 0

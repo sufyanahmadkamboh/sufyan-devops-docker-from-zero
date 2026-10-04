@@ -1,0 +1,29 @@
+docker logs --tail 3 web
+docker logs --since 10m --timestamps web | tail -n 2
+---
+2026/10/04 04:51:47 [notice] 1#1: start worker process 41
+2026/10/04 04:51:47 [notice] 1#1: start worker process 42
+2026/10/04 04:51:47 [notice] 1#1: start worker process 43
+2026-10-04T04:51:47.675028762Z 2026/10/04 04:51:47 [notice] 1#1: using the "epoll" event method
+2026-10-04T04:51:47.675081311Z 2026/10/04 04:51:47 [notice] 1#1: nginx/1.30.5
+2026-10-04T04:51:47.675084899Z 2026/10/04 04:51:47 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026-10-04T04:51:47.675086707Z 2026/10/04 04:51:47 [notice] 1#1: OS: Linux 6.6.114.1-microsoft-standard-WSL2
+2026-10-04T04:51:47.675088509Z 2026/10/04 04:51:47 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026-10-04T04:51:47.675186219Z 2026/10/04 04:51:47 [notice] 1#1: start worker processes
+2026-10-04T04:51:47.675457001Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 30
+2026-10-04T04:51:47.675675296Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 31
+2026-10-04T04:51:47.675775768Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 32
+2026-10-04T04:51:47.675910862Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 33
+2026-10-04T04:51:47.676000485Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 34
+2026-10-04T04:51:47.676201222Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 35
+2026-10-04T04:51:47.676516703Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 36
+2026-10-04T04:51:47.676528341Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 37
+2026-10-04T04:51:47.676698188Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 38
+2026-10-04T04:51:47.676914076Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 39
+2026-10-04T04:51:47.677118730Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 40
+2026-10-04T04:51:47.677329182Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 41
+2026-10-04T04:51:47.677570982Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 42
+2026-10-04T04:51:47.677808099Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 43
+2026-10-04T04:51:47.668461541Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+2026-10-04T04:51:47.669890531Z /docker-entrypoint.sh: Configuration complete; ready for start up
+# exit 0

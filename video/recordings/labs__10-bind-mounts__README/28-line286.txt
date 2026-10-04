@@ -1,0 +1,9 @@
+docker rm -f web mysite
+docker rmi my-nginx:1.0
+rm -rf my-site
+---
+web
+mysite
+Untagged: my-nginx:1.0
+Deleted: sha256:f35e597de4602887b4b1de22bd58f361db365531831c10ca80f09ce4cc10508d
+# exit 0

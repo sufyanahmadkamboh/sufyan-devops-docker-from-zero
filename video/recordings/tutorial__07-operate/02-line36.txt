@@ -1,0 +1,6 @@
+curl -s -o /dev/null http://localhost:8080/
+curl -s -o /dev/null http://localhost:8080/
+curl -s -o /dev/null http://localhost:8080/this-page-does-not-exist
+---
+
+# exit 0

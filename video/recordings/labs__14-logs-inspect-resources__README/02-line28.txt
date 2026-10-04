@@ -1,0 +1,8 @@
+docker network create lab14-net
+docker volume create lab14-data
+docker run -d --name web --network lab14-net -p 8080:80 -e APP_ENV=lab14 -v lab14-data:/data nginx:1.30-alpine
+---
+fc3c94a4b690a9f0b1b42b60c5f2f63ba50f5488bc4e1f4cff57e81f6e7a37d8
+lab14-data
+5588460359f0eb31454845a4f2591312dfc8807202d0b8463311247b2ecfea4f
+# exit 0

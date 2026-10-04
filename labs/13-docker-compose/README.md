@@ -95,13 +95,15 @@ connects every service to it.
 
 Want to see the file the way Compose understands it, after filling in defaults? Ask Compose:
 
-<!-- test: contains=web; contains=api; contains=db -->
+<!-- test: contains=web; contains=api; contains=db; output -->
 ```bash
 docker compose config --services
 ```
 
 ```text
-(output appears here when the tests run)
+db
+api
+web
 ```
 
 `docker compose config` is a good habit: if the file has a typo or bad indentation, this command tells you before
@@ -170,7 +172,7 @@ docker network ls --filter name=multi-container-app
 
 ```text
 NETWORK ID     NAME                          DRIVER    SCOPE
-3871c31348df   multi-container-app_default   bridge    local
+211f8c6a7a2f   multi-container-app_default   bridge    local
 ```
 
 <!-- test: output; contains=multi-container-app_db-data -->
@@ -211,7 +213,7 @@ curl -s http://localhost:8080/api/info
 ```
 
 ```text
-{"app_env":"development","container_hostname":"54908cbbc7d2","database_host":"db","greeting":"Hello from Docker Compose"}
+{"app_env":"development","container_hostname":"f65932ab28ce","database_host":"db","greeting":"Hello from Docker Compose"}
 ```
 
 The `greeting` and `app_env` come from the `environment:` section of the Compose file. `container_hostname` is the
@@ -230,7 +232,7 @@ curl -s http://localhost:8080/api/messages
 ```
 
 ```text
-[{"created_at":"2026-10-04T04:05:17.690148+00:00","id":1,"text":"Hello! This first message was created by database/init.sql."},{"created_at":"2026-10-04T04:05:18.932558+00:00","id":2,"text":"written with compose"}]
+[{"created_at":"2026-10-04T05:16:49.937929+00:00","id":1,"text":"Hello! This first message was created by database/init.sql."},{"created_at":"2026-10-04T05:16:51.202456+00:00","id":2,"text":"written with compose"}]
 ```
 
 You see two messages: the first one was created by `database/init.sql`, the second one is yours.
@@ -246,29 +248,29 @@ docker compose logs --tail 5
 
 ```text
 ...
-db-1   | 2026-10-04 04:05:18.034 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-db-1   | 2026-10-04 04:05:18.041 UTC [70] LOG:  database system was shut down at 2026-10-04 04:05:17 UTC
-db-1   | 2026-10-04 04:05:18.047 UTC [1] LOG:  database system is ready to accept connections
-web-1  | 172.18.0.1 - - [04/Oct/2026:04:05:17 +0000] "GET /api/health HTTP/1.1" 503 200 "-" "curl/8.19.0" "-"
-web-1  | 172.18.0.1 - - [04/Oct/2026:04:05:18 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "curl/8.19.0" "-"
-web-1  | 172.18.0.1 - - [04/Oct/2026:04:05:18 +0000] "GET /api/info HTTP/1.1" 200 122 "-" "curl/8.19.0" "-"
-web-1  | 172.18.0.1 - - [04/Oct/2026:04:05:18 +0000] "POST /api/messages HTTP/1.1" 201 39 "-" "curl/8.19.0" "-"
-web-1  | 172.18.0.1 - - [04/Oct/2026:04:05:19 +0000] "GET /api/messages HTTP/1.1" 200 215 "-" "curl/8.19.0" "-"
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:16:51 +0000] "GET /api/info HTTP/1.1" 200 122 "-" "curl/8.19.0"
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:16:51 +0000] "POST /api/messages HTTP/1.1" 201 39 "-" "curl/8.19.0"
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:16:51 +0000] "GET /api/messages HTTP/1.1" 200 215 "-" "curl/8.19.0"
+web-1  | 172.18.0.1 - - [04/Oct/2026:05:16:49 +0000] "GET /api/health HTTP/1.1" 503 200 "-" "curl/8.19.0" "-"
+web-1  | 172.18.0.1 - - [04/Oct/2026:05:16:51 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "curl/8.19.0" "-"
+web-1  | 172.18.0.1 - - [04/Oct/2026:05:16:51 +0000] "GET /api/info HTTP/1.1" 200 122 "-" "curl/8.19.0" "-"
+web-1  | 172.18.0.1 - - [04/Oct/2026:05:16:51 +0000] "POST /api/messages HTTP/1.1" 201 39 "-" "curl/8.19.0" "-"
+web-1  | 172.18.0.1 - - [04/Oct/2026:05:16:51 +0000] "GET /api/messages HTTP/1.1" 200 215 "-" "curl/8.19.0" "-"
 ```
 
 Every line starts with the container name, so you can tell who said what. Usually you only care about one service:
 
-<!-- test: output; contains=GET -->
+<!-- test: retry=15; output; contains=GET -->
 ```bash
 docker compose logs api --tail 5
 ```
 
 ```text
-api-1  | 172.18.0.4 - - [04/Oct/2026:04:05:17 +0000] "GET /api/health HTTP/1.1" 503 200 "-" "curl/8.19.0"
-api-1  | 172.18.0.4 - - [04/Oct/2026:04:05:18 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "curl/8.19.0"
-api-1  | 172.18.0.4 - - [04/Oct/2026:04:05:18 +0000] "GET /api/info HTTP/1.1" 200 122 "-" "curl/8.19.0"
-api-1  | 172.18.0.4 - - [04/Oct/2026:04:05:18 +0000] "POST /api/messages HTTP/1.1" 201 39 "-" "curl/8.19.0"
-api-1  | 172.18.0.4 - - [04/Oct/2026:04:05:19 +0000] "GET /api/messages HTTP/1.1" 200 215 "-" "curl/8.19.0"
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:16:49 +0000] "GET /api/health HTTP/1.1" 503 200 "-" "curl/8.19.0"
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:16:51 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "curl/8.19.0"
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:16:51 +0000] "GET /api/info HTTP/1.1" 200 122 "-" "curl/8.19.0"
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:16:51 +0000] "POST /api/messages HTTP/1.1" 201 39 "-" "curl/8.19.0"
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:16:51 +0000] "GET /api/messages HTTP/1.1" 200 215 "-" "curl/8.19.0"
 ```
 
 These are gunicorn's access log lines: one line per request the API answered, with the HTTP status code.
@@ -448,7 +450,7 @@ curl fails. The website itself still loads (try <http://localhost:8080>), but th
 
 **Investigate.** Which containers are actually running? `-a` also shows stopped ones:
 
-<!-- test: output; contains=Exited -->
+<!-- test: retry=20; output; contains=Exited -->
 ```bash
 docker compose ps -a
 ```
@@ -476,10 +478,10 @@ docker compose logs db --tail 4
 ```
 
 ```text
-db-1  | 2026-10-04 04:05:33.040 UTC [68] LOG:  shutting down
-db-1  | 2026-10-04 04:05:33.042 UTC [68] LOG:  checkpoint starting: shutdown immediate
-db-1  | 2026-10-04 04:05:33.055 UTC [68] LOG:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.002 s, total=0.015 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/1BACEB8, redo lsn=0/1BACEB8
-db-1  | 2026-10-04 04:05:33.065 UTC [1] LOG:  database system is shut down
+db-1  | 2026-10-04 05:17:07.002 UTC [68] LOG:  shutting down
+db-1  | 2026-10-04 05:17:07.004 UTC [68] LOG:  checkpoint starting: shutdown immediate
+db-1  | 2026-10-04 05:17:07.017 UTC [68] LOG:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.002 s, total=0.016 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/1BACEB8, redo lsn=0/1BACEB8
+db-1  | 2026-10-04 05:17:07.026 UTC [1] LOG:  database system is shut down
 ```
 
 **Root cause.** The `db` service is stopped. The API is fine; it just has nothing to talk to.

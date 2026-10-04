@@ -1,0 +1,7 @@
+printf 'APP_ENV=staging\nGREETING=Hello from an env file\nLOG_LEVEL=debug\n' > lab.env
+cat lab.env
+---
+APP_ENV=staging
+GREETING=Hello from an env file
+LOG_LEVEL=debug
+# exit 0

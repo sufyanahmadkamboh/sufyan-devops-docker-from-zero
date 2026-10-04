@@ -1,0 +1,4 @@
+docker run --rm -e APP_ENV=testing -e GREETING="Hello from lab 05" alpine:3.24 printenv GREETING
+---
+Hello from lab 05
+# exit 0

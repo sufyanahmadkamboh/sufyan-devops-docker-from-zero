@@ -127,7 +127,7 @@ curl -s http://localhost:8080/api/info
 ```
 
 ```text
-{"app_env":"production","container_hostname":"0b3c53393d52","database_host":"db","greeting":"Hello from the capstone"}
+{"app_env":"production","container_hostname":"4a0d2eaf48f5","database_host":"db","greeting":"Hello from the capstone"}
 ```
 
 Step 5. Add a message and read the list back:
@@ -171,7 +171,7 @@ data survives `docker compose down`):
 6. Data on a volume (docker volume inspect capstone_db-data)
   PASS  volume capstone_db-data exists
    docker compose down  (containers and networks are removed, the volume is kept)
-  PASS  after down + up, the message verify-1791088798 is still there
+  PASS  after down + up, the message verify-1791091292 is still there
 
 All checks passed.
 ```
@@ -197,8 +197,8 @@ docker network inspect capstone_backend --format '{{range .Containers}}{{.Name}}
 ```
 
 ```text
-capstone-web-1 capstone-api-1 
-capstone-db-1 capstone-api-1 
+capstone-api-1 capstone-web-1 
+capstone-api-1 capstone-db-1 
 ```
 
 The frontend network holds web and api; the backend network holds api and db.
@@ -226,8 +226,8 @@ docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}'
 ```text
 NAME             CPU %     MEM USAGE / LIMIT
 capstone-web-1   0.00%     11.24MiB / 15.35GiB
-capstone-api-1   0.03%     84.24MiB / 256MiB
-capstone-db-1    2.30%     24.61MiB / 512MiB
+capstone-api-1   0.02%     54.51MiB / 256MiB
+capstone-db-1    0.06%     24.15MiB / 512MiB
 ```
 
 The last lines the API wrote:
@@ -238,11 +238,11 @@ docker compose logs --tail 5 api
 ```
 
 ```text
-api-1  | [2026-10-04 04:40:15 +0000] [8] [INFO] Booting worker with pid: 8
-api-1  | [2026-10-04 04:40:15 +0000] [1] [ERROR] Control server error: [Errno 30] Read-only file system: '/home/app'
-api-1  | 127.0.0.1 - - [04/Oct/2026:04:40:20 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "Python-urllib/3.14"
-api-1  | 127.0.0.1 - - [04/Oct/2026:04:40:30 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "Python-urllib/3.14"
-api-1  | 172.19.0.3 - - [04/Oct/2026:04:40:31 +0000] "GET /api/messages HTTP/1.1" 200 309 "-" "curl/8.19.0"
+api-1  | [2026-10-04 05:21:50 +0000] [8] [INFO] Booting worker with pid: 8
+api-1  | [2026-10-04 05:21:50 +0000] [1] [ERROR] Control server error: [Errno 30] Read-only file system: '/home/app'
+api-1  | 127.0.0.1 - - [04/Oct/2026:05:21:54 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "Python-urllib/3.14"
+api-1  | 127.0.0.1 - - [04/Oct/2026:05:22:05 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "Python-urllib/3.14"
+api-1  | 172.18.0.3 - - [04/Oct/2026:05:22:06 +0000] "GET /api/messages HTTP/1.1" 200 309 "-" "curl/8.19.0"
 ```
 
 ## Break it, then fix it
@@ -263,7 +263,7 @@ curl -s http://localhost:8080/api/health
 The API answers, but with `"status":"error"` and HTTP 503. So the web container and the API are fine. The problem is
 behind the API. Ask Docker what it thinks:
 
-<!-- test: contains=Exited -->
+<!-- test: retry=20; contains=Exited -->
 ```bash
 docker compose ps -a --format 'table {{.Name}}\t{{.Status}}'
 ```

@@ -64,8 +64,8 @@ docker volume inspect notes note --format '{{.Name}}  created {{.CreatedAt}}'
 ```
 
 ```text
-notes  created 2026-10-04T04:09:31Z
-note  created 2026-10-04T04:09:32Z
+notes  created 2026-10-04T04:58:11Z
+note  created 2026-10-04T04:58:12Z
 ```
 
 `note` was created seconds ago, by the `reader` command.

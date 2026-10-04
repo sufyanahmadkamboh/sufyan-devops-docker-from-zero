@@ -27,13 +27,13 @@ every container on that network can be reached by its **container name** (and in
           user-defined bridge network "demo-net"  (Docker DNS: name -> IP)
    ┌─────────────────────────────────────────────────────────────┐
    │                                                             │
-   │   ┌──────────────┐   "http://web"   ┌──────────────┐        │
+   │   ┌──────────────┐   "http://web1"  ┌──────────────┐        │
    │   │  container   │ ───────────────► │  container   │        │
-   │   │  client      │   DNS answers    │  web (nginx) │        │
+   │   │  client      │   DNS answers    │ web1 (nginx) │        │
    │   │ 172.20.0.3   │   172.20.0.2     │ 172.20.0.2   │        │
    │   └──────────────┘                  └──────────────┘        │
    └─────────────────────────────────────────────────────────────┘
-                 Containers outside "demo-net" cannot reach "web" at all.
+                 Containers outside "demo-net" cannot reach "web1" at all.
 ```
 
 The capstone uses **two** networks so the web server can never touch the database:
@@ -74,12 +74,12 @@ on it, and reach it **by name** from a second container.
 
 ```bash
 docker network create demo-net
-docker run -d --name web --network demo-net nginx:1.30-alpine
+docker run -d --name web1 --network demo-net nginx:1.30-alpine
 ```
 
 <!-- test: retry=15; contains=Welcome to nginx -->
 ```bash
-docker run --rm --network demo-net busybox:1.37 wget -qO- http://web
+docker run --rm --network demo-net busybox:1.37 wget -qO- http://web1
 ```
 
 <!-- test: output=head:12 -->
@@ -88,13 +88,13 @@ docker network inspect demo-net --format '{{range .Containers}}{{.Name}} {{.IPv4
 ```
 
 ```text
-web 172.18.0.2/16
+web1 172.18.0.2/16
 ```
 
 ## Expected Result
 
-- `wget` prints the HTML of the nginx welcome page: the busybox container found `web` by its name.
-- `docker network inspect` lists `web` with an IP address in the network's subnet. (The busybox container is
+- `wget` prints the HTML of the nginx welcome page: the busybox container found `web1` by its name.
+- `docker network inspect` lists `web1` with an IP address in the network's subnet. (The busybox container is
   already gone, because `--rm` removed it when `wget` finished.)
 
 ## Experiment
@@ -128,15 +128,15 @@ docker run --rm --network demo-net busybox:1.37 wget -qO- -T 3 http://web2
 
 ## Break It
 
-Unplug `web` from `demo-net` and try to reach it:
+Unplug `web1` from `demo-net` and try to reach it:
 
 ```bash
-docker network disconnect demo-net web
+docker network disconnect demo-net web1
 ```
 
 <!-- test: fail; contains=bad address -->
 ```bash
-docker run --rm --network demo-net busybox:1.37 wget -qO- -T 3 http://web
+docker run --rm --network demo-net busybox:1.37 wget -qO- -T 3 http://web1
 ```
 
 ## Troubleshoot It
@@ -145,27 +145,27 @@ When two containers cannot talk, do not guess. Check **which networks each one i
 
 <!-- test: contains=demo-net -->
 ```bash
-docker inspect web --format '{{range $name, $net := .NetworkSettings.Networks}}{{$name}} {{end}}'
+docker inspect web1 --format '{{range $name, $net := .NetworkSettings.Networks}}{{$name}} {{end}}'
 docker inspect web2 --format '{{range $name, $net := .NetworkSettings.Networks}}{{$name}} {{end}}'
 ```
 
-`web` is only on `bridge`; `web2` is on `bridge` and `demo-net`. They do not share a user-defined network, so there is
+`web1` is only on `bridge`; `web2` is on `bridge` and `demo-net`. They do not share a user-defined network, so there is
 no name resolution between them. Fix and verify:
 
 ```bash
-docker network connect demo-net web
+docker network connect demo-net web1
 ```
 
 <!-- test: retry=10; contains=Welcome to nginx -->
 ```bash
-docker run --rm --network demo-net busybox:1.37 wget -qO- -T 3 http://web
+docker run --rm --network demo-net busybox:1.37 wget -qO- -T 3 http://web1
 ```
 
 The Compose version of this problem (`host not found in upstream "api"`) is in
 [troubleshooting/03-containers-cannot-communicate](../troubleshooting/03-containers-cannot-communicate/README.md).
 
 ```bash
-docker rm -f web web2
+docker rm -f web1 web2
 docker network rm demo-net
 ```
 

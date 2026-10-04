@@ -1,0 +1,6 @@
+docker exec web tail -n 3 /usr/share/nginx/html/index.html
+---
+</body>
+</html>
+<p>Edited on my computer, served by the container without a rebuild.</p>
+# exit 0

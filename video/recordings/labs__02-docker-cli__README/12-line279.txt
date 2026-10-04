@@ -1,0 +1,5 @@
+printf '<h1>Copied in with docker cp</h1>\n' > hello.html
+docker cp hello.html web:/usr/share/nginx/html/hello.html
+---
+
+# exit 0

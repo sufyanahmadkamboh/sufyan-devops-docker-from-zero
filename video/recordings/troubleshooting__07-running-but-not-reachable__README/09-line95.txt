@@ -1,0 +1,4 @@
+docker run --rm busybox:1.37 wget -q -O- -T 3 "http://$(docker inspect simple --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'):5000"
+---
+wget: can't connect to remote host (172.17.0.2): Connection refused
+# exit 1

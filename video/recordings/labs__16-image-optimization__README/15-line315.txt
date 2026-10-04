@@ -1,0 +1,4 @@
+docker run --rm simple-app:broken ls /opt/venv
+---
+ls: /opt/venv: No such file or directory
+# exit 1

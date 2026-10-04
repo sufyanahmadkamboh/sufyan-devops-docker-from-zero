@@ -1,0 +1,4 @@
+docker run -d --name db -e POSTGRES_PASSWORD=lab-password -v pgdata:/var/lib/postgresql postgres:18-alpine
+---
+8cc1e48e8748321481f7c594befb0d7941f7d767296a51da7cd10123175d8c2e
+# exit 0

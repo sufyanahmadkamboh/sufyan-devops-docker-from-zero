@@ -1,0 +1,10 @@
+ls dockerfile-steps
+---
+01.Dockerfile
+02.Dockerfile
+03.Dockerfile
+04.Dockerfile
+05.Dockerfile
+06.Dockerfile
+entrypoint-vs-cmd.Dockerfile
+# exit 0

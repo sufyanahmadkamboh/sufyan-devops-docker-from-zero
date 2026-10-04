@@ -1,0 +1,4 @@
+docker run --rm simple-app:1.0 touch /usr/local/bin/hacked
+---
+touch: cannot touch '/usr/local/bin/hacked': Permission denied
+# exit 1

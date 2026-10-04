@@ -1,0 +1,5 @@
+docker volume ls --filter name=ts10
+---
+DRIVER    VOLUME NAME
+local     ts10_db-data
+# exit 0

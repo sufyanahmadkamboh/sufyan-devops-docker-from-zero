@@ -1,0 +1,6 @@
+docker inspect simple-app:step4 --format '{{json .Config.ExposedPorts}}'
+docker rm -f step4
+---
+{"5000/tcp":{}}
+step4
+# exit 0

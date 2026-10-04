@@ -62,15 +62,15 @@ docker run -d --name web -p 8080:80 nginx:1.30-alpine
 curl -s http://localhost:8080
 ```
 
-<!-- test: contains=GET / HTTP; output=tail:3 -->
+<!-- test: retry=15; contains=GET / HTTP; output=tail:3 -->
 ```bash
 docker logs --tail 3 web
 ```
 
 ```text
-2026/10/04 04:18:08 [notice] 1#1: start worker process 42
-2026/10/04 04:18:08 [notice] 1#1: start worker process 43
-172.17.0.1 - - [04/Oct/2026:04:18:08 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
+2026/10/04 05:18:59 [notice] 1#1: start worker process 43
+2026/10/04 05:18:59 [notice] 1#1: start worker process 44
+172.17.0.1 - - [04/Oct/2026:05:19:00 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
 ```
 
 Watching live is how you debug "what happens when I click this?". It never ends by itself, so it is not part of the
@@ -95,12 +95,12 @@ A container that crashes still has logs. Let's create one on purpose:
 docker run --name crasher alpine:3.24 sh -c "echo 'starting the job'; echo 'ERROR: config file /etc/job.conf not found' >&2; exit 3"
 ```
 
-<!-- test: contains=Exited (3) -->
+<!-- test: retry=20; contains=Exited (3) -->
 ```bash
 docker ps -a --filter name=crasher --format '{{.Names}}  {{.Status}}'
 ```
 
-<!-- test: contains=ERROR: config file -->
+<!-- test: retry=15; contains=ERROR: config file -->
 ```bash
 docker logs crasher
 ```
@@ -173,7 +173,7 @@ docker run -d --name ticker busybox:1.37 sh -c 'i=0; while true; do i=$((i+1)); 
 
 <!-- test-run: sleep 4 -->
 
-<!-- test: contains=tick -->
+<!-- test: retry=15; contains=tick -->
 ```bash
 docker logs -t --tail 2 ticker
 docker rm -f ticker

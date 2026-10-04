@@ -1,0 +1,4 @@
+docker inspect ts03-web-1 --format '{{range $name, $net := .NetworkSettings.Networks}}{{$name}} {{end}}'
+---
+ts03_frontend 
+# exit 0

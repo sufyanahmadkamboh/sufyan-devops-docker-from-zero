@@ -1,0 +1,7 @@
+docker run --rm -e APP_ENV=development alpine:3.24 env
+---
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=542caf56459e
+APP_ENV=development
+HOME=/root
+# exit 0

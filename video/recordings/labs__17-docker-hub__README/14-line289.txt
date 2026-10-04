@@ -1,0 +1,78 @@
+docker tag localhost:5000/simple-app:1.0 localhost:5000/simple-app:2.0
+docker push localhost:5000/simple-app:2.0
+curl -s http://localhost:5000/v2/simple-app/tags/list
+---
+The push refers to repository [localhost:5000/simple-app]
+f0bdbd59e899: Waiting
+843a06858f66: Waiting
+6b37362b3da7: Waiting
+e42bb4d14bbe: Waiting
+c5e6e50697ef: Waiting
+fd85d2de73d8: Waiting
+1ae2ea666d2d: Waiting
+c4d667dbb95c: Waiting
+c57fc4c5ea60: Waiting
+cb3b71641359: Waiting
+1ae2ea666d2d: Waiting
+c4d667dbb95c: Waiting
+c57fc4c5ea60: Waiting
+cb3b71641359: Waiting
+f0bdbd59e899: Waiting
+843a06858f66: Waiting
+6b37362b3da7: Waiting
+e42bb4d14bbe: Waiting
+c5e6e50697ef: Waiting
+fd85d2de73d8: Waiting
+f0bdbd59e899: Waiting
+843a06858f66: Waiting
+6b37362b3da7: Waiting
+e42bb4d14bbe: Waiting
+c5e6e50697ef: Waiting
+fd85d2de73d8: Waiting
+1ae2ea666d2d: Waiting
+c4d667dbb95c: Waiting
+c57fc4c5ea60: Waiting
+cb3b71641359: Waiting
+e42bb4d14bbe: Waiting
+c5e6e50697ef: Waiting
+fd85d2de73d8: Waiting
+1ae2ea666d2d: Waiting
+c4d667dbb95c: Waiting
+c57fc4c5ea60: Waiting
+cb3b71641359: Waiting
+f0bdbd59e899: Waiting
+843a06858f66: Waiting
+6b37362b3da7: Waiting
+f0bdbd59e899: Waiting
+843a06858f66: Waiting
+6b37362b3da7: Waiting
+e42bb4d14bbe: Waiting
+c5e6e50697ef: Waiting
+fd85d2de73d8: Waiting
+1ae2ea666d2d: Waiting
+c4d667dbb95c: Waiting
+c57fc4c5ea60: Waiting
+cb3b71641359: Waiting
+c5e6e50697ef: Waiting
+fd85d2de73d8: Waiting
+1ae2ea666d2d: Waiting
+c4d667dbb95c: Waiting
+c57fc4c5ea60: Waiting
+cb3b71641359: Waiting
+f0bdbd59e899: Waiting
+843a06858f66: Waiting
+6b37362b3da7: Waiting
+e42bb4d14bbe: Waiting
+c5e6e50697ef: Layer already exists
+fd85d2de73d8: Layer already exists
+1ae2ea666d2d: Layer already exists
+c4d667dbb95c: Layer already exists
+c57fc4c5ea60: Layer already exists
+cb3b71641359: Layer already exists
+f0bdbd59e899: Already exists
+843a06858f66: Layer already exists
+6b37362b3da7: Layer already exists
+e42bb4d14bbe: Layer already exists
+2.0: digest: sha256:8e4b2f4b8a3767276532d3dc589d719cd7d3f21eaaf8088ab911a1b608b45a08 size: 856
+{"name":"simple-app","tags":["1.0","2.0"]}
+# exit 0

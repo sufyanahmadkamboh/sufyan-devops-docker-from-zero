@@ -1,0 +1,4 @@
+docker run --rm greeter Docker
+---
+Hello, Docker
+# exit 0

@@ -65,18 +65,18 @@ docker ps --filter name=web
 
 **logs** — what did nginx print? Each line comes from the container's stdout/stderr:
 
-<!-- test: contains=start worker; output=tail:5 -->
+<!-- test: retry=15; contains=start worker; output=tail:5 -->
 ```bash
 docker logs web
 ```
 
 ```text
 ...
-2026/10/04 04:15:29 [notice] 1#1: start worker process 39
-2026/10/04 04:15:29 [notice] 1#1: start worker process 40
-2026/10/04 04:15:29 [notice] 1#1: start worker process 41
-2026/10/04 04:15:29 [notice] 1#1: start worker process 42
-2026/10/04 04:15:29 [notice] 1#1: start worker process 43
+2026/10/04 05:02:20 [notice] 1#1: start worker process 39
+2026/10/04 05:02:20 [notice] 1#1: start worker process 40
+2026/10/04 05:02:20 [notice] 1#1: start worker process 41
+2026/10/04 05:02:20 [notice] 1#1: start worker process 42
+2026/10/04 05:02:20 [notice] 1#1: start worker process 43
 ```
 
 **exec** — run a command inside the running container:
@@ -105,7 +105,7 @@ docker inspect web --format 'state={{.State.Status}} ip={{range .NetworkSettings
 ```
 
 ```text
-state=running ip=172.17.0.2 started=2026-10-04T04:15:29.759309141Z
+state=running ip=172.17.0.2 started=2026-10-04T05:02:20.170081961Z
 ```
 
 **stats** — one snapshot of resource use (without `--no-stream` it updates live until Ctrl+C):
@@ -117,7 +117,7 @@ docker stats --no-stream web
 
 ```text
 CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O     PIDS
-8d65d8170b0a   web       0.00%     11.57MiB / 15.35GiB   0.07%     1.17kB / 126B   0B / 8.19kB   15
+c80c057b4b65   web       0.00%     11.64MiB / 15.35GiB   0.07%     1.17kB / 126B   0B / 8.19kB   15
 ```
 
 **top** — the processes inside the container:
@@ -129,21 +129,21 @@ docker top web
 
 ```text
 UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
-root                1602092             1602070             0                   04:15               ?                   00:00:00            nginx: master process nginx -g daemon off;
-statd               1602136             1602092             0                   04:15               ?                   00:00:00            nginx: worker process
-statd               1602137             1602092             0                   04:15               ?                   00:00:00            nginx: worker process
-statd               1602138             1602092             0                   04:15               ?                   00:00:00            nginx: worker process
-statd               1602139             1602092             0                   04:15               ?                   00:00:00            nginx: worker process
-statd               1602140             1602092             0                   04:15               ?                   00:00:00            nginx: worker process
-statd               1602141             1602092             0                   04:15               ?                   00:00:00            nginx: worker process
-statd               1602142             1602092             0                   04:15               ?                   00:00:00            nginx: worker process
-statd               1602143             1602092             0                   04:15               ?                   00:00:00            nginx: worker process
-statd               1602144             1602092             0                   04:15               ?                   00:00:00            nginx: worker process
-statd               1602145             1602092             0                   04:15               ?                   00:00:00            nginx: worker process
-statd               1602146             1602092             0                   04:15               ?                   00:00:00            nginx: worker process
-statd               1602147             1602092             0                   04:15               ?                   00:00:00            nginx: worker process
-statd               1602148             1602092             0                   04:15               ?                   00:00:00            nginx: worker process
-statd               1602149             1602092             0                   04:15               ?                   00:00:00            nginx: worker process
+root                1685514             1685490             0                   05:02               ?                   00:00:00            nginx: master process nginx -g daemon off;
+statd               1685558             1685514             0                   05:02               ?                   00:00:00            nginx: worker process
+statd               1685559             1685514             0                   05:02               ?                   00:00:00            nginx: worker process
+statd               1685560             1685514             0                   05:02               ?                   00:00:00            nginx: worker process
+statd               1685561             1685514             0                   05:02               ?                   00:00:00            nginx: worker process
+statd               1685562             1685514             0                   05:02               ?                   00:00:00            nginx: worker process
+statd               1685563             1685514             0                   05:02               ?                   00:00:00            nginx: worker process
+statd               1685564             1685514             0                   05:02               ?                   00:00:00            nginx: worker process
+statd               1685565             1685514             0                   05:02               ?                   00:00:00            nginx: worker process
+statd               1685566             1685514             0                   05:02               ?                   00:00:00            nginx: worker process
+statd               1685567             1685514             0                   05:02               ?                   00:00:00            nginx: worker process
+statd               1685568             1685514             0                   05:02               ?                   00:00:00            nginx: worker process
+statd               1685569             1685514             0                   05:02               ?                   00:00:00            nginx: worker process
+statd               1685570             1685514             0                   05:02               ?                   00:00:00            nginx: worker process
+statd               1685571             1685514             0                   05:02               ?                   00:00:00            nginx: worker process
 ```
 
 **cp** — copy nginx's default page out of the container to your computer:

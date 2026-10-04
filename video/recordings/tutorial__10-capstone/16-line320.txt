@@ -1,0 +1,4 @@
+curl -s http://localhost:8080/api/info
+---
+{"app_env":"production","container_hostname":"80ca3e7d8d9c","database_host":"db","greeting":"Hello from the capstone"}
+# exit 0

@@ -1,0 +1,4 @@
+docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' web
+---
+172.18.0.2
+# exit 0

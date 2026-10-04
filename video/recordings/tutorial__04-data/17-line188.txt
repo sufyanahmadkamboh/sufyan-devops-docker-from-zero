@@ -1,0 +1,7 @@
+docker logs olddb 2>&1 | grep -A 3 "in 18+"
+---
+Error: in 18+, these Docker images are configured to store database data in a
+       format which is compatible with "pg_ctlcluster" (specifically, using
+       major-version-specific directory names).  This better reflects how
+       PostgreSQL itself works, and how upgrades are to be performed.
+# exit 0

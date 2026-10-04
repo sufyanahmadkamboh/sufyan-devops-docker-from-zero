@@ -1,0 +1,4 @@
+docker run --rm --read-only simple-app:1.0 touch /home/appuser/notes.txt
+---
+touch: cannot touch '/home/appuser/notes.txt': Read-only file system
+# exit 1

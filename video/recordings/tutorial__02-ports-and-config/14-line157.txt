@@ -1,0 +1,4 @@
+docker ps --filter publish=8080 --format '{{.Names}} {{.Ports}}'
+---
+web 0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
+# exit 0

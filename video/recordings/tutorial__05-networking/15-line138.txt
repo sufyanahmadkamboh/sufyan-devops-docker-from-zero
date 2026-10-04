@@ -1,0 +1,5 @@
+docker network rm labnet
+---
+Error response from daemon: error while removing network: network labnet has active endpoints (name:"web2" id:"8e94fd947f13")
+exit status 1
+# exit 1

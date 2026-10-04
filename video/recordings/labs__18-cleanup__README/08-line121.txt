@@ -1,0 +1,9 @@
+docker container prune -f
+---
+Deleted Containers:
+a7b5a29c80053cb3d68036b0372600c9f2f3d5cec46957e8e6ab0d79d986b243
+6a43dc6a2617bff859bff3bd08714569427603eef86d5d89004d605f8e1cdbe4
+f6d1026f7ff9cfbdfabb9f8f8ca3730f6d9a4f9e5561d369c184f425cf3c28d9
+
+Total reclaimed space: 16.38kB
+# exit 0

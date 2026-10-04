@@ -1,0 +1,4 @@
+docker inspect --format '{{json .Config.Env}}' leaky
+---
+["DB_PASSWORD=lab-password-123","PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"]
+# exit 0

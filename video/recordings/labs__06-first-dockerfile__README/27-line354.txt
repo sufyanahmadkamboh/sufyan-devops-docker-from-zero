@@ -1,0 +1,6 @@
+curl -s http://localhost:5002
+---
+Hi from my first image!
+environment: production
+container hostname: b9940bf2b969
+# exit 0

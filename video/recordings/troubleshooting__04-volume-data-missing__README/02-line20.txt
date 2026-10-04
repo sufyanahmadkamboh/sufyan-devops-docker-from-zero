@@ -1,0 +1,5 @@
+docker volume create notes
+docker run --rm --name writer -v notes:/data alpine:3.24 sh -c 'echo "remember the milk" > /data/todo.txt'
+---
+notes
+# exit 0

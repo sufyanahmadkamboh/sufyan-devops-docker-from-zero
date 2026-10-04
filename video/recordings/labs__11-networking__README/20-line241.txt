@@ -1,0 +1,5 @@
+   docker ps --filter name=backend
+---
+CONTAINER ID   IMAGE               COMMAND                  CREATED         STATUS         PORTS     NAMES
+1009f471c016   nginx:1.30-alpine   "/docker-entrypoint.…"   5 seconds ago   Up 5 seconds   80/tcp    backend
+# exit 0

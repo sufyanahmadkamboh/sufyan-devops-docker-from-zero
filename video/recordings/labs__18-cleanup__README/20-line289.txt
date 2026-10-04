@@ -1,0 +1,14 @@
+docker volume inspect lab18-db
+---
+[
+    {
+        "CreatedAt": "2026-10-04T04:56:59Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/lab18-db/_data",
+        "Name": "lab18-db",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+# exit 0

@@ -1,0 +1,6 @@
+docker images --filter "reference=docker-from-zero/*"
+---
+IMAGE                        ID             DISK USAGE   CONTENT SIZE   EXTRA
+docker-from-zero/api:1.0.0   861de5936573        247MB         58.8MB        
+docker-from-zero/web:1.0.0   b976402ef15f       81.5MB         23.1MB        
+# exit 0

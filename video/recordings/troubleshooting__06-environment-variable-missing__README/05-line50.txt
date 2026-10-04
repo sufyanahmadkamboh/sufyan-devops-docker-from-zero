@@ -1,0 +1,7 @@
+docker compose ps -a --format 'table {{.Service}}\t{{.Status}}'
+---
+SERVICE   STATUS
+api       Exited (3) 13 seconds ago
+db        Up 14 seconds
+web       Up 13 seconds
+# exit 0

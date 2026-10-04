@@ -31,10 +31,10 @@ docker system df
 
 ```text
 TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
-Images          44        0         7.894GB   6.681GB (84%)
+Images          30        0         5.301GB   3.853GB (72%)
 Containers      0         0         0B        0B
 Local Volumes   0         0         0B        0B
-Build Cache     148       0         3.397GB   469.1MB
+Build Cache     109       0         2.89GB    2.348GB
 ```
 
 | Column | Meaning |
@@ -83,10 +83,10 @@ docker ps -a
 
 ```text
 CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS                     PORTS     NAMES
-6be26b35cc4f   alpine:3.24   "echo 'I created an …"   3 seconds ago   Exited (0) 3 seconds ago             anon
-2eaa997e70b3   alpine:3.24   "echo 'I have a labe…"   4 seconds ago   Exited (0) 3 seconds ago             labeled
-8e24955663a2   alpine:3.24   "echo 'me too'"          4 seconds ago   Exited (0) 4 seconds ago             old2
-a8ac41a11edd   alpine:3.24   "echo 'I ran once'"      5 seconds ago   Exited (0) 4 seconds ago             old1
+a7b5a29c8005   alpine:3.24   "echo 'I created an …"   3 seconds ago   Exited (0) 2 seconds ago             anon
+7ef9d179398c   alpine:3.24   "echo 'I have a labe…"   4 seconds ago   Exited (0) 3 seconds ago             labeled
+6a43dc6a2617   alpine:3.24   "echo 'me too'"          4 seconds ago   Exited (0) 4 seconds ago             old2
+f6d1026f7ff9   alpine:3.24   "echo 'I ran once'"      5 seconds ago   Exited (0) 4 seconds ago             old1
 ```
 
 Four stopped containers, all `Exited (0)`.
@@ -103,7 +103,7 @@ docker container prune -f --filter label=course=docker-from-zero
 
 ```text
 Deleted Containers:
-2eaa997e70b373300c92d431b907db57cde0cf5a9537c6188555718de62272de
+7ef9d179398cd40c57494f1b0169067f2fafcc56e4e519d0edc1ebfa73aee9a4
 
 Total reclaimed space: 4.096kB
 ```
@@ -124,9 +124,9 @@ docker container prune -f
 
 ```text
 Deleted Containers:
-6be26b35cc4f6e369b43c9c5eca6a4973591503069e0025c11452a2fcc80c30f
-8e24955663a2ffb5664957870399c177c22635d5bf30cc060fb49355d95470dc
-a8ac41a11eddaf7f62856b3749c8a68889201128766c8a66800a0d452b9c3fe0
+a7b5a29c80053cb3d68036b0372600c9f2f3d5cec46957e8e6ab0d79d986b243
+6a43dc6a2617bff859bff3bd08714569427603eef86d5d89004d605f8e1cdbe4
+f6d1026f7ff9cfbdfabb9f8f8ca3730f6d9a4f9e5561d369c184f425cf3c28d9
 
 Total reclaimed space: 16.38kB
 ```
@@ -143,7 +143,8 @@ docker images --filter dangling=true
 ```
 
 ```text
-IMAGE   ID             DISK USAGE   CONTENT SIZE   EXTRA
+IMAGE        ID             DISK USAGE   CONTENT SIZE   EXTRA
+<untagged>   20aeb3209e8f        212MB         51.9MB        
 ```
 
 The first `lab18-demo` build lost its name: `<none>`. That is a **dangling** image, and it is always safe to remove:
@@ -154,7 +155,11 @@ docker image prune -f
 ```
 
 ```text
-Total reclaimed space: 0B
+Deleted Images:
+untagged: sha256:20aeb3209e8f8b24bb1576144d489d260045bbbadf7fc9633b09d8dff01fedfe
+deleted: sha256:20aeb3209e8f8b24bb1576144d489d260045bbbadf7fc9633b09d8dff01fedfe
+
+Total reclaimed space: 856B
 ```
 
 <!-- test: contains=lab18-demo -->
@@ -183,7 +188,7 @@ docker volume ls
 
 ```text
 DRIVER    VOLUME NAME
-local     ab7bdd7a983fdb6323d808a7cf6c82637d367d247d0ce84c83deb7eeafae8197
+local     71a6c043c5eeac9d158ec3251f9af7029cb77b0670569e36d712529d61883967
 local     lab18-keep
 ```
 
@@ -198,7 +203,7 @@ docker volume prune -f
 
 ```text
 Deleted Volumes:
-ab7bdd7a983fdb6323d808a7cf6c82637d367d247d0ce84c83deb7eeafae8197
+71a6c043c5eeac9d158ec3251f9af7029cb77b0670569e36d712529d61883967
 
 Total reclaimed space: 0B
 ```
@@ -239,9 +244,9 @@ docker system prune -f
 
 ```text
 ...
-ko05dkinupe4w8ff734lwgm6n
+qnk2cftwvj7xq7s3fe9sqko9q
 
-Total reclaimed space: 469.2MB
+Total reclaimed space: 2.349GB
 ```
 
 > **⚠ WARNING: `docker system prune -a --volumes`**
@@ -293,7 +298,7 @@ docker volume inspect lab18-db
 ```text
 [
     {
-        "CreatedAt": "2026-10-04T04:34:43Z",
+        "CreatedAt": "2026-10-04T04:56:59Z",
         "Driver": "local",
         "Labels": null,
         "Mountpoint": "/var/lib/docker/volumes/lab18-db/_data",

@@ -1,0 +1,4 @@
+docker run -d --name small -p 5000:5000 simple-app:multistage
+---
+573bd5ffe3d71452ee4b99170266247ca1e1f4e1222b13aa2090bc338c03b5d7
+# exit 0

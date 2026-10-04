@@ -115,7 +115,7 @@ grep -nE "^(FROM|COPY|RUN|USER|HEALTHCHECK|CMD)" app/api/Dockerfile
 19:RUN useradd --uid 10001 --no-create-home --shell /usr/sbin/nologin app
 20:USER app
 25:HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 \
-28:CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--access-logfile", "-", "app:app"]
+28:CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--preload", "--access-logfile", "-", "app:app"]
 ```
 
 How to read it:
@@ -201,8 +201,8 @@ docker compose build
 
 ```text
 ...
-#25 [web] resolving provenance for metadata file
-#25 DONE 0.0s
+#24 [api] resolving provenance for metadata file
+#24 DONE 0.0s
  Image docker-from-zero/web:1.0.0 Built 
  Image docker-from-zero/api:1.0.0 Built 
 ```
@@ -214,8 +214,8 @@ docker images --filter "reference=docker-from-zero/*"
 
 ```text
 IMAGE                        ID             DISK USAGE   CONTENT SIZE   EXTRA
-docker-from-zero/api:1.0.0   9dad34e98b53        247MB         58.8MB        
-docker-from-zero/web:1.0.0   6dcf9c12927c       81.5MB         23.1MB        
+docker-from-zero/api:1.0.0   861de5936573        247MB         58.8MB        
+docker-from-zero/web:1.0.0   b976402ef15f       81.5MB         23.1MB        
 ```
 
 Two images with proper names and versions (`1.0.0`), because the Compose file sets `image:` next to `build:`.
@@ -278,8 +278,8 @@ docker network ls --filter name=capstone
 
 ```text
 NETWORK ID     NAME                DRIVER    SCOPE
-60a85757435a   capstone_backend    bridge    local
-1a2ace4002ea   capstone_frontend   bridge    local
+005d2cac127c   capstone_backend    bridge    local
+ff4d682895db   capstone_frontend   bridge    local
 ```
 
 The API is on both, so it can reach the database by name:
@@ -322,7 +322,7 @@ curl -s http://localhost:8080/api/info
 ```
 
 ```text
-{"app_env":"production","container_hostname":"3f1efccb2e10","database_host":"db","greeting":"Hello from the capstone"}
+{"app_env":"production","container_hostname":"80ca3e7d8d9c","database_host":"db","greeting":"Hello from the capstone"}
 ```
 
 `container_hostname` is the short ID of the API container that answered. Now open <http://localhost:8080> in your
@@ -349,8 +349,8 @@ docker volume ls --filter name=capstone
 
 ```text
 ...
- Network capstone_backend Removing 
  Network capstone_frontend Removing 
+ Network capstone_backend Removing 
  Network capstone_backend Removed 
  Network capstone_frontend Removed 
 DRIVER    VOLUME NAME
@@ -370,7 +370,7 @@ curl -s http://localhost:8080/api/messages
 ```
 
 ```text
-[{"created_at":"2026-10-04T04:25:32.459844+00:00","id":1,"text":"Hello! This first message was created by database/init.sql."},{"created_at":"2026-10-04T04:25:51.868159+00:00","id":2,"text":"capstone persistence check"}]
+[{"created_at":"2026-10-04T05:14:09.549015+00:00","id":1,"text":"Hello! This first message was created by database/init.sql."},{"created_at":"2026-10-04T05:14:31.186611+00:00","id":2,"text":"capstone persistence check"}]
 ```
 
 New containers, same data. Note what did **not** happen: `init.sql` did not run again (there is still only one
@@ -384,11 +384,11 @@ docker compose logs api --tail 5
 ```
 
 ```text
-api-1  | [2026-10-04 04:26:02 +0000] [7] [INFO] Booting worker with pid: 7
-api-1  | [2026-10-04 04:26:02 +0000] [8] [INFO] Booting worker with pid: 8
-api-1  | [2026-10-04 04:26:03 +0000] [1] [ERROR] Control server error: [Errno 30] Read-only file system: '/home/app'
-api-1  | 127.0.0.1 - - [04/Oct/2026:04:26:07 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "Python-urllib/3.14"
-api-1  | 172.18.0.3 - - [04/Oct/2026:04:26:07 +0000] "GET /api/messages HTTP/1.1" 200 221 "-" "curl/8.19.0"
+api-1  | [2026-10-04 05:14:42 +0000] [7] [INFO] Booting worker with pid: 7
+api-1  | [2026-10-04 05:14:42 +0000] [8] [INFO] Booting worker with pid: 8
+api-1  | [2026-10-04 05:14:42 +0000] [1] [ERROR] Control server error: [Errno 30] Read-only file system: '/home/app'
+api-1  | 127.0.0.1 - - [04/Oct/2026:05:14:47 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "Python-urllib/3.14"
+api-1  | 172.18.0.3 - - [04/Oct/2026:05:14:47 +0000] "GET /api/messages HTTP/1.1" 200 221 "-" "curl/8.19.0"
 ```
 
 You see gunicorn starting and one line per request, including the health checks Docker runs every 10 seconds.
@@ -399,10 +399,10 @@ docker compose logs db --tail 4
 ```
 
 ```text
-db-1  | 2026-10-04 04:25:56.302 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-db-1  | 2026-10-04 04:25:56.306 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-db-1  | 2026-10-04 04:25:56.313 UTC [32] LOG:  database system was shut down at 2026-10-04 04:25:54 UTC
-db-1  | 2026-10-04 04:25:56.317 UTC [1] LOG:  database system is ready to accept connections
+db-1  | 2026-10-04 05:14:35.978 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+db-1  | 2026-10-04 05:14:35.982 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db-1  | 2026-10-04 05:14:35.990 UTC [32] LOG:  database system was shut down at 2026-10-04 05:14:34 UTC
+db-1  | 2026-10-04 05:14:35.996 UTC [1] LOG:  database system is ready to accept connections
 ```
 
 The database says it is ready to accept connections. Run `docker compose logs db` without `--tail` and look near the
@@ -441,10 +441,10 @@ docker inspect capstone-api-1 --format '{{range .Config.Env}}{{println .}}{{end}
 ```
 
 ```text
-DB_PASSWORD_FILE=/run/secrets/db_password
 DB_HOST=db
 DB_NAME=board
 DB_USER=board
+DB_PASSWORD_FILE=/run/secrets/db_password
 ```
 
 Only `DB_PASSWORD_FILE=/run/secrets/db_password`, a path, not the password itself.
@@ -458,9 +458,9 @@ docker stats --no-stream capstone-web-1 capstone-api-1 capstone-db-1
 
 ```text
 CONTAINER ID   NAME             CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O     PIDS
-d53455a25d0f   capstone-web-1   0.00%     11.27MiB / 15.35GiB   0.07%     2.2kB / 1.46kB    0B / 8.19kB   15
-fbc9bb1e60f2   capstone-api-1   0.01%     84.05MiB / 256MiB     32.83%    6.39kB / 3.45kB   0B / 0B       3
-68d834ddf712   capstone-db-1    0.06%     23.02MiB / 512MiB     4.50%     4.27kB / 3.14kB   0B / 221kB    9
+aa8a7ad34c98   capstone-web-1   0.00%     11.19MiB / 15.35GiB   0.07%     2.2kB / 1.46kB    0B / 8.19kB   15
+a34f2d326bd5   capstone-api-1   0.02%     63.21MiB / 256MiB     24.69%    6.39kB / 3.45kB   0B / 0B       3
+5fc12a971921   capstone-db-1    0.08%     23.03MiB / 512MiB     4.50%     4.3kB / 3.14kB    0B / 28.7kB   9
 ```
 
 The `LIMIT` column shows `256MiB` for the API and `512MiB` for the database, the limits from the Compose file.
@@ -498,16 +498,16 @@ The page still loads, but the API reports an error, and the browser shows no mes
 Before changing anything, let's investigate. **What is the symptom?** The API answers, but cannot use the database.
 **What should we check first?** The state of every service:
 
-<!-- test: output; contains=Exited -->
+<!-- test: retry=20; output; contains=Exited -->
 ```bash
 docker compose ps -a
 ```
 
 ```text
 NAME             IMAGE                        COMMAND                  SERVICE   CREATED          STATUS                            PORTS
-capstone-api-1   docker-from-zero/api:1.0.0   "gunicorn --bind 0.0…"   api       21 seconds ago   Up 14 seconds (healthy)           5000/tcp
-capstone-db-1    postgres:18-alpine           "docker-entrypoint.s…"   db        21 seconds ago   Exited (0) 4 seconds ago          
-capstone-web-1   docker-from-zero/web:1.0.0   "/docker-entrypoint.…"   web       21 seconds ago   Up 8 seconds (health: starting)   0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+capstone-api-1   docker-from-zero/api:1.0.0   "gunicorn --bind 0.0…"   api       20 seconds ago   Up 14 seconds (healthy)           5000/tcp
+capstone-db-1    postgres:18-alpine           "docker-entrypoint.s…"   db        20 seconds ago   Exited (0) 4 seconds ago          
+capstone-web-1   docker-from-zero/web:1.0.0   "/docker-entrypoint.…"   web       20 seconds ago   Up 8 seconds (health: starting)   0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
 ```
 
 `db` has exited. Wait 30 seconds and look again: after three failed health checks the API is also marked `unhealthy`,
@@ -520,9 +520,9 @@ docker compose logs db --tail 3
 ```
 
 ```text
-db-1  | 2026-10-04 04:26:11.611 UTC [30] LOG:  checkpoint starting: shutdown immediate
-db-1  | 2026-10-04 04:26:11.625 UTC [30] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.004 s, total=0.017 s; sync files=3, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB; lsn=0/1BFAFE8, redo lsn=0/1BFAFE8
-db-1  | 2026-10-04 04:26:11.635 UTC [1] LOG:  database system is shut down
+db-1  | 2026-10-04 05:14:51.109 UTC [30] LOG:  checkpoint starting: shutdown immediate
+db-1  | 2026-10-04 05:14:51.124 UTC [30] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.004 s, total=0.018 s; sync files=3, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB; lsn=0/1BFAFE8, redo lsn=0/1BFAFE8
+db-1  | 2026-10-04 05:14:51.133 UTC [1] LOG:  database system is shut down
 ```
 
 The database log ends with a normal, clean shutdown ("database system is shut down"). It did not crash; someone
@@ -551,9 +551,9 @@ docker compose restart
 ```
 
 ```text
- Container capstone-api-1 Restarting 
  Container capstone-web-1 Restarting 
  Container capstone-db-1 Restarting 
+ Container capstone-api-1 Restarting 
  Container capstone-db-1 Started 
  Container capstone-web-1 Started 
  Container capstone-api-1 Started 
@@ -599,7 +599,7 @@ persistence test. Read the script once; every check is one line you could type y
 6. Data on a volume (docker volume inspect capstone_db-data)
   PASS  volume capstone_db-data exists
    docker compose down  (containers and networks are removed, the volume is kept)
-  PASS  after down + up, the message verify-1791087994 is still there
+  PASS  after down + up, the message verify-1791090914 is still there
 
 All checks passed.
 ```
@@ -631,8 +631,8 @@ docker compose down
  Container capstone-db-1 Stopped 
  Container capstone-db-1 Removing 
  Container capstone-db-1 Removed 
- Network capstone_backend Removing 
  Network capstone_frontend Removing 
+ Network capstone_backend Removing 
  Network capstone_backend Removed 
  Network capstone_frontend Removed 
 ```

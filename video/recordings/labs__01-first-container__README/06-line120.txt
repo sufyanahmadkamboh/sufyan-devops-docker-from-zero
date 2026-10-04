@@ -1,0 +1,5 @@
+docker images nginx
+---
+IMAGE               ID             DISK USAGE   CONTENT SIZE   EXTRA
+nginx:1.30-alpine   0985e772fb9f       93.6MB           27MB        
+# exit 0

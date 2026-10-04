@@ -1,0 +1,6 @@
+docker rmi simple-app:1.0 localhost:5000/simple-app:1.0
+---
+Untagged: simple-app:1.0
+Untagged: localhost:5000/simple-app:1.0
+Deleted: sha256:8e4b2f4b8a3767276532d3dc589d719cd7d3f21eaaf8088ab911a1b608b45a08
+# exit 0

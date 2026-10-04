@@ -1,0 +1,12 @@
+ls -la
+---
+total 27
+drwxr-xr-x 1 learner learner    0 Oct  4 05:57 .
+drwxr-xr-x 1 learner learner    0 Oct  4 05:55 ..
+-rw-r--r-- 1 learner learner   81 Oct  4 05:44 .dockerignore
+-rw-r--r-- 1 learner learner  233 Oct  4 05:44 Dockerfile
+-rw-r--r-- 1 learner learner 4565 Oct  4 05:57 README.md
+-rw-r--r-- 1 learner learner 1087 Oct  4 05:44 app.py
+drwxr-xr-x 1 learner learner    0 Oct  4 05:54 fixed
+-rw-r--r-- 1 learner learner   13 Oct  4 05:44 requirements.txt
+# exit 0

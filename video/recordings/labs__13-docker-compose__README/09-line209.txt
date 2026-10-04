@@ -1,0 +1,4 @@
+curl -s http://localhost:8080/api/info
+---
+{"app_env":"development","container_hostname":"f65932ab28ce","database_host":"db","greeting":"Hello from Docker Compose"}
+# exit 0

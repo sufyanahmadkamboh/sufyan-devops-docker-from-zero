@@ -1,0 +1,9 @@
+docker run -d --name web nginx:1.30-alpine
+docker run -d --name web2 nginx:1.30-alpine
+docker ps --format '{{.ID}}  {{.Image}}  {{.Names}}'
+---
+6fa372df75b04ccfab849d36f3391133a81c7c2ff3e36c06332a43eccc4c6712
+0eba9fe87ad2274a824978f8a23a185fb87555f4bd72d9b0bcd21fb0f7703949
+0eba9fe87ad2  nginx:1.30-alpine  web2
+6fa372df75b0  nginx:1.30-alpine  web
+# exit 0

@@ -1,0 +1,4 @@
+docker compose version
+---
+Docker Compose version v5.1.4
+# exit 0

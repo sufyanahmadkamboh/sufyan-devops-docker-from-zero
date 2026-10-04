@@ -1,0 +1,4 @@
+docker rm -f step3
+---
+step3
+# exit 0

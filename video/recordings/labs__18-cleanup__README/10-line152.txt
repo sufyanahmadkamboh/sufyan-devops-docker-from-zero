@@ -1,0 +1,8 @@
+docker image prune -f
+---
+Deleted Images:
+untagged: sha256:20aeb3209e8f8b24bb1576144d489d260045bbbadf7fc9633b09d8dff01fedfe
+deleted: sha256:20aeb3209e8f8b24bb1576144d489d260045bbbadf7fc9633b09d8dff01fedfe
+
+Total reclaimed space: 856B
+# exit 0

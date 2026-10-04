@@ -1,0 +1,5 @@
+docker rm -f web
+rm -f index-from-container.html hello.html
+---
+web
+# exit 0

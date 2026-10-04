@@ -1,0 +1,5 @@
+cd labs/09-volumes
+docker run --name nodata alpine:3.24 sh -c 'echo "important data" > /data.txt && cat /data.txt'
+---
+important data
+# exit 0

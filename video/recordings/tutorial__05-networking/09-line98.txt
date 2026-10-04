@@ -1,0 +1,6 @@
+docker network create othernet
+docker run -d --name client --network othernet busybox:1.37 sleep 3600
+---
+c109852880ed539026d0dff1cb57c761197c6da51ec37a689bed781c7f53ecbd
+4a60d0f222cfe0c8fe59afe777d0ef990b62f5fba891c7864c074eebeadfedef
+# exit 0

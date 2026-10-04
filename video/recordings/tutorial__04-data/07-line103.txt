@@ -1,0 +1,6 @@
+docker run -d --name holder -v notes:/data alpine:3.24 sleep 300
+docker volume rm notes
+---
+b8fb0c6c3bfaf552df2a1fb2fce34c14776199ac8861dc2aea5ea02bf5748af3
+Error response from daemon: remove notes: volume is in use - [b8fb0c6c3bfaf552df2a1fb2fce34c14776199ac8861dc2aea5ea02bf5748af3]
+# exit 1

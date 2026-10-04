@@ -1,0 +1,5 @@
+docker run --name quick ubuntu:26.04
+docker ps -a --filter name=quick --format '{{.Names}}: {{.Status}}'
+---
+quick: Exited (0) Less than a second ago
+# exit 0

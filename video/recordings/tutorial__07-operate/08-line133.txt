@@ -1,0 +1,5 @@
+docker ps -a --filter name=db
+---
+CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS                     PORTS     NAMES
+a8105a16ac9e   postgres:18-alpine   "docker-entrypoint.s…"   6 seconds ago   Exited (1) 5 seconds ago             db
+# exit 0

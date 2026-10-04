@@ -1,0 +1,6 @@
+docker rm -f web
+docker run -d --name web --network board-net -p 8080:80 board-web
+---
+web
+4777a264d4baea4a972a1b9cadf0a82c75837ec11accbdcf7c3f3ca1cf03908e
+# exit 0

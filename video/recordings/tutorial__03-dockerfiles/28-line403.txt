@@ -1,0 +1,4 @@
+rm -rf junk .env
+---
+
+# exit 0

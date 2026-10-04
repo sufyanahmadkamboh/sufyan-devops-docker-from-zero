@@ -1,0 +1,4 @@
+docker inspect demo --format '{{json .Config.Env}}'
+---
+["APP_ENV=development","GREETING=Hi there","PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"]
+# exit 0

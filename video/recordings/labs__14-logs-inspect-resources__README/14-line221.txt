@@ -1,0 +1,4 @@
+docker inspect --format 'status={{.State.Status}} started={{.State.StartedAt}} restarts={{.RestartCount}}' web
+---
+status=running started=2026-10-04T05:17:21.361715297Z restarts=0
+# exit 0

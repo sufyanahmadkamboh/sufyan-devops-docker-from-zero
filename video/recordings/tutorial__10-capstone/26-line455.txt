@@ -1,0 +1,7 @@
+docker stats --no-stream capstone-web-1 capstone-api-1 capstone-db-1
+---
+CONTAINER ID   NAME             CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O     PIDS
+aa8a7ad34c98   capstone-web-1   0.00%     11.19MiB / 15.35GiB   0.07%     2.2kB / 1.46kB    0B / 8.19kB   15
+a34f2d326bd5   capstone-api-1   0.02%     63.21MiB / 256MiB     24.69%    6.39kB / 3.45kB   0B / 0B       3
+5fc12a971921   capstone-db-1    0.08%     23.03MiB / 512MiB     4.50%     4.3kB / 3.14kB    0B / 28.7kB   9
+# exit 0

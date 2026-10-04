@@ -1,0 +1,5 @@
+cp site/index.html site/index.html.backup
+echo "<p>Edited on my computer, served by the container without a rebuild.</p>" >> site/index.html
+---
+
+# exit 0

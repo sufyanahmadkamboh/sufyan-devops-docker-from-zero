@@ -1,0 +1,4 @@
+docker run --rm --memory=512m python:3.14-slim python -c "x = bytearray(256*1024*1024); print('allocated 256 MiB without problems')"
+---
+allocated 256 MiB without problems
+# exit 0

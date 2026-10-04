@@ -1,0 +1,4 @@
+docker run -d --name from-registry -p 5001:5000 localhost:5000/simple-app:1.0
+---
+ff566b091a5f9e6db6c9ef312fede9c058f22b918d239b19ff2e9fb4c928715f
+# exit 0

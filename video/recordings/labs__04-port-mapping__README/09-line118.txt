@@ -1,0 +1,5 @@
+docker ps --format '{{.Names}}  {{.Ports}}'
+---
+web2  0.0.0.0:8081->80/tcp, [::]:8081->80/tcp
+web  0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
+# exit 0

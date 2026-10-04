@@ -1,0 +1,8 @@
+docker rm -f demo
+docker run -d --name demo -e APP_ENV=production alpine:3.24 sleep 300
+docker exec demo printenv APP_ENV
+---
+demo
+c2dd4b2cf0bf1d103d6b0b946b9be76640e8f11ef9ebecf30f0ca75a82ced3e7
+production
+# exit 0

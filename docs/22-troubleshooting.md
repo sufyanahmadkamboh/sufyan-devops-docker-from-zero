@@ -88,14 +88,14 @@ had not seen the message (in real life the container usually runs in the backgro
 
 **Observe:**
 
-<!-- test: contains=Exited (2) -->
+<!-- test: retry=20; contains=Exited (2) -->
 ```bash
 docker ps -a --filter name=report --format '{{.Names}}  {{.Status}}'
 ```
 
 **Investigate:** the logs and the configuration the container really received:
 
-<!-- test: contains=REPORT_NAME is empty -->
+<!-- test: retry=15; contains=REPORT_NAME is empty -->
 ```bash
 docker logs report
 ```
@@ -113,12 +113,12 @@ docker rm report
 docker run --name report -e REPORT_NAME=weekly alpine:3.24 sh -c 'test -n "$REPORT_NAME" || { echo "ERROR: REPORT_NAME is empty" >&2; exit 2; }; echo "report $REPORT_NAME done"'
 ```
 
-<!-- test: contains=Exited (0) -->
+<!-- test: retry=20; contains=Exited (0) -->
 ```bash
 docker ps -a --filter name=report --format '{{.Names}}  {{.Status}}'
 ```
 
-<!-- test: contains=report weekly done -->
+<!-- test: retry=15; contains=report weekly done -->
 ```bash
 docker logs report
 docker rm report

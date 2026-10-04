@@ -1,0 +1,5 @@
+docker exec db psql -U postgres -c "CREATE TABLE IF NOT EXISTS notes (text TEXT); INSERT INTO notes VALUES ('I must survive');"
+---
+CREATE TABLE
+INSERT 0 1
+# exit 0

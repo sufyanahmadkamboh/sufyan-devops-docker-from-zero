@@ -1,0 +1,4 @@
+docker inspect exits-demo --format '{{json .Config.Cmd}}'
+---
+["python","main.py"]
+# exit 0

@@ -1,0 +1,8 @@
+cd examples/multi-container-app
+ls
+---
+api
+database
+docker-compose.yml
+web
+# exit 0

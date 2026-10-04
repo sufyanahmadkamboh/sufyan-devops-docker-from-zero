@@ -1,0 +1,4 @@
+   docker network inspect labnet --format '{{range .Containers}}{{.Name}} {{end}}'
+---
+web2 
+# exit 0

@@ -1,0 +1,22 @@
+docker compose down
+docker volume ls --filter name=capstone
+---
+ Container capstone-web-1 Stopping 
+ Container capstone-web-1 Stopped 
+ Container capstone-web-1 Removing 
+ Container capstone-web-1 Removed 
+ Container capstone-api-1 Stopping 
+ Container capstone-api-1 Stopped 
+ Container capstone-api-1 Removing 
+ Container capstone-api-1 Removed 
+ Container capstone-db-1 Stopping 
+ Container capstone-db-1 Stopped 
+ Container capstone-db-1 Removing 
+ Container capstone-db-1 Removed 
+ Network capstone_backend Removing 
+ Network capstone_frontend Removing 
+ Network capstone_backend Removed 
+ Network capstone_frontend Removed 
+DRIVER    VOLUME NAME
+local     capstone_db-data
+# exit 0

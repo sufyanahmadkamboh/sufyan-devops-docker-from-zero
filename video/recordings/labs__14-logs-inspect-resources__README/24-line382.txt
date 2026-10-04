@@ -1,0 +1,5 @@
+docker ps -a --filter name=oom
+---
+CONTAINER ID   IMAGE              COMMAND                  CREATED        STATUS                                PORTS     NAMES
+e1032bf46e06   python:3.14-slim   "python -c 'x = byte…"   1 second ago   Exited (137) Less than a second ago             oom
+# exit 0

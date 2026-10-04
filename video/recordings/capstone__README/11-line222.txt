@@ -1,0 +1,7 @@
+docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}'
+---
+NAME             CPU %     MEM USAGE / LIMIT
+capstone-web-1   0.00%     11.24MiB / 15.35GiB
+capstone-api-1   0.02%     54.51MiB / 256MiB
+capstone-db-1    0.06%     24.15MiB / 512MiB
+# exit 0

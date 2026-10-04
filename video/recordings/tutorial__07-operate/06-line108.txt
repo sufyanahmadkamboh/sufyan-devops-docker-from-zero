@@ -1,0 +1,4 @@
+docker run -d --name db postgres:18-alpine
+---
+a8105a16ac9e56ddf53df977d96c6e71c5703663c20f1486a14db76dcf13554c
+# exit 0

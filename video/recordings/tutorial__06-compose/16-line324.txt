@@ -1,0 +1,4 @@
+curl -s http://localhost:8080/api/health
+---
+{"database":"failed to resolve host 'db': [Errno -2] Name or service not known","status":"error"}
+# exit 0

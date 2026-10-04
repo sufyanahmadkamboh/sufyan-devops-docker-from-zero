@@ -1,0 +1,4 @@
+cd troubleshooting/06-environment-variable-missing
+---
+
+# exit 0

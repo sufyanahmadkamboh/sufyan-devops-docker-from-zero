@@ -1,0 +1,6 @@
+docker rm -f web api db
+---
+web
+api
+db
+# exit 0

@@ -64,7 +64,7 @@ docker ps --filter name=web --format '{{.Names}}  ports: {{.Ports}}'
 ```
 
 ```text
-39e0a68dbcbc6a07534d5162c5e50ef09a896bee3aeef81ff34cf2f4b3b4d45d
+ce9ab6d232d65d3189b2d056ccb7326fd7afcbfb47060fdd801a180a7fea8c5b
 web  ports: 0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
 ```
 
@@ -93,15 +93,15 @@ docker port web
 
 Every request is also visible in the logs (one line per request, with the address it came from):
 
-<!-- test: output=tail:2; contains=GET / -->
+<!-- test: retry=15; output=tail:2; contains=GET / -->
 ```bash
 docker logs web
 ```
 
 ```text
 ...
-2026/10/04 03:59:01 [notice] 1#1: start worker process 43
-172.17.0.1 - - [04/Oct/2026:03:59:01 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
+2026/10/04 04:52:24 [notice] 1#1: start worker process 43
+172.17.0.1 - - [04/Oct/2026:04:52:25 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
 ```
 
 ## Step 3 · Same container port, different host ports
@@ -166,9 +166,9 @@ docker logs broken
 
 ```text
 ...
-2026/10/04 03:59:03 [notice] 1#1: start worker process 41
-2026/10/04 03:59:03 [notice] 1#1: start worker process 42
-2026/10/04 03:59:03 [notice] 1#1: start worker process 43
+2026/10/04 04:52:26 [notice] 1#1: start worker process 41
+2026/10/04 04:52:26 [notice] 1#1: start worker process 42
+2026/10/04 04:52:26 [notice] 1#1: start worker process 43
 ```
 
 No errors: nginx started normally. Next question: **which port does nginx really listen on inside the container?** `netstat` (included in the Alpine image) lists listening ports:

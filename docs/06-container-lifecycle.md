@@ -94,7 +94,7 @@ docker ps -a --filter name=demo --format 'table {{.Names}}\t{{.Status}}'
 ```
 
 ```text
-606fa2f5bcdbb989a7c9a7a89cf9c7ff935f966182c3313ac9c5206782ac70fa
+d4d7327177dfcd9c4d5a6231c6ad587c9997aac5e8b9eb2076f9fb3d6a148704
 NAMES     STATUS
 demo      Created
 ```
@@ -115,7 +115,7 @@ demo      Up Less than a second
 
 **Stop** it gracefully (stop signal, then SIGKILL only if needed):
 
-<!-- test: contains=Exited (0); output -->
+<!-- test: retry=20; contains=Exited (0); output -->
 ```bash
 docker stop demo
 docker ps -a --filter name=demo --format 'table {{.Names}}\t{{.Status}}'
@@ -129,7 +129,7 @@ demo      Exited (0) Less than a second ago
 
 **Start** it again, then **kill** it (SIGKILL):
 
-<!-- test: contains=Exited (137); output -->
+<!-- test: retry=20; contains=Exited (137); output -->
 ```bash
 docker start demo
 docker kill demo
@@ -205,14 +205,14 @@ Wait more than 5 seconds, then look again: `sleep` finished, so the container ex
 
 <!-- test-run: sleep 7 -->
 
-<!-- test: contains=Exited (0) -->
+<!-- test: retry=20; contains=Exited (0) -->
 ```bash
 docker ps -a --filter name=sleeper --format '{{.Names}}: {{.Status}}'
 ```
 
 And the classic beginner surprise: Ubuntu "does not start".
 
-<!-- test: contains=Exited (0) -->
+<!-- test: retry=20; contains=Exited (0) -->
 ```bash
 docker run --name ubuntu-test ubuntu:26.04
 docker ps -a --filter name=ubuntu-test --format '{{.Names}}: {{.Status}}'
@@ -236,7 +236,7 @@ docker run --name broken alpine:3.24 sh -c 'echo "starting..."; ls /does-not-exi
 - **Observe:** the command printed `starting...` and an `ls` error, and returned to the prompt.
 - **Investigate:** the state and the exit code, then the logs:
 
-<!-- test: contains=Exited (1); contains=No such file -->
+<!-- test: retry=20; contains=Exited (1); contains=No such file -->
 ```bash
 docker ps -a --filter name=broken --format '{{.Names}}: {{.Status}}'
 docker inspect broken --format 'exit code: {{.State.ExitCode}}'
@@ -247,7 +247,7 @@ docker logs broken
 - **Fix:** run a command that works (in a real app: fix the command, file or setting the logs name).
 - **Verify:**
 
-<!-- test: contains=Exited (0) -->
+<!-- test: retry=20; contains=Exited (0) -->
 ```bash
 docker rm broken
 docker run --name fixed alpine:3.24 sh -c 'echo "starting..."; ls /'

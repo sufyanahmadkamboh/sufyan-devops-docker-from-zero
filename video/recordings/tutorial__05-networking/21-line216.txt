@@ -1,0 +1,7 @@
+docker run -d --name api --network board-net \
+  -e DB_HOST=db -e DB_PASSWORD=board-lab-password \
+  -e APP_ENV=development -e GREETING="Hello from a container I started by hand" \
+  board-api
+---
+d7b72582d1070422e1dd680f81ee52a0297cc3b3db1af938fa2d1e5a7209c435
+# exit 0

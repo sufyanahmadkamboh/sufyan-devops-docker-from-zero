@@ -1,0 +1,4 @@
+docker inspect nginx:1.30-alpine --format '{{json .Config.ExposedPorts}}'
+---
+{"80/tcp":{}}
+# exit 0

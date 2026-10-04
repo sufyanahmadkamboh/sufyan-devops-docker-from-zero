@@ -1,0 +1,6 @@
+docker images
+---
+IMAGE                ID             DISK USAGE   CONTENT SIZE   EXTRA
+hello-world:latest   5e2309035332       25.9kB         9.49kB        
+nginx:1.30-alpine    0985e772fb9f       93.6MB           27MB        
+# exit 0

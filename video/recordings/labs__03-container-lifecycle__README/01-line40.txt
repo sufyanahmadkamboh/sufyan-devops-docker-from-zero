@@ -1,0 +1,4 @@
+cd labs/03-container-lifecycle
+---
+
+# exit 0

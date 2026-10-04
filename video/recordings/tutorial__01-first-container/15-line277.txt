@@ -1,0 +1,6 @@
+docker start demo
+docker ps -a --filter name=demo --format '{{.Names}}: {{.Status}}'
+---
+demo
+demo: Up Less than a second
+# exit 0

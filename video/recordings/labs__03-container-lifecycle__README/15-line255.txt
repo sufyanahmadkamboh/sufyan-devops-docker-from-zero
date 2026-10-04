@@ -1,0 +1,4 @@
+docker exec web nginx -s quit
+---
+2026/10/04 04:52:17 [notice] 44#44: signal process started
+# exit 0

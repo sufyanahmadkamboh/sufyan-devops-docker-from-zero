@@ -1,0 +1,4 @@
+mv .dockerignore.disabled .dockerignore
+---
+
+# exit 0

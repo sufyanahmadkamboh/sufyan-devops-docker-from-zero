@@ -1,0 +1,38 @@
+docker run -d --name db --network board-net \
+  -e POSTGRES_DB=board -e POSTGRES_USER=board -e POSTGRES_PASSWORD=board-lab-password \
+  -v board-data:/var/lib/postgresql \
+  -v "$(pwd)/examples/multi-container-app/database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro" \
+  postgres:18-alpine
+---
+Unable to find image 'postgres:18-alpine' locally
+18-alpine: Pulling from library/postgres
+5ef7ae0adbc8: Pulling fs layer
+d8f47ca787e9: Pulling fs layer
+23ebd6772525: Pulling fs layer
+176ab66edd39: Pulling fs layer
+e5545be08ab6: Pulling fs layer
+a7fe94998417: Pulling fs layer
+976cd45ecd0f: Pulling fs layer
+30b4807a96db: Pulling fs layer
+e5545be08ab6: Download complete
+30b4807a96db: Download complete
+d8f47ca787e9: Download complete
+a7fe94998417: Download complete
+5ef7ae0adbc8: Download complete
+176ab66edd39: Download complete
+976cd45ecd0f: Download complete
+d8f47ca787e9: Pull complete
+976cd45ecd0f: Pull complete
+30b4807a96db: Pull complete
+26b9f17ac0bd: Download complete
+41433c2899da: Download complete
+23ebd6772525: Download complete
+e5545be08ab6: Pull complete
+a7fe94998417: Pull complete
+5ef7ae0adbc8: Pull complete
+176ab66edd39: Pull complete
+23ebd6772525: Pull complete
+Digest: sha256:77f585114c32fbca283dc835b0596f4e52b51b4c6662d7810b2f4084f60a1873
+Status: Downloaded newer image for postgres:18-alpine
+f5856addd08348712a385a51d15a0cae9062a07968ac69e47c30fe1471b47883
+# exit 0

@@ -1,0 +1,36 @@
+docker logs --since 5m --timestamps web
+---
+2026-10-04T05:12:40.873130322Z /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+2026-10-04T05:12:40.873166794Z /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+2026-10-04T05:12:40.874107914Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+2026-10-04T05:12:40.883270848Z 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+2026-10-04T05:12:40.892317923Z 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+2026-10-04T05:12:40.892530892Z /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+2026-10-04T05:12:40.892539256Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+2026-10-04T05:12:40.895762193Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+2026-10-04T05:12:40.897398102Z /docker-entrypoint.sh: Configuration complete; ready for start up
+2026-10-04T05:12:40.904140604Z 2026/10/04 05:12:40 [notice] 1#1: using the "epoll" event method
+2026-10-04T05:12:40.904170715Z 2026/10/04 05:12:40 [notice] 1#1: nginx/1.30.5
+2026-10-04T05:12:40.904172423Z 2026/10/04 05:12:40 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026-10-04T05:12:40.904173497Z 2026/10/04 05:12:40 [notice] 1#1: OS: Linux 6.6.114.1-microsoft-standard-WSL2
+2026-10-04T05:12:40.904174492Z 2026/10/04 05:12:40 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026-10-04T05:12:40.904350102Z 2026/10/04 05:12:40 [notice] 1#1: start worker processes
+2026-10-04T05:12:40.904778487Z 2026/10/04 05:12:40 [notice] 1#1: start worker process 31
+2026-10-04T05:12:40.904958859Z 2026/10/04 05:12:40 [notice] 1#1: start worker process 32
+2026-10-04T05:12:40.905217794Z 2026/10/04 05:12:40 [notice] 1#1: start worker process 33
+2026-10-04T05:12:40.905233758Z 2026/10/04 05:12:40 [notice] 1#1: start worker process 34
+2026-10-04T05:12:40.905499251Z 2026/10/04 05:12:40 [notice] 1#1: start worker process 35
+2026-10-04T05:12:40.905663165Z 2026/10/04 05:12:40 [notice] 1#1: start worker process 36
+2026-10-04T05:12:40.905798904Z 2026/10/04 05:12:40 [notice] 1#1: start worker process 37
+2026-10-04T05:12:40.906055063Z 2026/10/04 05:12:40 [notice] 1#1: start worker process 38
+2026-10-04T05:12:40.906256654Z 2026/10/04 05:12:40 [notice] 1#1: start worker process 39
+2026-10-04T05:12:40.906484493Z 2026/10/04 05:12:40 [notice] 1#1: start worker process 40
+2026-10-04T05:12:40.906779195Z 2026/10/04 05:12:40 [notice] 1#1: start worker process 41
+2026-10-04T05:12:40.907100051Z 2026/10/04 05:12:40 [notice] 1#1: start worker process 42
+2026-10-04T05:12:40.907248029Z 2026/10/04 05:12:40 [notice] 1#1: start worker process 43
+2026-10-04T05:12:40.907566494Z 2026/10/04 05:12:40 [notice] 1#1: start worker process 44
+2026-10-04T05:12:41.082873243Z 172.17.0.1 - - [04/Oct/2026:05:12:41 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
+2026-10-04T05:12:41.140400165Z 172.17.0.1 - - [04/Oct/2026:05:12:41 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
+2026-10-04T05:12:41.182301591Z 2026/10/04 05:12:41 [error] 33#33: *3 open() "/usr/share/nginx/html/this-page-does-not-exist" failed (2: No such file or directory), client: 172.17.0.1, server: localhost, request: "GET /this-page-does-not-exist HTTP/1.1", host: "localhost:8080"
+2026-10-04T05:12:41.182328734Z 172.17.0.1 - - [04/Oct/2026:05:12:41 +0000] "GET /this-page-does-not-exist HTTP/1.1" 404 153 "-" "curl/8.19.0" "-"
+# exit 0

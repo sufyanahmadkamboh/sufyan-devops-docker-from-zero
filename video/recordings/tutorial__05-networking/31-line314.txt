@@ -1,0 +1,4 @@
+docker inspect web --format '{{range $name, $settings := .NetworkSettings.Networks}}{{$name}} {{end}}'
+---
+bridge 
+# exit 0

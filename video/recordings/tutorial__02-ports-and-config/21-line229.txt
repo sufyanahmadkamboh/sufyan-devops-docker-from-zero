@@ -1,0 +1,42 @@
+docker run --name db postgres:18-alpine
+---
+Unable to find image 'postgres:18-alpine' locally
+18-alpine: Pulling from library/postgres
+5ef7ae0adbc8: Pulling fs layer
+176ab66edd39: Pulling fs layer
+23ebd6772525: Pulling fs layer
+976cd45ecd0f: Pulling fs layer
+d8f47ca787e9: Pulling fs layer
+30b4807a96db: Pulling fs layer
+a7fe94998417: Pulling fs layer
+e5545be08ab6: Pulling fs layer
+30b4807a96db: Download complete
+5ef7ae0adbc8: Download complete
+976cd45ecd0f: Download complete
+a7fe94998417: Download complete
+e5545be08ab6: Download complete
+176ab66edd39: Download complete
+d8f47ca787e9: Download complete
+976cd45ecd0f: Pull complete
+30b4807a96db: Pull complete
+d8f47ca787e9: Pull complete
+41433c2899da: Download complete
+26b9f17ac0bd: Download complete
+23ebd6772525: Download complete
+23ebd6772525: Pull complete
+5ef7ae0adbc8: Pull complete
+a7fe94998417: Pull complete
+e5545be08ab6: Pull complete
+176ab66edd39: Pull complete
+Digest: sha256:77f585114c32fbca283dc835b0596f4e52b51b4c6662d7810b2f4084f60a1873
+Status: Downloaded newer image for postgres:18-alpine
+Error: Database is uninitialized and superuser password is not specified.
+       You must specify POSTGRES_PASSWORD to a non-empty value for the
+       superuser. For example, "-e POSTGRES_PASSWORD=password" on "docker run".
+
+       You may also use "POSTGRES_HOST_AUTH_METHOD=trust" to allow all
+       connections without a password. This is *not* recommended.
+
+       See PostgreSQL documentation about "trust":
+       https://www.postgresql.org/docs/current/auth-trust.html
+# exit 1

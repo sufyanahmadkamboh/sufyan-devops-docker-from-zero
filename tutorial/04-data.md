@@ -82,7 +82,7 @@ docker volume inspect notes
 ```text
 [
     {
-        "CreatedAt": "2026-10-04T04:38:18Z",
+        "CreatedAt": "2026-10-04T04:45:30Z",
         "Driver": "local",
         "Labels": null,
         "Mountpoint": "/var/lib/docker/volumes/notes/_data",
@@ -184,7 +184,7 @@ Many older tutorials mount `/var/lib/postgresql/data`. That was right up to Post
 docker run --name olddb -e POSTGRES_PASSWORD=lab-only-password -v olddata:/var/lib/postgresql/data postgres:18-alpine
 ```
 
-<!-- test: contains=in 18+ -->
+<!-- test: retry=15; contains=in 18+ -->
 ```bash
 docker logs olddb 2>&1 | grep -A 3 "in 18+"
 ```

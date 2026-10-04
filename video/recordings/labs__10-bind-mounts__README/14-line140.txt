@@ -1,0 +1,6 @@
+docker run -d --name web3 -p 8082:80 \
+  --mount type=bind,source="$(pwd)/site",target=/usr/share/nginx/html,readonly \
+  nginx:1.30-alpine
+---
+a5dfa6ef584492b9b2a401d665c5a746f747cd0765c9722511ae75d5ae1c0904
+# exit 0

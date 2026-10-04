@@ -73,7 +73,7 @@ docker volume inspect notes
 ```text
 [
     {
-        "CreatedAt": "2026-10-04T04:03:24Z",
+        "CreatedAt": "2026-10-04T04:53:39Z",
         "Driver": "local",
         "Labels": null,
         "Mountpoint": "/var/lib/docker/volumes/notes/_data",

@@ -1,0 +1,4 @@
+docker compose logs api
+---
+api-1  | ERROR: required setting DB_PASSWORD is missing. Set the environment variable DB_PASSWORD (or DB_PASSWORD_FILE).
+# exit 0

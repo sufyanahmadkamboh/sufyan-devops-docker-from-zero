@@ -1,0 +1,7 @@
+docker run -d --name web3 -p 8082:8080 nginx:1.30-alpine
+docker ps --filter name=web3
+---
+8753daf19460827a114e7206618d37d85a3df1bb349793e5f3383ded2e98b517
+CONTAINER ID   IMAGE               COMMAND                  CREATED                  STATUS                  PORTS                                         NAMES
+8753daf19460   nginx:1.30-alpine   "/docker-entrypoint.…"   Less than a second ago   Up Less than a second   0.0.0.0:8082->8080/tcp, [::]:8082->8080/tcp   web3
+# exit 0

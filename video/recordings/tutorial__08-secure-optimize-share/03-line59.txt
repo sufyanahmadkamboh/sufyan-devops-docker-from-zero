@@ -1,0 +1,4 @@
+docker run --rm simple-app:1.0 id
+---
+uid=10001(appuser) gid=10001(appuser) groups=10001(appuser)
+# exit 0

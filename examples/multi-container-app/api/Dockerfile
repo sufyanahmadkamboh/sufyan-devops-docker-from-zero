@@ -4,5 +4,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py .
 EXPOSE 5000
-# gunicorn is a production web server for Python apps; 2 worker processes are plenty here
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--access-logfile", "-", "app:app"]
+# gunicorn is a production web server for Python apps; 2 worker processes are plenty here.
+# --preload loads the app (and checks its settings) once, before the workers start, so a missing setting
+# stops the container immediately with exit code 3 and one clear error line.
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--preload", "--access-logfile", "-", "app:app"]

@@ -1,0 +1,8 @@
+curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080/
+curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080/
+curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080/does-not-exist
+---
+200
+200
+404
+# exit 0

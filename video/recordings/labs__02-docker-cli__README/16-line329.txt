@@ -1,0 +1,4 @@
+docker exec web nginx -v
+---
+Error response from daemon: container 2912e74b3f640222f0021e604a202461cfc1671b1436230633c8b4f835f0f8a1 is not running
+# exit 1

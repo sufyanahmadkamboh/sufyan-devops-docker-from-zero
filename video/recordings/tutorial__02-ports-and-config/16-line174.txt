@@ -1,0 +1,6 @@
+docker rm web4
+docker run -d --name web4 -p 8083:80 nginx:1.30-alpine
+---
+web4
+6ab8bf61aaaebae254f2e7dfb6ed2271e4f49fd316f755d685fbf2a30c7dfacf
+# exit 0

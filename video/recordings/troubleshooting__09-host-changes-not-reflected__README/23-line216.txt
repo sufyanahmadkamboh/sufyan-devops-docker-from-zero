@@ -1,0 +1,12 @@
+docker rm -f web web3
+docker rmi my-site:1.0 my-site:1.1
+echo '<h1>Version 1</h1>' > site/index.html
+cd ../..
+---
+web
+web3
+Untagged: my-site:1.0
+Deleted: sha256:b04c79fd8c61c5126ae97d588d0a17d988c63dd86ad4d72552a37782df862385
+Untagged: my-site:1.1
+Deleted: sha256:380ef18c5981a9d6cea0b51775bd0c6a2582cfe1232b338b94e53fe0eb3e13d5
+# exit 0

@@ -1,0 +1,5 @@
+docker run --rm ts01 ls /app
+---
+app.py
+requirements.txt
+# exit 0

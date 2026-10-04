@@ -1,0 +1,7 @@
+cat site/index.html Dockerfile
+---
+<h1>Version 1</h1>
+# A tiny site image: the page is COPIED into the image at build time.
+FROM nginx:1.30-alpine
+COPY site/ /usr/share/nginx/html/
+# exit 0

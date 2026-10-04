@@ -1,0 +1,11 @@
+diff Dockerfile Dockerfile.fixed || true
+---
+1c1
+< # Broken on purpose. Build it, run it, and find out why the container stops.
+---
+> # Fixed version: the CMD now points at the file that really exists in /app.
+7c7
+< CMD ["python", "main.py"]
+---
+> CMD ["python", "app.py"]
+# exit 0

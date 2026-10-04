@@ -1,0 +1,9 @@
+docker run --rm --env-file lab.env alpine:3.24 env
+---
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=5d90bcaf81fa
+APP_ENV=staging
+GREETING=Hello from an env file
+LOG_LEVEL=debug
+HOME=/root
+# exit 0

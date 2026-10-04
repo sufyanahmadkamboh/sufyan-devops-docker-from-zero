@@ -1,0 +1,15 @@
+docker images simple-app
+---
+IMAGE                   ID             DISK USAGE   CONTENT SIZE   EXTRA
+simple-app:1.0          3f6962c3154a        212MB         51.9MB        
+simple-app:clean        614749901fce        189MB         46.5MB        
+simple-app:fat          f29822dcd7e5       1.75GB          454MB        
+simple-app:leaky        06809757035e        239MB         46.5MB        
+simple-app:multistage   2bcbfd28cfde        108MB         26.1MB        
+simple-app:root         939d3ab86401        212MB         51.9MB        
+simple-app:step1        f3b879a66ba5        189MB         46.5MB        
+simple-app:step2        0709c7207019        189MB         46.5MB        
+simple-app:step3        67c42d9bdc4d        212MB         51.9MB        
+simple-app:step4        ead82f948cbf        212MB         51.9MB   U    
+simple-app:step5        667a8d95bf73        212MB         51.9MB        
+# exit 0

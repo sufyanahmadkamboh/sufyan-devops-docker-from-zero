@@ -1,0 +1,4 @@
+docker run -d --name backend --network othernet nginx:1.30-alpine
+---
+1009f471c016766fe3fcaa38730768a65227ddbd4f9528ab466744986fd1e374
+# exit 0

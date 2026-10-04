@@ -1,0 +1,35 @@
+cat docker-compose.yml
+---
+# Broken on purpose: the web container keeps stopping. Why?
+name: ts03
+
+services:
+  web:
+    build: ../../examples/multi-container-app/web
+    ports:
+      - "8080:80"
+    networks: [frontend]
+    depends_on: [api]
+
+  api:
+    build: ../../examples/multi-container-app/api
+    environment:
+      DB_HOST: db
+      DB_PASSWORD: board-lab-password
+    networks: [backend]
+    depends_on: [db]
+
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: board
+      POSTGRES_USER: board
+      POSTGRES_PASSWORD: board-lab-password
+    volumes:
+      - ../../examples/multi-container-app/database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks: [backend]
+
+networks:
+  frontend:
+  backend:
+# exit 0

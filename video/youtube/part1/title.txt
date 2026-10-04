@@ -1,0 +1,5 @@
+Docker From Zero (Part 1): Containers, Ports, Dockerfiles, Layers | Hands-On for Beginners
+
+Alternatives (A/B test with YouTube "Test & compare"):
+Learn Docker by Breaking It: Your First Containers and Dockerfiles (Part 1)
+Docker for Absolute Beginners: Run, Break, Fix (Real Output, No Slides)

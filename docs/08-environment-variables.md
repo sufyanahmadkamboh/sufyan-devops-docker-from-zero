@@ -69,7 +69,7 @@ docker run --rm -e APP_ENV=development -e TEAM=platform alpine:3.24 env
 
 ```text
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME=e63259c8392a
+HOSTNAME=e1a60ee19fb5
 APP_ENV=development
 TEAM=platform
 HOME=/root
@@ -120,8 +120,8 @@ docker inspect dev --format '{{range .Config.Env}}{{println .}}{{end}}'
 ```
 
 ```text
-GREETING=Hi from the dev container
 APP_ENV=development
+GREETING=Hi from the dev container
 PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 PYTHON_VERSION=3.14.8
 PYTHON_SHA256=c2215904f02b175596dc49351585104f4bc20341e1c47378b26a2c274360ce73
@@ -164,7 +164,7 @@ docker run --name pg postgres:18-alpine
   `Error: Database is uninitialized and superuser password is not specified.`
 - **Investigate:**
 
-<!-- test: contains=Exited (1); contains=POSTGRES_PASSWORD -->
+<!-- test: retry=20; contains=Exited (1); contains=POSTGRES_PASSWORD -->
 ```bash
 docker ps -a --filter name=pg --format '{{.Names}}: {{.Status}}'
 docker logs pg

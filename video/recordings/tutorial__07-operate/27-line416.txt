@@ -1,0 +1,7 @@
+docker rm -f web db limited oom
+---
+web
+db
+limited
+oom
+# exit 0

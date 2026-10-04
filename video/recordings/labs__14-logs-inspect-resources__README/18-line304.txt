@@ -1,0 +1,5 @@
+docker stats --no-stream limited
+---
+CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT   MEM %     NET I/O      BLOCK I/O     PIDS
+ad56d89dcee8   limited   0.00%     11.52MiB / 256MiB   4.50%     690B / 84B   0B / 8.19kB   15
+# exit 0

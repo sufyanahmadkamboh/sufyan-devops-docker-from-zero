@@ -1,0 +1,51 @@
+docker build -f dockerfile-steps/03.Dockerfile -t simple-app:broken dockerfile-steps
+---
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from 03.Dockerfile
+#1 transferring dockerfile: 218B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14-slim
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 DONE 0.0s
+
+#5 [1/4] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#5 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151 0.0s done
+#5 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 1.83kB done
+#4 DONE 0.0s
+
+#6 [2/4] WORKDIR /app
+#6 CACHED
+
+#7 [3/4] COPY . .
+#7 DONE 0.0s
+
+#8 [4/4] RUN pip install --no-cache-dir -r requirements.txt
+#8 1.345 ERROR: Could not open requirements file: [Errno 2] No such file or directory: 'requirements.txt'
+#8 ERROR: process "/bin/sh -c pip install --no-cache-dir -r requirements.txt" did not complete successfully: exit code: 1
+------
+ > [4/4] RUN pip install --no-cache-dir -r requirements.txt:
+1.345 ERROR: Could not open requirements file: [Errno 2] No such file or directory: 'requirements.txt'
+------
+03.Dockerfile:5
+--------------------
+   3 |     WORKDIR /app
+   4 |     COPY . .
+   5 | >>> RUN pip install --no-cache-dir -r requirements.txt
+   6 |     CMD ["python", "app.py"]
+   7 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/sh -c pip install --no-cache-dir -r requirements.txt" did not complete successfully: exit code: 1
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/9vuaxxudzq2mi3il01x5w5wuu
+# exit 1

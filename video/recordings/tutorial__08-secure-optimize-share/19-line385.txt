@@ -1,0 +1,22 @@
+docker run -d --name registry -p 5000:5000 registry:3
+---
+Unable to find image 'registry:3' locally
+3: Pulling from library/registry
+8dc2188d2a74: Pulling fs layer
+90764beeca7f: Pulling fs layer
+2aef3a8beb68: Pulling fs layer
+783ed5b12fca: Pulling fs layer
+8dc2188d2a74: Download complete
+90764beeca7f: Download complete
+783ed5b12fca: Download complete
+90764beeca7f: Pull complete
+d561fdf230c8: Download complete
+2aef3a8beb68: Download complete
+6c18a739ea63: Download complete
+8dc2188d2a74: Pull complete
+783ed5b12fca: Pull complete
+2aef3a8beb68: Pull complete
+Digest: sha256:ddf754342cfc8acc51a56d5d0ab6af06826461864460636d8bd5c546dab2a7b8
+Status: Downloaded newer image for registry:3
+9d88ff40131e4060951463cb8fc9d3629921a60d64167017526471734bc2b139
+# exit 0

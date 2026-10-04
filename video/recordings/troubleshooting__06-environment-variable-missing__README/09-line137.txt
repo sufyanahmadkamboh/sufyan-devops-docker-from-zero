@@ -1,0 +1,5 @@
+grep -n DB_PASSWORD docker-compose.fixed.yml
+---
+1:# Fixed: the api gets the DB_PASSWORD it needs (the same value the database was created with).
+17:      DB_PASSWORD: board-lab-password
+# exit 0

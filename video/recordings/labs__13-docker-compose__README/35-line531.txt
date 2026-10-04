@@ -1,0 +1,4 @@
+curl -fs http://localhost:8081/api/health
+---
+{"database":"ok","status":"ok"}
+# exit 0

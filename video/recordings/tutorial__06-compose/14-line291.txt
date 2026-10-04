@@ -1,0 +1,60 @@
+docker compose build api
+docker compose up -d
+---
+ Image multi-container-app-api Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 667B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 558B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.14-slim
+#3 DONE 0.2s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 64B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 63B done
+#5 DONE 0.0s
+
+#6 [1/5] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#6 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151 0.0s done
+#6 DONE 0.0s
+
+#7 [2/5] WORKDIR /app
+#7 CACHED
+
+#8 [3/5] COPY requirements.txt .
+#8 CACHED
+
+#9 [4/5] RUN pip install --no-cache-dir -r requirements.txt
+#9 CACHED
+
+#10 [5/5] COPY app.py .
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 exporting manifest sha256:11c1b006efe48dc8962acf980b59efb21feca6b017b81798b9d49e65f3af1d07 done
+#11 exporting config sha256:1db9efe8d78597eff4a1e5ba952baa2c2838df7ebf6be7728b0b5dd55098a9c3 done
+#11 exporting attestation manifest sha256:ba9b774dbbb53a72fb4fbc6b76b51df76b7fe8a031cefd2c0d7c61c32aefb2eb 0.0s done
+#11 exporting manifest list sha256:b3a1c22d0dafe7fe682cee6033b5ef2ba525e95a0038ba45c555e6899b5335d4 0.0s done
+#11 naming to docker.io/library/multi-container-app-api:latest
+#11 naming to docker.io/library/multi-container-app-api:latest done
+#11 unpacking to docker.io/library/multi-container-app-api:latest done
+#11 DONE 0.1s
+
+#12 resolving provenance for metadata file
+#12 DONE 0.0s
+ Image multi-container-app-api Built 
+ Container multi-container-app-db-1 Running 
+ Container multi-container-app-api-1 Recreate 
+ Container multi-container-app-api-1 Recreated 
+ Container multi-container-app-web-1 Running 
+ Container multi-container-app-api-1 Starting 
+ Container multi-container-app-api-1 Started 
+# exit 0

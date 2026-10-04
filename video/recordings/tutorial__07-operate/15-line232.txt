@@ -1,0 +1,4 @@
+docker inspect web --format '{{json .NetworkSettings.Ports}}'
+---
+{"80/tcp":[{"HostIp":"0.0.0.0","HostPort":"8080"},{"HostIp":"::","HostPort":"8080"}]}
+# exit 0

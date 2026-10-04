@@ -1,0 +1,4 @@
+docker inspect ubuntu:26.04 --format '{{json .Config.Cmd}}'
+---
+["/bin/bash"]
+# exit 0

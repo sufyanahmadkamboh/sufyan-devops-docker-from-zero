@@ -1,0 +1,8 @@
+docker rm -f web web2 web3 broken multi
+---
+web
+web2
+web3
+broken
+multi
+# exit 0

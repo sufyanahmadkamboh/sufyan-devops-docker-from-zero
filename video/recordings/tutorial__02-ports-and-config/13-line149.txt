@@ -1,0 +1,7 @@
+docker run -d --name web4 -p 8080:80 nginx:1.30-alpine
+---
+fc1ccdf0ee0c71d43a9e28495f90868ad2d7e8af8b2651b46c65fa682bd76bf2
+docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint web4 (1469dc8476ca9507d2d3c1098b36f237ac794c486d102ec523c4178128c84f17): Bind for 0.0.0.0:8080 failed: port is already allocated
+
+Run 'docker run --help' for more information
+# exit 125

@@ -1,0 +1,55 @@
+docker network inspect labnet
+---
+[
+    {
+        "Name": "labnet",
+        "Id": "cbb4bdff36c00b709524e7f8b8ca0d5c557839084a2ceb234328eea71fd1d2d8",
+        "Created": "2026-10-04T05:15:56.975129083Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Options": {
+            "com.docker.network.enable_ipv4": "true",
+            "com.docker.network.enable_ipv6": "false"
+        },
+        "Labels": {},
+        "Containers": {
+            "ceede396e6345e037b63fb66dd150d2f685e171166de2527003c25a24bc14119": {
+                "Name": "web2",
+                "EndpointID": "4a18572830339a355eec3337c48b32cfb60e3b8912d2f724f25c0c8959091e31",
+                "MacAddress": "ce:ce:55:44:01:6d",
+                "IPv4Address": "172.18.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Status": {
+            "IPAM": {
+                "Subnets": {
+                    "172.18.0.0/16": {
+                        "IPsInUse": 4,
+                        "DynamicIPsAvailable": 65532
+                    }
+                }
+            }
+        }
+    }
+]
+# exit 0

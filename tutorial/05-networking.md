@@ -31,25 +31,25 @@ Three networks are always there:
 Start a web server and try to reach it **by name** from a second container:
 
 ```bash
-docker run -d --name web nginx:1.30-alpine
+docker run -d --name web1 nginx:1.30-alpine
 ```
 
 <!-- test: fail; contains=bad address -->
 ```bash
-docker run --rm busybox:1.37 wget -qO- -T 3 http://web
+docker run --rm busybox:1.37 wget -qO- -T 3 http://web1
 ```
 
-`bad address 'web'`. Don't fix it yet. Both containers are on the same default `bridge` network, so why does the name not
+`bad address 'web1'`. Don't fix it yet. Both containers are on the same default `bridge` network, so why does the name not
 work? Let's try the IP address instead. `docker inspect` knows it:
 
 <!-- test: contains=. -->
 ```bash
-docker inspect web --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
+docker inspect web1 --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
 ```
 
 <!-- test: retry=10; contains=Welcome to nginx -->
 ```bash
-WEB_IP=$(docker inspect web --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}')
+WEB_IP=$(docker inspect web1 --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}')
 docker run --rm busybox:1.37 wget -qO- -T 3 "http://$WEB_IP" | grep title
 ```
 
@@ -142,7 +142,7 @@ docker network rm labnet
 Clean up Parts 1-3:
 
 ```bash
-docker rm -f web web2 client
+docker rm -f web1 web2 client
 docker network rm labnet othernet
 ```
 
@@ -248,7 +248,7 @@ curl -s http://localhost:8080/api/info
 ```
 
 ```text
-{"app_env":"development","container_hostname":"d91b6f162f1a","database_host":"db","greeting":"Hello from a container I started by hand"}
+{"app_env":"development","container_hostname":"d7b72582d107","database_host":"db","greeting":"Hello from a container I started by hand"}
 ```
 
 Add a message and read them all:
@@ -264,7 +264,7 @@ curl -s http://localhost:8080/api/messages
 ```
 
 ```text
-[{"created_at":"2026-10-04T04:39:09.194521+00:00","id":1,"text":"Hello! This first message was created by database/init.sql."},{"created_at":"2026-10-04T04:39:11.944254+00:00","id":2,"text":"written by hand"}]
+[{"created_at":"2026-10-04T05:12:03.754757+00:00","id":1,"text":"Hello! This first message was created by database/init.sql."},{"created_at":"2026-10-04T05:12:06.704740+00:00","id":2,"text":"written by hand"}]
 ```
 
 Open <http://localhost:8080> in your browser: the same data, with a page around it. Add a message there too.
@@ -289,21 +289,21 @@ Don't fix it yet. Before changing anything, let's investigate.
 
 **What is the symptom?** Nothing answers on 8080. **What should we check first?** Whether the container is running:
 
-<!-- test: contains=Exited (1) -->
+<!-- test: retry=20; contains=Exited (1) -->
 ```bash
 docker ps -a --filter name=web --format '{{.Names}}: {{.Status}}'
 ```
 
 It exited with code 1. **Which command tells us why?** The logs:
 
-<!-- test: output=tail:2; contains=host not found in upstream "api" -->
+<!-- test: retry=15; output=tail:2; contains=host not found in upstream "api" -->
 ```bash
 docker logs web
 ```
 
 ```text
 ...
-2026/10/04 04:39:13 [emerg] 1#1: host not found in upstream "api" in /etc/nginx/conf.d/default.conf:16
+2026/10/04 05:12:07 [emerg] 1#1: host not found in upstream "api" in /etc/nginx/conf.d/default.conf:16
 nginx: [emerg] host not found in upstream "api" in /etc/nginx/conf.d/default.conf:16
 ```
 

@@ -1,0 +1,6 @@
+docker volume rm lab18-db lab18-keep 2>/dev/null || true
+rm -f lab18-db.tar.gz
+cd ../..
+---
+lab18-db
+# exit 0

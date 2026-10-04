@@ -1,0 +1,4 @@
+docker ps -a --filter name=web3 --format '{{.Names}}  {{.Status}}'
+---
+web3  Created
+# exit 0

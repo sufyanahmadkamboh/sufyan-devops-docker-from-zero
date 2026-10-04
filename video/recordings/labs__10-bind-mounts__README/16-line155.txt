@@ -1,0 +1,4 @@
+docker exec web3 touch /usr/share/nginx/html/hacked.html
+---
+touch: /usr/share/nginx/html/hacked.html: Read-only file system
+# exit 1

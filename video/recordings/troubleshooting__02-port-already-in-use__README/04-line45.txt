@@ -1,0 +1,6 @@
+docker ps -a --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'
+---
+NAMES     STATUS        PORTS
+web2      Created       
+web       Up 1 second   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
+# exit 0

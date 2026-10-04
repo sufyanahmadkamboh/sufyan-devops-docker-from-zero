@@ -1,0 +1,9 @@
+grep -n 'networks: \[' docker-compose.yml docker-compose.fixed.yml
+---
+docker-compose.yml:9:    networks: [frontend]
+docker-compose.yml:17:    networks: [backend]
+docker-compose.yml:28:    networks: [backend]
+docker-compose.fixed.yml:12:    networks: [frontend]
+docker-compose.fixed.yml:20:    networks: [frontend, backend]
+docker-compose.fixed.yml:31:    networks: [backend]
+# exit 0

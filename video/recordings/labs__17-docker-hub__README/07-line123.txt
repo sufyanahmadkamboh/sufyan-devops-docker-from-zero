@@ -1,0 +1,6 @@
+curl -s http://localhost:5000/v2/_catalog
+curl -s http://localhost:5000/v2/simple-app/tags/list
+---
+{"repositories":["simple-app"]}
+{"name":"simple-app","tags":["1.0"]}
+# exit 0

@@ -1,0 +1,6 @@
+docker stop web
+docker rm web
+---
+web
+web
+# exit 0

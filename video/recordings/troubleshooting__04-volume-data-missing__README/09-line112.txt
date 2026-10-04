@@ -1,0 +1,4 @@
+docker volume rm note
+---
+note
+# exit 0

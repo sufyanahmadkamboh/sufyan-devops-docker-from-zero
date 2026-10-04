@@ -1,0 +1,4 @@
+docker run -d --name web -p 8080:80 -v "$(pwd)/site:/usr/share/nginx/html" nginx:1.30-alpine
+---
+efb16f9536842047f4ba2ecef3439b6c99bd99f24cc171d85d4355f3305fd1ce
+# exit 0

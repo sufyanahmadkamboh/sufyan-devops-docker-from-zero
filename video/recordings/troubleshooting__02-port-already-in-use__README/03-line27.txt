@@ -1,0 +1,7 @@
+docker run -d --name web2 -p 8080:80 nginx:1.30-alpine
+---
+33492ef8a1664227cb3818088b55c991810942911b9c4035c5c6967fac53f65c
+docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint web2 (1c05d044955a1f0f9973df0b92002d1f3171b508cbf504e1dba03abe9de915f8): Bind for 0.0.0.0:8080 failed: port is already allocated
+
+Run 'docker run --help' for more information
+# exit 125

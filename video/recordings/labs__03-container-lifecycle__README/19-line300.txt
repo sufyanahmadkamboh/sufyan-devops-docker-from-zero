@@ -1,0 +1,6 @@
+docker start sleeper
+docker exec sleeper echo hello
+---
+sleeper
+hello
+# exit 0

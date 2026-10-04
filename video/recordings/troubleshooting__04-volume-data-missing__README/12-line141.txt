@@ -1,0 +1,6 @@
+docker volume ls --filter name=db-data
+---
+DRIVER    VOLUME NAME
+local     multi-container-app_db-data
+local     renamed-project_db-data
+# exit 0

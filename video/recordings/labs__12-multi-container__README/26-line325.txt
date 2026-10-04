@@ -1,0 +1,10 @@
+docker rm -f web api db
+docker network rm board-net
+docker volume rm board-data
+---
+web
+api
+db
+board-net
+board-data
+# exit 0

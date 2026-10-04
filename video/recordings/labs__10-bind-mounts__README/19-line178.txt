@@ -1,0 +1,4 @@
+curl -s -o /dev/null -w "HTTP status: %{http_code}\n" http://localhost:8080
+---
+HTTP status: 403
+# exit 0

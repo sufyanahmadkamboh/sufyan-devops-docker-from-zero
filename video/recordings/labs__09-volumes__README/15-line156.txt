@@ -1,0 +1,4 @@
+docker exec db2 psql -U postgres -t -c "SELECT text FROM notes;"
+---
+ I survive container removal
+# exit 0

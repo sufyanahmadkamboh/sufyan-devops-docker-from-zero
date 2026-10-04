@@ -1,0 +1,4 @@
+docker ps -a --filter name=demo --format '{{.Names}}: {{.Status}}'
+---
+demo: Created
+# exit 0

@@ -1,0 +1,6 @@
+docker rm -f web
+docker run -d --name web -p 8080:80 -v "$(pwd)/site:/usr/share/nginx/html:ro" nginx:1.30-alpine
+---
+web
+f2519c24972e73e2a7c6d648acf0a6c0ab97bbf771e6e0bb9a84be18a81abc4e
+# exit 0

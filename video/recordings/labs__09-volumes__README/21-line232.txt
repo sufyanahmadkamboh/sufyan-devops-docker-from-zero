@@ -1,0 +1,7 @@
+docker volume create site-data
+docker run --rm -v site-data:/site alpine:3.24 sh -c 'echo "<h1>Served from a volume</h1>" > /site/index.html'
+docker run -d --name web -p 8080:80 -v site-data:/usr/share/nginx/html nginx:1.30-alpine
+---
+site-data
+2fab83b579ff9e5858a56c67a66e8b2207048466a64d1ffd622af283c87ca83b
+# exit 0

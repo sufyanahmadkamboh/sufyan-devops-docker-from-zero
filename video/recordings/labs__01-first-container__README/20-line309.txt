@@ -1,0 +1,12 @@
+docker stop web
+docker rm web
+docker rm $(docker ps -aq --filter ancestor=hello-world)
+docker rmi hello-world
+---
+web
+web
+54d3adccb99e
+2f5027f8258d
+Untagged: hello-world:latest
+Deleted: sha256:5e23090353324d887c48ad5e5c56d294eab81588df9605b07d1afe895f9cc8f8
+# exit 0

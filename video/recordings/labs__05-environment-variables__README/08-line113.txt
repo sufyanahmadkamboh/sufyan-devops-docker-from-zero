@@ -1,0 +1,4 @@
+docker exec demo printenv APP_ENV
+---
+development
+# exit 0

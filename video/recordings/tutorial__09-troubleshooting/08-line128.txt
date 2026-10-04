@@ -1,0 +1,4 @@
+grep CMD Dockerfile
+---
+CMD ["python", "main.py"]
+# exit 0

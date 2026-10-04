@@ -1,0 +1,5 @@
+docker images --filter dangling=true
+---
+IMAGE        ID             DISK USAGE   CONTENT SIZE   EXTRA
+<untagged>   20aeb3209e8f        212MB         51.9MB        
+# exit 0

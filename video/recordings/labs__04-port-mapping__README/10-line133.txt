@@ -1,0 +1,4 @@
+docker run -d --name broken -p 8082:8080 nginx:1.30-alpine
+---
+c44fe31325fc7cf6d3bca29bc42626ad01d19270e9877fdf13ccdf7c3b4e5b5f
+# exit 0

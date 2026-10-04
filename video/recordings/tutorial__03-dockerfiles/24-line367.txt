@@ -1,0 +1,4 @@
+docker run --rm simple-app:leaky cat .env
+---
+DB_PASSWORD=super-secret-do-not-ship
+# exit 0

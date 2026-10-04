@@ -1,0 +1,4 @@
+docker logs wbe
+---
+Error response from daemon: No such container: wbe
+# exit 1

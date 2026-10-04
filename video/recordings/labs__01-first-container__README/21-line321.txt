@@ -1,0 +1,6 @@
+docker ps -a
+docker images hello-world
+---
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+IMAGE   ID             DISK USAGE   CONTENT SIZE   EXTRA
+# exit 0

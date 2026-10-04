@@ -1,0 +1,4 @@
+docker run --rm --read-only --tmpfs /tmp simple-app:1.0 sh -c "touch /tmp/ok && echo /tmp is writable"
+---
+/tmp is writable
+# exit 0

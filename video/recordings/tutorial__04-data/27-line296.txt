@@ -1,0 +1,5 @@
+curl -s http://localhost:8080 | grep -o '403 Forbidden'
+---
+403 Forbidden
+403 Forbidden
+# exit 0

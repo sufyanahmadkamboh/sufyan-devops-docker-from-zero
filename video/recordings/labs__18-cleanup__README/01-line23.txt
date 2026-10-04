@@ -1,0 +1,4 @@
+cd labs/18-cleanup
+---
+
+# exit 0

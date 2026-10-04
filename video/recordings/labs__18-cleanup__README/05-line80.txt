@@ -1,0 +1,8 @@
+docker ps -a
+---
+CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS                     PORTS     NAMES
+a7b5a29c8005   alpine:3.24   "echo 'I created an …"   3 seconds ago   Exited (0) 2 seconds ago             anon
+7ef9d179398c   alpine:3.24   "echo 'I have a labe…"   4 seconds ago   Exited (0) 3 seconds ago             labeled
+6a43dc6a2617   alpine:3.24   "echo 'me too'"          4 seconds ago   Exited (0) 4 seconds ago             old2
+f6d1026f7ff9   alpine:3.24   "echo 'I ran once'"      5 seconds ago   Exited (0) 4 seconds ago             old1
+# exit 0

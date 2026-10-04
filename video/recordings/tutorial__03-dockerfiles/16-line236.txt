@@ -1,0 +1,18 @@
+docker history simple-app:step4
+---
+IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
+d0c998f34082   7 seconds ago    CMD ["python" "app.py"]                         0B        buildkit.dockerfile.v0
+<missing>      7 seconds ago    EXPOSE [5000/tcp]                               0B        buildkit.dockerfile.v0
+<missing>      7 seconds ago    ENV APP_ENV=production                          0B        buildkit.dockerfile.v0
+<missing>      7 seconds ago    RUN /bin/sh -c pip install --no-cache-dir -r…   16.9MB    buildkit.dockerfile.v0
+<missing>      11 seconds ago   COPY . . # buildkit                             16.4kB    buildkit.dockerfile.v0
+<missing>      21 seconds ago   WORKDIR /app                                    8.19kB    buildkit.dockerfile.v0
+<missing>      2 days ago       CMD ["python3"]                                 0B        buildkit.dockerfile.v0
+<missing>      2 days ago       RUN /bin/sh -c set -eux;  for src in idle3 p…   16.4kB    buildkit.dockerfile.v0
+<missing>      2 days ago       RUN /bin/sh -c set -eux;   savedAptMark="$(a…   42MB      buildkit.dockerfile.v0
+<missing>      2 days ago       ENV PYTHON_SHA256=c2215904f02b175596dc493515…   0B        buildkit.dockerfile.v0
+<missing>      2 days ago       ENV PYTHON_VERSION=3.14.8                       0B        buildkit.dockerfile.v0
+<missing>      2 days ago       RUN /bin/sh -c set -eux;  apt-get update;  a…   13.2MB    buildkit.dockerfile.v0
+<missing>      2 days ago       ENV PATH=/usr/local/bin:/usr/local/sbin:/usr…   0B        buildkit.dockerfile.v0
+<missing>      2 weeks ago      # debian.sh --arch 'amd64' out/ 'trixie' '@1…   87.7MB    debuerreotype 0.17
+# exit 0

@@ -1,0 +1,43 @@
+docker build -t my-nginx:1.0 .
+docker run -d --name web2 -p 8081:80 my-nginx:1.0
+---
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 168B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/nginx:1.30-alpine
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context:
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 717B done
+#4 DONE 0.0s
+
+#5 [1/2] FROM docker.io/library/nginx:1.30-alpine@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
+#5 resolve docker.io/library/nginx:1.30-alpine@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94 0.0s done
+#5 CACHED
+
+#6 [2/2] COPY site/ /usr/share/nginx/html/
+#6 DONE 0.0s
+
+#7 exporting to image
+#7 exporting layers
+#7 exporting layers 0.1s done
+#7 exporting manifest sha256:7eafa3d5de8be6df5510d0a5f5f2fb5b96db388a230a52c3331d88b6a1828d92 0.0s done
+#7 exporting config sha256:f13f680e9748059690aebe9ee32f05ff3486cf756ac23d8ada9eeb9789aa1fb8 0.0s done
+#7 exporting attestation manifest sha256:84359c36094ce19b9b43369d0add70de8258f6413fe085d490c120885b7e7cf1
+#7 exporting attestation manifest sha256:84359c36094ce19b9b43369d0add70de8258f6413fe085d490c120885b7e7cf1 0.0s done
+#7 exporting manifest list sha256:f35e597de4602887b4b1de22bd58f361db365531831c10ca80f09ce4cc10508d 0.0s done
+#7 naming to docker.io/library/my-nginx:1.0 done
+#7 unpacking to docker.io/library/my-nginx:1.0 0.0s done
+#7 DONE 0.2s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/w54djtjb3atqkzssm9w10rkg2
+686905e91cb0ad1c9f58e9f1578f03b1def4ea942fb082c6d491a492739070f7
+# exit 0

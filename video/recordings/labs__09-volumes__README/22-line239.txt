@@ -1,0 +1,4 @@
+curl -s http://localhost:8080
+---
+<h1>Served from a volume</h1>
+# exit 0

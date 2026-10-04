@@ -1,0 +1,7 @@
+grep -n "networks" docker-compose.yml
+---
+9:    networks: [frontend]
+17:    networks: [backend]
+28:    networks: [backend]
+30:networks:
+# exit 0

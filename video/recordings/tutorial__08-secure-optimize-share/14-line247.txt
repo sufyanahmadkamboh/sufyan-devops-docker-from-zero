@@ -1,0 +1,12 @@
+grep -E "^(FROM|COPY|RUN)" optimization/multistage.Dockerfile
+---
+FROM python:3.14-alpine AS builder
+RUN apk add --no-cache build-base
+RUN python -m venv /opt/venv
+COPY requirements.txt .
+RUN /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
+FROM python:3.14-alpine
+COPY --from=builder /opt/venv /opt/venv
+COPY app.py .
+RUN adduser -D -u 10001 appuser
+# exit 0

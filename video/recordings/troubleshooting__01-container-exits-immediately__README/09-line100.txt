@@ -1,0 +1,8 @@
+docker run --rm exits-demo ls -la /app
+---
+total 16
+drwxr-xr-x 1 root root 4096 Oct  4 04:48 .
+drwxr-xr-x 1 root root 4096 Oct  4 04:57 ..
+-rwxr-xr-x 1 root root 1087 Oct  4 03:44 app.py
+-rwxr-xr-x 1 root root   13 Oct  4 04:03 requirements.txt
+# exit 0

@@ -1,0 +1,9 @@
+docker compose restart
+---
+ Container capstone-web-1 Restarting 
+ Container capstone-db-1 Restarting 
+ Container capstone-api-1 Restarting 
+ Container capstone-db-1 Started 
+ Container capstone-web-1 Started 
+ Container capstone-api-1 Started 
+# exit 0

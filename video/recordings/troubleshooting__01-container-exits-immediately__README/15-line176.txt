@@ -1,0 +1,4 @@
+docker run --name idle ubuntu:26.04
+---
+
+# exit 0

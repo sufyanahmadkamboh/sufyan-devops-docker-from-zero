@@ -1,0 +1,4 @@
+docker exec web nginx -v
+---
+nginx version: nginx/1.30.5
+# exit 0

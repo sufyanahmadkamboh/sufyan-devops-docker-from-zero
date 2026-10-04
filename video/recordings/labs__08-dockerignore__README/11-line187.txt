@@ -1,0 +1,4 @@
+docker run --rm simple-app:with-ignore cat .env
+---
+cat: .env: No such file or directory
+# exit 1

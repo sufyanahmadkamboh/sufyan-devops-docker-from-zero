@@ -1,0 +1,25 @@
+docker top web
+docker inspect web --format '{{.Config.Image}}'
+docker exec web ls /usr/share/nginx/html
+---
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+root                1659757             1659734             3                   04:51               ?                   00:00:00            nginx: master process nginx -g daemon off;
+statd               1659786             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659787             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659788             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659789             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659790             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659791             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659792             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659793             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659794             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659795             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659796             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659797             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659798             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659799             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+nginx:1.30-alpine
+50x.html
+hello.html
+index.html
+# exit 0

@@ -1,0 +1,4 @@
+curl -s http://localhost:8080 | grep '<title>'
+---
+  <title>Message Board · Docker From Zero</title>
+# exit 0

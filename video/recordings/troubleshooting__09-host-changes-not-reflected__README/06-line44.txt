@@ -1,0 +1,4 @@
+docker run -d --name web3 -p 8082:80 -v "$(pwd)/sitee:/usr/share/nginx/html" nginx:1.30-alpine
+---
+97dfde5fe8730d0b843acf29f40d44c75addc236741d942cd81bc60e453dbdd8
+# exit 0

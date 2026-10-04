@@ -1,0 +1,6 @@
+docker rm -f web3
+docker run -d --name web3 -p 8082:80 nginx:1.30-alpine
+---
+web3
+ed8d3167ab11d63332056b029c91458bbc056452de8206307aea582961a9c6cd
+# exit 0

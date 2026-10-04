@@ -1,0 +1,10 @@
+docker run -d --name dev --env-file lab.env alpine:3.24 sleep 300
+docker run -d --name prod --env-file lab.env -e APP_ENV=production alpine:3.24 sleep 300
+docker exec dev printenv APP_ENV
+docker exec prod printenv APP_ENV
+---
+30f0a4a6e44e4d81053b52e12e6b599f098e924e10c85c3313f4bf00a5f79228
+22fe63598684446085f51aaad8b962677e9e83ee9f157998c9c0b9467c7ab78a
+staging
+production
+# exit 0

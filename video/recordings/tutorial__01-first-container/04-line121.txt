@@ -1,0 +1,7 @@
+docker run -d --name web nginx:1.30-alpine
+docker ps
+---
+93b4d8a6da050b88fd2be9a9a31264656433b132036b76e1af092d1e6e5b8851
+CONTAINER ID   IMAGE               COMMAND                  CREATED        STATUS                  PORTS     NAMES
+93b4d8a6da05   nginx:1.30-alpine   "/docker-entrypoint.…"   1 second ago   Up Less than a second   80/tcp    web
+# exit 0

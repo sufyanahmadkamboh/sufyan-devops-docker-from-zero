@@ -1,0 +1,7 @@
+docker compose -f docker-compose.fixed.yml ps -a --format 'table {{.Service}}\t{{.Status}}'
+---
+SERVICE   STATUS
+api       Up 8 seconds
+db        Up 9 seconds
+web       Up 8 seconds
+# exit 0

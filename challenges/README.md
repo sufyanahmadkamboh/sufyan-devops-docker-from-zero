@@ -159,7 +159,7 @@ docker start short
 docker ps -a --filter name=short --format '{{.Status}}'
 ```
 
-<!-- test: contains=Exited (0) -->
+<!-- test: retry=20; contains=Exited (0) -->
 ```bash
 sleep 7
 docker ps -a --filter name=short --format '{{.Status}}'
@@ -914,12 +914,12 @@ docker run -d --name mystery alpine:3.24 sh -c 'echo "loading /config/app.conf";
 
 <details><summary>Solution</summary>
 
-<!-- test: contains=Exited (1) -->
+<!-- test: retry=20; contains=Exited (1) -->
 ```bash
 docker ps -a --filter name=mystery --format '{{.Names}} {{.Status}}'
 ```
 
-<!-- test: contains=No such file or directory -->
+<!-- test: retry=15; contains=No such file or directory -->
 ```bash
 docker logs mystery
 ```
@@ -938,7 +938,7 @@ echo 'mode=demo' > my-config/app.conf
 docker run --name mystery-fixed -v "$(pwd)/my-config:/config:ro" alpine:3.24 sh -c 'echo "loading /config/app.conf"; cat /config/app.conf'
 ```
 
-<!-- test: contains=Exited (0) -->
+<!-- test: retry=20; contains=Exited (0) -->
 ```bash
 docker ps -a --filter name=mystery-fixed --format '{{.Names}} {{.Status}}'
 ```

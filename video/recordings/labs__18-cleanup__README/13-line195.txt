@@ -1,0 +1,7 @@
+docker volume prune -f
+---
+Deleted Volumes:
+71a6c043c5eeac9d158ec3251f9af7029cb77b0670569e36d712529d61883967
+
+Total reclaimed space: 0B
+# exit 0

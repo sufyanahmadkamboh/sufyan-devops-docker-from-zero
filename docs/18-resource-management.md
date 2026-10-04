@@ -61,7 +61,7 @@ docker stats --no-stream limited
 
 ```text
 CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT   MEM %     NET I/O      BLOCK I/O     PIDS
-5925bcefc75d   limited   0.00%     11.67MiB / 256MiB   4.56%     690B / 84B   0B / 8.19kB   15
+b14c5de1afc4   limited   0.00%     11.64MiB / 256MiB   4.55%     690B / 84B   0B / 8.19kB   15
 ```
 
 <!-- test: contains=nginx -->
@@ -96,8 +96,11 @@ Give a Python program 64 MiB and ask it to allocate 256 MiB:
 
 <!-- test: fail; timeout=600 -->
 ```bash
-docker run --name oom --memory=64m python:3.14-slim python -c "x = bytearray(256*1024*1024)"
+docker run --name oom --memory=64m --memory-swap=64m python:3.14-slim python -c "x = bytearray(256*1024*1024)"
 ```
+
+> `--memory-swap=64m` (the same value as `--memory`) means "no swap on top". Without it, on a machine with swap
+> the container may move memory to disk instead of being stopped, and the demo just runs slowly.
 
 ## Troubleshoot It
 

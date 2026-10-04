@@ -1,0 +1,11 @@
+docker inspect --format '{{range .Config.Env}}{{println .}}{{end}}' web
+---
+APP_ENV=lab14
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+NGINX_VERSION=1.30.5
+PKG_RELEASE=1
+DYNPKG_RELEASE=1
+NJS_VERSION=1.0.1
+NJS_RELEASE=1
+ACME_VERSION=0.4.1
+# exit 0

@@ -38,7 +38,7 @@ docker run --rm -e APP_ENV=development alpine:3.24 env
 
 ```text
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME=77d7d8d123e5
+HOSTNAME=f005da4c2b74
 APP_ENV=development
 HOME=/root
 ```
@@ -90,7 +90,7 @@ docker run --rm --env-file lab.env alpine:3.24 env
 
 ```text
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME=a67e16e72e71
+HOSTNAME=5d90bcaf81fa
 APP_ENV=staging
 GREETING=Hello from an env file
 LOG_LEVEL=debug
@@ -174,7 +174,7 @@ The command ends almost immediately with an error. Don't fix it yet. Let's inves
 
 **Observe.** Is the container running?
 
-<!-- test: output; contains=Exited (1) -->
+<!-- test: retry=20; output; contains=Exited (1) -->
 ```bash
 docker ps -a --filter name=db --format '{{.Names}}: {{.Status}}'
 ```
@@ -187,7 +187,7 @@ db: Exited (1) Less than a second ago
 
 **Investigate.** The logs keep what it printed, even after the container stopped:
 
-<!-- test: output; contains=POSTGRES_PASSWORD -->
+<!-- test: retry=15; output; contains=POSTGRES_PASSWORD -->
 ```bash
 docker logs db
 ```
@@ -254,8 +254,8 @@ docker exec prod printenv APP_ENV
 ```
 
 ```text
-1c4d192e40f684e71f9c1c79a2bcda282174f6ee60395362de7a9ef6ba03d70f
-efef7b62c00d580fd81e59ec449ac8be393e5347c402f461c55196be62b9d046
+30f0a4a6e44e4d81053b52e12e6b599f098e924e10c85c3313f4bf00a5f79228
+22fe63598684446085f51aaad8b962677e9e83ee9f157998c9c0b9467c7ab78a
 staging
 production
 ```

@@ -56,29 +56,29 @@ NETWORK ID     NAME      DRIVER    SCOPE
 Start nginx without choosing a network:
 
 ```bash
-docker run -d --name web nginx:1.30-alpine
+docker run -d --name web1 nginx:1.30-alpine
 ```
 
 Now try to reach it **by name** from another container:
 
 <!-- test: fail; contains=bad address -->
 ```bash
-docker run --rm busybox:1.37 ping -c 1 web
+docker run --rm busybox:1.37 ping -c 1 web1
 ```
 
-`ping: bad address 'web'`. The busybox container has no idea who `web` is. On the default `bridge` network there is
-no name resolution. The containers *can* reach each other by IP address. Let's find `web`'s IP:
+`ping: bad address 'web1'`. The busybox container has no idea who `web1` is. On the default `bridge` network there is
+no name resolution. The containers *can* reach each other by IP address. Let's find `web1`'s IP:
 
 <!-- test: contains=. -->
 ```bash
-docker inspect web --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
+docker inspect web1 --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
 ```
 
 And use it:
 
 <!-- test: retry=10; contains=Welcome to nginx -->
 ```bash
-WEB_IP=$(docker inspect web --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}')
+WEB_IP=$(docker inspect web1 --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}')
 docker run --rm busybox:1.37 wget -qO- "http://$WEB_IP"
 ```
 
@@ -121,8 +121,8 @@ docker network inspect labnet
 [
     {
         "Name": "labnet",
-        "Id": "39c624bd970b1ac1db854f0359dc825029a6a22c5f5fa401c24d12679c075af2",
-        "Created": "2026-10-04T04:33:51.225766709Z",
+        "Id": "cbb4bdff36c00b709524e7f8b8ca0d5c557839084a2ceb234328eea71fd1d2d8",
+        "Created": "2026-10-04T05:15:56.975129083Z",
         "Scope": "local",
         "Driver": "bridge",
         "EnableIPv4": true,
@@ -150,10 +150,10 @@ docker network inspect labnet
         },
         "Labels": {},
         "Containers": {
-            "5703ac48e234e7931200c35d860e90eb490228f9a9463add9fa2bf5a0a9de75e": {
+            "ceede396e6345e037b63fb66dd150d2f685e171166de2527003c25a24bc14119": {
                 "Name": "web2",
-                "EndpointID": "b42da65b52f67ff17a7db74a94f25a0aa4ef27262bb6bc2fc51ea87efb711fe2",
-                "MacAddress": "22:e1:df:80:76:0d",
+                "EndpointID": "4a18572830339a355eec3337c48b32cfb60e3b8912d2f724f25c0c8959091e31",
+                "MacAddress": "ce:ce:55:44:01:6d",
                 "IPv4Address": "172.18.0.2/16",
                 "IPv6Address": ""
             }
@@ -162,7 +162,7 @@ docker network inspect labnet
 ```
 
 **What you see:** the network's `Subnet` and `Gateway` (under `IPAM`), its `Driver` (`bridge`), and under
-`Containers` every container attached to it, with its IP address. Only `web2` is listed: `web` is not on this network.
+`Containers` every container attached to it, with its IP address. Only `web2` is listed: `web1` is not on this network.
 
 A shorter question, using a Go template:
 
@@ -173,26 +173,26 @@ docker network inspect labnet --format '{{range .Containers}}{{.Name}} {{end}}'
 
 ## Step 5 · Connect and disconnect a running container
 
-`web` is still only on the default bridge. Attach it to `labnet` too, without restarting it:
+`web1` is still only on the default bridge. Attach it to `labnet` too, without restarting it:
 
 ```bash
-docker network connect labnet web
+docker network connect labnet web1
 ```
 
 <!-- test: retry=10; contains=Welcome to nginx -->
 ```bash
-docker run --rm --network labnet busybox:1.37 wget -qO- http://web
+docker run --rm --network labnet busybox:1.37 wget -qO- http://web1
 ```
 
 Now detach it again:
 
 ```bash
-docker network disconnect labnet web
+docker network disconnect labnet web1
 ```
 
 <!-- test: fail; contains=bad address -->
 ```bash
-docker run --rm --network labnet busybox:1.37 wget -qO- -T 3 http://web
+docker run --rm --network labnet busybox:1.37 wget -qO- -T 3 http://web1
 ```
 
 A container can be on several networks at the same time. That is how a "middle" service (an API) can talk to both
@@ -326,7 +326,7 @@ container, not between containers.
 A network can only be removed when no container uses it, so remove the containers first:
 
 ```bash
-docker rm -f web web2 backend store
+docker rm -f web1 web2 backend store
 docker network rm labnet othernet shop
 ```
 

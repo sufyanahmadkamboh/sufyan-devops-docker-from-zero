@@ -1,0 +1,19 @@
+docker run -d --name db --network board-net \
+  -e POSTGRES_DB=board \
+  -e POSTGRES_USER=board \
+  -e POSTGRES_PASSWORD=board-lab-password \
+  -v board-data:/var/lib/postgresql \
+  -v "$(pwd)/database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro" \
+  postgres:18-alpine
+docker run -d --name api --network board-net \
+  -e DB_HOST=db \
+  -e DB_PASSWORD=board-lab-password \
+  -e APP_ENV=development \
+  -e GREETING="Hello from the hard way" \
+  board-api:1.0
+docker run -d --name web --network board-net -p 8080:80 board-web:1.0
+---
+fa7eaeb94208620595dc42211b96bb6732f7ea2ff6ae457b3dbd8d267af37ec1
+09e4fcd3429238e303cbb325b8c50b4d4e47f2bdcd4b7b5182a0225ee3e66d1b
+d783232600efc3113e12794b849b00b0a45709622e66cd2fa3a01077e785646c
+# exit 0

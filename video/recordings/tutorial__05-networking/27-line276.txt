@@ -1,0 +1,6 @@
+docker rm -f web
+docker run -d --name web -p 8080:80 board-web
+---
+web
+0e58372fc60c2c6a5020a60ec61eb3d90ed4919b66c1ebe7032c63263b0555d1
+# exit 0

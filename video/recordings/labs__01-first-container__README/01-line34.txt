@@ -1,0 +1,4 @@
+cd labs/01-first-container
+---
+
+# exit 0

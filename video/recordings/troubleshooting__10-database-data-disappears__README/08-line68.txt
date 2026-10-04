@@ -1,0 +1,5 @@
+docker inspect ts10-db-1 --format '{{range .Mounts}}{{.Type}}  {{.Name}}  ->  {{.Destination}}{{println}}{{end}}'
+---
+bind    ->  /docker-entrypoint-initdb.d/init.sql
+volume  1c985bc582a7848c9e51ef9e22bf1ed67f6dd5a3df1e4b5967061acac21dd3ba  ->  /var/lib/postgresql
+# exit 0

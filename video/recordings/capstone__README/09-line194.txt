@@ -1,0 +1,6 @@
+docker network inspect capstone_frontend --format '{{range .Containers}}{{.Name}} {{end}}'
+docker network inspect capstone_backend --format '{{range .Containers}}{{.Name}} {{end}}'
+---
+capstone-api-1 capstone-web-1 
+capstone-api-1 capstone-db-1 
+# exit 0

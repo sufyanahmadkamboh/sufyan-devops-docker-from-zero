@@ -1,0 +1,30 @@
+./verify.sh --persistence
+---
+1. Containers (docker compose ps, docker inspect)
+  PASS  capstone-web-1 is running and healthy
+  PASS  capstone-api-1 is running and healthy
+  PASS  capstone-db-1 is running and healthy
+2. Ports (only the web container is published)
+  PASS  web page answers on http://localhost:8080
+  PASS  API is NOT published on localhost:5000
+  PASS  database is NOT published on localhost:5432
+3. Application (browser -> web -> api -> db)
+  PASS  GET /api/health says the database is ok
+  PASS  POST /api/messages stores a message
+  PASS  GET /api/messages returns it
+4. Networks (frontend: web+api, backend: api+db)
+  PASS  api can reach db (same backend network)
+  PASS  web can NOT even resolve db (different network)
+5. Security basics
+  PASS  api runs as a normal user (uid 10001, not root)
+  PASS  web runs as a normal user (not root)
+  PASS  api filesystem is read-only
+  PASS  password is not in the api's environment variables
+  PASS  api memory limit is 256 MiB
+6. Data on a volume (docker volume inspect capstone_db-data)
+  PASS  volume capstone_db-data exists
+   docker compose down  (containers and networks are removed, the volume is kept)
+  PASS  after down + up, the message verify-1791091292 is still there
+
+All checks passed.
+# exit 0

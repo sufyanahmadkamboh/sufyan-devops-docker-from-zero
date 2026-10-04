@@ -1,0 +1,20 @@
+docker compose down -v
+cd ../..
+---
+ Container multi-container-app-web-1 Stopping 
+ Container multi-container-app-web-1 Stopped 
+ Container multi-container-app-web-1 Removing 
+ Container multi-container-app-web-1 Removed 
+ Container multi-container-app-api-1 Stopping 
+ Container multi-container-app-api-1 Stopped 
+ Container multi-container-app-api-1 Removing 
+ Container multi-container-app-api-1 Removed 
+ Container multi-container-app-db-1 Stopping 
+ Container multi-container-app-db-1 Stopped 
+ Container multi-container-app-db-1 Removing 
+ Container multi-container-app-db-1 Removed 
+ Volume multi-container-app_db-data Removing 
+ Network multi-container-app_default Removing 
+ Volume multi-container-app_db-data Removed 
+ Network multi-container-app_default Removed 
+# exit 0

@@ -1,0 +1,8 @@
+docker ps -a --filter name=failing --format '{{.Names}}: {{.Status}}'
+docker inspect failing --format '{{.State.ExitCode}}'
+docker logs failing
+---
+failing: Exited (3) Less than a second ago
+3
+about to fail
+# exit 0

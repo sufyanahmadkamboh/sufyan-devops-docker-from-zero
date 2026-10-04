@@ -1,0 +1,5 @@
+docker ps -a --filter name=exits --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}'
+---
+NAMES     IMAGE        STATUS
+exits     exits-demo   Exited (2) 5 seconds ago
+# exit 0

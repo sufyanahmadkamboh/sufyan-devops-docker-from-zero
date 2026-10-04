@@ -1,0 +1,4 @@
+docker run -d --name web -p 8080:80 nginx:1.30-alpine
+---
+6906e2f045aebddd3b510c45d01f75b5f865822acb88999372b3a8b429743eaa
+# exit 0

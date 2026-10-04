@@ -1,0 +1,11 @@
+docker rm -f exits-fixed idle
+docker rmi exits-demo exits-demo:fixed
+cd ../..
+---
+exits-fixed
+idle
+Untagged: exits-demo:latest
+Deleted: sha256:4da807c46391eddf39cfad7dde2f09aabc50921f99f3abada8fea2ee685b1f6e
+Untagged: exits-demo:fixed
+Deleted: sha256:0bbff8384b594434970f32fc1352e1b9df84f5c8ca6b1f117da66ca738994804
+# exit 0

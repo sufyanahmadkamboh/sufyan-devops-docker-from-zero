@@ -30,8 +30,8 @@ def setting(name, default=None):
     value = os.environ.get(name, default)
     if value is None:
         # Fail fast, with a message that tells you exactly what is wrong.
-        # Exit code 3 tells gunicorn "this app cannot start": it stops instead of retrying forever,
-        # so the container stops too and `docker ps -a` / `docker logs` show you the problem.
+        # Exit code 3 means "this app cannot start": gunicorn (started with --preload) stops instead of
+        # retrying forever, so the container stops too and `docker ps -a` / `docker logs` show you the problem.
         print(f"ERROR: required setting {name} is missing. "
               f"Set the environment variable {name} (or {name}_FILE).", file=sys.stderr, flush=True)
         sys.exit(3)

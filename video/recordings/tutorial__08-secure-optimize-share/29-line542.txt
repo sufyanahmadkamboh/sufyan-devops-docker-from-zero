@@ -1,0 +1,4 @@
+docker container prune -f --filter "until=24h"
+---
+Total reclaimed space: 0B
+# exit 0

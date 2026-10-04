@@ -1,0 +1,42 @@
+echo "something went wrong at 03:00" > debug.log
+docker build -f dockerfile-steps/02.Dockerfile -t simple-app:log-test .
+---
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from 02.Dockerfile
+#1 transferring dockerfile: 170B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14-slim
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 295B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 63B done
+#4 DONE 0.0s
+
+#5 [1/3] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#5 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151 0.0s done
+#5 DONE 0.0s
+
+#6 [2/3] WORKDIR /app
+#6 CACHED
+
+#7 [3/3] COPY . .
+#7 CACHED
+
+#8 exporting to image
+#8 exporting layers done
+#8 exporting manifest sha256:24453cdff54594e24e95836ea822984cd32fc877e24bc133fd92bdb59fb6b02b done
+#8 exporting config sha256:1c3ae0f79feb61826b5d7c4692e4c5cc91474bce29e44d67dc0cdfc096906ab9 done
+#8 exporting attestation manifest sha256:0da7f23189bf348801657b38111b86afe178de099d7357247f9f184ec4c6640c 0.0s done
+#8 exporting manifest list sha256:3a9de49d37835e44cdde3b188c973b1ee8c31f2500dd40fd04cae0863b9acce4 0.0s done
+#8 naming to docker.io/library/simple-app:log-test done
+#8 unpacking to docker.io/library/simple-app:log-test done
+#8 DONE 0.1s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/jq4k9azduo8d1p10ejnx4si76
+# exit 0

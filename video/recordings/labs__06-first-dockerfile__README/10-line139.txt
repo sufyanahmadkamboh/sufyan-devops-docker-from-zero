@@ -1,0 +1,4 @@
+docker run -d --name simple -p 5000:5000 simple-app:step3
+---
+cce90fa05cb5e744d7f42bee5fac9b2e0903948521d0ee997109c01e4bfd7b22
+# exit 0

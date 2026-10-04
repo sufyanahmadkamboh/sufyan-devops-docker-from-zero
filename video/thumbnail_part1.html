@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Thumbnail</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1280px;height:720px;overflow:hidden}
+body{background:radial-gradient(900px 600px at 85% 15%,rgba(29,99,237,.36),transparent 60%),radial-gradient(700px 500px at 0% 100%,rgba(59,130,214,.30),transparent 60%),#0b1420;
+ font-family:Inter,"Segoe UI",sans-serif;color:#f1f6fc;position:relative}
+.left{position:absolute;left:56px;top:56px;width:760px}
+.tag{display:inline-block;background:#2496ed;color:#0b1420;font-weight:900;font-size:30px;padding:8px 18px;border-radius:12px;transform:rotate(-2deg)}
+h1{font-size:112px;line-height:.95;font-weight:900;letter-spacing:-3px;margin-top:26px}
+h1 .ok{color:#4cc286}
+.sub{font-size:36px;font-weight:800;color:#ffc94d;margin-top:22px}
+.chips{position:absolute;left:56px;bottom:44px;display:flex;gap:14px}
+.chips span{background:#13233a;border:3px solid #3b82d6;border-radius:40px;padding:10px 22px;font-size:27px;font-weight:800}
+.art{position:absolute;right:40px;top:60px;width:440px;height:480px}
+</style></head><body>
+<div class="left">
+  <div class="tag">DOCKER FROM ZERO · PART 1 OF 2</div>
+  <h1>Docker<br><span class="ok">from zero</span></h1>
+  <div class="sub">containers, images, Dockerfiles</div>
+</div>
+<svg class="art" viewBox="0 0 440 480">
+  <rect x="20" y="20" width="400" height="440" rx="40" fill="#13233a" stroke="#2496ed" stroke-width="8"/>
+  <text x="220" y="190" text-anchor="middle" font-size="170">🐳</text>
+  <text x="220" y="330" text-anchor="middle" font-size="120">📦</text>
+  <text x="220" y="420" text-anchor="middle" font-size="40" font-weight="900" fill="#4cc286">run · break · fix</text>
+</svg>
+<div class="chips"><span>docker run</span><span>ports</span><span>env vars</span><span>Dockerfile</span><span>layers</span></div>
+<script>window.__ready = true;</script>
+</body></html>

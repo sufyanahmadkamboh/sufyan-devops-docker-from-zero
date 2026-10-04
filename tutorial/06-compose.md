@@ -141,10 +141,10 @@ docker compose ps
 ```
 
 ```text
-NAME                        IMAGE                     COMMAND                  SERVICE   CREATED        STATUS                  PORTS
-multi-container-app-api-1   multi-container-app-api   "gunicorn --bind 0.0…"   api       1 second ago   Up Less than a second   5000/tcp
-multi-container-app-db-1    postgres:18-alpine        "docker-entrypoint.s…"   db        1 second ago   Up 1 second             5432/tcp
-multi-container-app-web-1   multi-container-app-web   "/docker-entrypoint.…"   web       1 second ago   Up Less than a second   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
+NAME                        IMAGE                     COMMAND                  SERVICE   CREATED         STATUS                  PORTS
+multi-container-app-api-1   multi-container-app-api   "gunicorn --bind 0.0…"   api       2 seconds ago   Up Less than a second   5000/tcp
+multi-container-app-db-1    postgres:18-alpine        "docker-entrypoint.s…"   db        2 seconds ago   Up 1 second             5432/tcp
+multi-container-app-web-1   multi-container-app-web   "/docker-entrypoint.…"   web       2 seconds ago   Up Less than a second   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
 ```
 
 Three rows. Look at the `NAME` column: Compose names containers `<project>-<service>-<number>`. The project name is
@@ -177,7 +177,7 @@ docker network ls --filter name=multi-container-app
 
 ```text
 NETWORK ID     NAME                          DRIVER    SCOPE
-db2e276063fe   multi-container-app_default   bridge    local
+1269798b7625   multi-container-app_default   bridge    local
 ```
 
 And a volume:
@@ -221,11 +221,11 @@ docker compose logs api --tail 5
 ```
 
 ```text
-api-1  | [2026-10-04 04:23:26 +0000] [8] [INFO] Booting worker with pid: 8
-api-1  | [2026-10-04 04:23:26 +0000] [1] [INFO] Control socket listening at /root/.gunicorn/gunicorn.ctl
-api-1  | 172.18.0.4 - - [04/Oct/2026:04:23:26 +0000] "GET /api/health HTTP/1.1" 503 200 "-" "curl/8.19.0"
-api-1  | 172.18.0.4 - - [04/Oct/2026:04:23:27 +0000] "GET /api/health HTTP/1.1" 503 152 "-" "curl/8.19.0"
-api-1  | 172.18.0.4 - - [04/Oct/2026:04:23:29 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "curl/8.19.0"
+api-1  | [2026-10-04 05:12:21 +0000] [8] [INFO] Booting worker with pid: 8
+api-1  | [2026-10-04 05:12:21 +0000] [9] [INFO] Booting worker with pid: 9
+api-1  | [2026-10-04 05:12:21 +0000] [1] [INFO] Control socket listening at /root/.gunicorn/gunicorn.ctl
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:12:22 +0000] "GET /api/health HTTP/1.1" 503 200 "-" "curl/8.19.0"
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:12:23 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "curl/8.19.0"
 ```
 
 You see gunicorn starting its workers, and one access log line per request (including our `/api/health` call).
@@ -335,7 +335,7 @@ let's investigate like an engineer:
 1. **What is the symptom?** The API answers, but says the database is not reachable.
 2. **What should we check?** Is every container running?
 
-<!-- test: output; contains=Exited -->
+<!-- test: retry=20; output; contains=Exited -->
 ```bash
 docker compose ps -a
 ```
@@ -343,8 +343,8 @@ docker compose ps -a
 ```text
 NAME                        IMAGE                     COMMAND                  SERVICE   CREATED          STATUS                     PORTS
 multi-container-app-api-1   multi-container-app-api   "gunicorn --bind 0.0…"   api       6 seconds ago    Up 5 seconds               5000/tcp
-multi-container-app-db-1    postgres:18-alpine        "docker-entrypoint.s…"   db        14 seconds ago   Exited (0) 4 seconds ago   
-multi-container-app-web-1   multi-container-app-web   "/docker-entrypoint.…"   web       14 seconds ago   Up 13 seconds              0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
+multi-container-app-db-1    postgres:18-alpine        "docker-entrypoint.s…"   db        13 seconds ago   Exited (0) 4 seconds ago   
+multi-container-app-web-1   multi-container-app-web   "/docker-entrypoint.…"   web       13 seconds ago   Up 12 seconds              0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
 ```
 
 3. **What does the output tell us?** `db` shows `Exited`. `-a` was important: without it, stopped containers are hidden,
@@ -418,7 +418,7 @@ curl -s http://localhost:8080/api/messages
 ```
 
 ```text
-[{"created_at":"2026-10-04T04:23:27.554586+00:00","id":1,"text":"Hello! This first message was created by database/init.sql."},{"created_at":"2026-10-04T04:23:30.412967+00:00","id":2,"text":"Written in chapter 6"}]
+[{"created_at":"2026-10-04T05:12:22.781535+00:00","id":1,"text":"Hello! This first message was created by database/init.sql."},{"created_at":"2026-10-04T05:12:24.664247+00:00","id":2,"text":"Written in chapter 6"}]
 ```
 
 It did. The containers are new, but the data lives in the volume. This is the single most important idea about data

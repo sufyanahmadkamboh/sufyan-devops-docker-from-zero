@@ -1,0 +1,4 @@
+docker rmi hello-world
+---
+Error response from daemon: conflict: unable to delete hello-world:latest (must be forced) - container 2f5027f8258d is using its referenced image 5e2309035332
+# exit 1

@@ -1,0 +1,10 @@
+docker rm -f build-ok
+docker rmi build-demo:fixed context-check
+cd ../..
+---
+build-ok
+Untagged: build-demo:fixed
+Deleted: sha256:242c0c3362eccd339e07627194741ce4e36dbcede6537f404e7fef4ebace0e3f
+Untagged: context-check:latest
+Deleted: sha256:733a2195c3171c991aa0b04a43297ca09f9453f0e23655fb0160d6c0c770eb07
+# exit 0

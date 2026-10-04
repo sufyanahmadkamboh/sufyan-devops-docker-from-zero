@@ -1,0 +1,4 @@
+docker compose exec -T web wget -q -T 2 -O /dev/null http://db:5432/
+---
+wget: bad address 'db:5432'
+# exit 1

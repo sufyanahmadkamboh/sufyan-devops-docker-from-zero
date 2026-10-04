@@ -41,12 +41,12 @@ docker build -f dockerfile-steps/01.Dockerfile -t simple-app:step1 .
 
 ```text
 ...
-#5 exporting manifest list sha256:21f9c18700c58361e10d75887522d7140762ef5542d7bb1faa64029194e747d8 0.0s done
+#5 naming to docker.io/library/simple-app:step1
 #5 naming to docker.io/library/simple-app:step1 done
 #5 unpacking to docker.io/library/simple-app:step1 done
 #5 DONE 0.1s
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/t80gx2ovayxkbt16c2zquq8vg
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/73kp7fywuem7zy4h8lbgz1a0h
 ```
 
 Three parts of that command:
@@ -59,7 +59,7 @@ Three parts of that command:
 
 Now run it:
 
-<!-- test: contains=Exited (0) -->
+<!-- test: retry=20; contains=Exited (0) -->
 ```bash
 docker run --name step1 simple-app:step1
 docker ps -a --filter name=step1 --format '{{.Names}}: {{.Status}}'
@@ -145,7 +145,7 @@ curl -s http://localhost:5000
 ```text
 Hello from simple-app!
 environment: development
-container hostname: ed88c1d93152
+container hostname: cec6570e21cb
 ```
 
 It works! Your first application image. Notice `environment: development`: the app's built-in default, because nobody
@@ -238,16 +238,16 @@ docker history simple-app:step4
 ```
 
 ```text
-IMAGE          CREATED             CREATED BY                                      SIZE      COMMENT
-1273cbf408e4   13 minutes ago      CMD ["python" "app.py"]                         0B        buildkit.dockerfile.v0
-<missing>      13 minutes ago      EXPOSE [5000/tcp]                               0B        buildkit.dockerfile.v0
-<missing>      13 minutes ago      ENV APP_ENV=production                          0B        buildkit.dockerfile.v0
-<missing>      13 minutes ago      RUN /bin/sh -c pip install --no-cache-dir -r…   16.9MB    buildkit.dockerfile.v0
-<missing>      15 minutes ago      COPY . . # buildkit                             16.4kB    buildkit.dockerfile.v0
-<missing>      About an hour ago   WORKDIR /app                                    8.19kB    buildkit.dockerfile.v0
-<missing>      2 days ago          CMD ["python3"]                                 0B        buildkit.dockerfile.v0
-<missing>      2 days ago          RUN /bin/sh -c set -eux;  for src in idle3 p…   16.4kB    buildkit.dockerfile.v0
-<missing>      2 days ago          RUN /bin/sh -c set -eux;   savedAptMark="$(a…   42MB      buildkit.dockerfile.v0
+IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
+d0c998f34082   7 seconds ago    CMD ["python" "app.py"]                         0B        buildkit.dockerfile.v0
+<missing>      7 seconds ago    EXPOSE [5000/tcp]                               0B        buildkit.dockerfile.v0
+<missing>      7 seconds ago    ENV APP_ENV=production                          0B        buildkit.dockerfile.v0
+<missing>      7 seconds ago    RUN /bin/sh -c pip install --no-cache-dir -r…   16.9MB    buildkit.dockerfile.v0
+<missing>      11 seconds ago   COPY . . # buildkit                             16.4kB    buildkit.dockerfile.v0
+<missing>      21 seconds ago   WORKDIR /app                                    8.19kB    buildkit.dockerfile.v0
+<missing>      2 days ago       CMD ["python3"]                                 0B        buildkit.dockerfile.v0
+<missing>      2 days ago       RUN /bin/sh -c set -eux;  for src in idle3 p…   16.4kB    buildkit.dockerfile.v0
+<missing>      2 days ago       RUN /bin/sh -c set -eux;   savedAptMark="$(a…   42MB      buildkit.dockerfile.v0
 ...
 ```
 
@@ -278,7 +278,7 @@ docker build --progress=plain -f dockerfile-steps/03.Dockerfile -t simple-app:st
 #6 CACHED
 #7 [3/4] COPY . .
 #8 [4/4] RUN pip install --no-cache-dir -r requirements.txt
-#8 2.141 Successfully installed blinker-1.9.0 click-8.5.0 flask-3.1.3 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.4 werkzeug-3.1.9
+#8 2.147 Successfully installed blinker-1.9.0 click-8.5.0 flask-3.1.3 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.4 werkzeug-3.1.9
 ```
 
 We changed **one comment line** in `app.py` and pip installed Flask **again**. Why? In step 3, `COPY . .` comes
@@ -312,9 +312,9 @@ docker build --progress=plain -f dockerfile-steps/05.Dockerfile -t simple-app:st
 
 ```text
 #5 [1/5] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
-#6 [2/5] WORKDIR /app
+#6 [3/5] COPY requirements.txt .
 #6 CACHED
-#7 [3/5] COPY requirements.txt .
+#7 [2/5] WORKDIR /app
 #7 CACHED
 #8 [4/5] RUN pip install --no-cache-dir -r requirements.txt
 #8 CACHED
@@ -358,7 +358,7 @@ docker build --progress=plain -f dockerfile-steps/02.Dockerfile -t simple-app:le
 
 ```text
 #3 transferring context: 2B done
-#4 transferring context: 50.02MB 1.9s done
+#5 transferring context: 50.02MB 1.6s done
 ```
 
 Tens of megabytes sent to the engine for a 40-line app. Slow, and worse:

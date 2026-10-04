@@ -1,0 +1,7 @@
+docker rm -f web api
+docker run -d --name web --network board-net -p 8080:80 board-web:1.0
+---
+web
+api
+9c0e2956579ba943a96fb9b35d52846336f8c0b606e3e71698f99ed781a64965
+# exit 0

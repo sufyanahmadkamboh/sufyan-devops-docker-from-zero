@@ -1,0 +1,7 @@
+docker compose ps -a
+---
+NAME         IMAGE                COMMAND                  SERVICE   CREATED          STATUS                     PORTS
+ts03-api-1   ts03-api             "gunicorn --bind 0.0…"   api       14 seconds ago   Up 13 seconds              5000/tcp
+ts03-db-1    postgres:18-alpine   "docker-entrypoint.s…"   db        14 seconds ago   Up 13 seconds              5432/tcp
+ts03-web-1   ts03-web             "/docker-entrypoint.…"   web       14 seconds ago   Exited (1) 7 seconds ago   
+# exit 0

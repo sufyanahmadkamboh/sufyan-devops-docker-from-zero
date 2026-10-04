@@ -1,0 +1,6 @@
+curl -s http://localhost:5001
+---
+Good morning from Docker!
+environment: development
+container hostname: e35975d7f688
+# exit 0

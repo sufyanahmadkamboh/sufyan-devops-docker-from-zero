@@ -1,0 +1,4 @@
+docker compose config | grep -i password
+---
+      POSTGRES_PASSWORD: board-lab-password
+# exit 0

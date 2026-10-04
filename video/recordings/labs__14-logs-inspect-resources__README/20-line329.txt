@@ -1,0 +1,4 @@
+docker run -d --name busy --cpus=0.5 busybox:1.37 sh -c "while true; do :; done"
+---
+958e3fe2d3fa1bd4c40c7784d0c8b5a842ce44adcfbf357aa1506a81afbd2d5b
+# exit 0

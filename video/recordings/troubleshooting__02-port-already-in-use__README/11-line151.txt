@@ -1,0 +1,6 @@
+docker rm -f web web2
+cd ../..
+---
+web
+web2
+# exit 0

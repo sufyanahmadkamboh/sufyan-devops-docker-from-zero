@@ -1,0 +1,16 @@
+mv .dockerignore.off .dockerignore
+cat .dockerignore
+---
+# Files that never need to be sent to the Docker build (the "build context").
+# Smaller context = faster builds, and no secrets or junk inside the image.
+.git
+.env
+*.log
+__pycache__/
+*.pyc
+junk/
+dockerfile-steps/
+optimization/
+Dockerfile*
+.dockerignore
+# exit 0

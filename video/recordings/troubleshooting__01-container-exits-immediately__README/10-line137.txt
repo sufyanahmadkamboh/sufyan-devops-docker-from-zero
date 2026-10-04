@@ -1,0 +1,6 @@
+grep CMD Dockerfile Dockerfile.fixed
+---
+Dockerfile:CMD ["python", "main.py"]
+Dockerfile.fixed:# Fixed version: the CMD now points at the file that really exists in /app.
+Dockerfile.fixed:CMD ["python", "app.py"]
+# exit 0

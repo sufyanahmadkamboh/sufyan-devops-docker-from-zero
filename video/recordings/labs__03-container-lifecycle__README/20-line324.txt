@@ -1,0 +1,4 @@
+docker run --name failing alpine:3.24 sh -c 'echo about to fail; exit 3'
+---
+about to fail
+# exit 3

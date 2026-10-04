@@ -1,0 +1,5 @@
+docker rm -f registry from-registry
+---
+registry
+from-registry
+# exit 0

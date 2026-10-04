@@ -1,0 +1,27 @@
+ls
+ls app/api app/web database secrets
+---
+README.md
+app
+database
+docker-compose.hub.yml
+docker-compose.yml
+secrets
+verify.sh
+app/api:
+Dockerfile
+app.py
+requirements.txt
+
+app/web:
+Dockerfile
+default.conf.template
+html
+
+database:
+init.sql
+
+secrets:
+db_password.txt
+db_password.txt.example
+# exit 0

@@ -1,0 +1,4 @@
+docker run -d --name simple -p 5000:5000 simple-app:1.0
+---
+b0c31ba226d11998e79677c1a58c086bc436916fa01723ecdf8053c76d559c12
+# exit 0

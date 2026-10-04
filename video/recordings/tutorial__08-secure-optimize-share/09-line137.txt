@@ -1,0 +1,4 @@
+docker run --rm --cap-drop ALL alpine:3.24 sh -c 'touch /tmp/f && chown nobody /tmp/f && echo changed owner'
+---
+chown: /tmp/f: Operation not permitted
+# exit 1

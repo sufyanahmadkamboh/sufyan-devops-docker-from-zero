@@ -1,0 +1,6 @@
+rm debug.log
+docker rmi simple-app:log-test
+---
+Untagged: simple-app:log-test
+Deleted: sha256:3a9de49d37835e44cdde3b188c973b1ee8c31f2500dd40fd04cae0863b9acce4
+# exit 0

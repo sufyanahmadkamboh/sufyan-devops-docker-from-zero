@@ -1,0 +1,4 @@
+docker run --rm alpine:3.24 sh -c "chown nobody /tmp && echo chown worked"
+---
+chown worked
+# exit 0

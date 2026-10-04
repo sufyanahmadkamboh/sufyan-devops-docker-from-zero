@@ -1,0 +1,6 @@
+curl -s -X POST -H 'Content-Type: application/json' -d '{"text":"written by the capstone README"}' http://localhost:8080/api/messages
+curl -s http://localhost:8080/api/messages
+---
+{"id":2,"text":"written by the capstone README"}
+[{"created_at":"2026-10-04T05:21:05.552016+00:00","id":1,"text":"Hello! This first message was created by database/init.sql."},{"created_at":"2026-10-04T05:21:27.323339+00:00","id":2,"text":"written by the capstone README"}]
+# exit 0

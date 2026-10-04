@@ -1,0 +1,9 @@
+docker run -d --name api --network board-net \
+  -e DB_HOST=db \
+  -e DB_PASSWORD=board-lab-password \
+  -e APP_ENV=development \
+  -e GREETING="Hello from the hard way" \
+  board-api:1.0
+---
+1d3a95f31989bb24035f12b9035dea5f40e41a4766d3e8aaa3a1cef4973acb18
+# exit 0

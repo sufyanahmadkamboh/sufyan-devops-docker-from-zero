@@ -1,0 +1,5 @@
+docker compose stop db
+---
+ Container multi-container-app-db-1 Stopping 
+ Container multi-container-app-db-1 Stopped 
+# exit 0

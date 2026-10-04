@@ -1,0 +1,8 @@
+docker exec fortress id
+docker exec fortress touch /app/x 2>&1 || true
+docker inspect --format '{{.HostConfig.Memory}}' fortress
+---
+uid=10001(appuser) gid=10001(appuser) groups=10001(appuser)
+touch: cannot touch '/app/x': Read-only file system
+134217728
+# exit 0

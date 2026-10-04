@@ -1,0 +1,9 @@
+cd examples/simple-app
+ls
+---
+Dockerfile
+app.py
+dockerfile-steps
+optimization
+requirements.txt
+# exit 0

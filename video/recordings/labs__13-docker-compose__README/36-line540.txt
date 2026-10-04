@@ -1,0 +1,10 @@
+rm docker-compose.override.yml
+docker compose up -d
+---
+ Container multi-container-app-db-1 Running 
+ Container multi-container-app-api-1 Running 
+ Container multi-container-app-web-1 Recreate 
+ Container multi-container-app-web-1 Recreated 
+ Container multi-container-app-web-1 Starting 
+ Container multi-container-app-web-1 Started 
+# exit 0

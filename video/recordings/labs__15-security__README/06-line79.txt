@@ -1,0 +1,4 @@
+docker run --rm simple-app:1.0 sh -c "echo hacked > /etc/motd"
+---
+sh: 1: cannot create /etc/motd: Permission denied
+# exit 2

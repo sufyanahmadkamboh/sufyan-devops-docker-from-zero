@@ -1,0 +1,4 @@
+docker run --rm --network labnet busybox:1.37 wget -qO- -T 3 http://web2 | grep title
+---
+<title>Welcome to nginx!</title>
+# exit 0

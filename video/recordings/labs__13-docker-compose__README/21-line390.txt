@@ -1,0 +1,17 @@
+docker compose up -d
+---
+ Network multi-container-app_default Creating 
+ Network multi-container-app_default Created 
+ Container multi-container-app-db-1 Creating 
+ Container multi-container-app-db-1 Created 
+ Container multi-container-app-api-1 Creating 
+ Container multi-container-app-api-1 Created 
+ Container multi-container-app-web-1 Creating 
+ Container multi-container-app-web-1 Created 
+ Container multi-container-app-db-1 Starting 
+ Container multi-container-app-db-1 Started 
+ Container multi-container-app-api-1 Starting 
+ Container multi-container-app-api-1 Started 
+ Container multi-container-app-web-1 Starting 
+ Container multi-container-app-web-1 Started 
+# exit 0

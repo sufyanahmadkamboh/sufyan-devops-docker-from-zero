@@ -1,0 +1,19 @@
+docker rmi localhost:5000/simple-app:1.0
+docker image rm simple-app:1.0
+docker pull localhost:5000/simple-app:1.0
+---
+Untagged: localhost:5000/simple-app:1.0
+Untagged: simple-app:1.0
+Deleted: sha256:20aeb3209e8f8b24bb1576144d489d260045bbbadf7fc9633b09d8dff01fedfe
+1.0: Pulling from simple-app
+fd85d2de73d8: Pulling fs layer
+e42bb4d14bbe: Pulling fs layer
+fd85d2de73d8: Already exists
+e42bb4d14bbe: Already exists
+fd85d2de73d8: Pull complete
+e42bb4d14bbe: Pull complete
+1a588671b79a: Download complete
+Digest: sha256:20aeb3209e8f8b24bb1576144d489d260045bbbadf7fc9633b09d8dff01fedfe
+Status: Downloaded newer image for localhost:5000/simple-app:1.0
+localhost:5000/simple-app:1.0
+# exit 0

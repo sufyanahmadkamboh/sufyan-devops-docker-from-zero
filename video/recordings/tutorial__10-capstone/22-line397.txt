@@ -1,0 +1,7 @@
+docker compose logs db --tail 4
+---
+db-1  | 2026-10-04 05:14:35.978 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+db-1  | 2026-10-04 05:14:35.982 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db-1  | 2026-10-04 05:14:35.990 UTC [32] LOG:  database system was shut down at 2026-10-04 05:14:34 UTC
+db-1  | 2026-10-04 05:14:35.996 UTC [1] LOG:  database system is ready to accept connections
+# exit 0

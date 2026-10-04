@@ -1,0 +1,4 @@
+docker run -d --name hardened --read-only --tmpfs /tmp --cap-drop ALL --security-opt no-new-privileges -p 5001:5000 simple-app:1.0
+---
+577468af333208af63fc9fa608068709884cae9ffab69b0ffe754a5b92c5e10f
+# exit 0

@@ -1,0 +1,5 @@
+docker ps -a --filter name=ts01
+---
+CONTAINER ID   IMAGE     COMMAND            CREATED         STATUS                     PORTS     NAMES
+10cad33942ef   ts01      "python main.py"   4 seconds ago   Exited (2) 3 seconds ago             ts01
+# exit 0

@@ -232,12 +232,12 @@ docker run --name db postgres:18-alpine
 
 It stopped immediately (and gave us the terminal back). Before changing anything, let's investigate:
 
-<!-- test: contains=Exited (1) -->
+<!-- test: retry=20; contains=Exited (1) -->
 ```bash
 docker ps -a --filter name=db --format '{{.Names}}: {{.Status}}'
 ```
 
-<!-- test: output; contains=POSTGRES_PASSWORD -->
+<!-- test: retry=15; output; contains=POSTGRES_PASSWORD -->
 ```bash
 docker logs db
 ```
@@ -316,7 +316,7 @@ curl -s http://localhost:5000
 ```text
 Hello from simple-app!
 environment: production
-container hostname: 7688b0f8996a
+container hostname: b0c31ba226d1
 ```
 
 ```bash
@@ -331,7 +331,7 @@ curl -s http://localhost:5001
 ```text
 Good morning from Docker!
 environment: development
-container hostname: 3b365813ca54
+container hostname: e35975d7f688
 ```
 
 Same image, byte for byte. Different behaviour, decided at run time. This is one of the most important ideas in

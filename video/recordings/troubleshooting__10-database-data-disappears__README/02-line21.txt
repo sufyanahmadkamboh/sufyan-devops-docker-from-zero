@@ -1,0 +1,15 @@
+cat docker-compose.yml
+---
+# Broken on purpose: messages are lost after "docker compose down" + "docker compose up".
+name: ts10
+
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: board
+      POSTGRES_USER: board
+      POSTGRES_PASSWORD: board-lab-password
+    volumes:
+      - ../../examples/multi-container-app/database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+# exit 0

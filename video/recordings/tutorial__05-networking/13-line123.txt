@@ -1,0 +1,4 @@
+docker inspect client --format '{{range $name, $settings := .NetworkSettings.Networks}}{{$name}} {{end}}'
+---
+labnet othernet 
+# exit 0

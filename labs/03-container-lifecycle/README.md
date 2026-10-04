@@ -75,7 +75,7 @@ demo: Up Less than a second
 
 ## Step 3 · Exited, the polite way: `docker stop`
 
-<!-- test: output; contains=Exited (0) -->
+<!-- test: retry=20; output; contains=Exited (0) -->
 ```bash
 docker stop demo
 docker ps -a --filter name=demo --format '{{.Names}}: {{.Status}}'
@@ -90,7 +90,7 @@ demo: Exited (0) Less than a second ago
 
 ## Step 4 · Exited, the hard way: `docker kill`
 
-<!-- test: output; contains=Exited (137) -->
+<!-- test: retry=20; output; contains=Exited (137) -->
 ```bash
 docker start demo
 docker kill demo
@@ -159,17 +159,6 @@ docker run --rm ubuntu:26.04 cat /etc/os-release
 ```
 
 ```text
-Unable to find image 'ubuntu:26.04' locally
-26.04: Pulling from library/ubuntu
-06ad70e463aa: Pulling fs layer
-4e07a0f12b2c: Pulling fs layer
-06ad70e463aa: Download complete
-8f70d2bfe91a: Download complete
-4e07a0f12b2c: Download complete
-06ad70e463aa: Pull complete
-4e07a0f12b2c: Pull complete
-Digest: sha256:f144425ff09be612d6d9ad965196e9cdc23dae1f42110a8a11a3e9a8198759f7
-Status: Downloaded newer image for ubuntu:26.04
 PRETTY_NAME="Ubuntu 26.04.1 LTS"
 NAME="Ubuntu"
 VERSION_ID="26.04"
@@ -212,14 +201,14 @@ docker ps --filter name=sleeper --format '{{.Names}}: {{.Status}}'
 ```
 
 ```text
-5fef0724ff4ad1b6b5463ea893f253425a915ccbb52bc4f446950fc1c5e48543
+803f265508e65a18ffa1fdc2d0d8446850320902ba5bd04d50017f260027cdca
 sleeper: Up Less than a second
 ```
 
 Wait 15 seconds, then look again:
 
 <!-- test-run: sleep 16 -->
-<!-- test: output; contains=Exited (0) -->
+<!-- test: retry=20; output; contains=Exited (0) -->
 ```bash
 docker ps -a --filter name=sleeper --format '{{.Names}}: {{.Status}}'
 ```
@@ -232,7 +221,7 @@ Nobody stopped it. `sleep` finished, so the container finished.
 
 **Experiment 2: a shell with nobody to talk to.**
 
-<!-- test: output; contains=Exited (0) -->
+<!-- test: retry=20; output; contains=Exited (0) -->
 ```bash
 docker run --name quick ubuntu:26.04
 docker ps -a --filter name=quick --format '{{.Names}}: {{.Status}}'
@@ -257,7 +246,7 @@ docker exec web nginx -s quit
 ```
 
 <!-- test-run: sleep 2 -->
-<!-- test: output; contains=Exited (0) -->
+<!-- test: retry=20; output; contains=Exited (0) -->
 ```bash
 docker ps -a --filter name=web --format '{{.Names}}: {{.Status}}'
 ```
@@ -289,7 +278,7 @@ docker inspect sleeper --format 'status={{.State.Status}} exit code={{.State.Exi
 ```
 
 ```text
-status=exited exit code=0 finished=2026-10-04T03:58:51.229940392Z
+status=exited exit code=0 finished=2026-10-04T04:52:14.745890497Z
 ```
 
 **Root cause.** The container is `exited` with exit code 0: its main process (`sleep 15`) completed normally. `docker exec` needs a running main process to attach to.
@@ -327,7 +316,7 @@ docker run --name failing alpine:3.24 sh -c 'echo about to fail; exit 3'
 
 `docker run` (without `-d`) returns the container's exit code, so your shell sees a failure too.
 
-<!-- test: output; contains=Exited (3); contains=3; contains=about to fail -->
+<!-- test: retry=20; output; contains=Exited (3); contains=3; contains=about to fail -->
 ```bash
 docker ps -a --filter name=failing --format '{{.Names}}: {{.Status}}'
 docker inspect failing --format '{{.State.ExitCode}}'

@@ -1,0 +1,8 @@
+docker images
+---
+IMAGE                           ID             DISK USAGE   CONTENT SIZE   EXTRA
+hello-world:latest              5e2309035332       25.9kB         9.49kB        
+jitesoft/tesseract-ocr:latest   23fbc1f29a6d        401MB          129MB        
+linuxserver/ffmpeg:latest       a7182d4fe498       1.09GB          268MB        
+nginx:1.30-alpine               0985e772fb9f       93.6MB           27MB        
+# exit 0

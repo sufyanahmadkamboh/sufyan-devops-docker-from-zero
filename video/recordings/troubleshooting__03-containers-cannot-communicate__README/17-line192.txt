@@ -1,0 +1,4 @@
+docker run --rm --network ts03_frontend busybox:1.37 ping -c 1 db
+---
+ping: bad address 'db'
+# exit 1

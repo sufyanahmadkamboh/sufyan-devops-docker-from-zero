@@ -1,0 +1,4 @@
+docker network inspect shop --format '{{range .Containers}}{{.Name}} {{end}}'
+---
+store 
+# exit 0

@@ -1,0 +1,7 @@
+docker rm -f web3
+rmdir sitee
+docker run -d --name web3 -p 8082:80 -v "$(pwd)/site:/usr/share/nginx/html:ro" nginx:1.30-alpine
+---
+web3
+25388060161d86f0a40aa9772d4d2894f44e62bd196251bfdfc05060df16083a
+# exit 0

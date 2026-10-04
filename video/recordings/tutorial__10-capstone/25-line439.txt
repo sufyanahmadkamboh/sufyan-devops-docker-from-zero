@@ -1,0 +1,7 @@
+docker inspect capstone-api-1 --format '{{range .Config.Env}}{{println .}}{{end}}' | grep DB_
+---
+DB_HOST=db
+DB_NAME=board
+DB_USER=board
+DB_PASSWORD_FILE=/run/secrets/db_password
+# exit 0

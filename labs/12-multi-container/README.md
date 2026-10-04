@@ -130,8 +130,8 @@ docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"
 ```text
 NAMES     IMAGE                STATUS                  PORTS
 web       board-web:1.0        Up Less than a second   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
-api       board-api:1.0        Up 1 second             5000/tcp
-db        postgres:18-alpine   Up 3 seconds            5432/tcp
+api       board-api:1.0        Up 2 seconds            5000/tcp
+db        postgres:18-alpine   Up 5 seconds            5432/tcp
 ```
 
 Three containers `Up`. Only `web` shows a mapping like `0.0.0.0:8080->80/tcp`; `api` and `db` show their ports

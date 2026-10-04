@@ -1,0 +1,6 @@
+docker inspect ts06-api-1 --format '{{range .Config.Env}}{{println .}}{{end}}' | grep DB_
+---
+DB_USER=board
+DB_HOST=db
+DB_NAME=board
+# exit 0

@@ -222,8 +222,12 @@ When you can tick every line of [CHECKLIST.md](CHECKLIST.md), you can honestly s
 
 ## Study material
 
+- 🎬 **Video course in two parts** (built from the real recorded runs of the tutorial): part 1 covers containers and
+  images, part 2 covers data, networks, Compose, troubleshooting and the capstone. See [video/](video/README.md).
 - [Study guide (PDF)](study/study-guide.pdf): all 23 lessons in one document, for reading offline
 - [Glossary](study/glossary.md) and [interview questions](study/interview-questions.md)
+- Ready-made images of the capstone on Docker Hub: `sufibaba6629/docker-from-zero-web:1.0.0` and
+  `sufibaba6629/docker-from-zero-api:1.0.0` (amd64 and arm64)
 
 ## Author
 

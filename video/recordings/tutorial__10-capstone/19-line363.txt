@@ -1,0 +1,23 @@
+docker compose up -d
+---
+ Network capstone_frontend Creating 
+ Network capstone_frontend Created 
+ Network capstone_backend Creating 
+ Network capstone_backend Created 
+ Container capstone-db-1 Creating 
+ Container capstone-db-1 Created 
+ Container capstone-api-1 Creating 
+ Container capstone-api-1 Created 
+ Container capstone-web-1 Creating 
+ Container capstone-web-1 Created 
+ Container capstone-db-1 Starting 
+ Container capstone-db-1 Started 
+ Container capstone-db-1 Waiting 
+ Container capstone-db-1 Healthy 
+ Container capstone-api-1 Starting 
+ Container capstone-api-1 Started 
+ Container capstone-api-1 Waiting 
+ Container capstone-api-1 Healthy 
+ Container capstone-web-1 Starting 
+ Container capstone-web-1 Started 
+# exit 0

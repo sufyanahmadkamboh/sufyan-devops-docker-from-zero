@@ -1,0 +1,4 @@
+docker run --rm -v notes:/data alpine:3.24 cat /data/message.txt
+---
+written by the first container
+# exit 0

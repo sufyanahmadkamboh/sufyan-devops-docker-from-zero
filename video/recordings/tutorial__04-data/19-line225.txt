@@ -1,0 +1,9 @@
+docker run -d --name site -p 8080:80 \
+  -v "$(pwd)/examples/nginx/site:/usr/share/nginx/html:ro" \
+  nginx:1.30-alpine
+docker ps --filter name=site
+---
+fba4bc93a99958a04e3cbcbf040c2d3d150b5cf9b1c0f02891aaee6a63f42131
+CONTAINER ID   IMAGE               COMMAND                  CREATED        STATUS                  PORTS                                     NAMES
+fba4bc93a999   nginx:1.30-alpine   "/docker-entrypoint.…"   1 second ago   Up Less than a second   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   site
+# exit 0

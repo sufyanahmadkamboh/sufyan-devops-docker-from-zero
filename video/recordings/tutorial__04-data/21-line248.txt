@@ -1,0 +1,4 @@
+echo '<p>Edited on my computer, served by the container!</p>' >> examples/nginx/site/index.html
+---
+
+# exit 0

@@ -1,0 +1,10 @@
+docker rm -f simple
+docker rmi simple-app:fat simple-app:multistage
+cd ../..
+---
+simple
+Untagged: simple-app:fat
+Deleted: sha256:903e1c00dd6073c995326d08583595541f7e094d4977e95941a36cd076b23b16
+Untagged: simple-app:multistage
+Deleted: sha256:4015f53c75b9dda13b149dfd50d136bea1df0c42747696ecfa2e69fe22014568
+# exit 0

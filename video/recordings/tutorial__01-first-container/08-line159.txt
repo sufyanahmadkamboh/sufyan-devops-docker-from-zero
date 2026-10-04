@@ -1,0 +1,6 @@
+docker restart web
+docker ps --filter name=web --format '{{.Names}}: {{.Status}}'
+---
+web
+web: Up Less than a second
+# exit 0

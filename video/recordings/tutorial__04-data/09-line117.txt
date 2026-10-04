@@ -1,0 +1,4 @@
+docker volume ls
+---
+DRIVER    VOLUME NAME
+# exit 0

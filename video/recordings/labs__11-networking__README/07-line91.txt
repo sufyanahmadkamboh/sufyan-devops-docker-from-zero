@@ -1,0 +1,6 @@
+docker network create labnet
+docker run -d --name web2 --network labnet nginx:1.30-alpine
+---
+cbb4bdff36c00b709524e7f8b8ca0d5c557839084a2ceb234328eea71fd1d2d8
+ceede396e6345e037b63fb66dd150d2f685e171166de2527003c25a24bc14119
+# exit 0

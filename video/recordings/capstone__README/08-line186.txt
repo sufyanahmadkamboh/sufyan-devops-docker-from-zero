@@ -1,0 +1,9 @@
+docker network ls --filter name=capstone
+docker volume ls --filter name=capstone
+---
+NETWORK ID     NAME                DRIVER    SCOPE
+ddbd7cfe25a6   capstone_backend    bridge    local
+ac0515d143ea   capstone_frontend   bridge    local
+DRIVER    VOLUME NAME
+local     capstone_db-data
+# exit 0

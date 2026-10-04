@@ -1,0 +1,6 @@
+docker rm shell sleeper quick
+---
+shell
+sleeper
+quick
+# exit 0

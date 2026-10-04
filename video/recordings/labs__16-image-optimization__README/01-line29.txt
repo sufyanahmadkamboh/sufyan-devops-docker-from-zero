@@ -1,0 +1,4 @@
+cd examples/simple-app
+---
+
+# exit 0

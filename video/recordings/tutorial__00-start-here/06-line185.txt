@@ -1,0 +1,18 @@
+ls
+---
+CHECKLIST.md
+LICENSE
+README.md
+ROADMAP.md
+capstone
+challenges
+docs
+examples
+labs
+linkedin
+study
+tests
+troubleshooting
+tutorial
+video
+# exit 0

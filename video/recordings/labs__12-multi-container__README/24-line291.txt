@@ -1,0 +1,13 @@
+docker rm -f api
+docker run -d --name api --network board-net \
+  -e DB_HOST=db \
+  -e DB_PASSWORD=board-lab-password \
+  -e APP_ENV=development \
+  -e GREETING="Configured at run time" \
+  board-api:1.0
+docker restart web
+---
+api
+e1fb1764f3c67edb68c8e56bbec2d1c1c19a63b5655fa52156c1b26685e1078b
+web
+# exit 0

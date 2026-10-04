@@ -62,18 +62,18 @@ docker run hello-world
 ```
 
 ```text
-Unable to find image 'hello-world:latest' locally
-latest: Pulling from library/hello-world
-4f55086f7dd0: Pulling fs layer
-4f55086f7dd0: Download complete
-4f55086f7dd0: Pull complete
-d5e71e642bf5: Download complete
-Digest: sha256:5e23090353324d887c48ad5e5c56d294eab81588df9605b07d1afe895f9cc8f8
-Status: Downloaded newer image for hello-world:latest
 
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
 ...
 ```
 
@@ -122,7 +122,6 @@ docker images nginx
 ```
 
 ```text
-WARNING: This output is designed for human readability. For machine-readable output, please use --format.
 IMAGE               ID             DISK USAGE   CONTENT SIZE   EXTRA
 nginx:1.30-alpine   0985e772fb9f       93.6MB           27MB        
 ```
@@ -149,7 +148,7 @@ docker run -d --name web nginx:1.30-alpine
 ```
 
 ```text
-ed6e0a9788b5f902fa7b6c66d7813487241d300ac4b7d95d21544c3332935956
+7025ee09c25d73711ea456a43380b4a2fe75d31f1d7d8e91e621d5a34bbc865f
 ```
 
 **What you see:** one long hexadecimal string. That is the full **container ID**. Docker printed it and gave you your terminal back.
@@ -162,8 +161,8 @@ docker ps
 ```
 
 ```text
-CONTAINER ID   IMAGE               COMMAND                  CREATED                  STATUS                  PORTS     NAMES
-ed6e0a9788b5   nginx:1.30-alpine   "/docker-entrypoint.…"   Less than a second ago   Up Less than a second   80/tcp    web
+CONTAINER ID   IMAGE               COMMAND                  CREATED        STATUS                  PORTS     NAMES
+7025ee09c25d   nginx:1.30-alpine   "/docker-entrypoint.…"   1 second ago   Up Less than a second   80/tcp    web
 ```
 
 Every column, one by one:
@@ -180,16 +179,16 @@ Every column, one by one:
 
 Where are the two `hello-world` containers? They are not in the list because they are **not running**: they printed their message and stopped. Add `-a` (all) to also see stopped containers:
 
-<!-- test: output; contains=hello-world; contains=Exited (0) -->
+<!-- test: retry=20; output; contains=hello-world; contains=Exited (0) -->
 ```bash
 docker ps -a
 ```
 
 ```text
-CONTAINER ID   IMAGE               COMMAND                  CREATED                  STATUS                     PORTS     NAMES
-ed6e0a9788b5   nginx:1.30-alpine   "/docker-entrypoint.…"   Less than a second ago   Up Less than a second      80/tcp    web
-9ebfe32742f4   hello-world         "/hello"                 3 seconds ago            Exited (0) 2 seconds ago             zen_matsumoto
-85df79aa9634   hello-world         "/hello"                 3 seconds ago            Exited (0) 3 seconds ago             hardcore_meitner
+CONTAINER ID   IMAGE               COMMAND                  CREATED         STATUS                     PORTS     NAMES
+7025ee09c25d   nginx:1.30-alpine   "/docker-entrypoint.…"   1 second ago    Up Less than a second      80/tcp    web
+54d3adccb99e   hello-world         "/hello"                 3 seconds ago   Exited (0) 2 seconds ago             hungry_curran
+2f5027f8258d   hello-world         "/hello"                 4 seconds ago   Exited (0) 3 seconds ago             agitated_noyce
 ```
 
 The `hello-world` containers show `Exited (0)`: they finished their job and the main program returned exit code **0**, which means "success". Their names were invented by Docker because we did not give one.
@@ -203,14 +202,14 @@ docker stop web
 
 Docker prints the name back when it is done. Check the status:
 
-<!-- test: output; contains=Exited -->
+<!-- test: retry=20; output; contains=Exited -->
 ```bash
 docker ps -a --filter name=web
 ```
 
 ```text
-CONTAINER ID   IMAGE               COMMAND                  CREATED        STATUS                              PORTS     NAMES
-ed6e0a9788b5   nginx:1.30-alpine   "/docker-entrypoint.…"   1 second ago   Exited (0) Less than a second ago             web
+CONTAINER ID   IMAGE               COMMAND                  CREATED         STATUS                              PORTS     NAMES
+7025ee09c25d   nginx:1.30-alpine   "/docker-entrypoint.…"   2 seconds ago   Exited (0) Less than a second ago             web
 ```
 
 The container still exists, it is just stopped. Nothing was deleted. Start it again:
@@ -295,8 +294,8 @@ docker ps -a --filter ancestor=hello-world
 
 ```text
 CONTAINER ID   IMAGE         COMMAND    CREATED         STATUS                     PORTS     NAMES
-9ebfe32742f4   hello-world   "/hello"   7 seconds ago   Exited (0) 6 seconds ago             zen_matsumoto
-85df79aa9634   hello-world   "/hello"   7 seconds ago   Exited (0) 6 seconds ago             hardcore_meitner
+54d3adccb99e   hello-world   "/hello"   7 seconds ago   Exited (0) 6 seconds ago             hungry_curran
+2f5027f8258d   hello-world   "/hello"   8 seconds ago   Exited (0) 7 seconds ago             agitated_noyce
 ```
 
 Two stopped containers, the ones from Step 2. A stopped container still "holds" its image, because you could start it again at any time.
@@ -325,7 +324,6 @@ docker images hello-world
 
 ```text
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
-WARNING: This output is designed for human readability. For machine-readable output, please use --format.
 IMAGE   ID             DISK USAGE   CONTENT SIZE   EXTRA
 ```
 
@@ -355,10 +353,10 @@ docker ps --format '{{.ID}}  {{.Image}}  {{.Names}}'
 ```
 
 ```text
-6ca5ede8c6bc60ec5bc4886bdb3da80af8706de7cb00aa8ee9125159d55b51b7
-3a609b82e1a6ddf30f24b773088669d8c5dbae4c0a67f4b8a27f197f44a24838
-3a609b82e1a6  nginx:1.30-alpine  web2
-6ca5ede8c6bc  nginx:1.30-alpine  web
+6fa372df75b04ccfab849d36f3391133a81c7c2ff3e36c06332a43eccc4c6712
+0eba9fe87ad2274a824978f8a23a185fb87555f4bd72d9b0bcd21fb0f7703949
+0eba9fe87ad2  nginx:1.30-alpine  web2
+6fa372df75b0  nginx:1.30-alpine  web
 ```
 
 <!-- test: contains=web -->

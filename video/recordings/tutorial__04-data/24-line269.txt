@@ -1,0 +1,8 @@
+docker rm -f site
+docker run -d --name site -p 8080:80 \
+  --mount type=bind,source="$(pwd)/examples/nginx/site",target=/usr/share/nginx/html,readonly \
+  nginx:1.30-alpine
+---
+site
+ed32ab1249049097672c1c5271902e0458c1180c658b98b608a450c765bd28a2
+# exit 0

@@ -1,0 +1,4 @@
+docker exec tidy cat /run/secrets/db_password
+---
+change-me-to-any-long-random-text
+# exit 0

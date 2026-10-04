@@ -1,0 +1,7 @@
+docker pull localhost:5000/simple-app:1.0
+---
+1.0: Pulling from simple-app
+Digest: sha256:8e4b2f4b8a3767276532d3dc589d719cd7d3f21eaaf8088ab911a1b608b45a08
+Status: Downloaded newer image for localhost:5000/simple-app:1.0
+localhost:5000/simple-app:1.0
+# exit 0

@@ -1,0 +1,5 @@
+docker compose down -v
+---
+ Volume capstone_db-data Removing 
+ Volume capstone_db-data Removed 
+# exit 0

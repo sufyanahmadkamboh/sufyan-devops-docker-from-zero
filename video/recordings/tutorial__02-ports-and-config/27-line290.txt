@@ -1,0 +1,4 @@
+docker rm -f db
+---
+db
+# exit 0

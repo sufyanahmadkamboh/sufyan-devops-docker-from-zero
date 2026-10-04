@@ -1,0 +1,9 @@
+cd troubleshooting/01-container-exits-immediately
+ls
+---
+Dockerfile
+Dockerfile.fixed
+README.md
+app.py
+requirements.txt
+# exit 0

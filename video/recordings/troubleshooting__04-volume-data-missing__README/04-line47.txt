@@ -1,0 +1,6 @@
+docker volume ls
+---
+DRIVER    VOLUME NAME
+local     note
+local     notes
+# exit 0

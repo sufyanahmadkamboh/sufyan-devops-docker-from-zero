@@ -1,0 +1,6 @@
+curl -s http://localhost:5000
+---
+Hello from simple-app!
+environment: development
+container hostname: cec6570e21cb
+# exit 0

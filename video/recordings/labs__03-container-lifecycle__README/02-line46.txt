@@ -1,0 +1,4 @@
+docker create --name demo nginx:1.30-alpine
+---
+987f2893a795f5a38a7131f17f2e0350e49e887126390d18e7bc796233a10b10
+# exit 0

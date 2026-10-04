@@ -56,7 +56,7 @@ docker build -t ts01 .
 ```text
 ...
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/8w8vnmemhhxqfg5ukn6q2a4qf
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/kpu09y386l1u219whnlzdx0k3
 ```
 
 <!-- test: output -->
@@ -65,7 +65,7 @@ docker run -d --name ts01 -p 5000:5000 ts01
 ```
 
 ```text
-a16e2b103aa70ca020c16466bc3f9966c389c274358b8f51ddf0011ccdb5e6c5
+10cad33942efe4d4e3a8980ec0c50717595602851d22672fdb8f4147dd5da9f2
 ```
 
 Docker printed an ID. Everything fine? Let's check.
@@ -86,20 +86,20 @@ either; that would just repeat the problem. Let's investigate.
 
 **What should we check first?** Whether it exited, and how:
 
-<!-- test: output; contains=Exited (2) -->
+<!-- test: retry=20; output; contains=Exited (2) -->
 ```bash
 docker ps -a --filter name=ts01
 ```
 
 ```text
 CONTAINER ID   IMAGE     COMMAND            CREATED         STATUS                     PORTS     NAMES
-a16e2b103aa7   ts01      "python main.py"   4 seconds ago   Exited (2) 3 seconds ago             ts01
+10cad33942ef   ts01      "python main.py"   4 seconds ago   Exited (2) 3 seconds ago             ts01
 ```
 
 `Exited (2)`: the main process ended with exit code 2. A non-zero code means "error". Something in the process went
 wrong, so the next question is: **what did the process say?**
 
-<!-- test: output; contains=can't open file -->
+<!-- test: retry=15; output; contains=can't open file -->
 ```bash
 docker logs ts01
 ```
@@ -173,7 +173,7 @@ curl -s http://localhost:5000/
 ```text
 Hello from simple-app!
 environment: development
-container hostname: 48ed6aef9fc7
+container hostname: e201c94d45ca
 ```
 
 **Lesson learned:** "exits immediately" is never a mystery. `docker ps -a` gives you the exit code, `docker logs`
@@ -213,7 +213,7 @@ curl -s --max-time 5 http://localhost:8080/
 Nothing comes back. **What happened?** The application is not reachable on port 8080. **What should we check?**
 Start with the state of all containers of this project:
 
-<!-- test: output; contains=Exited (1) -->
+<!-- test: retry=20; output; contains=Exited (1) -->
 ```bash
 docker compose ps -a
 ```
@@ -222,13 +222,13 @@ docker compose ps -a
 NAME         IMAGE                COMMAND                  SERVICE   CREATED          STATUS                     PORTS
 ts03-api-1   ts03-api             "gunicorn --bind 0.0…"   api       14 seconds ago   Up 13 seconds              5000/tcp
 ts03-db-1    postgres:18-alpine   "docker-entrypoint.s…"   db        14 seconds ago   Up 13 seconds              5432/tcp
-ts03-web-1   ts03-web             "/docker-entrypoint.…"   web       14 seconds ago   Exited (1) 8 seconds ago   
+ts03-web-1   ts03-web             "/docker-entrypoint.…"   web       14 seconds ago   Exited (1) 7 seconds ago   
 ```
 
 `api` and `db` are up, `web` has `Exited (1)`. The web container is the one serving port 8080, so that explains the
 symptom. Why did it exit? **Ask its logs:**
 
-<!-- test: output=tail:3; contains=host not found in upstream -->
+<!-- test: retry=15; output=tail:3; contains=host not found in upstream -->
 ```bash
 docker compose logs web
 ```
@@ -236,7 +236,7 @@ docker compose logs web
 ```text
 ...
 web-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
-web-1  | 2026/10/04 04:24:43 [emerg] 1#1: host not found in upstream "api" in /etc/nginx/conf.d/default.conf:16
+web-1  | 2026/10/04 05:13:13 [emerg] 1#1: host not found in upstream "api" in /etc/nginx/conf.d/default.conf:16
 web-1  | nginx: [emerg] host not found in upstream "api" in /etc/nginx/conf.d/default.conf:16
 ```
 
@@ -362,7 +362,7 @@ HTTP 502
 *behind* it did not answer. So web is fine, the problem is behind it. **What should we check?** The state of the
 services:
 
-<!-- test: output; contains=Exited (3) -->
+<!-- test: retry=20; output; contains=Exited (3) -->
 ```bash
 docker compose ps -a
 ```
@@ -370,25 +370,19 @@ docker compose ps -a
 ```text
 NAME         IMAGE                COMMAND                  SERVICE   CREATED          STATUS                      PORTS
 ts06-api-1   ts06-api             "gunicorn --bind 0.0…"   api       14 seconds ago   Exited (3) 13 seconds ago   
-ts06-db-1    postgres:18-alpine   "docker-entrypoint.s…"   db        14 seconds ago   Up 14 seconds               5432/tcp
+ts06-db-1    postgres:18-alpine   "docker-entrypoint.s…"   db        15 seconds ago   Up 14 seconds               5432/tcp
 ts06-web-1   ts06-web             "/docker-entrypoint.…"   web       14 seconds ago   Up 13 seconds               0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
 ```
 
 `api` has `Exited (3)`. **What did it say?**
 
-<!-- test: output=tail:6; contains=required setting DB_PASSWORD is missing -->
+<!-- test: retry=15; output=tail:6; contains=required setting DB_PASSWORD is missing -->
 ```bash
 docker compose logs api
 ```
 
 ```text
-...
-api-1  | [2026-10-04 04:25:07 +0000] [7] [INFO] Worker exiting (pid: 7)
-api-1  | [2026-10-04 04:25:07 +0000] [8] [INFO] Worker exiting (pid: 8)
-api-1  | [2026-10-04 04:25:07 +0000] [1] [ERROR] Worker (pid:8) exited with code 3.
-api-1  | [2026-10-04 04:25:07 +0000] [1] [INFO] Worker (pid:7) was sent SIGTERM!
-api-1  | [2026-10-04 04:25:07 +0000] [1] [ERROR] Shutting down: Master
-api-1  | [2026-10-04 04:25:07 +0000] [1] [ERROR] Reason: Worker failed to boot.
+api-1  | ERROR: required setting DB_PASSWORD is missing. Set the environment variable DB_PASSWORD (or DB_PASSWORD_FILE).
 ```
 
 `ERROR: required setting DB_PASSWORD is missing. Set the environment variable DB_PASSWORD (or DB_PASSWORD_FILE).`
@@ -401,9 +395,9 @@ docker inspect ts06-api-1 --format '{{range .Config.Env}}{{println .}}{{end}}' |
 ```
 
 ```text
-DB_NAME=board
 DB_USER=board
 DB_HOST=db
+DB_NAME=board
 ```
 
 `DB_HOST`, `DB_NAME`, `DB_USER`, but no `DB_PASSWORD`.
@@ -442,7 +436,7 @@ curl -s http://localhost:8080/api/info
 ```
 
 ```text
-{"app_env":"development","container_hostname":"26b479d23bc4","database_host":"db","greeting":"Hello from the API"}
+{"app_env":"development","container_hostname":"37d4d02543c9","database_host":"db","greeting":"Hello from the API"}
 ```
 
 **Lesson learned:** a `502` from a proxy points *behind* the proxy. Exit codes, logs and the environment in

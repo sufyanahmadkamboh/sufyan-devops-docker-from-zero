@@ -1,0 +1,4 @@
+docker compose exec -T api python -c "import socket; print('db is', socket.gethostbyname('db'))"
+---
+db is 172.18.0.2
+# exit 0

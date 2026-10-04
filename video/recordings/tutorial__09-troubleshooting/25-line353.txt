@@ -1,0 +1,4 @@
+curl -s -o /dev/null -w "HTTP %{http_code}\n" http://localhost:8080/api/info
+---
+HTTP 502
+# exit 0

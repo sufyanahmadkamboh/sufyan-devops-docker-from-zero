@@ -1,0 +1,20 @@
+ls examples examples/simple-app examples/multi-container-app
+---
+examples:
+multi-container-app
+nginx
+simple-app
+
+examples/multi-container-app:
+api
+database
+docker-compose.yml
+web
+
+examples/simple-app:
+Dockerfile
+app.py
+dockerfile-steps
+optimization
+requirements.txt
+# exit 0

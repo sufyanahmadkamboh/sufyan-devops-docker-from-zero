@@ -1,0 +1,4 @@
+docker run --rm -v lab18-db:/data alpine:3.24 cat /data/important.txt
+---
+cat: can't open '/data/important.txt': No such file or directory
+# exit 1

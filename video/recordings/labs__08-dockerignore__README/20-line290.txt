@@ -1,0 +1,5 @@
+docker run --rm simple-app:log-test ls
+---
+app.py
+requirements.txt
+# exit 0

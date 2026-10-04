@@ -1,0 +1,5 @@
+docker build -q -f dockerfile-steps/05.Dockerfile -t simple-app:step5 .
+echo "# another tiny change made at $(date)" >> app.py
+---
+sha256:40d00934bee7981a3dfc5b1be1916e2afb5f85648a3c22f5b1e937411e63f06b
+# exit 0

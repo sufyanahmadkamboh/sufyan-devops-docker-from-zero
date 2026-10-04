@@ -1,0 +1,10 @@
+docker rm -f db2 web
+docker volume rm notes note pgdata site-data
+---
+db2
+web
+notes
+note
+pgdata
+site-data
+# exit 0

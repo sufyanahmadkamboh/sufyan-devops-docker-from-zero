@@ -1,0 +1,8 @@
+docker rm -f demo db dev prod
+rm -f lab.env
+---
+demo
+db
+dev
+prod
+# exit 0

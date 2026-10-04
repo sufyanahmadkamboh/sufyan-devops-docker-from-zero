@@ -1,0 +1,39 @@
+cat docker-compose.yml
+---
+# The message board, described once and started with one command:
+#   docker compose up -d --build
+# Compose creates: 3 containers, 1 network (<project>_default), 1 volume (<project>_db-data).
+
+services:
+  web:
+    build: ./web
+    ports:
+      - "8080:80"          # browser -> http://localhost:8080
+    depends_on:
+      - api
+
+  api:
+    build: ./api
+    environment:
+      APP_ENV: development
+      GREETING: Hello from Docker Compose
+      DB_HOST: db          # the service name below is also its DNS name
+      DB_NAME: board
+      DB_USER: board
+      DB_PASSWORD: board-lab-password   # fine for a local lab; the capstone uses a secret file instead
+    depends_on:
+      - db
+
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: board
+      POSTGRES_USER: board
+      POSTGRES_PASSWORD: board-lab-password
+    volumes:
+      - db-data:/var/lib/postgresql                          # named volume: the data survives "down"
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro   # bind mount: runs once on first start
+
+volumes:
+  db-data:
+# exit 0

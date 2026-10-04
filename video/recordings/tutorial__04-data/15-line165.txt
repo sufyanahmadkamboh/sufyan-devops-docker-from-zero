@@ -1,0 +1,7 @@
+docker exec db psql -U postgres -c "SELECT * FROM notes;"
+---
+      text      
+----------------
+ I must survive
+(1 row)
+# exit 0

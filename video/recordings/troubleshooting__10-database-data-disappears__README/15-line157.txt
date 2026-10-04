@@ -1,0 +1,16 @@
+docker compose -f docker-compose.fixed.yml down
+docker compose -f docker-compose.fixed.yml up -d
+---
+ Container ts10-db-1 Stopping 
+ Container ts10-db-1 Stopped 
+ Container ts10-db-1 Removing 
+ Container ts10-db-1 Removed 
+ Network ts10_default Removing 
+ Network ts10_default Removed 
+ Network ts10_default Creating 
+ Network ts10_default Created 
+ Container ts10-db-1 Creating 
+ Container ts10-db-1 Created 
+ Container ts10-db-1 Starting 
+ Container ts10-db-1 Started 
+# exit 0

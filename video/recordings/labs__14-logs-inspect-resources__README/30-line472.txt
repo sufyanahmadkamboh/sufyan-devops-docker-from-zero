@@ -1,0 +1,11 @@
+docker rm -f web limited oom
+docker network rm lab14-net
+docker volume rm lab14-data
+cd ../..
+---
+web
+limited
+oom
+lab14-net
+lab14-data
+# exit 0

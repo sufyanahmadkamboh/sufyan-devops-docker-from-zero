@@ -1,0 +1,5 @@
+docker volume create lab18-db
+docker run --rm -v lab18-db:/data alpine:3.24 sh -c "echo 'customer orders' > /data/important.txt"
+---
+lab18-db
+# exit 0

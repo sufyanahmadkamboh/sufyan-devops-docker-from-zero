@@ -1,0 +1,4 @@
+docker inspect --format 'memory={{.HostConfig.Memory}} nanocpus={{.HostConfig.NanoCpus}}' limited
+---
+memory=268435456 nanocpus=500000000
+# exit 0

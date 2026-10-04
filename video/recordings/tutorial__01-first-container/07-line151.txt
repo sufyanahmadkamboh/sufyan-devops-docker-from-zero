@@ -1,0 +1,7 @@
+docker start web
+docker ps --filter name=web
+---
+web
+CONTAINER ID   IMAGE               COMMAND                  CREATED        STATUS                  PORTS     NAMES
+1e68f2421fc3   nginx:1.30-alpine   "/docker-entrypoint.…"   1 second ago   Up Less than a second   80/tcp    web
+# exit 0

@@ -1,0 +1,5 @@
+curl -s http://localhost:8080 | grep h1
+---
+    h1 { font-size: 2.4rem; margin-bottom: .3rem; }
+    <h1>🐳 Hello from my container!</h1>
+# exit 0

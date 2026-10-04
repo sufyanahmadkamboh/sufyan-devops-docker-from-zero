@@ -1,0 +1,10 @@
+printf 'APP_ENV=staging\nGREETING=Hi there\n' > demo.env
+docker run --rm --env-file demo.env alpine:3.24 env
+rm demo.env
+---
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=ffb9932614e7
+APP_ENV=staging
+GREETING=Hi there
+HOME=/root
+# exit 0

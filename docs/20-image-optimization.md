@@ -87,12 +87,14 @@ simple-app:step5        212MB
 simple-app:step3        212MB
 simple-app:multistage   108MB
 simple-app:fat          1.75GB
+simple-app:mine         212MB
 simple-app:slim         212MB
 simple-app:1.0          212MB
-simple-app:mine         212MB
+simple-app:leaky        239MB
 simple-app:step4        212MB
 simple-app:fixed        212MB
 simple-app:step2        189MB
+simple-app:clean        189MB
 simple-app:step1        189MB
 ```
 

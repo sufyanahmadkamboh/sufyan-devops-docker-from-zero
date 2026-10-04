@@ -1,0 +1,6 @@
+docker network create board-net
+docker volume create board-data
+---
+a12d2e6f2036ecc145ac4d4254d5bb18fa44cd28e501704a3d86771ad117dc1c
+board-data
+# exit 0

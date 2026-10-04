@@ -1,0 +1,4 @@
+docker run --rm --read-only --tmpfs /tmp simple-app:1.0 sh -c "echo 'request served' >> /tmp/app.log && cat /tmp/app.log"
+---
+request served
+# exit 0

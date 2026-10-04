@@ -1,0 +1,4 @@
+docker run -d --name fortress --read-only --tmpfs /tmp --cap-drop ALL --security-opt no-new-privileges --memory=128m -p 5002:5000 simple-app:1.0
+---
+9d8352c7a466155e4ab83f45c3afd3a60acbd727009b5c5b7af530faccabe448
+# exit 0

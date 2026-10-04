@@ -71,7 +71,7 @@ docker inspect ts10-db-1 --format '{{range .Mounts}}{{.Type}}  {{.Name}}  ->  {{
 
 ```text
 bind    ->  /docker-entrypoint-initdb.d/init.sql
-volume  0e961e143b35ec23e02249af03d98686c4e3e72a8fe577211e2dcd28570b3da8  ->  /var/lib/postgresql
+volume  1c985bc582a7848c9e51ef9e22bf1ed67f6dd5a3df1e4b5967061acac21dd3ba  ->  /var/lib/postgresql
 ```
 
 One bind mount (`init.sql`) and one **volume** on `/var/lib/postgresql` with a long random name.
@@ -96,8 +96,8 @@ docker volume ls
 
 ```text
 DRIVER    VOLUME NAME
-local     0e961e143b35ec23e02249af03d98686c4e3e72a8fe577211e2dcd28570b3da8
-local     84c5f920ac401794c3987f9e69c9f3d9ad376693119be09b5f09018ca0f65a66
+local     1c985bc582a7848c9e51ef9e22bf1ed67f6dd5a3df1e4b5967061acac21dd3ba
+local     163983c8c445be5cf1a0792737ee534cbe1ccb2b1dade237bd0c1666025e54fe
 ```
 
 Two anonymous volumes with random names: the one from the first container (our row is still in it!)
@@ -194,7 +194,7 @@ docker compose -f docker-compose.old-tutorial.yml up -d
 
 **Symptom:** the database container stops right away.
 
-<!-- test: contains=Exited (1) -->
+<!-- test: retry=20; contains=Exited (1) -->
 ```bash
 docker compose -f docker-compose.old-tutorial.yml ps -a --format 'table {{.Service}}\t{{.Status}}'
 ```

@@ -1,0 +1,10 @@
+rm -rf junk .env
+docker rmi simple-app:no-ignore simple-app:with-ignore simple-app:step5
+---
+Untagged: simple-app:no-ignore
+Deleted: sha256:24576c93c66f2c608f9338c4f7159f64e3b707db255ad910dc6d9b9f88f09114
+Untagged: simple-app:with-ignore
+Deleted: sha256:7cfb063ef1e0a1ad9ac517b5c9d5d96128c0ae8b03226c32ffef34be564cc038
+Untagged: simple-app:step5
+Deleted: sha256:40281f623c9646dd1a45c55556f85bc44b65c52cc4535dfa5a593fdbe5509be8
+# exit 0

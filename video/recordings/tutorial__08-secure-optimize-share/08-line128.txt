@@ -1,0 +1,4 @@
+docker run --rm alpine:3.24 sh -c 'touch /tmp/f && chown nobody /tmp/f && echo changed owner'
+---
+changed owner
+# exit 0

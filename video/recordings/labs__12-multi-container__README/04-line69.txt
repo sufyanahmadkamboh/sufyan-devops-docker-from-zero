@@ -1,0 +1,10 @@
+docker run -d --name db --network board-net \
+  -e POSTGRES_DB=board \
+  -e POSTGRES_USER=board \
+  -e POSTGRES_PASSWORD=board-lab-password \
+  -v board-data:/var/lib/postgresql \
+  -v "$(pwd)/database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro" \
+  postgres:18-alpine
+---
+ef0428223e5ad1161eae5876658aa8bc017a5abd89eefda37a2b53985a6d3c32
+# exit 0

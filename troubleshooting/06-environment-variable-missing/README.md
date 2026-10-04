@@ -46,7 +46,7 @@ The symptom points past nginx, at the API. Let's follow the request.
 
 **Step 1: are all containers running?**
 
-<!-- test: output; contains=Exited (3) -->
+<!-- test: retry=20; output; contains=Exited (3) -->
 ```bash
 docker compose ps -a --format 'table {{.Service}}\t{{.Status}}'
 ```
@@ -55,26 +55,20 @@ docker compose ps -a --format 'table {{.Service}}\t{{.Status}}'
 SERVICE   STATUS
 api       Exited (3) 13 seconds ago
 db        Up 14 seconds
-web       Up 14 seconds
+web       Up 13 seconds
 ```
 
 `web` and `db` are up, `api` exited with code **3**. nginx is reporting the truth: there is no API to talk to.
 
 **Step 2: why did the API stop?**
 
-<!-- test: output=tail:6; contains=required setting DB_PASSWORD is missing -->
+<!-- test: retry=15; output=tail:6; contains=required setting DB_PASSWORD is missing -->
 ```bash
 docker compose logs api
 ```
 
 ```text
-...
 api-1  | ERROR: required setting DB_PASSWORD is missing. Set the environment variable DB_PASSWORD (or DB_PASSWORD_FILE).
-api-1  | [2026-10-04 04:35:07 +0000] [7] [INFO] Worker exiting (pid: 7)
-api-1  | [2026-10-04 04:35:07 +0000] [1] [ERROR] Worker (pid:8) exited with code 3.
-api-1  | [2026-10-04 04:35:07 +0000] [1] [INFO] Worker (pid:7) was sent SIGTERM!
-api-1  | [2026-10-04 04:35:07 +0000] [1] [ERROR] Shutting down: Master
-api-1  | [2026-10-04 04:35:07 +0000] [1] [ERROR] Reason: Worker failed to boot.
 ```
 
 Read from the bottom up. gunicorn (the Python web server) says `Worker failed to boot` and shuts down.

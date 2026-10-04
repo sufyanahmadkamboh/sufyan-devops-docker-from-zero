@@ -1,0 +1,21 @@
+cd ../../examples/multi-container-app
+docker compose up -d db
+docker compose -p renamed-project up -d db
+---
+ Network multi-container-app_default Creating 
+ Network multi-container-app_default Created 
+ Volume multi-container-app_db-data Creating 
+ Volume multi-container-app_db-data Created 
+ Container multi-container-app-db-1 Creating 
+ Container multi-container-app-db-1 Created 
+ Container multi-container-app-db-1 Starting 
+ Container multi-container-app-db-1 Started 
+ Network renamed-project_default Creating 
+ Network renamed-project_default Created 
+ Volume renamed-project_db-data Creating 
+ Volume renamed-project_db-data Created 
+ Container renamed-project-db-1 Creating 
+ Container renamed-project-db-1 Created 
+ Container renamed-project-db-1 Starting 
+ Container renamed-project-db-1 Started 
+# exit 0

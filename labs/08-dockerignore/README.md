@@ -86,16 +86,16 @@ docker run --rm simple-app:no-ignore ls -la
 
 ```text
 total 40
-drwxr-xr-x 1 root root 4096 Oct  4 04:03 .
-drwxr-xr-x 1 root root 4096 Oct  4 04:03 ..
--rwxr-xr-x 1 root root  253 Oct  4 03:32 .dockerignore.disabled
--rwxr-xr-x 1 root root   39 Oct  4 04:03 .env
+drwxr-xr-x 1 root root 4096 Oct  4 04:53 .
+drwxr-xr-x 1 root root 4096 Oct  4 04:53 ..
+-rwxr-xr-x 1 root root  253 Oct  4 04:03 .dockerignore.disabled
+-rwxr-xr-x 1 root root   39 Oct  4 04:53 .env
 -rwxr-xr-x 1 root root 1013 Oct  4 03:32 Dockerfile
--rwxr-xr-x 1 root root 1087 Oct  4 04:02 app.py
+-rwxr-xr-x 1 root root 1201 Oct  4 04:53 app.py
 drwxr-xr-x 2 root root 4096 Oct  4 03:32 dockerfile-steps
-drwxr-xr-x 2 root root 4096 Oct  4 04:03 junk
+drwxr-xr-x 2 root root 4096 Oct  4 04:53 junk
 drwxr-xr-x 2 root root 4096 Oct  4 03:33 optimization
--rwxr-xr-x 1 root root   13 Oct  4 04:03 requirements.txt
+-rwxr-xr-x 1 root root   13 Oct  4 04:53 requirements.txt
 ```
 
 `junk`, `.env`, the Dockerfile steps and everything else ended up in `/app`. And the secret is readable by anyone who
@@ -118,9 +118,8 @@ docker images simple-app:no-ignore
 ```
 
 ```text
-WARNING: This output is designed for human readability. For machine-readable output, please use --format.
 IMAGE                  ID             DISK USAGE   CONTENT SIZE   EXTRA
-simple-app:no-ignore   da0f174fe1c4        294MB         46.6MB        
+simple-app:no-ignore   24576c93c66f        294MB         46.6MB        
 ```
 
 ## Step 3 · Turn the .dockerignore back on
@@ -175,10 +174,10 @@ docker run --rm simple-app:with-ignore ls -la
 
 ```text
 total 16
-drwxr-xr-x 1 root root 4096 Oct  4 03:48 .
-drwxr-xr-x 1 root root 4096 Oct  4 04:03 ..
--rwxr-xr-x 1 root root 1087 Oct  4 03:32 app.py
--rwxr-xr-x 1 root root   13 Oct  4 03:32 requirements.txt
+drwxr-xr-x 1 root root 4096 Oct  4 04:44 .
+drwxr-xr-x 1 root root 4096 Oct  4 04:53 ..
+-rwxr-xr-x 1 root root 1201 Oct  4 04:38 app.py
+-rwxr-xr-x 1 root root   13 Oct  4 04:03 requirements.txt
 ```
 
 The image only contains `app.py` and `requirements.txt`. And the secret is gone:
@@ -196,15 +195,19 @@ docker images simple-app
 ```
 
 ```text
-WARNING: This output is designed for human readability. For machine-readable output, please use --format.
 IMAGE                    ID             DISK USAGE   CONTENT SIZE   EXTRA
-simple-app:1.0           25032a644e9c        212MB         51.9MB        
-simple-app:fixed         18b09356d161        212MB         51.9MB        
-simple-app:no-ignore     da0f174fe1c4        294MB         46.6MB        
-simple-app:step1         c28c9280bf77        189MB         46.5MB        
-simple-app:step2         85904782ffb9        189MB         46.5MB        
-simple-app:step4         e0d9c69ee329        212MB         51.9MB        
-simple-app:with-ignore   c9b031fdee6d        189MB         46.5MB        
+simple-app:1.0           3f6962c3154a        212MB         51.9MB        
+simple-app:clean         614749901fce        189MB         46.5MB        
+simple-app:fat           f29822dcd7e5       1.75GB          454MB        
+simple-app:fixed         794eb244cb37        212MB         51.9MB        
+simple-app:leaky         06809757035e        239MB         46.5MB        
+simple-app:multistage    2bcbfd28cfde        108MB         26.1MB        
+simple-app:no-ignore     24576c93c66f        294MB         46.6MB        
+simple-app:root          939d3ab86401        212MB         51.9MB        
+simple-app:step1         f3b879a66ba5        189MB         46.5MB        
+simple-app:step2         0709c7207019        189MB         46.5MB        
+simple-app:step4         ead82f948cbf        212MB         51.9MB        
+simple-app:with-ignore   7cfb063ef1e0        189MB         46.5MB        
 ```
 
 Compare the `DISK USAGE` (called `SIZE` on Docker versions before 29) of `no-ignore` and `with-ignore`: the difference is our junk.

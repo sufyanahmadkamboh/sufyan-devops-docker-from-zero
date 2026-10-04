@@ -1,0 +1,5 @@
+docker compose start db
+---
+ Container multi-container-app-db-1 Starting 
+ Container multi-container-app-db-1 Started 
+# exit 0

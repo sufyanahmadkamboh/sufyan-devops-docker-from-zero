@@ -1,0 +1,4 @@
+docker inspect web --format '{{.State.Status}} since {{.State.StartedAt}}'
+---
+running since 2026-10-04T05:12:40.700137805Z
+# exit 0

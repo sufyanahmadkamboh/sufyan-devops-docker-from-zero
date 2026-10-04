@@ -1,0 +1,5 @@
+cp site/index.html site/index.html.backup
+echo "<p>Second edit on the host.</p>" >> site/index.html
+---
+
+# exit 0

@@ -57,7 +57,7 @@ logs and its configuration. That is our evidence.
 
 **Step 1: is it really gone, or only stopped?** `docker ps` shows only running containers. `-a` shows all of them:
 
-<!-- test: output; contains=Exited (2) -->
+<!-- test: retry=20; output; contains=Exited (2) -->
 ```bash
 docker ps -a --filter name=exits --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}'
 ```
@@ -72,7 +72,7 @@ Exit code 0 means "finished normally"; anything else means "something went wrong
 
 **Step 2: what did the process say before it died?** Everything the main process writes is kept in the logs:
 
-<!-- test: output; contains=can't open file '/app/main.py' -->
+<!-- test: retry=15; output; contains=can't open file '/app/main.py' -->
 ```bash
 docker logs exits
 ```
@@ -103,10 +103,10 @@ docker run --rm exits-demo ls -la /app
 
 ```text
 total 16
-drwxr-xr-x 1 root root 4096 Oct  4 04:08 .
-drwxr-xr-x 1 root root 4096 Oct  4 04:34 ..
+drwxr-xr-x 1 root root 4096 Oct  4 04:48 .
+drwxr-xr-x 1 root root 4096 Oct  4 04:57 ..
 -rwxr-xr-x 1 root root 1087 Oct  4 03:44 app.py
--rwxr-xr-x 1 root root   13 Oct  4 03:44 requirements.txt
+-rwxr-xr-x 1 root root   13 Oct  4 04:03 requirements.txt
 ```
 
 `--rm` removes this helper container as soon as `ls` finishes. In `/app` there is `app.py`, but no `main.py`.
@@ -177,7 +177,7 @@ A container also stops when its main process finishes **successfully**. The `ubu
 docker run --name idle ubuntu:26.04
 ```
 
-<!-- test: contains=Exited (0) -->
+<!-- test: retry=20; contains=Exited (0) -->
 ```bash
 docker ps -a --filter name=idle --format '{{.Names}} {{.Status}}'
 ```

@@ -1,0 +1,6 @@
+docker network create shop
+docker run -d --name store --network shop nginx:1.30-alpine
+---
+fdf9c5d281509cb24be20a0c02c0673669771877a6931371cc30708af484916d
+8d6aaa9ac9ec4c5651401905f4030e9523e37fdba3c8c99da58e672bf7b7273e
+# exit 0

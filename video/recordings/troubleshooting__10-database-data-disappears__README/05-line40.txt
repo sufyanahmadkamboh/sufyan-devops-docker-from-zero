@@ -1,0 +1,8 @@
+docker compose exec -T db psql -U board -d board -c "SELECT id, text FROM messages;"
+---
+ id |                            text                             
+----+-------------------------------------------------------------
+  1 | Hello! This first message was created by database/init.sql.
+  2 | do not lose me
+(2 rows)
+# exit 0

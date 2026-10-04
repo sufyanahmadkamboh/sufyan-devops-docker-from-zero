@@ -1,0 +1,5 @@
+docker network ls --filter name=multi-container-app
+---
+NETWORK ID     NAME                          DRIVER    SCOPE
+211f8c6a7a2f   multi-container-app_default   bridge    local
+# exit 0

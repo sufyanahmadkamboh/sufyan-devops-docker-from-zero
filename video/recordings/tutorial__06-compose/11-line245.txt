@@ -1,0 +1,4 @@
+curl -s -X POST -H "Content-Type: application/json" -d '{"text":"Written in chapter 6"}' http://localhost:8080/api/messages
+---
+{"id":2,"text":"Written in chapter 6"}
+# exit 0

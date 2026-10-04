@@ -1,0 +1,5 @@
+docker volume ls --filter name=multi-container-app
+---
+DRIVER    VOLUME NAME
+local     multi-container-app_db-data
+# exit 0

@@ -1,0 +1,4 @@
+docker run -d --name ro --read-only -p 5000:5000 simple-app:1.0
+---
+c7ac1ca3ae0bee9280d610917b0f49d9de07b8d091e85aafdf911130bb695e56
+# exit 0

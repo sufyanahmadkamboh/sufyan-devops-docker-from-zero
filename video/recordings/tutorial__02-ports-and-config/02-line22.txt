@@ -1,0 +1,4 @@
+curl -s --max-time 3 http://localhost:80
+---
+
+# exit 7

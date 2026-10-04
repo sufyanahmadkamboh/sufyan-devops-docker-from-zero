@@ -1,0 +1,5 @@
+docker network prune -f
+---
+Deleted Networks:
+lab18-unused
+# exit 0

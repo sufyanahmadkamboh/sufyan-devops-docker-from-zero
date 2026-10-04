@@ -1,0 +1,44 @@
+docker build -f dockerfile-steps/04.Dockerfile -t simple-app:step4 .
+---
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from 04.Dockerfile
+#1 transferring dockerfile: 275B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14-slim
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 295B done
+#3 DONE 0.0s
+
+#4 [1/4] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#4 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 63B done
+#5 DONE 0.0s
+
+#6 [2/4] WORKDIR /app
+#6 CACHED
+
+#7 [3/4] COPY . .
+#7 CACHED
+
+#8 [4/4] RUN pip install --no-cache-dir -r requirements.txt
+#8 CACHED
+
+#9 exporting to image
+#9 exporting layers done
+#9 exporting manifest sha256:a0cc1bce873871f3bd1844f2eae441e9e90535433329c8d1a437d3148b767017 done
+#9 exporting config sha256:be41789e4bac8747a38d05bac02b3cbdee86333d37a275569e8520b852039d7b done
+#9 exporting attestation manifest sha256:a7ae0c512d0dfd0943c360123853bfb952fb548c6ad94dd4f281aafb4813e932 0.0s done
+#9 exporting manifest list sha256:ead82f948cbf70f21db535bc15ba0b13ce4b9183ee55825ca8e65c25f199c406 0.0s done
+#9 naming to docker.io/library/simple-app:step4 done
+#9 unpacking to docker.io/library/simple-app:step4 done
+#9 DONE 0.1s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/cwhfr47d6tscws9ltnqwdhjwd
+# exit 0

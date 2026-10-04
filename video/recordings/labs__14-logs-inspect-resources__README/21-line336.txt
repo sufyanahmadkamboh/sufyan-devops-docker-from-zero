@@ -1,0 +1,5 @@
+docker stats --no-stream busy
+---
+CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT   MEM %     NET I/O       BLOCK I/O   PIDS
+958e3fe2d3fa   busy      49.54%    444KiB / 15.35GiB   0.00%     914B / 126B   0B / 0B     1
+# exit 0

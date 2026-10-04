@@ -1,0 +1,5 @@
+docker images simple-app:no-ignore
+---
+IMAGE                  ID             DISK USAGE   CONTENT SIZE   EXTRA
+simple-app:no-ignore   24576c93c66f        294MB         46.6MB        
+# exit 0

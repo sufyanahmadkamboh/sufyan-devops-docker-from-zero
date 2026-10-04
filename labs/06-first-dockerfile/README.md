@@ -50,12 +50,12 @@ docker build -f dockerfile-steps/01.Dockerfile -t simple-app:step1 .
 
 ```text
 ...
-#5 exporting manifest list sha256:aea6e8fb519ee6bddb19363e2906c1584332653c4ea064bdbc7a26ce799a7382 0.0s done
+#5 exporting manifest list sha256:f3b879a66ba56b45a3651eb0286e2286ce2a90402185a84a2a7107147cf8933f 0.0s done
 #5 naming to docker.io/library/simple-app:step1 done
 #5 unpacking to docker.io/library/simple-app:step1 done
 #5 DONE 0.1s
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/mcw35h8cxy0co8lr9iyra5qjq
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/odcexjpb0cyvt9anbp9emnaq1
 ```
 
 **What you see:** BuildKit, Docker's builder, prints numbered steps (`#1`, `#2`...). It loads the Dockerfile, sends the **build context** (the files of this folder, minus what `.dockerignore` excludes, Lab 08), pulls the base image and finally names the result `simple-app:step1`.
@@ -92,10 +92,10 @@ docker build -f dockerfile-steps/02.Dockerfile -t simple-app:step2 .
 
 ```text
 ...
-#8 unpacking to docker.io/library/simple-app:step2 0.0s done
-#8 DONE 0.2s
+#8 unpacking to docker.io/library/simple-app:step2 done
+#8 DONE 0.1s
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/ye13nhf9qimq53kyhfkfrvum8
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/gjcwpte72l0x4ysd3tpqxzetl
 ```
 
 Let's run it:
@@ -124,14 +124,14 @@ docker build -f dockerfile-steps/03.Dockerfile -t simple-app:step3 .
 
 ```text
 ...
-#9 exporting attestation manifest sha256:27b671875e5bd47e58600754b49c31a2adc07b9361308af48abacc8370ab9bb3 0.0s done
-#9 exporting manifest list sha256:f355c1d11101b4992bca52d1bd72e43e3eae4761525dc436b50caa7295a6708f 0.0s done
+#9 exporting config sha256:94850611b5c8634806a53f5888308c6be6f80c16a6ee401533936893f148a890 done
+#9 exporting attestation manifest sha256:14bffa5c8c98a31f8c38878cf0f54ff30c97154d1c90b7e47ad1021858971b93 0.0s done
+#9 exporting manifest list sha256:67c42d9bdc4deb7ce6df78d7a99803d74ea1d785443d2b4b608d6d97586bb636 0.0s done
 #9 naming to docker.io/library/simple-app:step3 done
-#9 unpacking to docker.io/library/simple-app:step3
-#9 unpacking to docker.io/library/simple-app:step3 0.2s done
-#9 DONE 0.9s
+#9 unpacking to docker.io/library/simple-app:step3 done
+#9 DONE 0.1s
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/cw8nlecgrktbpu8peooqfhrtz
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/lh79ah8tmqd9p3hah7xpmn3is
 ```
 
 Run it in the background, with a port mapping (Lab 04):
@@ -148,12 +148,12 @@ curl -s http://localhost:5000
 ```text
 Hello from simple-app!
 environment: development
-container hostname: c64a092e9958
+container hostname: cce90fa05cb5
 ```
 
 **What you see:** the greeting, `environment: development` (the app's default) and the container hostname. Open http://localhost:5000 in your browser too. Then look at the logs:
 
-<!-- test: output=head:4; contains=simple-app starting on 0.0.0.0:5000 -->
+<!-- test: retry=15; output=head:4; contains=simple-app starting on 0.0.0.0:5000 -->
 ```bash
 docker logs simple
 ```
@@ -184,9 +184,9 @@ docker build -f dockerfile-steps/04.Dockerfile -t simple-app:step4 .
 
 ```text
 ...
-#9 DONE 0.2s
+#9 DONE 0.1s
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/tgipq40pygwqbz4k5rk7ot76e
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/cwhfr47d6tscws9ltnqwdhjwd
 ```
 
 <!-- test: retry=15; contains=environment: production -->
@@ -233,7 +233,7 @@ docker run --rm greeter Docker
 ```
 
 ```text
-sha256:86c5a476a023c13ae66ff29fa5c9c2e6d6f926dbeaf772b6d6c005cac97b161b
+sha256:15597981addb6a5cc4e00ccf9750b249a4237e01842c9c1aa2198874b4a89061
 Hello, world
 Hello, Docker
 ```
@@ -264,7 +264,7 @@ docker build -t simple-app:1.0 .
 ...
 #11 DONE 0.1s
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/t1ypv94fnjhlf2q78bjtei0go
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/r892zcixd374197ualsr2d92f
 ```
 
 <!-- test: output; contains=simple-app -->
@@ -273,13 +273,18 @@ docker images simple-app
 ```
 
 ```text
-WARNING: This output is designed for human readability. For machine-readable output, please use --format.
-IMAGE              ID             DISK USAGE   CONTENT SIZE   EXTRA
-simple-app:1.0     c363d96bdb25        212MB         51.9MB        
-simple-app:step1   aea6e8fb519e        189MB         46.5MB        
-simple-app:step2   867931d92532        189MB         46.5MB        
-simple-app:step3   f355c1d11101        212MB         51.9MB        
-simple-app:step4   2804bfbe2c6b        212MB         51.9MB   U    
+IMAGE                   ID             DISK USAGE   CONTENT SIZE   EXTRA
+simple-app:1.0          3f6962c3154a        212MB         51.9MB        
+simple-app:clean        614749901fce        189MB         46.5MB        
+simple-app:fat          f29822dcd7e5       1.75GB          454MB        
+simple-app:leaky        06809757035e        239MB         46.5MB        
+simple-app:multistage   2bcbfd28cfde        108MB         26.1MB        
+simple-app:root         939d3ab86401        212MB         51.9MB        
+simple-app:step1        f3b879a66ba5        189MB         46.5MB        
+simple-app:step2        0709c7207019        189MB         46.5MB        
+simple-app:step3        67c42d9bdc4d        212MB         51.9MB        
+simple-app:step4        ead82f948cbf        212MB         51.9MB   U    
+simple-app:step5        667a8d95bf73        212MB         51.9MB        
 ```
 
 **What you see:** one repository `simple-app` with several tags. Some tags may share the same IMAGE ID when their content is identical.
@@ -328,7 +333,7 @@ docker build -f dockerfile-steps/03.Dockerfile -t simple-app:fixed .
 ```text
 ...
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/05wwvduuu7s0du10uoidytgci
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/qao6iydxsilgxv199ycqobctx
 ```
 
 **Verify.** The build ends with `naming to ...simple-app:fixed`.
@@ -356,7 +361,9 @@ curl -s http://localhost:5002
 ```
 
 ```text
-(output appears here when the tests run)
+Hi from my first image!
+environment: production
+container hostname: b9940bf2b969
 ```
 
 **Explanation:** `app.py` reads `GREETING` from the environment. `-e` sets it for this container. To make it the default for everyone, add `ENV GREETING="Hi from my first image"` to a Dockerfile and rebuild.

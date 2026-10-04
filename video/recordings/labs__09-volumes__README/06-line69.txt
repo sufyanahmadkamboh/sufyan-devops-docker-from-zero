@@ -1,0 +1,14 @@
+docker volume inspect notes
+---
+[
+    {
+        "CreatedAt": "2026-10-04T04:53:39Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/notes/_data",
+        "Name": "notes",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+# exit 0

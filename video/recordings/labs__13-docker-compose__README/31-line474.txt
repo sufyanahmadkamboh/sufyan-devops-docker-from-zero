@@ -1,0 +1,7 @@
+docker compose logs db --tail 4
+---
+db-1  | 2026-10-04 05:17:07.002 UTC [68] LOG:  shutting down
+db-1  | 2026-10-04 05:17:07.004 UTC [68] LOG:  checkpoint starting: shutdown immediate
+db-1  | 2026-10-04 05:17:07.017 UTC [68] LOG:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.002 s, total=0.016 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/1BACEB8, redo lsn=0/1BACEB8
+db-1  | 2026-10-04 05:17:07.026 UTC [1] LOG:  database system is shut down
+# exit 0

@@ -1,0 +1,4 @@
+docker rm writer
+---
+writer
+# exit 0

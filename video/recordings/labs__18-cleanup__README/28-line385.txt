@@ -1,0 +1,4 @@
+docker images --filter reference='lab18-*'
+---
+IMAGE   ID             DISK USAGE   CONTENT SIZE   EXTRA
+# exit 0

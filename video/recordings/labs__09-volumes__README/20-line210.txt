@@ -1,0 +1,5 @@
+   docker run --rm -v notes:/data alpine:3.24 cat /data/hello.txt
+---
+Hello from the writer container
+line 2, from another container
+# exit 0

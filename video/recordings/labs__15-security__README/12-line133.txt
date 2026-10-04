@@ -1,0 +1,4 @@
+docker run --rm --cap-drop ALL alpine:3.24 chown nobody /tmp
+---
+chown: /tmp: Operation not permitted
+# exit 1

@@ -1,0 +1,11 @@
+docker compose -f docker-compose.fixed.yml up -d
+---
+ Network ts10_default Creating 
+ Network ts10_default Created 
+ Volume ts10_db-data Creating 
+ Volume ts10_db-data Created 
+ Container ts10-db-1 Creating 
+ Container ts10-db-1 Created 
+ Container ts10-db-1 Starting 
+ Container ts10-db-1 Started 
+# exit 0

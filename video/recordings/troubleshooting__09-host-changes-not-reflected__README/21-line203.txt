@@ -1,0 +1,4 @@
+curl -s http://localhost:8082
+---
+<h1>Version 3</h1>
+# exit 0

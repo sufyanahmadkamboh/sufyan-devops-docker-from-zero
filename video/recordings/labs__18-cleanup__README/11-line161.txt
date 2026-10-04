@@ -1,0 +1,5 @@
+docker images lab18-demo
+---
+IMAGE               ID             DISK USAGE   CONTENT SIZE   EXTRA
+lab18-demo:latest   bd65f6e22ee7       12.9MB         3.85MB        
+# exit 0

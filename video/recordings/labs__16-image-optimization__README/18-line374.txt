@@ -1,0 +1,87 @@
+docker build -t simple-app:alpine -f - . <<'EOF'
+FROM python:3.14-alpine
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY app.py .
+RUN adduser -D -u 10001 appuser
+USER appuser
+EXPOSE 5000
+CMD ["python", "app.py"]
+EOF
+---
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 247B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14-alpine
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 295B done
+#3 DONE 0.0s
+
+#4 [1/6] FROM docker.io/library/python:3.14-alpine@sha256:2e740b2c28a426e74f11396c05e38afb3191acced75045b8d62df573c1dc8ce8
+#4 resolve docker.io/library/python:3.14-alpine@sha256:2e740b2c28a426e74f11396c05e38afb3191acced75045b8d62df573c1dc8ce8 0.0s done
+#4 DONE 0.0s
+
+#5 [2/6] WORKDIR /app
+#5 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 86B done
+#6 DONE 0.0s
+
+#7 [3/6] COPY requirements.txt .
+#7 DONE 0.0s
+
+#8 [4/6] RUN pip install --no-cache-dir -r requirements.txt
+#8 1.947 Collecting flask==3.1.3 (from -r requirements.txt (line 1))
+#8 1.997   Downloading flask-3.1.3-py3-none-any.whl.metadata (3.2 kB)
+#8 2.009 Collecting blinker>=1.9.0 (from flask==3.1.3->-r requirements.txt (line 1))
+#8 2.017   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#8 2.034 Collecting click>=8.1.3 (from flask==3.1.3->-r requirements.txt (line 1))
+#8 2.042   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#8 2.055 Collecting itsdangerous>=2.2.0 (from flask==3.1.3->-r requirements.txt (line 1))
+#8 2.065   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#8 2.080 Collecting jinja2>=3.1.2 (from flask==3.1.3->-r requirements.txt (line 1))
+#8 2.087   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#8 2.134 Collecting markupsafe>=2.1.1 (from flask==3.1.3->-r requirements.txt (line 1))
+#8 2.143   Downloading markupsafe-3.0.4-cp314-cp314-musllinux_1_2_x86_64.whl.metadata (2.7 kB)
+#8 2.161 Collecting werkzeug>=3.1.0 (from flask==3.1.3->-r requirements.txt (line 1))
+#8 2.168   Downloading werkzeug-3.1.9-py3-none-any.whl.metadata (4.1 kB)
+#8 2.179 Downloading flask-3.1.3-py3-none-any.whl (103 kB)
+#8 2.195 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#8 2.202 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#8 2.215 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#8 2.224 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#8 2.237 Downloading markupsafe-3.0.4-cp314-cp314-musllinux_1_2_x86_64.whl (23 kB)
+#8 2.246 Downloading werkzeug-3.1.9-py3-none-any.whl (228 kB)
+#8 2.355 Installing collected packages: markupsafe, itsdangerous, click, blinker, werkzeug, jinja2, flask
+#8 2.859 
+#8 2.861 Successfully installed blinker-1.9.0 click-8.5.0 flask-3.1.3 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.4 werkzeug-3.1.9
+#8 2.861 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#8 DONE 3.0s
+
+#9 [5/6] COPY app.py .
+#9 DONE 0.1s
+
+#10 [6/6] RUN adduser -D -u 10001 appuser
+#10 DONE 0.3s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 0.5s done
+#11 exporting manifest sha256:9c899c875f3bab9bc63f76405cee7eb1d895b1b2e9732e1fe8b839a76a9c9be2 0.0s done
+#11 exporting config sha256:efc2203b7c629e3f533604ed832b01f4c023902b3eb623f5a51ca22d8f1560ad 0.0s done
+#11 exporting attestation manifest sha256:d94991e4db15c7c2331b81ac48e6da851ee2dd5fdd2701b45b592048f7c8cc8e 0.0s done
+#11 exporting manifest list sha256:27b710f61a83a87d49533ae68166810905b2fcdc864f97e881983b861856e75c 0.0s done
+#11 naming to docker.io/library/simple-app:alpine done
+#11 unpacking to docker.io/library/simple-app:alpine
+#11 unpacking to docker.io/library/simple-app:alpine 0.2s done
+#11 DONE 0.9s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/tphbq2cz87q4bodvattgmqezg
+# exit 0

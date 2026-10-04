@@ -75,8 +75,8 @@ Images: {{.Images}}'
 ```text
 Server version: 29.4.3
 Operating system: Docker Desktop
-Containers: 2 (running: 1)
-Images: 17
+Containers: 1 (running: 1)
+Images: 32
 ```
 
 Run plain `docker info` yourself to see everything: storage driver, number of CPUs and memory available to containers, and more.
@@ -85,7 +85,7 @@ Run plain `docker info` yourself to see everything: storage driver, number of CP
 
 A container's **logs** are whatever its main process writes to the screen (standard output and standard error). Docker records them for you.
 
-<!-- test: output=head:8; contains=docker-entrypoint -->
+<!-- test: retry=15; output=head:8; contains=docker-entrypoint -->
 ```bash
 docker logs web
 ```
@@ -111,31 +111,31 @@ docker logs --since 10m --timestamps web | tail -n 2
 ```
 
 ```text
-2026/10/04 03:58:19 [notice] 1#1: start worker process 41
-2026/10/04 03:58:19 [notice] 1#1: start worker process 42
-2026/10/04 03:58:19 [notice] 1#1: start worker process 43
-2026-10-04T03:58:19.406799310Z 2026/10/04 03:58:19 [notice] 1#1: using the "epoll" event method
-2026-10-04T03:58:19.406830698Z 2026/10/04 03:58:19 [notice] 1#1: nginx/1.30.5
-2026-10-04T03:58:19.406833899Z 2026/10/04 03:58:19 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
-2026-10-04T03:58:19.406835632Z 2026/10/04 03:58:19 [notice] 1#1: OS: Linux 6.6.114.1-microsoft-standard-WSL2
-2026-10-04T03:58:19.406837158Z 2026/10/04 03:58:19 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
-2026-10-04T03:58:19.406932139Z 2026/10/04 03:58:19 [notice] 1#1: start worker processes
-2026-10-04T03:58:19.407273054Z 2026/10/04 03:58:19 [notice] 1#1: start worker process 30
-2026-10-04T03:58:19.407478687Z 2026/10/04 03:58:19 [notice] 1#1: start worker process 31
-2026-10-04T03:58:19.407708708Z 2026/10/04 03:58:19 [notice] 1#1: start worker process 32
-2026-10-04T03:58:19.407888498Z 2026/10/04 03:58:19 [notice] 1#1: start worker process 33
-2026-10-04T03:58:19.408213857Z 2026/10/04 03:58:19 [notice] 1#1: start worker process 34
-2026-10-04T03:58:19.408407213Z 2026/10/04 03:58:19 [notice] 1#1: start worker process 35
-2026-10-04T03:58:19.408555339Z 2026/10/04 03:58:19 [notice] 1#1: start worker process 36
-2026-10-04T03:58:19.408838285Z 2026/10/04 03:58:19 [notice] 1#1: start worker process 37
-2026-10-04T03:58:19.409433624Z 2026/10/04 03:58:19 [notice] 1#1: start worker process 38
-2026-10-04T03:58:19.409920130Z 2026/10/04 03:58:19 [notice] 1#1: start worker process 39
-2026-10-04T03:58:19.410527011Z 2026/10/04 03:58:19 [notice] 1#1: start worker process 40
-2026-10-04T03:58:19.410975289Z 2026/10/04 03:58:19 [notice] 1#1: start worker process 41
-2026-10-04T03:58:19.411227236Z 2026/10/04 03:58:19 [notice] 1#1: start worker process 42
-2026-10-04T03:58:19.411634049Z 2026/10/04 03:58:19 [notice] 1#1: start worker process 43
-2026-10-04T03:58:19.400599207Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
-2026-10-04T03:58:19.401903230Z /docker-entrypoint.sh: Configuration complete; ready for start up
+2026/10/04 04:51:47 [notice] 1#1: start worker process 41
+2026/10/04 04:51:47 [notice] 1#1: start worker process 42
+2026/10/04 04:51:47 [notice] 1#1: start worker process 43
+2026-10-04T04:51:47.675028762Z 2026/10/04 04:51:47 [notice] 1#1: using the "epoll" event method
+2026-10-04T04:51:47.675081311Z 2026/10/04 04:51:47 [notice] 1#1: nginx/1.30.5
+2026-10-04T04:51:47.675084899Z 2026/10/04 04:51:47 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026-10-04T04:51:47.675086707Z 2026/10/04 04:51:47 [notice] 1#1: OS: Linux 6.6.114.1-microsoft-standard-WSL2
+2026-10-04T04:51:47.675088509Z 2026/10/04 04:51:47 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026-10-04T04:51:47.675186219Z 2026/10/04 04:51:47 [notice] 1#1: start worker processes
+2026-10-04T04:51:47.675457001Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 30
+2026-10-04T04:51:47.675675296Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 31
+2026-10-04T04:51:47.675775768Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 32
+2026-10-04T04:51:47.675910862Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 33
+2026-10-04T04:51:47.676000485Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 34
+2026-10-04T04:51:47.676201222Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 35
+2026-10-04T04:51:47.676516703Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 36
+2026-10-04T04:51:47.676528341Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 37
+2026-10-04T04:51:47.676698188Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 38
+2026-10-04T04:51:47.676914076Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 39
+2026-10-04T04:51:47.677118730Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 40
+2026-10-04T04:51:47.677329182Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 41
+2026-10-04T04:51:47.677570982Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 42
+2026-10-04T04:51:47.677808099Z 2026/10/04 04:51:47 [notice] 1#1: start worker process 43
+2026-10-04T04:51:47.668461541Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+2026-10-04T04:51:47.669890531Z /docker-entrypoint.sh: Configuration complete; ready for start up
 ```
 
 `--tail 3` shows only the last 3 lines. `--since 10m` only the last 10 minutes. `--timestamps` adds the time to each line.
@@ -184,8 +184,8 @@ docker inspect web
 ```text
 [
     {
-        "Id": "79eafa5a5d801ad316236e19eccb380d7b46ea02f3ca4c6e9681f425fcad3915",
-        "Created": "2026-10-04T03:58:19.189511996Z",
+        "Id": "2912e74b3f640222f0021e604a202461cfc1671b1436230633c8b4f835f0f8a1",
+        "Created": "2026-10-04T04:51:47.436089068Z",
         "Path": "/docker-entrypoint.sh",
         "Args": [
             "nginx",
@@ -211,7 +211,7 @@ docker inspect web --format 'IP address: {{range .NetworkSettings.Networks}}{{.I
 
 ```text
 status: running
-started at: 2026-10-04T03:58:19.25581861Z
+started at: 2026-10-04T04:51:47.495561941Z
 IP address: 172.17.0.2
 ```
 
@@ -225,8 +225,8 @@ docker stats --no-stream web
 ```
 
 ```text
-CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
-79eafa5a5d80   web       0.00%     11.82MiB / 15.35GiB   0.08%     1.17kB / 126B   16.4kB / 8.19kB   15
+CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O     PIDS
+2912e74b3f64   web       0.00%     11.72MiB / 15.35GiB   0.07%     1.17kB / 126B   0B / 8.19kB   15
 ```
 
 **What you see:** CPU %, memory used and its limit, network and disk input/output, and `PIDS` (number of processes). Without `--no-stream` the numbers refresh live until you press `Ctrl+C`:
@@ -245,21 +245,21 @@ docker top web
 
 ```text
 UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
-root                1574032             1574009             0                   03:58               ?                   00:00:00            nginx: master process nginx -g daemon off;
-statd               1574068             1574032             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574069             1574032             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574070             1574032             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574071             1574032             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574072             1574032             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574073             1574032             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574074             1574032             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574075             1574032             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574076             1574032             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574077             1574032             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574078             1574032             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574079             1574032             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574080             1574032             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574081             1574032             0                   03:58               ?                   00:00:00            nginx: worker process
+root                1659569             1659545             0                   04:51               ?                   00:00:00            nginx: master process nginx -g daemon off;
+statd               1659605             1659569             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659606             1659569             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659607             1659569             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659608             1659569             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659609             1659569             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659610             1659569             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659611             1659569             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659612             1659569             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659613             1659569             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659614             1659569             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659615             1659569             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659616             1659569             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659617             1659569             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659618             1659569             0                   04:51               ?                   00:00:00            nginx: worker process
 ```
 
 You see the nginx **master** process (the container's main process) and its **worker** processes.
@@ -338,7 +338,7 @@ Before changing anything, let's investigate.
 
 **Investigate.** Which containers exist, and in which state?
 
-<!-- test: output; contains=Exited -->
+<!-- test: retry=20; output; contains=Exited -->
 ```bash
 docker ps -a --format '{{.Names}}: {{.Status}}'
 ```
@@ -384,21 +384,21 @@ docker exec web ls /usr/share/nginx/html
 
 ```text
 UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
-root                1574216             1574192             3                   03:58               ?                   00:00:00            nginx: master process nginx -g daemon off;
-statd               1574246             1574216             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574247             1574216             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574248             1574216             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574249             1574216             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574250             1574216             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574251             1574216             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574252             1574216             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574253             1574216             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574254             1574216             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574255             1574216             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574256             1574216             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574257             1574216             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574258             1574216             0                   03:58               ?                   00:00:00            nginx: worker process
-statd               1574259             1574216             0                   03:58               ?                   00:00:00            nginx: worker process
+root                1659757             1659734             3                   04:51               ?                   00:00:00            nginx: master process nginx -g daemon off;
+statd               1659786             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659787             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659788             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659789             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659790             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659791             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659792             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659793             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659794             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659795             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659796             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659797             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659798             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
+statd               1659799             1659757             0                   04:51               ?                   00:00:00            nginx: worker process
 nginx:1.30-alpine
 50x.html
 hello.html

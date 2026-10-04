@@ -1,0 +1,4 @@
+docker run --rm busybox:1.37 ping -c 1 web1
+---
+ping: bad address 'web1'
+# exit 1

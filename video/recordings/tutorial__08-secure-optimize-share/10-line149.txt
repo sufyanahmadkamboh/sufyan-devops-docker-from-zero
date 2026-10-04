@@ -1,0 +1,4 @@
+docker run -d --name leaky -e DB_PASSWORD=super-secret-lab-value alpine:3.24 sleep 300
+---
+c9fd6960656aba37db1e3820a1b4509a76fa19daf662d65129933a9f787207e8
+# exit 0

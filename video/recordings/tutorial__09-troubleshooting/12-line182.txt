@@ -1,0 +1,4 @@
+docker rm -f ts01
+---
+ts01
+# exit 0

@@ -1,0 +1,11 @@
+docker build --progress=plain -f dockerfile-steps/05.Dockerfile -t simple-app:step5 . 2>&1 | grep -E '\[[0-9]/[0-9]\]|CACHED|Successfully installed'
+---
+#5 [1/5] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#6 [3/5] COPY requirements.txt .
+#6 CACHED
+#7 [2/5] WORKDIR /app
+#7 CACHED
+#8 [4/5] RUN pip install --no-cache-dir -r requirements.txt
+#8 CACHED
+#9 [5/5] COPY app.py .
+# exit 0

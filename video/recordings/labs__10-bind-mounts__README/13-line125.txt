@@ -1,0 +1,5 @@
+mv site/index.html.backup site/index.html
+docker rm -f web2
+---
+web2
+# exit 0

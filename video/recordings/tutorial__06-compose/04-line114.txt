@@ -1,0 +1,110 @@
+docker compose up -d --build
+---
+ Image multi-container-app-web Building 
+ Image multi-container-app-api Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.25kB done
+#1 DONE 0.0s
+
+#2 [api internal] load build definition from Dockerfile
+#2 transferring dockerfile: 558B done
+#2 DONE 0.0s
+
+#3 [web internal] load build definition from Dockerfile
+#3 transferring dockerfile: 266B done
+#3 DONE 0.0s
+
+#4 [web internal] load metadata for docker.io/library/nginx:1.30-alpine
+#4 DONE 0.0s
+
+#5 [web internal] load .dockerignore
+#5 transferring context: 51B done
+#5 DONE 0.0s
+
+#6 [web internal] load build context
+#6 transferring context: 167B done
+#6 DONE 0.0s
+
+#7 [web 1/3] FROM docker.io/library/nginx:1.30-alpine@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
+#7 resolve docker.io/library/nginx:1.30-alpine@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94 0.0s done
+#7 DONE 0.0s
+
+#8 [web 2/3] COPY default.conf.template /etc/nginx/templates/default.conf.template
+#8 CACHED
+
+#9 [web 3/3] COPY html/ /usr/share/nginx/html/
+#9 CACHED
+
+#10 [web] exporting to image
+#10 exporting layers done
+#10 exporting manifest sha256:d16d1295f52491dc255bfb5f17ebca2174a90561cc6549b9adc647a8af912e55 0.0s done
+#10 exporting config sha256:6130f7ea50203aaf1f61ff8a1ae490c7ae88e1882f0ebd4f6a3cbce4ba6df208 0.0s done
+#10 exporting attestation manifest sha256:1ba1e817be52f2fb2f27f4269d3a2b359d4865a950f40f104f2effe98d33bfaf 0.0s done
+#10 exporting manifest list sha256:eef39084a7e462301f5653d2ebb9a5020558c99e2d136baef6b92c48d2d11c28
+#10 exporting manifest list sha256:eef39084a7e462301f5653d2ebb9a5020558c99e2d136baef6b92c48d2d11c28 0.0s done
+#10 naming to docker.io/library/multi-container-app-web:latest done
+#10 unpacking to docker.io/library/multi-container-app-web:latest 0.0s done
+#10 DONE 0.1s
+
+#11 [web] resolving provenance for metadata file
+#11 DONE 0.0s
+
+#12 [api internal] load metadata for docker.io/library/python:3.14-slim
+#12 DONE 0.6s
+
+#13 [api internal] load .dockerignore
+#13 transferring context: 64B done
+#13 DONE 0.0s
+
+#14 [api internal] load build context
+#14 transferring context: 63B done
+#14 DONE 0.0s
+
+#15 [api 1/5] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#15 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151 0.0s done
+#15 DONE 0.0s
+
+#16 [api 2/5] WORKDIR /app
+#16 CACHED
+
+#17 [api 3/5] COPY requirements.txt .
+#17 CACHED
+
+#18 [api 4/5] RUN pip install --no-cache-dir -r requirements.txt
+#18 CACHED
+
+#19 [api 5/5] COPY app.py .
+#19 CACHED
+
+#20 [api] exporting to image
+#20 exporting layers done
+#20 exporting manifest sha256:11c1b006efe48dc8962acf980b59efb21feca6b017b81798b9d49e65f3af1d07 0.0s done
+#20 exporting config sha256:1db9efe8d78597eff4a1e5ba952baa2c2838df7ebf6be7728b0b5dd55098a9c3 0.0s done
+#20 exporting attestation manifest sha256:2ad7c1497df17038aa67205980607805cfaecc0d73968a8c5588835a115e6894
+#20 exporting attestation manifest sha256:2ad7c1497df17038aa67205980607805cfaecc0d73968a8c5588835a115e6894 0.0s done
+#20 exporting manifest list sha256:91a53670b85b4452e0b4e245a1598b53e8fb4a282f29724a2452d5fa520b46bc 0.0s done
+#20 naming to docker.io/library/multi-container-app-api:latest done
+#20 unpacking to docker.io/library/multi-container-app-api:latest done
+#20 DONE 0.1s
+
+#21 [api] resolving provenance for metadata file
+#21 DONE 0.0s
+ Image multi-container-app-api Built 
+ Image multi-container-app-web Built 
+ Network multi-container-app_default Creating 
+ Network multi-container-app_default Created 
+ Volume multi-container-app_db-data Creating 
+ Volume multi-container-app_db-data Created 
+ Container multi-container-app-db-1 Creating 
+ Container multi-container-app-db-1 Created 
+ Container multi-container-app-api-1 Creating 
+ Container multi-container-app-api-1 Created 
+ Container multi-container-app-web-1 Creating 
+ Container multi-container-app-web-1 Created 
+ Container multi-container-app-db-1 Starting 
+ Container multi-container-app-db-1 Started 
+ Container multi-container-app-api-1 Starting 
+ Container multi-container-app-api-1 Started 
+ Container multi-container-app-web-1 Starting 
+ Container multi-container-app-web-1 Started 
+# exit 0

@@ -1,0 +1,110 @@
+docker compose -f docker-compose.fixed.yml up -d --build
+---
+ Image ts03-api Building 
+ Image ts03-web Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.19kB done
+#1 DONE 0.0s
+
+#2 [web internal] load build definition from Dockerfile
+#2 transferring dockerfile: 266B done
+#2 DONE 0.0s
+
+#3 [api internal] load build definition from Dockerfile
+#3 transferring dockerfile: 558B done
+#3 DONE 0.0s
+
+#4 [web internal] load metadata for docker.io/library/nginx:1.30-alpine
+#4 DONE 0.0s
+
+#5 [api internal] load metadata for docker.io/library/python:3.14-slim
+#5 DONE 0.0s
+
+#6 [web internal] load .dockerignore
+#6 transferring context: 51B done
+#6 DONE 0.0s
+
+#7 [api internal] load .dockerignore
+#7 transferring context: 64B done
+#7 DONE 0.0s
+
+#8 [web internal] load build context
+#8 transferring context: 167B done
+#8 DONE 0.0s
+
+#9 [api internal] load build context
+#9 transferring context: 63B done
+#9 DONE 0.0s
+
+#10 [api 1/5] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#10 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#10 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151 0.0s done
+#10 DONE 0.0s
+
+#11 [web 1/3] FROM docker.io/library/nginx:1.30-alpine@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
+#11 resolve docker.io/library/nginx:1.30-alpine@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94 0.0s done
+#11 DONE 0.0s
+
+#12 [web 2/3] COPY default.conf.template /etc/nginx/templates/default.conf.template
+#12 CACHED
+
+#13 [web 3/3] COPY html/ /usr/share/nginx/html/
+#13 CACHED
+
+#14 [api 2/5] WORKDIR /app
+#14 CACHED
+
+#15 [api 3/5] COPY requirements.txt .
+#15 CACHED
+
+#16 [api 4/5] RUN pip install --no-cache-dir -r requirements.txt
+#16 CACHED
+
+#17 [api 5/5] COPY app.py .
+#17 CACHED
+
+#18 [api] exporting to image
+#18 exporting layers done
+#18 exporting manifest sha256:1dff4ec1f2150917e634b1800d1d3c455cc323e2429291fbbc43e488de8f3802 done
+#18 exporting config sha256:b9200c0c06aa4ad32af66ef1d904c27527fd5bbb73a28e71ad669dc5e3647288 done
+#18 exporting attestation manifest sha256:484fcaada19c5311b306ae09dbd875bbe19304237c2c5e1c5f3393d2c7f2c202 0.0s done
+#18 exporting manifest list sha256:5eee8d358f86c08c9a1af8a4bcf8c6bff1617fc6969dee236ee85c74f221c576
+#18 exporting manifest list sha256:5eee8d358f86c08c9a1af8a4bcf8c6bff1617fc6969dee236ee85c74f221c576 0.0s done
+#18 naming to docker.io/library/ts03-api:latest done
+#18 unpacking to docker.io/library/ts03-api:latest 0.0s done
+#18 DONE 0.2s
+
+#19 [web] exporting to image
+#19 exporting layers done
+#19 exporting manifest sha256:227af57b9e5aef04971f30c929f87be8eaf3e827507aa6d12c93821339572144 done
+#19 exporting config sha256:f0e76f2a5811e0fe8b0dbfee98d01249100d3b1d68760cbe26224cbb648412fd done
+#19 exporting attestation manifest sha256:31b0c1ab811694fbe34669aafdb2e2ed707b8ec7f370c1bc667d795f2f4413fc 0.0s done
+#19 exporting manifest list sha256:c2c5010650e779a71ce98cf375889bba3713142c85b621897d402b44d0debd1d 0.0s done
+#19 naming to docker.io/library/ts03-web:latest done
+#19 unpacking to docker.io/library/ts03-web:latest 0.0s done
+#19 DONE 0.2s
+
+#20 [api] resolving provenance for metadata file
+#20 DONE 0.0s
+
+#21 [web] resolving provenance for metadata file
+#21 DONE 0.0s
+ Image ts03-api Built 
+ Image ts03-web Built 
+ Network ts03_frontend Creating 
+ Network ts03_frontend Created 
+ Network ts03_backend Creating 
+ Network ts03_backend Created 
+ Container ts03-db-1 Creating 
+ Container ts03-db-1 Created 
+ Container ts03-api-1 Creating 
+ Container ts03-api-1 Created 
+ Container ts03-web-1 Creating 
+ Container ts03-web-1 Created 
+ Container ts03-db-1 Starting 
+ Container ts03-db-1 Started 
+ Container ts03-api-1 Starting 
+ Container ts03-api-1 Started 
+ Container ts03-web-1 Starting 
+ Container ts03-web-1 Started 
+# exit 0

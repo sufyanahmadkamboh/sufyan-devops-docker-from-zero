@@ -1,0 +1,4 @@
+grep COPY Dockerfile
+---
+COPY site/ /usr/share/nginx/html/
+# exit 0

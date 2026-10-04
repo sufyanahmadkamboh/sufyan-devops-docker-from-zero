@@ -1,0 +1,11 @@
+docker exec web hostname
+docker exec web cat /etc/os-release
+---
+93b4d8a6da05
+NAME="Alpine Linux"
+ID=alpine
+VERSION_ID=3.24.2
+PRETTY_NAME="Alpine Linux v3.24"
+HOME_URL="https://alpinelinux.org/"
+BUG_REPORT_URL="https://gitlab.alpinelinux.org/alpine/aports/-/issues"
+# exit 0

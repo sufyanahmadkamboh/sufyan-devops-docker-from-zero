@@ -1,0 +1,60 @@
+docker build -f optimization/multistage.Dockerfile -t simple-app:multistage .
+---
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from multistage.Dockerfile
+#1 transferring dockerfile: 831B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14-alpine
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 295B done
+#3 DONE 0.0s
+
+#4 [builder 1/5] FROM docker.io/library/python:3.14-alpine@sha256:2e740b2c28a426e74f11396c05e38afb3191acced75045b8d62df573c1dc8ce8
+#4 resolve docker.io/library/python:3.14-alpine@sha256:2e740b2c28a426e74f11396c05e38afb3191acced75045b8d62df573c1dc8ce8 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 63B done
+#5 DONE 0.0s
+
+#6 [builder 5/5] RUN /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
+#6 CACHED
+
+#7 [stage-1 4/5] COPY app.py .
+#7 CACHED
+
+#8 [builder 2/5] RUN apk add --no-cache build-base
+#8 CACHED
+
+#9 [builder 3/5] RUN python -m venv /opt/venv
+#9 CACHED
+
+#10 [stage-1 2/5] COPY --from=builder /opt/venv /opt/venv
+#10 CACHED
+
+#11 [stage-1 3/5] WORKDIR /app
+#11 CACHED
+
+#12 [builder 4/5] COPY requirements.txt .
+#12 CACHED
+
+#13 [stage-1 5/5] RUN adduser -D -u 10001 appuser
+#13 CACHED
+
+#14 exporting to image
+#14 exporting layers done
+#14 exporting manifest sha256:afa2490921702a6ab8ece057fefa60f2f2b8239c226ad3a07f2c400c61341e68 done
+#14 exporting config sha256:ec95a4b49c92fc2f09f073d0db9cfa7c8f32cd94243ae7b758a8128cf6b6a169 done
+#14 exporting attestation manifest sha256:7cb152138c5560dd12cddcbc9781fb077a952fa9ab2d067a2e8d63f2807ad0eb 0.0s done
+#14 exporting manifest list sha256:2f2a9a504e347711171df9e9e2187ed77716cb7dfb02bc4ba3cefd24403f754f
+#14 exporting manifest list sha256:2f2a9a504e347711171df9e9e2187ed77716cb7dfb02bc4ba3cefd24403f754f 0.0s done
+#14 naming to docker.io/library/simple-app:multistage done
+#14 unpacking to docker.io/library/simple-app:multistage done
+#14 DONE 0.1s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/mb025ujmnt05qtyqwfza3cap2
+# exit 0

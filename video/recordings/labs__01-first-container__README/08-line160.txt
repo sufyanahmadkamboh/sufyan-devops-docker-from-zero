@@ -1,0 +1,5 @@
+docker ps
+---
+CONTAINER ID   IMAGE               COMMAND                  CREATED        STATUS                  PORTS     NAMES
+7025ee09c25d   nginx:1.30-alpine   "/docker-entrypoint.…"   1 second ago   Up Less than a second   80/tcp    web
+# exit 0

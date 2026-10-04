@@ -1,0 +1,4 @@
+docker ps --filter name=db
+---
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+# exit 0

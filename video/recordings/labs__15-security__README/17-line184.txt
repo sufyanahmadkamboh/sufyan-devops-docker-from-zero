@@ -1,0 +1,4 @@
+docker run -d --name tidy -e DB_PASSWORD_FILE=/run/secrets/db_password -v "$(pwd)/../../capstone/secrets/db_password.txt.example:/run/secrets/db_password:ro" alpine:3.24 sleep 300
+---
+a615454ae9e1782393bf4ba9326a7fbdc6beb07ca66091e0dc5199a8614d92fe
+# exit 0

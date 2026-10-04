@@ -1,0 +1,5 @@
+docker rmi lab18-demo
+---
+Untagged: lab18-demo:latest
+Deleted: sha256:bd65f6e22ee7bf51b6517b7ddfc570547ebbc5fc07a5748d061f9d17a64bb3ef
+# exit 0

@@ -1,0 +1,20 @@
+docker compose -f docker-compose.old-tutorial.yml down -v
+docker compose -f docker-compose.old-tutorial.fixed.yml up -d
+---
+ Container ts10b-db-1 Stopping 
+ Container ts10b-db-1 Stopped 
+ Container ts10b-db-1 Removing 
+ Container ts10b-db-1 Removed 
+ Network ts10b_default Removing 
+ Volume ts10b_db-data Removing 
+ Volume ts10b_db-data Removed 
+ Network ts10b_default Removed 
+ Network ts10b_default Creating 
+ Network ts10b_default Created 
+ Volume ts10b_db-data Creating 
+ Volume ts10b_db-data Created 
+ Container ts10b-db-1 Creating 
+ Container ts10b-db-1 Created 
+ Container ts10b-db-1 Starting 
+ Container ts10b-db-1 Started 
+# exit 0

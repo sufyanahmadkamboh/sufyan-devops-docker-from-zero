@@ -1,0 +1,4 @@
+   docker inspect backend --format '{{range $name, $net := .NetworkSettings.Networks}}{{$name}} {{end}}'
+---
+othernet 
+# exit 0

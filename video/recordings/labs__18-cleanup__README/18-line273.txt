@@ -1,0 +1,8 @@
+docker volume prune -a -f
+---
+Deleted Volumes:
+lab18-keep
+lab18-db
+
+Total reclaimed space: 16B
+# exit 0

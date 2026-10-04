@@ -1,0 +1,284 @@
+docker build -f optimization/fat.Dockerfile -t simple-app:fat .
+---
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from fat.Dockerfile
+#1 transferring dockerfile: 562B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14
+#2 DONE 1.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 295B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 63B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM docker.io/library/python:3.14@sha256:504679006065cdab9a85e983e269140d3c5a279492395a6863b25b1ffb377f86
+#5 resolve docker.io/library/python:3.14@sha256:504679006065cdab9a85e983e269140d3c5a279492395a6863b25b1ffb377f86 0.0s done
+#5 DONE 0.1s
+
+#5 [1/5] FROM docker.io/library/python:3.14@sha256:504679006065cdab9a85e983e269140d3c5a279492395a6863b25b1ffb377f86
+#5 sha256:58c447da347e74de7fa9644d20b4fc8baf6f922a3d52cf472d1b0530ab4c39ff 250B / 250B 0.1s done
+#5 sha256:e636a39670e049b2ae85a878003f8403dda94cf0e8803ad2ce55d1513ebef1c0 0B / 29.80MB 0.2s
+#5 sha256:7654fbfc185d733c507c36a4310e8729883d55eb6678cdbd1bd3427e87e613cd 0B / 6.10MB 0.2s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 0B / 236.40MB 0.2s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 0B / 67.81MB 0.2s
+#5 sha256:e636a39670e049b2ae85a878003f8403dda94cf0e8803ad2ce55d1513ebef1c0 4.19MB / 29.80MB 0.5s
+#5 sha256:e636a39670e049b2ae85a878003f8403dda94cf0e8803ad2ce55d1513ebef1c0 7.34MB / 29.80MB 0.6s
+#5 sha256:7654fbfc185d733c507c36a4310e8729883d55eb6678cdbd1bd3427e87e613cd 1.05MB / 6.10MB 0.6s
+#5 sha256:e636a39670e049b2ae85a878003f8403dda94cf0e8803ad2ce55d1513ebef1c0 9.44MB / 29.80MB 0.8s
+#5 sha256:7654fbfc185d733c507c36a4310e8729883d55eb6678cdbd1bd3427e87e613cd 2.10MB / 6.10MB 0.8s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 4.19MB / 67.81MB 0.8s
+#5 sha256:e636a39670e049b2ae85a878003f8403dda94cf0e8803ad2ce55d1513ebef1c0 12.58MB / 29.80MB 0.9s
+#5 sha256:7654fbfc185d733c507c36a4310e8729883d55eb6678cdbd1bd3427e87e613cd 3.15MB / 6.10MB 0.9s
+#5 sha256:e636a39670e049b2ae85a878003f8403dda94cf0e8803ad2ce55d1513ebef1c0 14.68MB / 29.80MB 1.1s
+#5 sha256:7654fbfc185d733c507c36a4310e8729883d55eb6678cdbd1bd3427e87e613cd 4.19MB / 6.10MB 1.1s
+#5 sha256:e636a39670e049b2ae85a878003f8403dda94cf0e8803ad2ce55d1513ebef1c0 16.78MB / 29.80MB 1.2s
+#5 sha256:7654fbfc185d733c507c36a4310e8729883d55eb6678cdbd1bd3427e87e613cd 6.10MB / 6.10MB 1.2s done
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 8.39MB / 67.81MB 1.2s
+#5 sha256:e636a39670e049b2ae85a878003f8403dda94cf0e8803ad2ce55d1513ebef1c0 19.92MB / 29.80MB 1.4s
+#5 sha256:42f0cc32f2e355552fbfad163210ddc51f7b8bc7cfaddb2a41bd9c4a7c5e3c49 0B / 25.64MB 0.2s
+#5 sha256:e636a39670e049b2ae85a878003f8403dda94cf0e8803ad2ce55d1513ebef1c0 22.02MB / 29.80MB 1.5s
+#5 sha256:e636a39670e049b2ae85a878003f8403dda94cf0e8803ad2ce55d1513ebef1c0 24.12MB / 29.80MB 1.7s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 12.58MB / 67.81MB 1.7s
+#5 sha256:42f0cc32f2e355552fbfad163210ddc51f7b8bc7cfaddb2a41bd9c4a7c5e3c49 2.10MB / 25.64MB 0.5s
+#5 sha256:e636a39670e049b2ae85a878003f8403dda94cf0e8803ad2ce55d1513ebef1c0 26.21MB / 29.80MB 1.8s
+#5 sha256:42f0cc32f2e355552fbfad163210ddc51f7b8bc7cfaddb2a41bd9c4a7c5e3c49 5.24MB / 25.64MB 0.8s
+#5 sha256:e636a39670e049b2ae85a878003f8403dda94cf0e8803ad2ce55d1513ebef1c0 29.80MB / 29.80MB 2.1s done
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 16.78MB / 67.81MB 2.1s
+#5 sha256:42f0cc32f2e355552fbfad163210ddc51f7b8bc7cfaddb2a41bd9c4a7c5e3c49 7.34MB / 25.64MB 0.9s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 12.58MB / 236.40MB 2.3s
+#5 sha256:42f0cc32f2e355552fbfad163210ddc51f7b8bc7cfaddb2a41bd9c4a7c5e3c49 9.44MB / 25.64MB 1.1s
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 0B / 49.38MB 0.2s
+#5 sha256:42f0cc32f2e355552fbfad163210ddc51f7b8bc7cfaddb2a41bd9c4a7c5e3c49 11.53MB / 25.64MB 1.2s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 20.97MB / 67.81MB 2.6s
+#5 sha256:42f0cc32f2e355552fbfad163210ddc51f7b8bc7cfaddb2a41bd9c4a7c5e3c49 13.63MB / 25.64MB 1.4s
+#5 sha256:42f0cc32f2e355552fbfad163210ddc51f7b8bc7cfaddb2a41bd9c4a7c5e3c49 15.73MB / 25.64MB 1.5s
+#5 sha256:42f0cc32f2e355552fbfad163210ddc51f7b8bc7cfaddb2a41bd9c4a7c5e3c49 18.87MB / 25.64MB 1.7s
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 3.15MB / 49.38MB 0.8s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 25.17MB / 67.81MB 3.0s
+#5 sha256:42f0cc32f2e355552fbfad163210ddc51f7b8bc7cfaddb2a41bd9c4a7c5e3c49 20.97MB / 25.64MB 1.8s
+#5 sha256:42f0cc32f2e355552fbfad163210ddc51f7b8bc7cfaddb2a41bd9c4a7c5e3c49 23.07MB / 25.64MB 2.0s
+#5 sha256:42f0cc32f2e355552fbfad163210ddc51f7b8bc7cfaddb2a41bd9c4a7c5e3c49 25.64MB / 25.64MB 2.1s done
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 6.29MB / 49.38MB 1.2s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 25.17MB / 236.40MB 3.5s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 30.41MB / 67.81MB 3.5s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 34.60MB / 67.81MB 3.8s
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 9.44MB / 49.38MB 1.7s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 38.80MB / 236.40MB 4.2s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 39.85MB / 67.81MB 4.2s
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 12.58MB / 49.38MB 2.1s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 44.04MB / 67.81MB 4.5s
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 15.73MB / 49.38MB 2.6s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 54.53MB / 236.40MB 5.0s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 49.28MB / 67.81MB 5.0s
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 18.87MB / 49.38MB 3.0s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 54.53MB / 67.81MB 5.4s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 67.11MB / 236.40MB 5.6s
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 22.02MB / 49.38MB 3.6s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 58.72MB / 67.81MB 5.9s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 80.74MB / 236.40MB 6.2s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 63.96MB / 67.81MB 6.3s
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 25.17MB / 49.38MB 4.2s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 95.42MB / 236.40MB 6.8s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 67.81MB / 67.81MB 6.8s
+#5 sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 67.81MB / 67.81MB 6.8s done
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 28.31MB / 49.38MB 4.8s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 111.15MB / 236.40MB 7.4s
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 32.51MB / 49.38MB 5.3s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 123.73MB / 236.40MB 7.8s
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 36.70MB / 49.38MB 5.6s
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 40.89MB / 49.38MB 5.9s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 138.41MB / 236.40MB 8.4s
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 44.04MB / 49.38MB 6.2s
+#5 sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 49.38MB / 49.38MB 6.5s done
+#5 extracting sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 150.99MB / 236.40MB 8.9s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 163.58MB / 236.40MB 9.3s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 176.16MB / 236.40MB 9.8s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 189.79MB / 236.40MB 10.2s
+#5 extracting sha256:6eefb2f5d3e91a6cfc577476bbec26bb63f0d0fc31f904493f400833783aa2c2 1.5s done
+#5 extracting sha256:42f0cc32f2e355552fbfad163210ddc51f7b8bc7cfaddb2a41bd9c4a7c5e3c49
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 202.38MB / 236.40MB 10.7s
+#5 extracting sha256:42f0cc32f2e355552fbfad163210ddc51f7b8bc7cfaddb2a41bd9c4a7c5e3c49 0.6s done
+#5 extracting sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 216.01MB / 236.40MB 11.1s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 230.69MB / 236.40MB 11.6s
+#5 sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 236.40MB / 236.40MB 11.9s done
+#5 extracting sha256:38985a14f2b1b8215895ecb448f3dfc4067cb494aa00b547c78c9a012e9b2460 1.7s done
+#5 DONE 12.7s
+
+#5 [1/5] FROM docker.io/library/python:3.14@sha256:504679006065cdab9a85e983e269140d3c5a279492395a6863b25b1ffb377f86
+#5 extracting sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6
+#5 extracting sha256:e7272a918094ebc3b66e08b23223afd37614df4ba4518b2dfd9da5ee9247fce6 4.4s done
+#5 DONE 17.1s
+
+#5 [1/5] FROM docker.io/library/python:3.14@sha256:504679006065cdab9a85e983e269140d3c5a279492395a6863b25b1ffb377f86
+#5 extracting sha256:7654fbfc185d733c507c36a4310e8729883d55eb6678cdbd1bd3427e87e613cd
+#5 extracting sha256:7654fbfc185d733c507c36a4310e8729883d55eb6678cdbd1bd3427e87e613cd 0.2s done
+#5 DONE 17.2s
+
+#5 [1/5] FROM docker.io/library/python:3.14@sha256:504679006065cdab9a85e983e269140d3c5a279492395a6863b25b1ffb377f86
+#5 extracting sha256:e636a39670e049b2ae85a878003f8403dda94cf0e8803ad2ce55d1513ebef1c0
+#5 extracting sha256:e636a39670e049b2ae85a878003f8403dda94cf0e8803ad2ce55d1513ebef1c0 0.6s done
+#5 DONE 17.8s
+
+#5 [1/5] FROM docker.io/library/python:3.14@sha256:504679006065cdab9a85e983e269140d3c5a279492395a6863b25b1ffb377f86
+#5 extracting sha256:58c447da347e74de7fa9644d20b4fc8baf6f922a3d52cf472d1b0530ab4c39ff 0.0s done
+#5 DONE 17.8s
+
+#6 [2/5] RUN apt-get update && apt-get install -y build-essential curl vim
+#6 0.311 Hit:1 http://deb.debian.org/debian trixie InRelease
+#6 0.311 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#6 0.312 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#6 0.324 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9678 kB]
+#6 0.661 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [4412 B]
+#6 0.661 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [264 kB]
+#6 1.262 Fetched 10.0 MB in 1s (9649 kB/s)
+#6 1.262 Reading package lists...
+#6 1.717 Reading package lists...
+#6 2.171 Building dependency tree...
+#6 2.306 Reading state information...
+#6 2.484 curl is already the newest version (8.14.1-2+deb13u5).
+#6 2.484 The following additional packages will be installed:
+#6 2.485   libgpm2 libsodium23 vim-common vim-runtime xxd
+#6 2.487 Suggested packages:
+#6 2.487   gpm ctags vim-doc vim-scripts
+#6 2.551 The following NEW packages will be installed:
+#6 2.552   build-essential libgpm2 libsodium23 vim vim-common vim-runtime xxd
+#6 2.586 0 upgraded, 7 newly installed, 0 to remove and 16 not upgraded.
+#6 2.586 Need to get 9500 kB of archives.
+#6 2.586 After this operation, 45.9 MB of additional disk space will be used.
+#6 2.586 Get:1 http://deb.debian.org/debian trixie/main amd64 vim-common all 2:9.1.1230-2 [421 kB]
+#6 2.610 Get:2 http://deb.debian.org/debian trixie/main amd64 build-essential amd64 12.12 [4624 B]
+#6 2.611 Get:3 http://deb.debian.org/debian trixie/main amd64 libgpm2 amd64 1.20.7-11+b2 [14.4 kB]
+#6 2.615 Get:4 http://deb.debian.org/debian trixie/main amd64 libsodium23 amd64 1.0.18-1+deb13u1 [165 kB]
+#6 2.625 Get:5 http://deb.debian.org/debian trixie/main amd64 vim-runtime all 2:9.1.1230-2 [7127 kB]
+#6 2.860 Get:6 http://deb.debian.org/debian trixie/main amd64 vim amd64 2:9.1.1230-2 [1670 kB]
+#6 2.914 Get:7 http://deb.debian.org/debian trixie/main amd64 xxd amd64 2:9.1.1230-2 [98.8 kB]
+#6 3.054 debconf: unable to initialize frontend: Dialog
+#6 3.054 debconf: (TERM is not set, so the dialog frontend is not usable.)
+#6 3.054 debconf: falling back to frontend: Readline
+#6 3.060 debconf: unable to initialize frontend: Readline
+#6 3.060 debconf: (This frontend requires a controlling tty.)
+#6 3.060 debconf: falling back to frontend: Teletype
+#6 3.064 debconf: unable to initialize frontend: Teletype
+#6 3.064 debconf: (This frontend requires a controlling tty.)
+#6 3.064 debconf: falling back to frontend: Noninteractive
+#6 3.538 Fetched 9500 kB in 0s (26.8 MB/s)
+#6 3.564 Selecting previously unselected package vim-common.
+#6 3.564 (Reading database ... 
+(Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+(Reading database ... 70%
+(Reading database ... 75%
+(Reading database ... 80%
+(Reading database ... 85%
+(Reading database ... 90%
+(Reading database ... 95%
+(Reading database ... 100%
+(Reading database ... 26760 files and directories currently installed.)
+#6 3.579 Preparing to unpack .../0-vim-common_2%3a9.1.1230-2_all.deb ...
+#6 3.583 Unpacking vim-common (2:9.1.1230-2) ...
+#6 3.635 Selecting previously unselected package build-essential.
+#6 3.638 Preparing to unpack .../1-build-essential_12.12_amd64.deb ...
+#6 3.642 Unpacking build-essential (12.12) ...
+#6 3.676 Selecting previously unselected package libgpm2:amd64.
+#6 3.679 Preparing to unpack .../2-libgpm2_1.20.7-11+b2_amd64.deb ...
+#6 3.687 Unpacking libgpm2:amd64 (1.20.7-11+b2) ...
+#6 3.724 Selecting previously unselected package libsodium23:amd64.
+#6 3.729 Preparing to unpack .../3-libsodium23_1.0.18-1+deb13u1_amd64.deb ...
+#6 3.734 Unpacking libsodium23:amd64 (1.0.18-1+deb13u1) ...
+#6 3.776 Selecting previously unselected package vim-runtime.
+#6 3.779 Preparing to unpack .../4-vim-runtime_2%3a9.1.1230-2_all.deb ...
+#6 3.788 Adding 'diversion of /usr/share/vim/vim91/doc/help.txt to /usr/share/vim/vim91/doc/help.txt.vim-tiny by vim-runtime'
+#6 3.796 Adding 'diversion of /usr/share/vim/vim91/doc/tags to /usr/share/vim/vim91/doc/tags.vim-tiny by vim-runtime'
+#6 3.799 Unpacking vim-runtime (2:9.1.1230-2) ...
+#6 4.154 Selecting previously unselected package vim.
+#6 4.157 Preparing to unpack .../5-vim_2%3a9.1.1230-2_amd64.deb ...
+#6 4.161 Unpacking vim (2:9.1.1230-2) ...
+#6 4.259 Selecting previously unselected package xxd.
+#6 4.266 Preparing to unpack .../6-xxd_2%3a9.1.1230-2_amd64.deb ...
+#6 4.271 Unpacking xxd (2:9.1.1230-2) ...
+#6 4.310 Setting up libsodium23:amd64 (1.0.18-1+deb13u1) ...
+#6 4.321 Setting up libgpm2:amd64 (1.20.7-11+b2) ...
+#6 4.333 Setting up xxd (2:9.1.1230-2) ...
+#6 4.344 Setting up vim-common (2:9.1.1230-2) ...
+#6 4.360 Setting up build-essential (12.12) ...
+#6 4.372 Setting up vim-runtime (2:9.1.1230-2) ...
+#6 4.394 Setting up vim (2:9.1.1230-2) ...
+#6 4.407 update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/editor (editor) in auto mode
+#6 4.412 update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/ex (ex) in auto mode
+#6 4.416 update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/rview (rview) in auto mode
+#6 4.419 update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/rvim (rvim) in auto mode
+#6 4.423 update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vi (vi) in auto mode
+#6 4.427 update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/view (view) in auto mode
+#6 4.432 update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vim (vim) in auto mode
+#6 4.435 update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vimdiff (vimdiff) in auto mode
+#6 4.442 Processing triggers for libc-bin (2.41-12+deb13u4) ...
+#6 4.466 Processing triggers for hicolor-icon-theme (0.18-2) ...
+#6 DONE 5.6s
+
+#7 [3/5] WORKDIR /app
+#7 DONE 0.0s
+
+#8 [4/5] COPY . .
+#8 DONE 0.0s
+
+#9 [5/5] RUN pip install -r requirements.txt
+#9 1.408 Collecting flask==3.1.3 (from -r requirements.txt (line 1))
+#9 1.454   Downloading flask-3.1.3-py3-none-any.whl.metadata (3.2 kB)
+#9 1.479 Collecting blinker>=1.9.0 (from flask==3.1.3->-r requirements.txt (line 1))
+#9 1.486   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#9 1.524 Collecting click>=8.1.3 (from flask==3.1.3->-r requirements.txt (line 1))
+#9 1.531   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#9 1.569 Collecting itsdangerous>=2.2.0 (from flask==3.1.3->-r requirements.txt (line 1))
+#9 1.577   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#9 1.603 Collecting jinja2>=3.1.2 (from flask==3.1.3->-r requirements.txt (line 1))
+#9 1.611   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#9 1.665 Collecting markupsafe>=2.1.1 (from flask==3.1.3->-r requirements.txt (line 1))
+#9 1.672   Downloading markupsafe-3.0.4-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#9 1.715 Collecting werkzeug>=3.1.0 (from flask==3.1.3->-r requirements.txt (line 1))
+#9 1.722   Downloading werkzeug-3.1.9-py3-none-any.whl.metadata (4.1 kB)
+#9 1.740 Downloading flask-3.1.3-py3-none-any.whl (103 kB)
+#9 1.760 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#9 1.772 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#9 1.791 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#9 1.804 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#9 1.823 Downloading markupsafe-3.0.4-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (23 kB)
+#9 1.836 Downloading werkzeug-3.1.9-py3-none-any.whl (228 kB)
+#9 1.930 Installing collected packages: markupsafe, itsdangerous, click, blinker, werkzeug, jinja2, flask
+#9 2.320 
+#9 2.321 Successfully installed blinker-1.9.0 click-8.5.0 flask-3.1.3 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.4 werkzeug-3.1.9
+#9 2.321 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#9 DONE 2.5s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 2.2s done
+#10 exporting manifest sha256:42d4e9cc9de4dc507345af6ff20807b314d131930c16cd7b07a498f9ab263e87 0.0s done
+#10 exporting config sha256:706bbf740a4487f5c1523daeb5298c0a33cac77b71ac0306b8cd2a9b788e37bd 0.0s done
+#10 exporting attestation manifest sha256:622639fa65e991d3e8db619c9399e60c29060ffc185bff96c8d31174c312be24 0.0s done
+#10 exporting manifest list sha256:903e1c00dd6073c995326d08583595541f7e094d4977e95941a36cd076b23b16 0.0s done
+#10 naming to docker.io/library/simple-app:fat done
+#10 unpacking to docker.io/library/simple-app:fat
+#10 unpacking to docker.io/library/simple-app:fat 0.8s done
+#10 DONE 3.2s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/9va1759wxasu32ircjsvs1t6q
+# exit 0

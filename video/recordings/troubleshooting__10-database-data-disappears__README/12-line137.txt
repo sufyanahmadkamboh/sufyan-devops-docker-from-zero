@@ -1,0 +1,14 @@
+docker compose down -v
+docker volume prune -f
+---
+ Container ts10-db-1 Stopping 
+ Container ts10-db-1 Stopped 
+ Container ts10-db-1 Removing 
+ Container ts10-db-1 Removed 
+ Network ts10_default Removing 
+ Network ts10_default Removed 
+Deleted Volumes:
+163983c8c445be5cf1a0792737ee534cbe1ccb2b1dade237bd0c1666025e54fe
+
+Total reclaimed space: 48.59MB
+# exit 0

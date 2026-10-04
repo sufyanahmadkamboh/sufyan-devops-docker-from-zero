@@ -1,0 +1,6 @@
+docker create --name demo nginx:1.30-alpine
+docker ps -a --filter name=demo --format '{{.Names}}: {{.Status}}'
+---
+f957f852efc7962496078eb16bc09050d4dd09f9de9dd1e00ddc53cd28c6a253
+demo: Created
+# exit 0

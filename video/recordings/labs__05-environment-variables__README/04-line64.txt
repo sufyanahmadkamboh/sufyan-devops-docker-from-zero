@@ -1,0 +1,5 @@
+export LAB_COLOR=blue
+docker run --rm -e LAB_COLOR alpine:3.24 printenv LAB_COLOR
+---
+blue
+# exit 0

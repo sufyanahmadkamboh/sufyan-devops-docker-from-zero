@@ -52,18 +52,18 @@ docker history simple-app:step5
 ```
 
 ```text
-IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
-b07321e8274a   18 minutes ago   CMD ["python" "app.py"]                         0B        buildkit.dockerfile.v0
-<missing>      18 minutes ago   EXPOSE [5000/tcp]                               0B        buildkit.dockerfile.v0
-<missing>      18 minutes ago   ENV APP_ENV=production                          0B        buildkit.dockerfile.v0
-<missing>      18 minutes ago   COPY app.py . # buildkit                        12.3kB    buildkit.dockerfile.v0
-<missing>      18 minutes ago   RUN /bin/sh -c pip install --no-cache-dir -r…   16.9MB    buildkit.dockerfile.v0
-<missing>      18 minutes ago   COPY requirements.txt . # buildkit              12.3kB    buildkit.dockerfile.v0
-<missing>      28 minutes ago   WORKDIR /app                                    8.19kB    buildkit.dockerfile.v0
-<missing>      2 days ago       CMD ["python3"]                                 0B        buildkit.dockerfile.v0
-<missing>      2 days ago       RUN /bin/sh -c set -eux;  for src in idle3 p…   16.4kB    buildkit.dockerfile.v0
-<missing>      2 days ago       RUN /bin/sh -c set -eux;   savedAptMark="$(a…   42MB      buildkit.dockerfile.v0
-<missing>      2 days ago       ENV PYTHON_SHA256=c2215904f02b175596dc493515…   0B        buildkit.dockerfile.v0
+IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
+f8c0a76e4ad0   8 minutes ago   CMD ["python" "app.py"]                         0B        buildkit.dockerfile.v0
+<missing>      8 minutes ago   EXPOSE [5000/tcp]                               0B        buildkit.dockerfile.v0
+<missing>      8 minutes ago   ENV APP_ENV=production                          0B        buildkit.dockerfile.v0
+<missing>      8 minutes ago   COPY app.py . # buildkit                        12.3kB    buildkit.dockerfile.v0
+<missing>      8 minutes ago   RUN /bin/sh -c pip install --no-cache-dir -r…   16.9MB    buildkit.dockerfile.v0
+<missing>      8 minutes ago   COPY requirements.txt . # buildkit              12.3kB    buildkit.dockerfile.v0
+<missing>      8 minutes ago   WORKDIR /app                                    8.19kB    buildkit.dockerfile.v0
+<missing>      2 days ago      CMD ["python3"]                                 0B        buildkit.dockerfile.v0
+<missing>      2 days ago      RUN /bin/sh -c set -eux;  for src in idle3 p…   16.4kB    buildkit.dockerfile.v0
+<missing>      2 days ago      RUN /bin/sh -c set -eux;   savedAptMark="$(a…   42MB      buildkit.dockerfile.v0
+<missing>      2 days ago      ENV PYTHON_SHA256=c2215904f02b175596dc493515…   0B        buildkit.dockerfile.v0
 ...
 ```
 

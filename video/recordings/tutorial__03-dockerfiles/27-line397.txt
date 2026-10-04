@@ -1,0 +1,7 @@
+docker run --rm simple-app:clean ls -a
+---
+.
+..
+app.py
+requirements.txt
+# exit 0

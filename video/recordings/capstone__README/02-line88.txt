@@ -1,0 +1,133 @@
+docker compose up -d --build
+---
+ Image docker-from-zero/web:1.0.0 Building 
+ Image docker-from-zero/api:1.0.0 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.17kB done
+#1 DONE 0.0s
+
+#2 [api internal] load build definition from Dockerfile
+#2 DONE 0.0s
+
+#3 [web internal] load build definition from Dockerfile
+#3 transferring dockerfile: 416B done
+#3 DONE 0.0s
+
+#2 [api internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.10kB done
+#2 DONE 0.0s
+
+#4 [api internal] load metadata for docker.io/library/python:3.14-slim
+#4 DONE 0.0s
+
+#5 [api internal] load .dockerignore
+#5 transferring context: 64B done
+#5 DONE 0.0s
+
+#6 [api internal] load build context
+#6 DONE 0.0s
+
+#7 [api builder 1/4] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#7 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151 0.0s done
+#7 DONE 0.0s
+
+#6 [api internal] load build context
+#6 transferring context: 63B done
+#6 DONE 0.0s
+
+#8 [api builder 2/4] RUN python -m venv /opt/venv
+#8 CACHED
+
+#9 [api builder 3/4] COPY requirements.txt .
+#9 CACHED
+
+#10 [api stage-1 3/5] WORKDIR /app
+#10 CACHED
+
+#11 [api builder 4/4] RUN /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
+#11 CACHED
+
+#12 [api stage-1 2/5] COPY --from=builder /opt/venv /opt/venv
+#12 CACHED
+
+#13 [api stage-1 4/5] COPY app.py .
+#13 CACHED
+
+#14 [api stage-1 5/5] RUN useradd --uid 10001 --no-create-home --shell /usr/sbin/nologin app
+#14 CACHED
+
+#15 [api] exporting to image
+#15 exporting layers done
+#15 exporting manifest sha256:2373060323a3093a78b4aabfd8801754b47da7839ff3df57960888063e2effa6 done
+#15 exporting config sha256:84a53dcc1c858073c0d01b8a99603254d85e604feb6d8e5c36f7d2c2bbaf8072 done
+#15 exporting attestation manifest sha256:4bb9d37e02a1db6426be7cf6a33bf4bb6dc5e4a728e5b9d1263fe1dfb3b06da2 0.0s done
+#15 exporting manifest list sha256:4e21b1fc547a89574586cedef88a4d281ab1a0ebf81be52136506012383d028e 0.0s done
+#15 naming to docker.io/docker-from-zero/api:1.0.0 done
+#15 unpacking to docker.io/docker-from-zero/api:1.0.0 done
+#15 DONE 0.1s
+
+#16 [web internal] load metadata for docker.io/nginxinc/nginx-unprivileged:1.30-alpine
+#16 ...
+
+#17 [api] resolving provenance for metadata file
+#17 DONE 0.0s
+
+#16 [web internal] load metadata for docker.io/nginxinc/nginx-unprivileged:1.30-alpine
+#16 DONE 0.5s
+
+#18 [web internal] load .dockerignore
+#18 transferring context: 51B done
+#18 DONE 0.0s
+
+#19 [web internal] load build context
+#19 transferring context: 167B done
+#19 DONE 0.0s
+
+#20 [web 1/3] FROM docker.io/nginxinc/nginx-unprivileged:1.30-alpine@sha256:ed04ec1ff34502c339ee5c3ae3f855442398edc1d05591e2b98981dcbbd20b1e
+#20 resolve docker.io/nginxinc/nginx-unprivileged:1.30-alpine@sha256:ed04ec1ff34502c339ee5c3ae3f855442398edc1d05591e2b98981dcbbd20b1e 0.0s done
+#20 DONE 0.0s
+
+#21 [web 2/3] COPY default.conf.template /etc/nginx/templates/default.conf.template
+#21 CACHED
+
+#22 [web 3/3] COPY html/ /usr/share/nginx/html/
+#22 CACHED
+
+#23 [web] exporting to image
+#23 exporting layers done
+#23 exporting manifest sha256:b2fc578b334e75653307695436a890e6b055e059bc33c09f3f10ded107da179c done
+#23 exporting config sha256:d5a7627988b9c7cea4e108c594664e68661e12951dc0add25b2b048cb45a9788 done
+#23 exporting attestation manifest sha256:58465056f9278dbd5606e813690aeb299348d5845d090e45f1c49afc02fc4e5c 0.0s done
+#23 exporting manifest list sha256:af6d17b9e1cbd41f379b253aa4e740ea9f61cc7235b6cd3727d2e954f6818837
+#23 exporting manifest list sha256:af6d17b9e1cbd41f379b253aa4e740ea9f61cc7235b6cd3727d2e954f6818837 0.0s done
+#23 naming to docker.io/docker-from-zero/web:1.0.0 done
+#23 unpacking to docker.io/docker-from-zero/web:1.0.0 0.0s done
+#23 DONE 0.1s
+
+#24 [web] resolving provenance for metadata file
+#24 DONE 0.0s
+ Image docker-from-zero/api:1.0.0 Built 
+ Image docker-from-zero/web:1.0.0 Built 
+ Network capstone_backend Creating 
+ Network capstone_backend Created 
+ Network capstone_frontend Creating 
+ Network capstone_frontend Created 
+ Volume capstone_db-data Creating 
+ Volume capstone_db-data Created 
+ Container capstone-db-1 Creating 
+ Container capstone-db-1 Created 
+ Container capstone-api-1 Creating 
+ Container capstone-api-1 Created 
+ Container capstone-web-1 Creating 
+ Container capstone-web-1 Created 
+ Container capstone-db-1 Starting 
+ Container capstone-db-1 Started 
+ Container capstone-db-1 Waiting 
+ Container capstone-db-1 Healthy 
+ Container capstone-api-1 Starting 
+ Container capstone-api-1 Started 
+ Container capstone-api-1 Waiting 
+ Container capstone-api-1 Healthy 
+ Container capstone-web-1 Starting 
+ Container capstone-web-1 Started 
+# exit 0

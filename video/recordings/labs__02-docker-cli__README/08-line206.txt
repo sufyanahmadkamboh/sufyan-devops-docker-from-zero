@@ -1,0 +1,8 @@
+docker inspect web --format 'status: {{.State.Status}}'
+docker inspect web --format 'started at: {{.State.StartedAt}}'
+docker inspect web --format 'IP address: {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
+---
+status: running
+started at: 2026-10-04T04:51:47.495561941Z
+IP address: 172.17.0.2
+# exit 0

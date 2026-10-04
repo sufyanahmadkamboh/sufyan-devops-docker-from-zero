@@ -1,0 +1,9 @@
+docker compose up -d
+---
+ Network ts10_default Creating 
+ Network ts10_default Created 
+ Container ts10-db-1 Creating 
+ Container ts10-db-1 Created 
+ Container ts10-db-1 Starting 
+ Container ts10-db-1 Started 
+# exit 0

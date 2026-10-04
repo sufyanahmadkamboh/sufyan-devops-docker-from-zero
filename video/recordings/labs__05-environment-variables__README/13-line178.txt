@@ -1,0 +1,4 @@
+docker ps -a --filter name=db --format '{{.Names}}: {{.Status}}'
+---
+db: Exited (1) Less than a second ago
+# exit 0

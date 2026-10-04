@@ -1,0 +1,10 @@
+docker stop web2
+docker rm web2
+docker ps --format '{{.Names}}'
+docker rm -f web
+---
+web2
+web2
+web
+web
+# exit 0

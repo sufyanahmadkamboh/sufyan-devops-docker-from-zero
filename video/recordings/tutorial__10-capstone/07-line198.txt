@@ -1,0 +1,170 @@
+docker compose build
+---
+ Image docker-from-zero/web:1.0.0 Building 
+ Image docker-from-zero/api:1.0.0 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.17kB done
+#1 DONE 0.0s
+
+#2 [api internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.10kB done
+#2 DONE 0.0s
+
+#3 [web internal] load build definition from Dockerfile
+#3 transferring dockerfile: 416B done
+#3 DONE 0.0s
+
+#4 [api internal] load metadata for docker.io/library/python:3.14-slim
+#4 DONE 0.0s
+
+#5 [api internal] load .dockerignore
+#5 transferring context: 64B done
+#5 DONE 0.0s
+
+#6 [api internal] load build context
+#6 DONE 0.0s
+
+#7 [api builder 1/4] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#7 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151 0.0s done
+#7 DONE 0.0s
+
+#8 [web internal] load metadata for docker.io/nginxinc/nginx-unprivileged:1.30-alpine
+#8 ...
+
+#7 [api builder 1/4] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#7 CACHED
+
+#6 [api internal] load build context
+#6 transferring context: 126B done
+#6 DONE 0.0s
+
+#9 [api builder 2/4] RUN python -m venv /opt/venv
+#9 ...
+
+#8 [web internal] load metadata for docker.io/nginxinc/nginx-unprivileged:1.30-alpine
+#8 DONE 1.3s
+
+#10 [web internal] load .dockerignore
+#10 transferring context: 51B done
+#10 DONE 0.0s
+
+#11 [web internal] load build context
+#11 transferring context: 4.08kB done
+#11 DONE 0.0s
+
+#12 [web 1/3] FROM docker.io/nginxinc/nginx-unprivileged:1.30-alpine@sha256:ed04ec1ff34502c339ee5c3ae3f855442398edc1d05591e2b98981dcbbd20b1e
+#12 resolve docker.io/nginxinc/nginx-unprivileged:1.30-alpine@sha256:ed04ec1ff34502c339ee5c3ae3f855442398edc1d05591e2b98981dcbbd20b1e 0.0s done
+#12 DONE 0.2s
+
+#9 [api builder 2/4] RUN python -m venv /opt/venv
+#9 ...
+
+#12 [web 1/3] FROM docker.io/nginxinc/nginx-unprivileged:1.30-alpine@sha256:ed04ec1ff34502c339ee5c3ae3f855442398edc1d05591e2b98981dcbbd20b1e
+#12 sha256:e0e3c441a630e0818bfb45d04cf5c73aad856343ee25492de39cccf6a96586d2 17.33MB / 17.33MB 0.8s done
+#12 sha256:271864eba7915a55a7d1af39ff183c0913ca4a8f1220d422fe2a15270ce96b3c 1.40kB / 1.40kB 0.3s done
+#12 sha256:b8a85f59d3e5aa0cdf5a8ddbea4307cac0ab04787922a343f5dc477f7a349e78 1.20kB / 1.20kB 0.3s done
+#12 sha256:5b2b641f9e3884a4b5eb1edce0290bff1b93e60a55671799bc7e8098a318e964 404B / 404B 0.3s done
+#12 sha256:8fb7bbcab893bf5c512342e36df99004d46586961b1dd0137128258420b1f3ad 964B / 964B 0.1s done
+#12 sha256:7c6d6d466e6a9981743118c4335a8a8708b87cbb79ab373a4572ab5a64b76ab2 2.79kB / 2.79kB 0.1s done
+#12 sha256:f7c5d86527246d95eaa5f248a68e2db1ca1c45ed1fba6af4717f2db52201ff9e 627B / 627B 0.1s done
+#12 sha256:ed0b1af5d9312f8ab2024bb1464021296651539d9bac6f362f26fd1ae59d47a3 1.88MB / 1.88MB 0.2s done
+#12 extracting sha256:ed0b1af5d9312f8ab2024bb1464021296651539d9bac6f362f26fd1ae59d47a3 0.1s done
+#12 extracting sha256:7c6d6d466e6a9981743118c4335a8a8708b87cbb79ab373a4572ab5a64b76ab2 0.0s done
+#12 extracting sha256:f7c5d86527246d95eaa5f248a68e2db1ca1c45ed1fba6af4717f2db52201ff9e 0.0s done
+#12 extracting sha256:8fb7bbcab893bf5c512342e36df99004d46586961b1dd0137128258420b1f3ad 0.0s done
+#12 extracting sha256:5b2b641f9e3884a4b5eb1edce0290bff1b93e60a55671799bc7e8098a318e964 0.0s done
+#12 extracting sha256:b8a85f59d3e5aa0cdf5a8ddbea4307cac0ab04787922a343f5dc477f7a349e78 0.0s done
+#12 extracting sha256:271864eba7915a55a7d1af39ff183c0913ca4a8f1220d422fe2a15270ce96b3c 0.0s done
+#12 extracting sha256:e0e3c441a630e0818bfb45d04cf5c73aad856343ee25492de39cccf6a96586d2 0.3s done
+#12 DONE 1.5s
+
+#13 [web 2/3] COPY default.conf.template /etc/nginx/templates/default.conf.template
+#13 DONE 0.1s
+
+#14 [web 3/3] COPY html/ /usr/share/nginx/html/
+#14 DONE 0.0s
+
+#9 [api builder 2/4] RUN python -m venv /opt/venv
+#9 DONE 3.2s
+
+#15 [web] exporting to image
+#15 exporting layers 0.1s done
+#15 exporting manifest sha256:b2fc578b334e75653307695436a890e6b055e059bc33c09f3f10ded107da179c 0.0s done
+#15 exporting config sha256:d5a7627988b9c7cea4e108c594664e68661e12951dc0add25b2b048cb45a9788 0.0s done
+#15 exporting attestation manifest sha256:025680cdb8ddb020a860a67412f668643147404b3e164e2b8c0d5a89d247a9ed 0.0s done
+#15 exporting manifest list sha256:b976402ef15ffa60696c710e672ca905ac2f8a9617755d52fc1e34bfb18fe083 0.0s done
+#15 naming to docker.io/docker-from-zero/web:1.0.0 done
+#15 unpacking to docker.io/docker-from-zero/web:1.0.0 0.1s done
+#15 DONE 0.3s
+
+#16 [api builder 3/4] COPY requirements.txt .
+#16 DONE 0.1s
+
+#17 [web] resolving provenance for metadata file
+#17 DONE 0.0s
+
+#18 [api builder 4/4] RUN /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
+#18 0.660 Collecting flask==3.1.3 (from -r requirements.txt (line 1))
+#18 0.700   Downloading flask-3.1.3-py3-none-any.whl.metadata (3.2 kB)
+#18 0.716 Collecting gunicorn==26.2.0 (from -r requirements.txt (line 2))
+#18 0.728   Downloading gunicorn-26.2.0-py3-none-any.whl.metadata (5.5 kB)
+#18 0.744 Collecting psycopg==3.3.6 (from psycopg[binary]==3.3.6->-r requirements.txt (line 3))
+#18 0.751   Downloading psycopg-3.3.6-py3-none-any.whl.metadata (4.4 kB)
+#18 0.764 Collecting blinker>=1.9.0 (from flask==3.1.3->-r requirements.txt (line 1))
+#18 0.770   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#18 0.783 Collecting click>=8.1.3 (from flask==3.1.3->-r requirements.txt (line 1))
+#18 0.789   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#18 0.800 Collecting itsdangerous>=2.2.0 (from flask==3.1.3->-r requirements.txt (line 1))
+#18 0.808   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#18 0.820 Collecting jinja2>=3.1.2 (from flask==3.1.3->-r requirements.txt (line 1))
+#18 0.827   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#18 0.872 Collecting markupsafe>=2.1.1 (from flask==3.1.3->-r requirements.txt (line 1))
+#18 0.879   Downloading markupsafe-3.0.4-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#18 0.892 Collecting werkzeug>=3.1.0 (from flask==3.1.3->-r requirements.txt (line 1))
+#18 0.898   Downloading werkzeug-3.1.9-py3-none-any.whl.metadata (4.1 kB)
+#18 0.990 Collecting psycopg-binary==3.3.6 (from psycopg[binary]==3.3.6->-r requirements.txt (line 3))
+#18 1.000   Downloading psycopg_binary-3.3.6-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.7 kB)
+#18 1.008 Downloading flask-3.1.3-py3-none-any.whl (103 kB)
+#18 1.021 Downloading gunicorn-26.2.0-py3-none-any.whl (228 kB)
+#18 1.040 Downloading psycopg-3.3.6-py3-none-any.whl (215 kB)
+#18 1.057 Downloading psycopg_binary-3.3.6-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.2 MB)
+#18 1.286    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.2/5.2 MB 22.7 MB/s  0:00:00
+#18 1.294 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#18 1.302 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#18 1.323 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#18 1.330 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#18 1.344 Downloading markupsafe-3.0.4-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (23 kB)
+#18 1.353 Downloading werkzeug-3.1.9-py3-none-any.whl (228 kB)
+#18 1.402 Installing collected packages: psycopg-binary, psycopg, markupsafe, itsdangerous, gunicorn, click, blinker, werkzeug, jinja2, flask
+#18 2.104 
+#18 2.105 Successfully installed blinker-1.9.0 click-8.5.0 flask-3.1.3 gunicorn-26.2.0 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.4 psycopg-3.3.6 psycopg-binary-3.3.6 werkzeug-3.1.9
+#18 DONE 2.2s
+
+#19 [api stage-1 2/5] COPY --from=builder /opt/venv /opt/venv
+#19 DONE 0.2s
+
+#20 [api stage-1 3/5] WORKDIR /app
+#20 DONE 0.1s
+
+#21 [api stage-1 4/5] COPY app.py .
+#21 DONE 0.0s
+
+#22 [api stage-1 5/5] RUN useradd --uid 10001 --no-create-home --shell /usr/sbin/nologin app
+#22 DONE 0.3s
+
+#23 [api] exporting to image
+#23 exporting layers 1.2s done
+#23 exporting manifest sha256:2373060323a3093a78b4aabfd8801754b47da7839ff3df57960888063e2effa6 0.0s done
+#23 exporting config sha256:84a53dcc1c858073c0d01b8a99603254d85e604feb6d8e5c36f7d2c2bbaf8072 0.0s done
+#23 exporting attestation manifest sha256:d60e03d13452a1bf60417dcad2f55e5bb560f0ac4986921cea8369b892c1a3ec 0.0s done
+#23 exporting manifest list sha256:861de59365732db0a2f3baee6269737006923fa888005f165a0f1343bd090e0e 0.0s done
+#23 naming to docker.io/docker-from-zero/api:1.0.0 done
+#23 unpacking to docker.io/docker-from-zero/api:1.0.0
+#23 unpacking to docker.io/docker-from-zero/api:1.0.0 0.4s done
+#23 DONE 1.7s
+
+#24 [api] resolving provenance for metadata file
+#24 DONE 0.0s
+ Image docker-from-zero/web:1.0.0 Built 
+ Image docker-from-zero/api:1.0.0 Built 
+# exit 0

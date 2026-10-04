@@ -1,0 +1,7 @@
+docker compose ps
+---
+NAME             IMAGE                        COMMAND                  SERVICE   CREATED          STATUS                                     PORTS
+capstone-api-1   docker-from-zero/api:1.0.0   "gunicorn --bind 0.0…"   api       13 seconds ago   Up 6 seconds (healthy)                     5000/tcp
+capstone-db-1    postgres:18-alpine           "docker-entrypoint.s…"   db        13 seconds ago   Up 12 seconds (healthy)                    5432/tcp
+capstone-web-1   docker-from-zero/web:1.0.0   "/docker-entrypoint.…"   web       13 seconds ago   Up Less than a second (health: starting)   0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+# exit 0

@@ -1,0 +1,4 @@
+docker exec small whoami
+---
+appuser
+# exit 0

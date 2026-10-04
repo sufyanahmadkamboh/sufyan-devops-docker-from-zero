@@ -1,0 +1,4 @@
+docker tag simple-app:1.0 localhost:5000/simple-app:1.0
+---
+
+# exit 0

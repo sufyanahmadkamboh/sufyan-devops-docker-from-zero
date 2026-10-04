@@ -1,0 +1,4 @@
+docker inspect ts03-api-1 --format '{{range $name, $net := .NetworkSettings.Networks}}{{$name}} {{end}}'
+---
+ts03_backend 
+# exit 0

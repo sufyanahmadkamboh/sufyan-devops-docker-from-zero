@@ -47,19 +47,19 @@ You see `200`, `200` and `404`.
 Docker collects everything the main process writes to **standard output** and **standard error**. The official nginx
 image sends its access log to stdout and its error log to stderr, so `docker logs` shows both.
 
-<!-- test: output=tail:6; contains=GET -->
+<!-- test: retry=15; output=tail:6; contains=GET -->
 ```bash
 docker logs web
 ```
 
 ```text
 ...
-2026/10/04 04:34:16 [notice] 1#1: start worker process 42
-2026/10/04 04:34:16 [notice] 1#1: start worker process 43
-172.18.0.1 - - [04/Oct/2026:04:34:16 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
-172.18.0.1 - - [04/Oct/2026:04:34:16 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
-2026/10/04 04:34:16 [error] 33#33: *3 open() "/usr/share/nginx/html/does-not-exist" failed (2: No such file or directory), client: 172.18.0.1, server: localhost, request: "GET /does-not-exist HTTP/1.1", host: "localhost:8080"
-172.18.0.1 - - [04/Oct/2026:04:34:16 +0000] "GET /does-not-exist HTTP/1.1" 404 153 "-" "curl/8.19.0" "-"
+2026/10/04 05:17:21 [notice] 1#1: start worker process 42
+2026/10/04 05:17:21 [notice] 1#1: start worker process 43
+172.18.0.1 - - [04/Oct/2026:05:17:21 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
+172.18.0.1 - - [04/Oct/2026:05:17:21 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
+2026/10/04 05:17:21 [error] 33#33: *3 open() "/usr/share/nginx/html/does-not-exist" failed (2: No such file or directory), client: 172.18.0.1, server: localhost, request: "GET /does-not-exist HTTP/1.1", host: "localhost:8080"
+172.18.0.1 - - [04/Oct/2026:05:17:21 +0000] "GET /does-not-exist HTTP/1.1" 404 153 "-" "curl/8.19.0" "-"
 ```
 
 At the top: nginx's start-up messages. At the bottom: one line per request, with the client address, the path and
@@ -67,14 +67,14 @@ the status code (`200`, `404`), and an error line explaining why `/does-not-exis
 
 Real containers produce thousands of lines. Narrow it down:
 
-<!-- test: output; contains=does-not-exist -->
+<!-- test: retry=15; output; contains=does-not-exist -->
 ```bash
 docker logs --tail 2 web
 ```
 
 ```text
-2026/10/04 04:34:16 [error] 33#33: *3 open() "/usr/share/nginx/html/does-not-exist" failed (2: No such file or directory), client: 172.18.0.1, server: localhost, request: "GET /does-not-exist HTTP/1.1", host: "localhost:8080"
-172.18.0.1 - - [04/Oct/2026:04:34:16 +0000] "GET /does-not-exist HTTP/1.1" 404 153 "-" "curl/8.19.0" "-"
+2026/10/04 05:17:21 [error] 33#33: *3 open() "/usr/share/nginx/html/does-not-exist" failed (2: No such file or directory), client: 172.18.0.1, server: localhost, request: "GET /does-not-exist HTTP/1.1", host: "localhost:8080"
+172.18.0.1 - - [04/Oct/2026:05:17:21 +0000] "GET /does-not-exist HTTP/1.1" 404 153 "-" "curl/8.19.0" "-"
 ```
 
 <!-- test: output=tail:3 -->
@@ -84,9 +84,9 @@ docker logs --since 5m -t web
 
 ```text
 ...
-2026-10-04T04:34:16.302700973Z 172.18.0.1 - - [04/Oct/2026:04:34:16 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
-2026-10-04T04:34:16.341682955Z 2026/10/04 04:34:16 [error] 33#33: *3 open() "/usr/share/nginx/html/does-not-exist" failed (2: No such file or directory), client: 172.18.0.1, server: localhost, request: "GET /does-not-exist HTTP/1.1", host: "localhost:8080"
-2026-10-04T04:34:16.341708450Z 172.18.0.1 - - [04/Oct/2026:04:34:16 +0000] "GET /does-not-exist HTTP/1.1" 404 153 "-" "curl/8.19.0" "-"
+2026-10-04T05:17:21.780941908Z 172.18.0.1 - - [04/Oct/2026:05:17:21 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
+2026-10-04T05:17:21.821888145Z 2026/10/04 05:17:21 [error] 33#33: *3 open() "/usr/share/nginx/html/does-not-exist" failed (2: No such file or directory), client: 172.18.0.1, server: localhost, request: "GET /does-not-exist HTTP/1.1", host: "localhost:8080"
+2026-10-04T05:17:21.821932215Z 172.18.0.1 - - [04/Oct/2026:05:17:21 +0000] "GET /does-not-exist HTTP/1.1" 404 153 "-" "curl/8.19.0" "-"
 ```
 
 - `--tail 2`: only the last 2 lines
@@ -117,8 +117,8 @@ docker inspect web
 ```text
 [
     {
-        "Id": "47ae4aa7ed69bbf3e4e5bc2a72109e0dae219379ad30c63777d3cd326226e8f7",
-        "Created": "2026-10-04T04:34:15.820394305Z",
+        "Id": "5588460359f0eb31454845a4f2591312dfc8807202d0b8463311247b2ecfea4f",
+        "Created": "2026-10-04T05:17:21.224843442Z",
         "Path": "/docker-entrypoint.sh",
         "Args": [
             "nginx",
@@ -132,7 +132,7 @@ docker inspect web
             "Restarting": false,
             "OOMKilled": false,
             "Dead": false,
-            "Pid": 1630259,
+            "Pid": 1713482,
             "ExitCode": 0,
             "Error": "",
 ...
@@ -223,7 +223,7 @@ docker inspect --format 'status={{.State.Status}} started={{.State.StartedAt}} r
 ```
 
 ```text
-status=running started=2026-10-04T04:34:15.936854067Z restarts=0
+status=running started=2026-10-04T05:17:21.361715297Z restarts=0
 ```
 
 > PowerShell users: the single quotes work the same way there. In Windows `cmd.exe`, use double quotes around the
@@ -241,7 +241,7 @@ docker stats --no-stream
 
 ```text
 CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O     PIDS
-47ae4aa7ed69   web       0.00%     11.69MiB / 15.35GiB   0.07%     3.39kB / 3.69kB   0B / 8.19kB   15
+5588460359f0   web       0.00%     11.63MiB / 15.35GiB   0.07%     3.39kB / 3.69kB   0B / 8.19kB   15
 ```
 
 The columns:
@@ -271,21 +271,21 @@ docker top web
 
 ```text
 UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
-root                1630259             1630236             0                   04:34               ?                   00:00:00            nginx: master process nginx -g daemon off;
-statd               1630312             1630259             0                   04:34               ?                   00:00:00            nginx: worker process
-statd               1630313             1630259             0                   04:34               ?                   00:00:00            nginx: worker process
-statd               1630314             1630259             0                   04:34               ?                   00:00:00            nginx: worker process
-statd               1630315             1630259             0                   04:34               ?                   00:00:00            nginx: worker process
-statd               1630316             1630259             0                   04:34               ?                   00:00:00            nginx: worker process
-statd               1630317             1630259             0                   04:34               ?                   00:00:00            nginx: worker process
-statd               1630318             1630259             0                   04:34               ?                   00:00:00            nginx: worker process
-statd               1630319             1630259             0                   04:34               ?                   00:00:00            nginx: worker process
-statd               1630320             1630259             0                   04:34               ?                   00:00:00            nginx: worker process
-statd               1630321             1630259             0                   04:34               ?                   00:00:00            nginx: worker process
-statd               1630322             1630259             0                   04:34               ?                   00:00:00            nginx: worker process
-statd               1630323             1630259             0                   04:34               ?                   00:00:00            nginx: worker process
-statd               1630324             1630259             0                   04:34               ?                   00:00:00            nginx: worker process
-statd               1630325             1630259             0                   04:34               ?                   00:00:00            nginx: worker process
+root                1713482             1713459             0                   05:17               ?                   00:00:00            nginx: master process nginx -g daemon off;
+statd               1713536             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713537             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713538             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713539             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713540             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713541             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713542             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713543             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713544             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713545             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713546             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713547             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713548             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
+statd               1713549             1713482             0                   05:17               ?                   00:00:00            nginx: worker process
 ```
 
 One nginx **master** process (PID 1 inside the container, the main process) and its **worker** processes. The PIDs
@@ -307,7 +307,7 @@ docker stats --no-stream limited
 
 ```text
 CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT   MEM %     NET I/O      BLOCK I/O     PIDS
-4e8ceaa51f88   limited   0.00%     11.56MiB / 256MiB   4.52%     910B / 84B   0B / 8.19kB   15
+ad56d89dcee8   limited   0.00%     11.52MiB / 256MiB   4.50%     690B / 84B   0B / 8.19kB   15
 ```
 
 The `LIMIT` column now says `256MiB` instead of the whole machine. Docker stores the limits in the container's
@@ -339,7 +339,7 @@ docker stats --no-stream busy
 
 ```text
 CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT   MEM %     NET I/O       BLOCK I/O   PIDS
-efff12ae0041   busy      50.67%    444KiB / 15.35GiB   0.00%     872B / 126B   0B / 0B     1
+958e3fe2d3fa   busy      49.54%    444KiB / 15.35GiB   0.00%     914B / 126B   0B / 0B     1
 ```
 
 The `CPU %` column stays around 50 %: the loop wants more, Docker does not give it more. Stop it, it is just burning
@@ -357,8 +357,11 @@ container may only use 64 MiB. Don't fix it yet, we broke it on purpose.
 
 <!-- test: fail; timeout=600 -->
 ```bash
-docker run --name oom --memory=64m python:3.14-slim python -c "x = bytearray(256*1024*1024)"
+docker run --name oom --memory=64m --memory-swap=64m python:3.14-slim python -c "x = bytearray(256*1024*1024)"
 ```
+
+> `--memory-swap=64m` (the same value as `--memory`) means "no swap on top". Without it, on a machine with swap
+> the container may move memory to disk instead of being stopped, and the demo just runs slowly.
 
 The command ends without any Python error message. Check the exit status your shell received:
 
@@ -381,8 +384,8 @@ docker ps -a --filter name=oom
 ```
 
 ```text
-CONTAINER ID   IMAGE              COMMAND                  CREATED                  STATUS                                PORTS     NAMES
-3896f09a3fe8   python:3.14-slim   "python -c 'x = byte…"   Less than a second ago   Exited (137) Less than a second ago             oom
+CONTAINER ID   IMAGE              COMMAND                  CREATED        STATUS                                PORTS     NAMES
+e1032bf46e06   python:3.14-slim   "python -c 'x = byte…"   1 second ago   Exited (137) Less than a second ago             oom
 ```
 
 `Exited (137)`. Exit codes above 128 mean "killed by a signal": 137 − 128 = 9, which is `SIGKILL`, a kill that the

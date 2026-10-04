@@ -1,0 +1,4 @@
+docker ps -a --filter name=sleeper --format '{{.Names}}: {{.Status}}'
+---
+sleeper: Exited (0) 2 seconds ago
+# exit 0

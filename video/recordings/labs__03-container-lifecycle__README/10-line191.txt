@@ -1,0 +1,5 @@
+docker run --rm alpine:3.24 ps
+---
+PID   USER     TIME  COMMAND
+    1 root      0:00 ps
+# exit 0

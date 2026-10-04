@@ -1,0 +1,4 @@
+docker ps -a --format '{{.Names}}: {{.Status}}'
+---
+web: Exited (0) Less than a second ago
+# exit 0

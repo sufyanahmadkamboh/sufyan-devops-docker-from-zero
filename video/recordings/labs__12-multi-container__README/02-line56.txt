@@ -1,0 +1,8 @@
+docker images --filter reference='board-*'
+---
+IMAGE              ID             DISK USAGE   CONTENT SIZE   EXTRA
+board-api:1.0      0d4689443adb        243MB         58.5MB        
+board-api:latest   cb22e09bad85        243MB         58.5MB        
+board-web:1.0      c13837362034       92.8MB         26.1MB        
+board-web:latest   203565b63fdf       92.8MB         26.1MB        
+# exit 0

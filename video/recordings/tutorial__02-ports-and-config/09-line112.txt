@@ -1,0 +1,4 @@
+curl -s --max-time 3 http://localhost:8082
+---
+
+# exit 52

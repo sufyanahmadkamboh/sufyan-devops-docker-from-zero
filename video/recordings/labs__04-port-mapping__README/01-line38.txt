@@ -1,0 +1,5 @@
+cd labs/04-port-mapping
+docker run -d --name hidden nginx:1.30-alpine
+---
+255d8c3c8046816ef1155840b078714dd98f2072ca8e97b93e43bfacbc5b74ec
+# exit 0

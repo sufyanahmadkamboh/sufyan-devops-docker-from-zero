@@ -1,0 +1,4 @@
+docker logs oom
+---
+
+# exit 0

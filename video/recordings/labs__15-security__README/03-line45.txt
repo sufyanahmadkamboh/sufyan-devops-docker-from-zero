@@ -1,0 +1,6 @@
+docker run --rm simple-app:root whoami
+docker run --rm simple-app:root id
+---
+root
+uid=0(root) gid=0(root) groups=0(root)
+# exit 0

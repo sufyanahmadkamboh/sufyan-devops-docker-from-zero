@@ -1,0 +1,4 @@
+docker inspect sleeper --format 'status={{.State.Status}} exit code={{.State.ExitCode}} finished={{.State.FinishedAt}}'
+---
+status=exited exit code=0 finished=2026-10-04T04:52:14.745890497Z
+# exit 0

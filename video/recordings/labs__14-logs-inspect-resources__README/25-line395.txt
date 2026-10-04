@@ -1,0 +1,4 @@
+docker inspect --format 'OOMKilled={{.State.OOMKilled}} exit={{.State.ExitCode}} limit={{.HostConfig.Memory}}' oom
+---
+OOMKilled=true exit=137 limit=67108864
+# exit 0

@@ -1,0 +1,9 @@
+   ls
+---
+Dockerfile
+app.py
+dockerfile-steps
+junk
+optimization
+requirements.txt
+# exit 0

@@ -1,0 +1,4 @@
+docker run --rm simple-app:multistage which gcc
+---
+
+# exit 1

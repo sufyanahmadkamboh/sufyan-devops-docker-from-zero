@@ -1,0 +1,6 @@
+   docker exec web ls -la /usr/share/nginx/html
+---
+total 4
+drwxrwxrwx    1 root     root          4096 Oct  4 04:53 .
+drwxr-xr-x    3 root     root          4096 Sep 22 21:19 ..
+# exit 0

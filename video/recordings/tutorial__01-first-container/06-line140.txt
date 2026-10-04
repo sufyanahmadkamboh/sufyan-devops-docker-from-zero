@@ -1,0 +1,7 @@
+docker stop web
+docker ps -a --filter name=web
+---
+web
+CONTAINER ID   IMAGE               COMMAND                  CREATED        STATUS                              PORTS     NAMES
+1e68f2421fc3   nginx:1.30-alpine   "/docker-entrypoint.…"   1 second ago   Exited (0) Less than a second ago             web
+# exit 0

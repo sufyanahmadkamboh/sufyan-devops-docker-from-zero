@@ -1,0 +1,12 @@
+docker run -d --name sleeper alpine:3.24 sleep 5
+docker ps --filter name=sleeper --format '{{.Names}}: {{.Status}}'
+---
+Unable to find image 'alpine:3.24' locally
+3.24: Pulling from library/alpine
+6d0606d1815c: Download complete
+797dd00a0fc7: Download complete
+Digest: sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6
+Status: Downloaded newer image for alpine:3.24
+1f7b68b051f47968047daeb1fa39ff71869ea2cc250c017160077f84877c9b84
+sleeper: Up Less than a second
+# exit 0

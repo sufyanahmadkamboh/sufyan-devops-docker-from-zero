@@ -1,0 +1,9 @@
+docker inspect ts06-api-1 --format '{{range .Config.Env}}{{println .}}{{end}}'
+---
+DB_NAME=board
+DB_USER=board
+DB_HOST=db
+PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PYTHON_VERSION=3.14.8
+PYTHON_SHA256=c2215904f02b175596dc49351585104f4bc20341e1c47378b26a2c274360ce73
+# exit 0

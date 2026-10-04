@@ -70,10 +70,10 @@ docker build -f optimization/fat.Dockerfile -t simple-app:fat .
 
 ```text
 ...
-#11 unpacking to docker.io/library/simple-app:fat 0.9s done
-#11 DONE 3.4s
+#10 unpacking to docker.io/library/simple-app:fat 0.0s done
+#10 DONE 0.1s
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/nfbyg924wexhm1j8vqxyg43bv
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/y6j862k2of9x4bhn6f2lfjyva
 ```
 
 <!-- test: timeout=600; output=tail:4 -->
@@ -86,7 +86,7 @@ docker build -t simple-app:slim .
 #11 unpacking to docker.io/library/simple-app:slim done
 #11 DONE 0.1s
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/mpa8j2x5z7qsk4q84nbj12rgo
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/3h1zkvf7dnptw3328mqt374y4
 ```
 
 <!-- test: timeout=900; output=tail:4 -->
@@ -96,10 +96,10 @@ docker build -f optimization/multistage.Dockerfile -t simple-app:multistage .
 
 ```text
 ...
-#14 unpacking to docker.io/library/simple-app:multistage 0.3s done
-#14 DONE 1.1s
+#14 unpacking to docker.io/library/simple-app:multistage done
+#14 DONE 0.1s
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/oy9tm9qhtcbreflt6qpej9kg8
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/mb025ujmnt05qtyqwfza3cap2
 ```
 
 ## Step 3 · Compare the sizes
@@ -110,16 +110,17 @@ docker images simple-app
 ```
 
 ```text
-WARNING: This output is designed for human readability. For machine-readable output, please use --format.
 IMAGE                   ID             DISK USAGE   CONTENT SIZE   EXTRA
-simple-app:1.0          99fca8fc867b        212MB         51.9MB        
-simple-app:fat          aef00de3ea70       1.75GB          454MB        
-simple-app:fixed        18b09356d161        212MB         51.9MB        
-simple-app:multistage   f6c6f818fa19        108MB         26.1MB        
-simple-app:slim         8ece4caa4c45        212MB         51.9MB        
-simple-app:step1        c28c9280bf77        189MB         46.5MB        
-simple-app:step2        85904782ffb9        189MB         46.5MB        
-simple-app:step4        e0d9c69ee329        212MB         51.9MB        
+simple-app:1.0          5a064677562f        212MB         51.9MB        
+simple-app:clean        614749901fce        189MB         46.5MB        
+simple-app:fat          2d059f7b0d53       1.75GB          454MB        
+simple-app:fixed        794eb244cb37        212MB         51.9MB        
+simple-app:leaky        06809757035e        239MB         46.5MB        
+simple-app:multistage   2f2a9a504e34        108MB         26.1MB        
+simple-app:slim         3396610b8301        212MB         51.9MB        
+simple-app:step1        f3b879a66ba5        189MB         46.5MB        
+simple-app:step2        0709c7207019        189MB         46.5MB        
+simple-app:step4        ead82f948cbf        212MB         51.9MB        
 ```
 
 Look at the `DISK USAGE` column (Docker 29 and newer; older versions call it `SIZE`). `CONTENT SIZE` is the compressed download size. Same
@@ -138,18 +139,18 @@ docker history simple-app:fat
 ```
 
 ```text
-IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
-aef00de3ea70   22 seconds ago   CMD ["python" "app.py"]                         0B        buildkit.dockerfile.v0
-<missing>      22 seconds ago   RUN /bin/sh -c pip install -r requirements.t…   18.4MB    buildkit.dockerfile.v0
-<missing>      25 seconds ago   COPY . . # buildkit                             16.4kB    buildkit.dockerfile.v0
-<missing>      25 seconds ago   WORKDIR /app                                    8.19kB    buildkit.dockerfile.v0
-<missing>      25 seconds ago   RUN /bin/sh -c apt-get update && apt-get ins…   74.5MB    buildkit.dockerfile.v0
-<missing>      2 days ago       CMD ["python3"]                                 0B        buildkit.dockerfile.v0
-<missing>      2 days ago       RUN /bin/sh -c set -eux;  for src in idle3 p…   16.4kB    buildkit.dockerfile.v0
-<missing>      2 days ago       RUN /bin/sh -c set -eux;   savedAptMark="$(a…   83.3MB    buildkit.dockerfile.v0
-<missing>      2 days ago       ENV PYTHON_SHA256=c2215904f02b175596dc493515…   0B        buildkit.dockerfile.v0
-<missing>      2 days ago       ENV PYTHON_VERSION=3.14.8                       0B        buildkit.dockerfile.v0
-<missing>      2 days ago       RUN /bin/sh -c set -eux;  apt-get update;  a…   19.9MB    buildkit.dockerfile.v0
+IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
+2d059f7b0d53   8 minutes ago   CMD ["python" "app.py"]                         0B        buildkit.dockerfile.v0
+<missing>      8 minutes ago   RUN /bin/sh -c pip install -r requirements.t…   18.4MB    buildkit.dockerfile.v0
+<missing>      8 minutes ago   COPY . . # buildkit                             16.4kB    buildkit.dockerfile.v0
+<missing>      8 minutes ago   WORKDIR /app                                    8.19kB    buildkit.dockerfile.v0
+<missing>      8 minutes ago   RUN /bin/sh -c apt-get update && apt-get ins…   74.5MB    buildkit.dockerfile.v0
+<missing>      2 days ago      CMD ["python3"]                                 0B        buildkit.dockerfile.v0
+<missing>      2 days ago      RUN /bin/sh -c set -eux;  for src in idle3 p…   16.4kB    buildkit.dockerfile.v0
+<missing>      2 days ago      RUN /bin/sh -c set -eux;   savedAptMark="$(a…   83.3MB    buildkit.dockerfile.v0
+<missing>      2 days ago      ENV PYTHON_SHA256=c2215904f02b175596dc493515…   0B        buildkit.dockerfile.v0
+<missing>      2 days ago      ENV PYTHON_VERSION=3.14.8                       0B        buildkit.dockerfile.v0
+<missing>      2 days ago      RUN /bin/sh -c set -eux;  apt-get update;  a…   19.9MB    buildkit.dockerfile.v0
 ...
 ```
 
@@ -251,7 +252,7 @@ curl -s http://localhost:5000/
 ```text
 Hello from simple-app!
 environment: production
-container hostname: 0409b71667fc
+container hostname: 573bd5ffe3d7
 ```
 
 <!-- test: contains=appuser -->
@@ -391,18 +392,19 @@ docker images simple-app
 ```
 
 ```text
-WARNING: This output is designed for human readability. For machine-readable output, please use --format.
 IMAGE                   ID             DISK USAGE   CONTENT SIZE   EXTRA
-simple-app:1.0          99fca8fc867b        212MB         51.9MB        
-simple-app:alpine       530cbf450a8c        104MB         25.8MB        
-simple-app:broken       ae8091872455         82MB         20.4MB        
-simple-app:fat          aef00de3ea70       1.75GB          454MB        
-simple-app:fixed        18b09356d161        212MB         51.9MB        
-simple-app:multistage   f6c6f818fa19        108MB         26.1MB   U    
-simple-app:slim         8ece4caa4c45        212MB         51.9MB        
-simple-app:step1        c28c9280bf77        189MB         46.5MB        
-simple-app:step2        85904782ffb9        189MB         46.5MB        
-simple-app:step4        e0d9c69ee329        212MB         51.9MB        
+simple-app:1.0          5a064677562f        212MB         51.9MB        
+simple-app:alpine       27b710f61a83        104MB         25.8MB        
+simple-app:broken       66c35bd0d8bc         82MB         20.4MB        
+simple-app:clean        614749901fce        189MB         46.5MB        
+simple-app:fat          2d059f7b0d53       1.75GB          454MB        
+simple-app:fixed        794eb244cb37        212MB         51.9MB        
+simple-app:leaky        06809757035e        239MB         46.5MB        
+simple-app:multistage   2f2a9a504e34        108MB         26.1MB   U    
+simple-app:slim         3396610b8301        212MB         51.9MB        
+simple-app:step1        f3b879a66ba5        189MB         46.5MB        
+simple-app:step2        0709c7207019        189MB         46.5MB        
+simple-app:step4        ead82f948cbf        212MB         51.9MB        
 ```
 
 Look at the two numbers. The difference is small, and it can go either way: Flask needs no compiler, so the builder

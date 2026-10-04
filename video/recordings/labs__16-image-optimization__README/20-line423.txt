@@ -1,0 +1,16 @@
+docker rm -f small
+docker rmi simple-app:fat simple-app:slim simple-app:multistage simple-app:broken simple-app:alpine 2>/dev/null || true
+cd ../..
+---
+small
+Untagged: simple-app:fat
+Deleted: sha256:2d059f7b0d53f53b9d8b6296cf36d4a33ef6b36e1bb0799a6e4ef5a866585388
+Untagged: simple-app:slim
+Deleted: sha256:3396610b83017966a1a233eddcb832e60ccffa00932f707eed16a9c634b35f71
+Untagged: simple-app:multistage
+Deleted: sha256:2f2a9a504e347711171df9e9e2187ed77716cb7dfb02bc4ba3cefd24403f754f
+Untagged: simple-app:broken
+Deleted: sha256:66c35bd0d8bc51a21207b41d3c620bf5e7184f7d470ca7fd076b123796ef1781
+Untagged: simple-app:alpine
+Deleted: sha256:27b710f61a83a87d49533ae68166810905b2fcdc864f97e881983b861856e75c
+# exit 0

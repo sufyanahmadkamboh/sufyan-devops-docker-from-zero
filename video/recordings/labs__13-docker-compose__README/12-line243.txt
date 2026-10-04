@@ -1,0 +1,18 @@
+docker compose logs --tail 5
+---
+db-1   | 2026-10-04 05:16:50.262 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+db-1   | 2026-10-04 05:16:50.262 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+db-1   | 2026-10-04 05:16:50.267 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db-1   | 2026-10-04 05:16:50.272 UTC [70] LOG:  database system was shut down at 2026-10-04 05:16:50 UTC
+db-1   | 2026-10-04 05:16:50.277 UTC [1] LOG:  database system is ready to accept connections
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:16:49 +0000] "GET /api/health HTTP/1.1" 503 200 "-" "curl/8.19.0"
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:16:51 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "curl/8.19.0"
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:16:51 +0000] "GET /api/info HTTP/1.1" 200 122 "-" "curl/8.19.0"
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:16:51 +0000] "POST /api/messages HTTP/1.1" 201 39 "-" "curl/8.19.0"
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:16:51 +0000] "GET /api/messages HTTP/1.1" 200 215 "-" "curl/8.19.0"
+web-1  | 172.18.0.1 - - [04/Oct/2026:05:16:49 +0000] "GET /api/health HTTP/1.1" 503 200 "-" "curl/8.19.0" "-"
+web-1  | 172.18.0.1 - - [04/Oct/2026:05:16:51 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "curl/8.19.0" "-"
+web-1  | 172.18.0.1 - - [04/Oct/2026:05:16:51 +0000] "GET /api/info HTTP/1.1" 200 122 "-" "curl/8.19.0" "-"
+web-1  | 172.18.0.1 - - [04/Oct/2026:05:16:51 +0000] "POST /api/messages HTTP/1.1" 201 39 "-" "curl/8.19.0" "-"
+web-1  | 172.18.0.1 - - [04/Oct/2026:05:16:51 +0000] "GET /api/messages HTTP/1.1" 200 215 "-" "curl/8.19.0" "-"
+# exit 0

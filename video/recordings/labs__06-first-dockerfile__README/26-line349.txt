@@ -1,0 +1,4 @@
+docker run -d --name mine -p 5002:5000 -e GREETING="Hi from my first image" simple-app:1.0
+---
+b9940bf2b9695ad890554e2c2754284982ea43ec8b5dda587dfcb7cd118c4ea4
+# exit 0

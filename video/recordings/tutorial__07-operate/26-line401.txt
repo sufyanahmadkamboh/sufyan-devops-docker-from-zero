@@ -1,0 +1,4 @@
+docker inspect oom --format 'OOMKilled={{.State.OOMKilled}} exit={{.State.ExitCode}}'
+---
+OOMKilled=true exit=137
+# exit 0

@@ -47,7 +47,7 @@ Symptom in one sentence: *"Compose said Started, but nothing listens on port 808
 
 **Step 1: which containers are still running?**
 
-<!-- test: output; contains=Exited (1) -->
+<!-- test: retry=20; output; contains=Exited (1) -->
 ```bash
 docker compose ps -a --format 'table {{.Service}}\t{{.Status}}'
 ```
@@ -63,7 +63,7 @@ web       Exited (1) 7 seconds ago
 
 **Step 2: read the web container's logs.**
 
-<!-- test: output=tail:3; contains=host not found in upstream "api" -->
+<!-- test: retry=15; output=tail:3; contains=host not found in upstream "api" -->
 ```bash
 docker compose logs web
 ```
@@ -71,7 +71,7 @@ docker compose logs web
 ```text
 ...
 web-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
-web-1  | 2026/10/04 04:08:52 [emerg] 1#1: host not found in upstream "api" in /etc/nginx/conf.d/default.conf:16
+web-1  | 2026/10/04 04:57:28 [emerg] 1#1: host not found in upstream "api" in /etc/nginx/conf.d/default.conf:16
 web-1  | nginx: [emerg] host not found in upstream "api" in /etc/nginx/conf.d/default.conf:16
 ```
 
@@ -169,7 +169,7 @@ docker compose -f docker-compose.fixed.yml ps -a --format 'table {{.Service}}\t{
 
 ```text
 SERVICE   STATUS
-api       Up 8 seconds
+api       Up 9 seconds
 db        Up 9 seconds
 web       Up 8 seconds
 ```

@@ -1,0 +1,7 @@
+   docker run --name checker -v note:/data alpine:3.24 true
+   docker inspect checker --format '{{json .Mounts}}'
+   docker rm checker
+---
+[{"Type":"volume","Name":"note","Source":"/var/lib/docker/volumes/note/_data","Destination":"/data","Driver":"local","Mode":"z","RW":true,"Propagation":""}]
+checker
+# exit 0

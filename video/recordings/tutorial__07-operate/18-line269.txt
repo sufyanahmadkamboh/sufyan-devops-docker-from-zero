@@ -1,0 +1,4 @@
+docker inspect db --format '{{range .Mounts}}{{.Type}} {{.Name}} -> {{.Destination}}{{end}}'
+---
+volume e744fd3ddffbf3d4023dec0b6405bc874a6edd7e34fd2160e2666c3ca8dbdb76 -> /var/lib/postgresql
+# exit 0

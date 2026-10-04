@@ -1,0 +1,4 @@
+docker inspect web --format '{{json .Mounts}}'
+---
+[]
+# exit 0

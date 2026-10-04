@@ -1,0 +1,4 @@
+docker image inspect postgres:18-alpine --format '{{json .Config.Volumes}}'
+---
+{"/var/lib/postgresql":{}}
+# exit 0

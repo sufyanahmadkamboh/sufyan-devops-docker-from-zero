@@ -1,0 +1,10 @@
+docker rm -f simple
+docker run -d --name simple -p 5000:5000 -e APP_ENV=testing simple-app:step4
+curl -s http://localhost:5000
+---
+simple
+d2b2cd69a03db75aea9b102b9cbf058695c485791ba95c41eaedc692753a4c36
+Hello from simple-app!
+environment: testing
+container hostname: d2b2cd69a03d
+# exit 0

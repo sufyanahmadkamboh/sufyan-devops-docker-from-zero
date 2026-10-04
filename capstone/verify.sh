@@ -5,7 +5,7 @@
 #   ./verify.sh                 checks the running stack
 #   ./verify.sh --persistence   also runs "docker compose down" + "up" and checks the data survived
 set -uo pipefail
-cd "$(dirname "$0")"
+cd "$(dirname "$0")" || exit 1
 # Git Bash on Windows rewrites paths like /app into C:/Program Files/Git/app; turn that off
 export MSYS_NO_PATHCONV=1
 

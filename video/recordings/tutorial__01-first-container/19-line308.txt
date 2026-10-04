@@ -1,0 +1,4 @@
+docker ps -a --format '{{.Names}}'
+---
+
+# exit 0

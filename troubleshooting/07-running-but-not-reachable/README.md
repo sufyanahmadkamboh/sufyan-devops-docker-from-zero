@@ -70,7 +70,7 @@ It answers. So the app itself works. The problem is **between** Docker's port fo
 
 **Step 3: on which address does the app listen?** The app prints it at start-up:
 
-<!-- test: contains=starting on 127.0.0.1:5000 -->
+<!-- test: retry=15; contains=starting on 127.0.0.1:5000 -->
 ```bash
 docker logs simple
 ```
@@ -139,7 +139,7 @@ docker run -d --name simple -p 5000:5000 simple-app:1.0
 curl -s http://localhost:5000
 ```
 
-<!-- test: contains=starting on 0.0.0.0:5000 -->
+<!-- test: retry=15; contains=starting on 0.0.0.0:5000 -->
 ```bash
 docker logs simple
 ```

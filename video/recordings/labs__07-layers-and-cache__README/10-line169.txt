@@ -1,0 +1,55 @@
+docker build -f dockerfile-steps/05.Dockerfile -t simple-app:broken ../..
+---
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from 05.Dockerfile
+#1 DONE 0.0s
+
+#1 [internal] load build definition from 05.Dockerfile
+#1 transferring dockerfile: 340B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14-slim
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 345B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#5 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151 0.0s done
+#5 DONE 0.0s
+
+#6 [4/5] RUN pip install --no-cache-dir -r requirements.txt
+#6 CACHED
+
+#7 [2/5] WORKDIR /app
+#7 CACHED
+
+#8 [5/5] COPY app.py .
+#8 ERROR: failed to calculate checksum of ref 3cd6gxh0d9ods5a51p5kfp9pm::htntei6gdw1ed1rbxsg38dljm: "/app.py": not found
+
+#9 [3/5] COPY requirements.txt .
+#9 ERROR: failed to calculate checksum of ref 3cd6gxh0d9ods5a51p5kfp9pm::htntei6gdw1ed1rbxsg38dljm: "/requirements.txt": not found
+------
+ > [3/5] COPY requirements.txt .:
+------
+------
+ > [5/5] COPY app.py .:
+------
+05.Dockerfile:7
+--------------------
+   5 |     COPY requirements.txt .
+   6 |     RUN pip install --no-cache-dir -r requirements.txt
+   7 | >>> COPY app.py .
+   8 |     ENV APP_ENV=production
+   9 |     EXPOSE 5000
+--------------------
+ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref 3cd6gxh0d9ods5a51p5kfp9pm::htntei6gdw1ed1rbxsg38dljm: "/app.py": not found
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/y48fqz5jcz665ijv2luhrm03v
+# exit 1

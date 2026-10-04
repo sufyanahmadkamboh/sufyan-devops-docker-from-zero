@@ -27,7 +27,7 @@ docker run -d --name web -p 8080:80 nginx:1.30-alpine
 ```
 
 ```text
-aaec89f2e5fc96a07d3694713c0e828992878c0d7e4048ef930240421f313df3
+6906e2f045aebddd3b510c45d01f75b5f865822acb88999372b3a8b429743eaa
 ```
 
 Now make a few requests, so nginx has something to log:
@@ -42,21 +42,21 @@ curl -s -o /dev/null http://localhost:8080/this-page-does-not-exist
 Docker collects everything a container's main process writes to its standard output and standard error. That is
 all `docker logs` shows:
 
-<!-- test: output=tail:8; contains=GET / HTTP; contains=404 -->
+<!-- test: retry=15; output=tail:8; contains=GET / HTTP; contains=404 -->
 ```bash
 docker logs web
 ```
 
 ```text
 ...
-2026/10/04 04:23:46 [notice] 1#1: start worker process 40
-2026/10/04 04:23:46 [notice] 1#1: start worker process 41
-2026/10/04 04:23:46 [notice] 1#1: start worker process 42
-2026/10/04 04:23:46 [notice] 1#1: start worker process 43
-172.17.0.1 - - [04/Oct/2026:04:23:46 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
-172.17.0.1 - - [04/Oct/2026:04:23:46 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
-2026/10/04 04:23:46 [error] 32#32: *3 open() "/usr/share/nginx/html/this-page-does-not-exist" failed (2: No such file or directory), client: 172.17.0.1, server: localhost, request: "GET /this-page-does-not-exist HTTP/1.1", host: "localhost:8080"
-172.17.0.1 - - [04/Oct/2026:04:23:46 +0000] "GET /this-page-does-not-exist HTTP/1.1" 404 153 "-" "curl/8.19.0" "-"
+2026/10/04 05:12:40 [notice] 1#1: start worker process 41
+2026/10/04 05:12:40 [notice] 1#1: start worker process 42
+2026/10/04 05:12:40 [notice] 1#1: start worker process 43
+2026/10/04 05:12:40 [notice] 1#1: start worker process 44
+172.17.0.1 - - [04/Oct/2026:05:12:41 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
+172.17.0.1 - - [04/Oct/2026:05:12:41 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.19.0" "-"
+2026/10/04 05:12:41 [error] 33#33: *3 open() "/usr/share/nginx/html/this-page-does-not-exist" failed (2: No such file or directory), client: 172.17.0.1, server: localhost, request: "GET /this-page-does-not-exist HTTP/1.1", host: "localhost:8080"
+172.17.0.1 - - [04/Oct/2026:05:12:41 +0000] "GET /this-page-does-not-exist HTTP/1.1" 404 153 "-" "curl/8.19.0" "-"
 ```
 
 At the top you see nginx starting up, at the bottom one line per request. Find the line for
@@ -71,8 +71,8 @@ docker logs --tail 2 web
 ```
 
 ```text
-2026/10/04 04:23:46 [error] 32#32: *3 open() "/usr/share/nginx/html/this-page-does-not-exist" failed (2: No such file or directory), client: 172.17.0.1, server: localhost, request: "GET /this-page-does-not-exist HTTP/1.1", host: "localhost:8080"
-172.17.0.1 - - [04/Oct/2026:04:23:46 +0000] "GET /this-page-does-not-exist HTTP/1.1" 404 153 "-" "curl/8.19.0" "-"
+2026/10/04 05:12:41 [error] 33#33: *3 open() "/usr/share/nginx/html/this-page-does-not-exist" failed (2: No such file or directory), client: 172.17.0.1, server: localhost, request: "GET /this-page-does-not-exist HTTP/1.1", host: "localhost:8080"
+172.17.0.1 - - [04/Oct/2026:05:12:41 +0000] "GET /this-page-does-not-exist HTTP/1.1" 404 153 "-" "curl/8.19.0" "-"
 ```
 
 <!-- test: output=head:4 -->
@@ -81,10 +81,10 @@ docker logs --since 5m --timestamps web
 ```
 
 ```text
-2026-10-04T04:23:46.084240929Z /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
-2026-10-04T04:23:46.084277353Z /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
-2026-10-04T04:23:46.085140859Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
-2026-10-04T04:23:46.090909312Z 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+2026-10-04T05:12:40.873130322Z /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+2026-10-04T05:12:40.873166794Z /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+2026-10-04T05:12:40.874107914Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+2026-10-04T05:12:40.883270848Z 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
 ...
 ```
 
@@ -110,7 +110,7 @@ docker run -d --name db postgres:18-alpine
 ```
 
 ```text
-c121a4251ef86d6f5ebe79bc6e7fe87cc45a448177cb792b475003755a6c6199
+a8105a16ac9e56ddf53df977d96c6e71c5703663c20f1486a14db76dcf13554c
 ```
 
 Docker printed a container ID. That only means "the container was created and started". It does **not** mean
@@ -129,20 +129,20 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 Nothing. Before changing anything, let's investigate. Where did it go? `-a` shows stopped containers too:
 
-<!-- test: output; contains=Exited (1) -->
+<!-- test: retry=20; output; contains=Exited (1) -->
 ```bash
 docker ps -a --filter name=db
 ```
 
 ```text
 CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS                     PORTS     NAMES
-c121a4251ef8   postgres:18-alpine   "docker-entrypoint.s…"   5 seconds ago   Exited (1) 5 seconds ago             db
+a8105a16ac9e   postgres:18-alpine   "docker-entrypoint.s…"   6 seconds ago   Exited (1) 5 seconds ago             db
 ```
 
 `Exited (1)`: the main process ended with exit code 1, which by convention means "error". Now the most important
 command in this chapter:
 
-<!-- test: output; contains=superuser password is not specified -->
+<!-- test: retry=15; output; contains=superuser password is not specified -->
 ```bash
 docker logs db
 ```
@@ -177,8 +177,8 @@ docker logs db
 
 ```text
 ...
-2026-10-04 04:23:55.116 UTC [67] LOG:  database system was shut down at 2026-10-04 04:23:54 UTC
-2026-10-04 04:23:55.122 UTC [1] LOG:  database system is ready to accept connections
+2026-10-04 05:12:49.910 UTC [50] LOG:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.002 s, total=0.016 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/1765F90, redo lsn=0/1765F90
+2026-10-04 05:12:49.920 UTC [46] LOG:  database system is shut down
 ```
 
 "database system is ready to accept connections". Observe → investigate → root cause → fix → verify. You will use this
@@ -209,7 +209,7 @@ docker inspect web --format '{{.State.Status}} since {{.State.StartedAt}}'
 ```
 
 ```text
-running since 2026-10-04T04:23:45.922798739Z
+running since 2026-10-04T05:12:40.700137805Z
 ```
 
 **What is the container's IP address?**
@@ -271,7 +271,7 @@ docker inspect db --format '{{range .Mounts}}{{.Type}} {{.Name}} -> {{.Destinati
 ```
 
 ```text
-volume 8c7da169183ec07e02a7c9f968ed669da08c9e816b2e800f69f155b6daf408df -> /var/lib/postgresql
+volume e744fd3ddffbf3d4023dec0b6405bc874a6edd7e34fd2160e2666c3ca8dbdb76 -> /var/lib/postgresql
 ```
 
 An anonymous volume (a long random name) mounted at `/var/lib/postgresql`. We did not ask for it; the image did.
@@ -292,8 +292,8 @@ docker stats --no-stream
 
 ```text
 CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O     PIDS
-fe6bd6061313   db        0.05%     32.54MiB / 15.35GiB   0.21%     872B / 126B       0B / 40.9MB   9
-aaec89f2e5fc   web       0.00%     11.63MiB / 15.35GiB   0.07%     3.07kB / 3.73kB   0B / 12.3kB   15
+7b0ffad33a7f   db        0.07%     32.79MiB / 15.35GiB   0.21%     872B / 126B       0B / 40.9MB   9
+6906e2f045ae   web       0.00%     11.56MiB / 15.35GiB   0.07%     3.07kB / 3.73kB   0B / 12.3kB   15
 ```
 
 How to read the columns:
@@ -316,21 +316,21 @@ docker top web
 
 ```text
 UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
-root                1620088             1620065             0                   04:23               ?                   00:00:00            nginx: master process nginx -g daemon off;
-statd               1620132             1620088             0                   04:23               ?                   00:00:00            nginx: worker process
-statd               1620133             1620088             0                   04:23               ?                   00:00:00            nginx: worker process
-statd               1620134             1620088             0                   04:23               ?                   00:00:00            nginx: worker process
-statd               1620135             1620088             0                   04:23               ?                   00:00:00            nginx: worker process
-statd               1620136             1620088             0                   04:23               ?                   00:00:00            nginx: worker process
-statd               1620137             1620088             0                   04:23               ?                   00:00:00            nginx: worker process
-statd               1620138             1620088             0                   04:23               ?                   00:00:00            nginx: worker process
-statd               1620139             1620088             0                   04:23               ?                   00:00:00            nginx: worker process
-statd               1620140             1620088             0                   04:23               ?                   00:00:00            nginx: worker process
-statd               1620141             1620088             0                   04:23               ?                   00:00:00            nginx: worker process
-statd               1620142             1620088             0                   04:23               ?                   00:00:00            nginx: worker process
-statd               1620143             1620088             0                   04:23               ?                   00:00:00            nginx: worker process
-statd               1620144             1620088             0                   04:23               ?                   00:00:00            nginx: worker process
-statd               1620145             1620088             0                   04:23               ?                   00:00:00            nginx: worker process
+root                1703572             1703550             0                   05:12               ?                   00:00:00            nginx: master process nginx -g daemon off;
+statd               1703617             1703572             0                   05:12               ?                   00:00:00            nginx: worker process
+statd               1703618             1703572             0                   05:12               ?                   00:00:00            nginx: worker process
+statd               1703619             1703572             0                   05:12               ?                   00:00:00            nginx: worker process
+statd               1703620             1703572             0                   05:12               ?                   00:00:00            nginx: worker process
+statd               1703621             1703572             0                   05:12               ?                   00:00:00            nginx: worker process
+statd               1703622             1703572             0                   05:12               ?                   00:00:00            nginx: worker process
+statd               1703623             1703572             0                   05:12               ?                   00:00:00            nginx: worker process
+statd               1703624             1703572             0                   05:12               ?                   00:00:00            nginx: worker process
+statd               1703625             1703572             0                   05:12               ?                   00:00:00            nginx: worker process
+statd               1703626             1703572             0                   05:12               ?                   00:00:00            nginx: worker process
+statd               1703627             1703572             0                   05:12               ?                   00:00:00            nginx: worker process
+statd               1703628             1703572             0                   05:12               ?                   00:00:00            nginx: worker process
+statd               1703629             1703572             0                   05:12               ?                   00:00:00            nginx: worker process
+statd               1703630             1703572             0                   05:12               ?                   00:00:00            nginx: worker process
 ```
 
 One nginx master process and its worker processes. A container is not a virtual machine: it is a group of ordinary
@@ -347,7 +347,7 @@ docker run -d --name limited --memory=256m --cpus=0.5 nginx:1.30-alpine
 ```
 
 ```text
-4645dc0db672a26d408d84ea2b1713ffba57145f8ae5ddc3257d09b8e5b766f6
+79b9dd9b5a71166dceca0352d93a2002a81c1f99515b26d9f928dc457384a8d8
 ```
 
 `--memory=256m`: at most 256 MiB of memory. `--cpus=0.5`: at most half a CPU core. Check the limit in `docker stats`:
@@ -359,7 +359,7 @@ docker stats --no-stream limited
 
 ```text
 CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT   MEM %     NET I/O      BLOCK I/O     PIDS
-4645dc0db672   limited   0.00%     11.48MiB / 256MiB   4.48%     390B / 84B   0B / 8.19kB   15
+79b9dd9b5a71   limited   0.00%     11.52MiB / 256MiB   4.50%     390B / 84B   0B / 8.19kB   15
 ```
 
 The `LIMIT` column now says `256MiB` instead of all your memory. And in `inspect` (in bytes and in billionths of a CPU):
@@ -380,19 +380,22 @@ yet. Watch what happens:
 
 <!-- test: fail; timeout=300 -->
 ```bash
-docker run --name oom --memory=64m python:3.14-slim python -c "x = bytearray(256*1024*1024)"
+docker run --name oom --memory=64m --memory-swap=64m python:3.14-slim python -c "x = bytearray(256*1024*1024)"
 ```
+
+> `--memory-swap=64m` (the same value as `--memory`) means "no swap on top". Without it, on a machine with swap
+> the container may move memory to disk instead of being stopped, and the demo just runs slowly.
 
 No Python error message at all; the command just ends. Investigate. What was the exit code?
 
-<!-- test: output; contains=Exited (137) -->
+<!-- test: retry=20; output; contains=Exited (137) -->
 ```bash
 docker ps -a --filter name=oom
 ```
 
 ```text
-CONTAINER ID   IMAGE              COMMAND                  CREATED                  STATUS                                PORTS     NAMES
-c2bbc0993b86   python:3.14-slim   "python -c 'x = byte…"   Less than a second ago   Exited (137) Less than a second ago             oom
+CONTAINER ID   IMAGE              COMMAND                  CREATED        STATUS                                PORTS     NAMES
+5d7f39f114d5   python:3.14-slim   "python -c 'x = byte…"   1 second ago   Exited (137) Less than a second ago             oom
 ```
 
 `137` = 128 + 9: the process was killed with signal 9 (`SIGKILL`). Who killed it? `inspect` knows:

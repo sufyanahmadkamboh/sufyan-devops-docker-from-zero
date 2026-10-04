@@ -1,0 +1,4 @@
+curl -s http://localhost:8080 | grep Edited
+---
+<p>Edited on my computer, served by the container!</p>
+# exit 0

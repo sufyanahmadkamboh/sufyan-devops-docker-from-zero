@@ -1,0 +1,5 @@
+cd capstone
+cp secrets/db_password.txt.example secrets/db_password.txt
+---
+
+# exit 0

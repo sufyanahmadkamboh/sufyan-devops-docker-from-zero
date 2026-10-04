@@ -1,0 +1,14 @@
+grep -nE "^(FROM|COPY|RUN|USER|HEALTHCHECK|CMD)" app/api/Dockerfile
+---
+4:FROM python:3.14-slim AS builder
+5:RUN python -m venv /opt/venv
+6:COPY requirements.txt .
+7:RUN /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
+10:FROM python:3.14-slim
+11:COPY --from=builder /opt/venv /opt/venv
+16:COPY app.py .
+19:RUN useradd --uid 10001 --no-create-home --shell /usr/sbin/nologin app
+20:USER app
+25:HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 \
+28:CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--preload", "--access-logfile", "-", "app:app"]
+# exit 0

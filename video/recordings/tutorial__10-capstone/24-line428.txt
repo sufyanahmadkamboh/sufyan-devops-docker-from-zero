@@ -1,0 +1,4 @@
+docker inspect capstone-api-1 --format '{{.State.Health.Status}}'
+---
+healthy
+# exit 0

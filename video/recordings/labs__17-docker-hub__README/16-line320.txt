@@ -1,0 +1,110 @@
+docker build -t localhost:5000/simple-app:1.1 -f - . <<'EOF'
+FROM localhost:5000/simple-app:1.0
+ENV GREETING="Hello from version 1.1"
+EOF
+docker push localhost:5000/simple-app:1.1
+docker run -d --name v11 -p 5004:5000 localhost:5000/simple-app:1.1
+---
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 110B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for localhost:5000/simple-app:1.0
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 295B done
+#3 DONE 0.0s
+
+#4 [1/1] FROM localhost:5000/simple-app:1.0@sha256:8e4b2f4b8a3767276532d3dc589d719cd7d3f21eaaf8088ab911a1b608b45a08
+#4 resolve localhost:5000/simple-app:1.0@sha256:8e4b2f4b8a3767276532d3dc589d719cd7d3f21eaaf8088ab911a1b608b45a08 0.0s done
+#4 DONE 0.1s
+
+#5 exporting to image
+#5 exporting layers done
+#5 exporting manifest sha256:9dc4900c1576f6f013ceee983f32770c60ba78280f8f9223b6a9ac0b7b5e0adc 0.0s done
+#5 exporting config sha256:5d04751b1c86f81d70e6c243985ea4c1c8868e29aced321e77de4bb67046ed5c 0.0s done
+#5 exporting attestation manifest sha256:2089f3e6391f4d9501cd57a3f16a0e5330b479d11eeecd216cacad09ad194e3c 0.0s done
+#5 exporting manifest list sha256:17f0622548d8bad873867f6fa711c5fe17f836680f7ca1c84019c740e618b725 0.0s done
+#5 naming to localhost:5000/simple-app:1.1 done
+#5 unpacking to localhost:5000/simple-app:1.1
+#5 unpacking to localhost:5000/simple-app:1.1 done
+#5 DONE 0.1s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/rdw11f3l0ifstydzzwrup4b54
+The push refers to repository [localhost:5000/simple-app]
+c4d667dbb95c: Waiting
+6b37362b3da7: Waiting
+e42bb4d14bbe: Waiting
+c5e6e50697ef: Waiting
+cb3b71641359: Waiting
+c57fc4c5ea60: Waiting
+843a06858f66: Waiting
+1ae2ea666d2d: Waiting
+5efe5024c8f2: Waiting
+fd85d2de73d8: Waiting
+5efe5024c8f2: Waiting
+fd85d2de73d8: Waiting
+c4d667dbb95c: Waiting
+6b37362b3da7: Waiting
+e42bb4d14bbe: Waiting
+c5e6e50697ef: Waiting
+cb3b71641359: Waiting
+c57fc4c5ea60: Waiting
+843a06858f66: Waiting
+1ae2ea666d2d: Waiting
+c5e6e50697ef: Waiting
+cb3b71641359: Waiting
+c57fc4c5ea60: Waiting
+843a06858f66: Waiting
+1ae2ea666d2d: Waiting
+5efe5024c8f2: Waiting
+fd85d2de73d8: Waiting
+c4d667dbb95c: Waiting
+6b37362b3da7: Waiting
+e42bb4d14bbe: Waiting
+e42bb4d14bbe: Waiting
+c5e6e50697ef: Waiting
+cb3b71641359: Waiting
+c57fc4c5ea60: Waiting
+843a06858f66: Waiting
+1ae2ea666d2d: Waiting
+5efe5024c8f2: Waiting
+fd85d2de73d8: Waiting
+c4d667dbb95c: Waiting
+6b37362b3da7: Waiting
+5efe5024c8f2: Waiting
+fd85d2de73d8: Waiting
+c4d667dbb95c: Waiting
+6b37362b3da7: Waiting
+e42bb4d14bbe: Waiting
+c5e6e50697ef: Waiting
+cb3b71641359: Waiting
+c57fc4c5ea60: Waiting
+843a06858f66: Waiting
+1ae2ea666d2d: Waiting
+e42bb4d14bbe: Waiting
+c5e6e50697ef: Waiting
+cb3b71641359: Waiting
+c57fc4c5ea60: Waiting
+843a06858f66: Waiting
+1ae2ea666d2d: Waiting
+5efe5024c8f2: Waiting
+fd85d2de73d8: Waiting
+c4d667dbb95c: Waiting
+6b37362b3da7: Waiting
+c57fc4c5ea60: Layer already exists
+843a06858f66: Layer already exists
+1ae2ea666d2d: Layer already exists
+5efe5024c8f2: Pushed
+fd85d2de73d8: Layer already exists
+c4d667dbb95c: Layer already exists
+6b37362b3da7: Layer already exists
+e42bb4d14bbe: Layer already exists
+c5e6e50697ef: Layer already exists
+cb3b71641359: Layer already exists
+1.1: digest: sha256:17f0622548d8bad873867f6fa711c5fe17f836680f7ca1c84019c740e618b725 size: 856
+e6415414f629c7c32fea2d260588b74302879d9010bc343a046f194240254626
+# exit 0

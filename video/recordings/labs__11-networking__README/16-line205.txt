@@ -1,0 +1,4 @@
+docker network create othernet
+---
+353639fcaffbe3aafda8939e9d95edc7b65b25184ddf7b95f3ea5827501cf3ea
+# exit 0

@@ -82,10 +82,10 @@ docker compose ps
 ```
 
 ```text
-NAME                        IMAGE                     COMMAND                  SERVICE   CREATED        STATUS                  PORTS
-multi-container-app-api-1   multi-container-app-api   "gunicorn --bind 0.0…"   api       1 second ago   Up Less than a second   5000/tcp
-multi-container-app-db-1    postgres:18-alpine        "docker-entrypoint.s…"   db        1 second ago   Up 1 second             5432/tcp
-multi-container-app-web-1   multi-container-app-web   "/docker-entrypoint.…"   web       1 second ago   Up Less than a second   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
+NAME                        IMAGE                     COMMAND                  SERVICE   CREATED         STATUS                  PORTS
+multi-container-app-api-1   multi-container-app-api   "gunicorn --bind 0.0…"   api       2 seconds ago   Up Less than a second   5000/tcp
+multi-container-app-db-1    postgres:18-alpine        "docker-entrypoint.s…"   db        2 seconds ago   Up 1 second             5432/tcp
+multi-container-app-web-1   multi-container-app-web   "/docker-entrypoint.…"   web       2 seconds ago   Up Less than a second   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
 ```
 
 <!-- test: retry=30; contains="database":"ok" -->
@@ -156,11 +156,11 @@ docker compose logs api
 
 ```text
 ...
-api-1  | [2026-10-04 04:17:59 +0000] [1] [INFO] Using worker: sync
-api-1  | [2026-10-04 04:17:59 +0000] [7] [INFO] Booting worker with pid: 7
-api-1  | [2026-10-04 04:17:59 +0000] [8] [INFO] Booting worker with pid: 8
-api-1  | [2026-10-04 04:17:59 +0000] [1] [INFO] Control socket listening at /root/.gunicorn/gunicorn.ctl
-api-1  | 172.18.0.4 - - [04/Oct/2026:04:18:00 +0000] "GET /api/messages HTTP/1.1" 200 205 "-" "curl/8.19.0"
+api-1  | [2026-10-04 05:18:51 +0000] [1] [INFO] Using worker: sync
+api-1  | [2026-10-04 05:18:51 +0000] [7] [INFO] Booting worker with pid: 7
+api-1  | [2026-10-04 05:18:51 +0000] [8] [INFO] Booting worker with pid: 8
+api-1  | [2026-10-04 05:18:51 +0000] [1] [INFO] Control socket listening at /root/.gunicorn/gunicorn.ctl
+api-1  | 172.18.0.4 - - [04/Oct/2026:05:18:51 +0000] "GET /api/messages HTTP/1.1" 200 205 "-" "curl/8.19.0"
 ```
 
 `ps -a` shows stopped containers too (look for `Exited (N)`), and `logs <service>` shows why. Real examples:

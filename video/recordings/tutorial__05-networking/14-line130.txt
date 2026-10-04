@@ -1,0 +1,5 @@
+docker network disconnect labnet client
+docker exec client wget -qO- -T 3 http://web2
+---
+wget: bad address 'web2'
+# exit 1

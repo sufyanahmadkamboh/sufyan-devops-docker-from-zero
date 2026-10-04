@@ -1,0 +1,4 @@
+curl -s http://localhost:8080 | grep '<title>'
+---
+<title>Welcome to nginx!</title>
+# exit 0

@@ -75,7 +75,7 @@ docker history simple-app:step5 --format 'table {{.CreatedBy}}\t{{.Size}}' | hea
 ```
 
 ```text
-sha256:a0693ed05f9d070256afb188da17b6d83e5cf4043b44a4cb3bd31e9b5eb96872
+sha256:bcb05088365fac70886ec410303b7ecf91170caf17f542bd0e8c9b8fab30809c
 CREATED BY                                      SIZE
 CMD ["python" "app.py"]                         0B
 EXPOSE [5000/tcp]                               0B
@@ -103,9 +103,9 @@ docker build --progress=plain -f dockerfile-steps/05.Dockerfile -t simple-app:st
 #3 [internal] load .dockerignore
 #4 [internal] load build context
 #5 [1/5] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
-#6 [2/5] WORKDIR /app
+#6 [3/5] COPY requirements.txt .
 #6 CACHED
-#7 [3/5] COPY requirements.txt .
+#7 [2/5] WORKDIR /app
 #7 CACHED
 #8 [4/5] RUN pip install --no-cache-dir -r requirements.txt
 #8 CACHED
@@ -195,7 +195,7 @@ docker images --format 'table {{.Repository}}\t{{.Size}}' | grep -E 'REPOSITORY|
 ```
 
 ```text
-sha256:5b13fda2eb145ac269f9343cea82cf8d6ead4b18c9ab66c6773ecb8f26b4466a
+sha256:98c74ac70f902fa1225d8408c928da912ce3abeeea3cf120d8f80a4cfbd6e83f
 REPOSITORY                SIZE
 layers-fixed              12.9MB
 layers-trap               63MB

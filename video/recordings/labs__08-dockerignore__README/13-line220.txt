@@ -1,0 +1,5 @@
+cp .dockerignore .dockerignore.backup
+echo "*.txt" >> .dockerignore
+---
+
+# exit 0

@@ -1,0 +1,4 @@
+curl -s http://localhost:8082
+---
+<h1>My own site</h1>
+# exit 0

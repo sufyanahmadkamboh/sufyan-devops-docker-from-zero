@@ -1,0 +1,4 @@
+docker run --rm --name reader -v notes:/data alpine:3.24 cat /data/hello.txt
+---
+Hello from the writer container
+# exit 0

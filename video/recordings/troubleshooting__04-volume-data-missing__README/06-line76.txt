@@ -1,0 +1,7 @@
+docker run --rm -v notes:/data alpine:3.24 ls -la /data
+---
+total 12
+drwxr-xr-x    2 root     root          4096 Oct  4 04:58 .
+drwxr-xr-x    1 root     root          4096 Oct  4 04:58 ..
+-rw-r--r--    1 root     root            18 Oct  4 04:58 todo.txt
+# exit 0

@@ -1,0 +1,49 @@
+docker build -t exits-demo .
+---
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 266B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14-slim
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#4 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#4 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 1.18kB done
+#5 DONE 0.0s
+
+#6 [4/5] RUN pip install --no-cache-dir -r requirements.txt
+#6 CACHED
+
+#7 [2/5] WORKDIR /app
+#7 CACHED
+
+#8 [3/5] COPY requirements.txt .
+#8 CACHED
+
+#9 [5/5] COPY app.py .
+#9 CACHED
+
+#10 exporting to image
+#10 exporting layers done
+#10 exporting manifest sha256:bbcfebf0e1aaf3f9aa04d42871456d38deaaaa9ec0adb2d4965403017ce712d6 done
+#10 exporting config sha256:20aa8c2a9fcef4fa6cb6a0360b17678c5b36997c9185d1acf8b54bb66eba8e1c done
+#10 exporting attestation manifest sha256:f68c531493ca13c541f545f1774d0e678c2a50735e22e9f4cc5ba2bfa29b96e5 0.0s done
+#10 exporting manifest list sha256:4da807c46391eddf39cfad7dde2f09aabc50921f99f3abada8fea2ee685b1f6e 0.0s done
+#10 naming to docker.io/library/exits-demo:latest
+#10 naming to docker.io/library/exits-demo:latest done
+#10 unpacking to docker.io/library/exits-demo:latest done
+#10 DONE 0.1s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/i1f37rx5mwhp7qcki3bmcncc6
+# exit 0

@@ -1,0 +1,4 @@
+docker --version
+---
+Docker version 29.4.3, build 055a478
+# exit 0

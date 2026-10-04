@@ -1,0 +1,4 @@
+docker run --rm --entrypoint echo greeter Bye
+---
+Bye
+# exit 0

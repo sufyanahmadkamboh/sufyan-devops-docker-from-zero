@@ -1,0 +1,4 @@
+docker ps -a --filter name=web --format '{{.Names}}: {{.Status}}'
+---
+web: Exited (1) Less than a second ago
+# exit 0

@@ -30,9 +30,18 @@ docker pull nginx:1.30-alpine
 
 ```text
 1.30-alpine: Pulling from library/nginx
-Digest: sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
-Status: Image is up to date for nginx:1.30-alpine
-docker.io/library/nginx:1.30-alpine
+b27cf3f7c39d: Pulling fs layer
+22e5a8a110ec: Pulling fs layer
+6b4dfb2e8f8a: Pulling fs layer
+b335b7ac3a40: Pulling fs layer
+703c5424632f: Pulling fs layer
+e3320d02d578: Pulling fs layer
+e2de96513ba9: Pulling fs layer
+3d85d110b167: Pulling fs layer
+6b4dfb2e8f8a: Download complete
+b335b7ac3a40: Download complete
+e3320d02d578: Download complete
+...
 ```
 
 Look at the output:
@@ -53,50 +62,9 @@ docker images
 ```
 
 ```text
-IMAGE                                     ID             DISK USAGE   CONTENT SIZE   EXTRA
-alpine:3.24                               294b683cb724         13MB         3.94MB        
-board-api:1.0                             9d6da54368f6        243MB         58.5MB        
-board-api:latest                          4e0d1c0cca1d        243MB         58.5MB        
-board-web:1.0                             37b4d6321a8d       92.8MB         26.1MB        
-board-web:latest                          19d1d8c20748       92.8MB         26.1MB        
-busybox:1.37                              bdf57e528e45       6.77MB         2.22MB        
-docker-from-zero/api:1.0.0                502cd60dc40f        247MB         58.8MB        
-docker-from-zero/web:1.0.0                0da114ad2400       81.5MB         23.1MB        
-greeter:latest                            58e5e5a1bb70       12.9MB         3.85MB        
-hello-world:latest                        5e2309035332       25.9kB         9.49kB        
-jitesoft/tesseract-ocr:latest             23fbc1f29a6d        401MB          129MB        
-linuxserver/ffmpeg:latest                 a7182d4fe498       1.09GB          268MB        
-localhost:5000/simple-app:1.0             8127abfae118        212MB         51.9MB        
-multi-container-app-api:latest            401160b8cb5d        243MB         58.5MB        
-multi-container-app-web:latest            3594f2d772f2       92.8MB         26.1MB        
-nginx:1.30-alpine                         0985e772fb9f       93.6MB           27MB        
-postgres:18-alpine                        77f585114c32        433MB          121MB        
-python:3.14-slim                          c3e521df8b2b        407MB         95.8MB        
-registry:3                                ddf754342cfc       86.9MB         20.7MB        
-simple-app:clean                          c21968dc4b3e        189MB         46.5MB        
-simple-app:fat                            5a68be4c0d32       1.75GB          454MB        
-simple-app:fat-nocache                    40b870a8fffa       1.74GB          453MB        
-simple-app:fixed                          18b09356d161        212MB         51.9MB        
-simple-app:leaky                          8ed0a4b5ade0        239MB         46.5MB        
-simple-app:mine                           99343326e3bc        212MB         51.9MB        
-simple-app:multistage                     986725ef8115        108MB         26.1MB        
-simple-app:root                           8ce7b2309a9f        212MB         51.9MB        
-simple-app:slim                           929c66f80e88        212MB         51.9MB        
-simple-app:step1                          1988bf99972f        189MB         46.5MB        
-simple-app:step2                          5e828c81d314        189MB         46.5MB        
-simple-app:step3                          adc2c758689e        212MB         51.9MB        
-simple-app:step4                          5d3c5c8176ee        212MB         51.9MB        
-simple-app:step5                          229e09ab9ddc        212MB         51.9MB        
-sufibaba6629/docker-from-zero-api:1.0.0   bd11d7028e0b        308MB          120MB        
-sufibaba6629/docker-from-zero-web:1.0.0   d23832ee9579        105MB         46.2MB        
-ts01:fixed                                576316c03eb6        212MB         51.9MB        
-ts01:latest                               558ecda8ad01        212MB         51.9MB        
-ts03-api:latest                           1b1358270354        243MB         58.5MB        
-ts03-web:latest                           b65ceefaa602       92.8MB         26.1MB        
-ts06-api:latest                           ebb389133ca9        243MB         58.5MB        
-ts06-web:latest                           db68da83a171       92.8MB         26.1MB        
-typo:latest                               812ef2b3da18        189MB         46.5MB        
-ubuntu:26.04                              f144425ff09b        162MB         45.6MB        
+IMAGE                ID             DISK USAGE   CONTENT SIZE   EXTRA
+hello-world:latest   5e2309035332       25.9kB         9.49kB        
+nginx:1.30-alpine    0985e772fb9f       93.6MB           27MB        
 ```
 
 The columns:
@@ -147,26 +115,26 @@ containers, each with its own ID.
 
 Whatever the main process writes to its output is collected by Docker:
 
-<!-- test: output=tail:6; contains=start worker -->
+<!-- test: retry=15; output=tail:6; contains=start worker -->
 ```bash
 docker logs web
 ```
 
 ```text
 ...
-2026/10/04 04:37:34 [notice] 1#1: start worker process 38
-2026/10/04 04:37:34 [notice] 1#1: start worker process 39
-2026/10/04 04:37:34 [notice] 1#1: start worker process 40
-2026/10/04 04:37:34 [notice] 1#1: start worker process 41
-2026/10/04 04:37:34 [notice] 1#1: start worker process 42
-2026/10/04 04:37:34 [notice] 1#1: start worker process 43
+2026/10/04 05:10:53 [notice] 1#1: start worker process 38
+2026/10/04 05:10:53 [notice] 1#1: start worker process 39
+2026/10/04 05:10:53 [notice] 1#1: start worker process 40
+2026/10/04 05:10:53 [notice] 1#1: start worker process 41
+2026/10/04 05:10:53 [notice] 1#1: start worker process 42
+2026/10/04 05:10:53 [notice] 1#1: start worker process 43
 ```
 
 These are nginx's start-up messages. When something goes wrong, `docker logs` is the first command you run.
 
 ### Stop, start, restart
 
-<!-- test: contains=Exited -->
+<!-- test: retry=20; contains=Exited -->
 ```bash
 docker stop web
 docker ps -a --filter name=web
@@ -232,7 +200,7 @@ docker exec web cat /etc/os-release
 ```
 
 ```text
-0f2f0c22f9ae
+1e68f2421fc3
 NAME="Alpine Linux"
 ID=alpine
 VERSION_ID=3.24.2
@@ -311,7 +279,7 @@ docker ps -a --filter name=demo --format '{{.Names}}: {{.Status}}'
 
 Now stop it in two different ways. First, politely:
 
-<!-- test: contains=Exited -->
+<!-- test: retry=20; contains=Exited -->
 ```bash
 docker stop demo
 docker ps -a --filter name=demo --format '{{.Names}}: {{.Status}}'
@@ -320,7 +288,7 @@ docker ps -a --filter name=demo --format '{{.Names}}: {{.Status}}'
 `docker stop` sends a signal asking the process to shut down cleanly, waits up to 10 seconds, and only then kills it.
 Now start it again and kill it without asking:
 
-<!-- test: contains=Exited (137) -->
+<!-- test: retry=20; contains=Exited (137) -->
 ```bash
 docker start demo
 docker kill demo
@@ -370,7 +338,7 @@ clean list of variables, and `/etc/os-release` says Ubuntu.
 Now, the important question: after `exit`, is the container still running?
 
 <!-- test-run: docker run --name shell ubuntu:26.04 bash -c "exit 0" -->
-<!-- test: contains=Exited -->
+<!-- test: retry=20; contains=Exited -->
 ```bash
 docker ps -a --filter name=shell --format '{{.Names}}: {{.Status}}'
 ```
@@ -415,7 +383,7 @@ docker ps --filter name=sleeper --format '{{.Names}}: {{.Status}}'
 It is `Up`. Wait a few seconds, then look again:
 
 <!-- test-run: sleep 7 -->
-<!-- test: contains=Exited (0) -->
+<!-- test: retry=20; contains=Exited (0) -->
 ```bash
 docker ps -a --filter name=sleeper --format '{{.Names}}: {{.Status}}'
 ```
@@ -425,7 +393,7 @@ finished too.
 
 Now the classic beginner surprise:
 
-<!-- test: contains=Exited -->
+<!-- test: retry=20; contains=Exited -->
 ```bash
 docker run --name quick ubuntu:26.04
 docker ps -a --filter name=quick --format '{{.Names}}: {{.Status}}'

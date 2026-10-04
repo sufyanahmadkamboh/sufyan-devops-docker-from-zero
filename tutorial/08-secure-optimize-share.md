@@ -17,9 +17,9 @@ docker build -f dockerfile-steps/03.Dockerfile -t simple-app:root .
 
 ```text
 ...
-#9 DONE 0.8s
+#9 DONE 0.1s
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/4htojrs2a5vw0e6bbhbi0v0lj
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/pu91d93wpfl6rg86lbqf5s6t4
 ```
 
 `simple-app:1.0` is built from the finished `Dockerfile`. `simple-app:root` is built from step 3, before we added a
@@ -99,7 +99,7 @@ docker run -d --name secure --read-only -p 5000:5000 simple-app:1.0
 ```
 
 ```text
-995ad4a5d4be0c73ede16eebe0a4fdd9213d1ea6abfc93626918ea5bb46a6975
+c494a6ee3a5982e510e9d443cb9203c1630e1b10393ffdc71b188145c867d8c6
 ```
 
 <!-- test: retry=15; output; contains=Hello from simple-app -->
@@ -110,7 +110,7 @@ curl -s http://localhost:5000/
 ```text
 Hello from simple-app!
 environment: production
-container hostname: 995ad4a5d4be
+container hostname: c494a6ee3a59
 ```
 
 It works, because it never writes anything. (If an app needs to write temporary files, you add a small in-memory
@@ -151,7 +151,7 @@ docker run -d --name leaky -e DB_PASSWORD=super-secret-lab-value alpine:3.24 sle
 ```
 
 ```text
-6fb25d6706e0e187c476ba7e868cfc95d4feabcf3341448076a72e765ad84321
+c9fd6960656aba37db1e3820a1b4509a76fa19daf662d65129933a9f787207e8
 ```
 
 Now, as anyone who can use Docker on this machine:
@@ -233,9 +233,9 @@ docker build -f optimization/fat.Dockerfile -t simple-app:fat .
 
 ```text
 ...
-#11 DONE 0.9s
+#10 DONE 3.2s
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/ytzj63sddgtuvny2rp8g3a0wh
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/fayntr446w8ybnk3a79szyoia
 ```
 
 ### 8.7 The multi-stage image
@@ -271,9 +271,9 @@ docker build -f optimization/multistage.Dockerfile -t simple-app:multistage .
 
 ```text
 ...
-#14 DONE 0.3s
+#14 DONE 1.1s
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/xoqm314hoabnq6a7zj69w82uu
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/387s5qjzcfuu9vlhclacnymuh
 ```
 
 ### 8.8 Compare
@@ -286,22 +286,18 @@ docker images simple-app
 ```
 
 ```text
-IMAGE                    ID             DISK USAGE   CONTENT SIZE   EXTRA
-simple-app:1.0           8127abfae118        212MB         51.9MB        
-simple-app:clean         c21968dc4b3e        189MB         46.5MB        
-simple-app:fat           5a68be4c0d32       1.75GB          454MB        
-simple-app:fat-nocache   40b870a8fffa       1.74GB          453MB        
-simple-app:fixed         18b09356d161        212MB         51.9MB        
-simple-app:leaky         8ed0a4b5ade0        239MB         46.5MB        
-simple-app:mine          99343326e3bc        212MB         51.9MB        
-simple-app:multistage    986725ef8115        108MB         26.1MB        
-simple-app:root          8ce7b2309a9f        212MB         51.9MB        
-simple-app:slim          929c66f80e88        212MB         51.9MB        
-simple-app:step1         1988bf99972f        189MB         46.5MB        
-simple-app:step2         5e828c81d314        189MB         46.5MB        
-simple-app:step3         adc2c758689e        212MB         51.9MB        
-simple-app:step4         5d3c5c8176ee        212MB         51.9MB        
-simple-app:step5         229e09ab9ddc        212MB         51.9MB        
+IMAGE                   ID             DISK USAGE   CONTENT SIZE   EXTRA
+simple-app:1.0          20aeb3209e8f        212MB         51.9MB        
+simple-app:clean        614749901fce        189MB         46.5MB        
+simple-app:fat          f29822dcd7e5       1.75GB          454MB        
+simple-app:leaky        06809757035e        239MB         46.5MB        
+simple-app:multistage   2bcbfd28cfde        108MB         26.1MB        
+simple-app:root         939d3ab86401        212MB         51.9MB        
+simple-app:step1        a9edeb483f3f        189MB         46.5MB        
+simple-app:step2        a885aefc3259        189MB         46.5MB        
+simple-app:step3        b7b846326047        212MB         51.9MB        
+simple-app:step4        d0c998f34082        212MB         51.9MB        
+simple-app:step5        667a8d95bf73        212MB         51.9MB        
 ```
 
 Look at the `DISK USAGE` column (`SIZE` on Docker versions before 29; your numbers may differ a little, the order will not). The fat image is many times bigger
@@ -322,10 +318,10 @@ WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://127.0.0.1:5000
  * Running on http://172.17.0.2:5000
 Press CTRL+C to quit
-127.0.0.1 - - [04/Oct/2026 04:24:24] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [04/Oct/2026 04:48:11] "GET / HTTP/1.1" 200 -
 Hello from simple-app!
 environment: production
-container hostname: cea8a41ce64f
+container hostname: 4100729239fc
 ```
 
 > That long command starts the app inside the container and asks it for its home page, all in one go. You could also
@@ -340,11 +336,11 @@ docker history simple-app:fat
 
 ```text
 IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
-5a68be4c0d32   6 seconds ago    CMD ["python" "app.py"]                         0B        buildkit.dockerfile.v0
-<missing>      6 seconds ago    RUN /bin/sh -c pip install -r requirements.t…   18.4MB    buildkit.dockerfile.v0
-<missing>      9 seconds ago    COPY . . # buildkit                             16.4kB    buildkit.dockerfile.v0
-<missing>      12 minutes ago   WORKDIR /app                                    8.19kB    buildkit.dockerfile.v0
-<missing>      12 minutes ago   RUN /bin/sh -c apt-get update && apt-get ins…   74.5MB    buildkit.dockerfile.v0
+f29822dcd7e5   23 seconds ago   CMD ["python" "app.py"]                         0B        buildkit.dockerfile.v0
+<missing>      23 seconds ago   RUN /bin/sh -c pip install -r requirements.t…   18.4MB    buildkit.dockerfile.v0
+<missing>      25 seconds ago   COPY . . # buildkit                             16.4kB    buildkit.dockerfile.v0
+<missing>      25 seconds ago   WORKDIR /app                                    8.19kB    buildkit.dockerfile.v0
+<missing>      25 seconds ago   RUN /bin/sh -c apt-get update && apt-get ins…   74.5MB    buildkit.dockerfile.v0
 <missing>      2 days ago       CMD ["python3"]                                 0B        buildkit.dockerfile.v0
 <missing>      2 days ago       RUN /bin/sh -c set -eux;  for src in idle3 p…   16.4kB    buildkit.dockerfile.v0
 ...
@@ -387,7 +383,25 @@ docker run -d --name registry -p 5000:5000 registry:3
 ```
 
 ```text
-1ce234a0bffb887918b47a6ecabfb5b0d04697e69148667de0d0984e6296b9ad
+Unable to find image 'registry:3' locally
+3: Pulling from library/registry
+8dc2188d2a74: Pulling fs layer
+90764beeca7f: Pulling fs layer
+2aef3a8beb68: Pulling fs layer
+783ed5b12fca: Pulling fs layer
+8dc2188d2a74: Download complete
+90764beeca7f: Download complete
+783ed5b12fca: Download complete
+90764beeca7f: Pull complete
+d561fdf230c8: Download complete
+2aef3a8beb68: Download complete
+6c18a739ea63: Download complete
+8dc2188d2a74: Pull complete
+783ed5b12fca: Pull complete
+2aef3a8beb68: Pull complete
+Digest: sha256:ddf754342cfc8acc51a56d5d0ab6af06826461864460636d8bd5c546dab2a7b8
+Status: Downloaded newer image for registry:3
+9d88ff40131e4060951463cb8fc9d3629921a60d64167017526471734bc2b139
 ```
 
 Tag the image with the registry's address. This does not copy anything; it adds a second name to the same image:
@@ -405,9 +419,9 @@ docker push localhost:5000/simple-app:1.0
 
 ```text
 ...
-c57fc4c5ea60: Pushed
-6b37362b3da7: Pushed
-1.0: digest: sha256:8127abfae118f3c1e2dfc1f86da619826d5288d4066b265b8ce25d05300a36c6 size: 856
+c5e6e50697ef: Pushed
+c4d667dbb95c: Pushed
+1.0: digest: sha256:20aeb3209e8f8b24bb1576144d489d260045bbbadf7fc9633b09d8dff01fedfe size: 856
 ```
 
 Each layer is uploaded, then you get a **digest**: the unique fingerprint of exactly this image content. Ask the
@@ -433,7 +447,7 @@ docker pull localhost:5000/simple-app:1.0
 
 ```text
 ...
-Digest: sha256:8127abfae118f3c1e2dfc1f86da619826d5288d4066b265b8ce25d05300a36c6
+Digest: sha256:20aeb3209e8f8b24bb1576144d489d260045bbbadf7fc9633b09d8dff01fedfe
 Status: Downloaded newer image for localhost:5000/simple-app:1.0
 localhost:5000/simple-app:1.0
 ```
@@ -446,7 +460,7 @@ docker run -d --name from-registry -p 8080:5000 localhost:5000/simple-app:1.0
 ```
 
 ```text
-bbacdc3ab37664cfc85a942cc41493eb5bf8c156054454a75e392b5b081308c7
+c118863029efeaceb70e038c8ae134826fafdd27ec9185dc8c6a83b3f340dc0c
 ```
 
 <!-- test: retry=15; contains=Hello from simple-app -->
@@ -504,10 +518,10 @@ docker system df
 
 ```text
 TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
-Images          41        0         7.499GB   6.695GB (89%)
+Images          25        0         5.534GB   5.284GB (95%)
 Containers      0         0         0B        0B
 Local Volumes   1         0         51.92MB   51.92MB (100%)
-Build Cache     126       0         2.98GB    469.1MB
+Build Cache     60        0         2.54GB    2.057GB
 ```
 
 `RECLAIMABLE` is what Docker could free because nothing uses it. Now the prune commands, from harmless to dangerous:

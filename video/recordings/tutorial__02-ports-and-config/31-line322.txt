@@ -1,0 +1,4 @@
+docker run -d --name simple2 -p 5001:5000 -e APP_ENV=development -e GREETING="Good morning from Docker" simple-app:1.0
+---
+e35975d7f688e2fde099c87175fbdb1aa4a245b5fb6c0f0b7b32f4a17761814a
+# exit 0

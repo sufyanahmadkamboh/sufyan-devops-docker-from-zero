@@ -1,0 +1,8 @@
+docker build -q -f dockerfile-steps/entrypoint-vs-cmd.Dockerfile -t greeter .
+docker run --rm greeter
+docker run --rm greeter Docker
+---
+sha256:15597981addb6a5cc4e00ccf9750b249a4237e01842c9c1aa2198874b4a89061
+Hello, world
+Hello, Docker
+# exit 0

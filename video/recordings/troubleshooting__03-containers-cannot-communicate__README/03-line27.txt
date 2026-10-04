@@ -1,0 +1,114 @@
+docker compose up -d --build
+---
+ Image ts03-api Building 
+ Image ts03-web Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.19kB done
+#1 DONE 0.0s
+
+#2 [web internal] load build definition from Dockerfile
+#2 transferring dockerfile: 266B done
+#2 DONE 0.0s
+
+#3 [api internal] load build definition from Dockerfile
+#3 transferring dockerfile: 558B done
+#3 DONE 0.0s
+
+#4 [api internal] load metadata for docker.io/library/python:3.14-slim
+#4 DONE 0.0s
+
+#5 [web internal] load metadata for docker.io/library/nginx:1.30-alpine
+#5 DONE 0.0s
+
+#6 [api internal] load .dockerignore
+#6 transferring context:
+#6 transferring context: 64B done
+#6 DONE 0.0s
+
+#7 [web internal] load .dockerignore
+#7 transferring context: 51B done
+#7 DONE 0.0s
+
+#8 [api 1/5] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#8 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151 0.1s done
+#8 DONE 0.1s
+
+#9 [api internal] load build context
+#9 transferring context: 3.33kB done
+#9 DONE 0.1s
+
+#10 [web internal] load build context
+#10 transferring context: 4.16kB done
+#10 DONE 0.1s
+
+#11 [api 3/5] COPY requirements.txt .
+#11 CACHED
+
+#12 [api 4/5] RUN pip install --no-cache-dir -r requirements.txt
+#12 CACHED
+
+#13 [api 2/5] WORKDIR /app
+#13 CACHED
+
+#14 [api 5/5] COPY app.py .
+#14 CACHED
+
+#15 [api] exporting to image
+#15 ...
+
+#16 [web 1/3] FROM docker.io/library/nginx:1.30-alpine@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
+#16 resolve docker.io/library/nginx:1.30-alpine@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94 0.1s done
+#16 DONE 0.2s
+
+#15 [api] exporting to image
+#15 exporting layers done
+#15 exporting manifest sha256:1dff4ec1f2150917e634b1800d1d3c455cc323e2429291fbbc43e488de8f3802 0.0s done
+#15 exporting config sha256:b9200c0c06aa4ad32af66ef1d904c27527fd5bbb73a28e71ad669dc5e3647288 0.0s done
+#15 exporting attestation manifest sha256:4b9604369b5ca7cbd46169849f1dfd6faf93f036c7d5429cd72be3ae9415e8de 0.0s done
+#15 exporting manifest list sha256:00de0882242faf19d81bba2ca247ee0005189d3881d2901c7690b116edba878b
+#15 exporting manifest list sha256:00de0882242faf19d81bba2ca247ee0005189d3881d2901c7690b116edba878b 0.0s done
+#15 naming to docker.io/library/ts03-api:latest 0.0s done
+#15 unpacking to docker.io/library/ts03-api:latest 0.0s done
+#15 DONE 0.2s
+
+#17 [web 2/3] COPY default.conf.template /etc/nginx/templates/default.conf.template
+#17 DONE 0.0s
+
+#18 [web 3/3] COPY html/ /usr/share/nginx/html/
+#18 DONE 0.1s
+
+#19 [api] resolving provenance for metadata file
+#19 DONE 0.0s
+
+#20 [web] exporting to image
+#20 exporting layers 0.2s done
+#20 exporting manifest sha256:227af57b9e5aef04971f30c929f87be8eaf3e827507aa6d12c93821339572144 0.0s done
+#20 exporting config sha256:f0e76f2a5811e0fe8b0dbfee98d01249100d3b1d68760cbe26224cbb648412fd 0.0s done
+#20 exporting attestation manifest sha256:bf3ec8af7e40b7aefb043e14a9e587f1e6e7c40b08567bdd959ee68be8de96eb 0.0s done
+#20 exporting manifest list sha256:9c0bc47da6d00e69fc57ec9245e419b613550f52c1c59c6bf3b2c628b0c5a22e
+#20 exporting manifest list sha256:9c0bc47da6d00e69fc57ec9245e419b613550f52c1c59c6bf3b2c628b0c5a22e 0.0s done
+#20 naming to docker.io/library/ts03-web:latest done
+#20 unpacking to docker.io/library/ts03-web:latest 0.0s done
+#20 DONE 0.4s
+
+#21 [web] resolving provenance for metadata file
+#21 DONE 0.0s
+ Image ts03-api Built 
+ Image ts03-web Built 
+ Network ts03_backend Creating 
+ Network ts03_backend Created 
+ Network ts03_frontend Creating 
+ Network ts03_frontend Created 
+ Container ts03-db-1 Creating 
+ Container ts03-db-1 Created 
+ Container ts03-api-1 Creating 
+ Container ts03-api-1 Created 
+ Container ts03-web-1 Creating 
+ Container ts03-web-1 Created 
+ Container ts03-db-1 Starting 
+ Container ts03-db-1 Started 
+ Container ts03-api-1 Starting 
+ Container ts03-api-1 Started 
+ Container ts03-web-1 Starting 
+ Container ts03-web-1 Started 
+# exit 0

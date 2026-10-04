@@ -1,0 +1,6 @@
+docker rm db
+docker run -d --name db -e POSTGRES_PASSWORD=lab-only-password postgres:18-alpine
+---
+db
+f623bd6f6a0618b42103d7981d3a5202cba4117eea80527d977b3886943ca956
+# exit 0

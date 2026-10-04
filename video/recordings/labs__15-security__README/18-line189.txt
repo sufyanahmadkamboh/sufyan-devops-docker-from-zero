@@ -1,0 +1,4 @@
+docker inspect --format '{{json .Config.Env}}' tidy
+---
+["DB_PASSWORD_FILE=/run/secrets/db_password","PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"]
+# exit 0

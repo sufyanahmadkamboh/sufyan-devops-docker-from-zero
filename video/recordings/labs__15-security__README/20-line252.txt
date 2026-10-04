@@ -1,0 +1,4 @@
+docker run --rm --read-only --tmpfs /tmp simple-app:1.0 sh -c "echo 'request served' >> /app/app.log"
+---
+sh: 1: cannot create /app/app.log: Read-only file system
+# exit 2

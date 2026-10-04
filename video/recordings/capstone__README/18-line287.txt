@@ -1,0 +1,4 @@
+curl -s http://localhost:8080/api/messages
+---
+[{"created_at":"2026-10-04T05:21:05.552016+00:00","id":1,"text":"Hello! This first message was created by database/init.sql."},{"created_at":"2026-10-04T05:21:27.323339+00:00","id":2,"text":"written by the capstone README"},{"created_at":"2026-10-04T05:21:32.775528+00:00","id":3,"text":"verify-1791091292"}]
+# exit 0

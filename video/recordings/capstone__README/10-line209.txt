@@ -1,0 +1,6 @@
+docker compose exec api id
+docker inspect capstone-api-1 --format 'memory limit: {{.HostConfig.Memory}} bytes, read-only: {{.HostConfig.ReadonlyRootfs}}'
+---
+uid=10001(app) gid=10001(app) groups=10001(app)
+memory limit: 268435456 bytes, read-only: true
+# exit 0

@@ -1,0 +1,4 @@
+cd labs/14-logs-inspect-resources
+---
+
+# exit 0

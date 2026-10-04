@@ -1,0 +1,8 @@
+docker compose ps --format 'table {{.Name}}\t{{.Status}}\t{{.Ports}}'
+docker compose ps | grep -q 'capstone-web-1.*(healthy)'
+---
+NAME             STATUS                    PORTS
+capstone-api-1   Up 17 seconds (healthy)   5000/tcp
+capstone-db-1    Up 22 seconds (healthy)   5432/tcp
+capstone-web-1   Up 11 seconds (healthy)   0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+# exit 0

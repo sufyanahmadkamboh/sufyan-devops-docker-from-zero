@@ -1,0 +1,7 @@
+docker rm -f sleeper quick web failing
+---
+sleeper
+quick
+web
+failing
+# exit 0

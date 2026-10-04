@@ -1,0 +1,4 @@
+docker inspect --format '{{range $name, $net := .NetworkSettings.Networks}}{{$name}} {{end}}' web
+---
+lab14-net 
+# exit 0

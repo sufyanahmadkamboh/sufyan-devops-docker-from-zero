@@ -1,0 +1,4 @@
+docker exec web wget -qO- http://localhost/hello.html
+---
+<h1>Copied in with docker cp</h1>
+# exit 0

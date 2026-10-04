@@ -1,0 +1,5 @@
+docker rm -f simple simple2
+---
+simple
+simple2
+# exit 0

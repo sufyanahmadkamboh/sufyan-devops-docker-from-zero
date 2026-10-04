@@ -1,0 +1,8 @@
+docker run --rm simple-app:fat ls -la /app
+---
+total 16
+drwxr-xr-x 1 root root 4096 Oct  4 04:58 .
+drwxr-xr-x 1 root root 4096 Oct  4 04:59 ..
+-rwxr-xr-x 1 root root 1201 Oct  4 04:53 app.py
+-rwxr-xr-x 1 root root   13 Oct  4 04:53 requirements.txt
+# exit 0

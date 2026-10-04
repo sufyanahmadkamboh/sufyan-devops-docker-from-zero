@@ -1,0 +1,6 @@
+docker rm -f site
+docker run -d --name site -p 8080:80 -v "$(pwd)/examples/nginx/sitee:/usr/share/nginx/html" nginx:1.30-alpine
+---
+site
+c54db8b6bf3b971fd4cb4bc388045c4341cf47bcbd0b9f3d58549eec879d4973
+# exit 0

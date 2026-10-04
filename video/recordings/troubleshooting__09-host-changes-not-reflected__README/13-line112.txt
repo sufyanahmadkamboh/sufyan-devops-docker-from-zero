@@ -1,0 +1,4 @@
+docker inspect web3 --format '{{range .Mounts}}{{.Type}}: {{.Source}} -> {{.Destination}}{{println}}{{end}}'
+---
+bind: ~/sufyan-devops-docker-from-zero/troubleshooting/09-host-changes-not-reflected/sitee -> /usr/share/nginx/html
+# exit 0

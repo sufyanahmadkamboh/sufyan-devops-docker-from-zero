@@ -1,0 +1,4 @@
+docker run -d --name limited --memory=256m --cpus=0.5 nginx:1.30-alpine
+---
+ad56d89dcee86afd3a9e20f7f988fe3abbda084e548fb173b8404438f49a8d11
+# exit 0

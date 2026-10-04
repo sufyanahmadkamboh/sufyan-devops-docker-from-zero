@@ -1,0 +1,6 @@
+docker stop demo
+docker ps -a --filter name=demo --format '{{.Names}}: {{.Status}}'
+---
+demo
+demo: Exited (0) Less than a second ago
+# exit 0

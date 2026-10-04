@@ -1,0 +1,4 @@
+docker ps --filter name=hidden --format '{{.Names}}  ports: {{.Ports}}'
+---
+hidden  ports: 80/tcp
+# exit 0

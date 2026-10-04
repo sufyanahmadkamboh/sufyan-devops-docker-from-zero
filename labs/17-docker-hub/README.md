@@ -86,16 +86,16 @@ docker images
 ```
 
 ```text
-WARNING: This output is designed for human readability. For machine-readable output, please use --format.
 IMAGE                            ID             DISK USAGE   CONTENT SIZE   EXTRA
 alpine:3.24                      294b683cb724         13MB         3.94MB        
-board-api:1.0                    9d6da54368f6        243MB         58.5MB        
-board-web:1.0                    37b4d6321a8d       92.8MB         26.1MB        
+board-api:1.0                    351aa764af08        243MB         58.5MB        
+board-api:latest                 6e0b9b3fce93        243MB         58.5MB        
+board-web:1.0                    89ee006648dd       92.8MB         26.1MB        
+board-web:latest                 ab2522c6f2d8       92.8MB         26.1MB        
 busybox:1.37                     bdf57e528e45       6.77MB         2.22MB        
-docker-from-zero/api:1.0.0       4ab4d0ebff07        247MB         58.8MB        
-docker-from-zero/web:1.0.0       640a2feebc89       81.5MB         23.1MB        
-greeter:latest                   1bb1dd5301aa       12.9MB         3.85MB        
-jitesoft/tesseract-ocr:latest    23fbc1f29a6d        401MB          129MB        
+docker-from-zero/api:1.0.0       07a9a8fe1d97        247MB         58.8MB        
+docker-from-zero/web:1.0.0       c41020e7b136       81.5MB         23.1MB        
+greeter:latest                   15597981addb       12.9MB         3.85MB        
 ...
 ```
 
@@ -110,10 +110,10 @@ docker push localhost:5000/simple-app:1.0
 
 ```text
 ...
-1ae2ea666d2d: Pushed
-c4d667dbb95c: Pushed
+e42bb4d14bbe: Pushed
 6b37362b3da7: Pushed
-1.0: digest: sha256:c07b3c9474bb7411bb28853e56a8086c3c9cfb1f79a6c91e9f2fd3fa6b194d98 size: 856
+c5e6e50697ef: Pushed
+1.0: digest: sha256:8e4b2f4b8a3767276532d3dc589d719cd7d3f21eaaf8088ab911a1b608b45a08 size: 856
 ```
 
 Docker uploads the image layer by layer and ends with the **digest** (`sha256:...`), the unique fingerprint of exactly
@@ -148,11 +148,7 @@ docker pull localhost:5000/simple-app:1.0
 
 ```text
 1.0: Pulling from simple-app
-5633fff9d3a8: Pulling fs layer
-5633fff9d3a8: Already exists
-5633fff9d3a8: Pull complete
-8f247766c492: Download complete
-Digest: sha256:c07b3c9474bb7411bb28853e56a8086c3c9cfb1f79a6c91e9f2fd3fa6b194d98
+Digest: sha256:8e4b2f4b8a3767276532d3dc589d719cd7d3f21eaaf8088ab911a1b608b45a08
 Status: Downloaded newer image for localhost:5000/simple-app:1.0
 localhost:5000/simple-app:1.0
 ```
@@ -171,7 +167,7 @@ curl -s http://localhost:5001/
 ```text
 Hello from simple-app!
 environment: production
-container hostname: 35417b67c2fa
+container hostname: ff566b091a5f
 ```
 
 That is the whole idea of a registry: **build once, run anywhere**. The machine that runs the image never needs your

@@ -1,0 +1,4 @@
+docker compose -f docker-compose.fixed.yml exec -T db psql -U board -d board -c "INSERT INTO messages (text) VALUES ('do not lose me');"
+---
+INSERT 0 1
+# exit 0

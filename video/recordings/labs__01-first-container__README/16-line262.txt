@@ -1,0 +1,4 @@
+docker run -d --name web nginx:1.30-alpine
+---
+8c5bf808d1c7cabb526d9f09a5b25e01e11eeaa12b41f823e1d59afa11d3e64c
+# exit 0

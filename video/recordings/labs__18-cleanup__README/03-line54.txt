@@ -1,0 +1,14 @@
+docker run --name old1 alpine:3.24 echo "I ran once"
+docker run --name old2 alpine:3.24 echo "me too"
+docker run --name labeled --label course=docker-from-zero alpine:3.24 echo "I have a label"
+docker run --name anon -v /data alpine:3.24 echo "I created an anonymous volume"
+docker network create lab18-unused
+docker volume create lab18-keep
+---
+I ran once
+me too
+I have a label
+I created an anonymous volume
+bf8d16d205236f049c521045aff3099b5e9314ea46727991247dc4711bc7a49d
+lab18-keep
+# exit 0

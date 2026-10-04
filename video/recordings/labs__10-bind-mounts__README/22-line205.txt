@@ -1,0 +1,4 @@
+   docker inspect web --format '{{json .Mounts}}'
+---
+[{"Type":"bind","Source":"~/sufyan-devops-docker-from-zero/examples/nginx/sitee","Destination":"/usr/share/nginx/html","Mode":"","RW":true,"Propagation":"rprivate"}]
+# exit 0

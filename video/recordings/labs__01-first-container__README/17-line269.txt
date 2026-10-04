@@ -1,0 +1,4 @@
+docker rm web
+---
+Error response from daemon: cannot remove container "web": container is running: stop the container before removing or force remove
+# exit 1

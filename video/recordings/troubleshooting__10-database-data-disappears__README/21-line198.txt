@@ -1,0 +1,5 @@
+docker compose -f docker-compose.old-tutorial.yml ps -a --format 'table {{.Service}}\t{{.Status}}'
+---
+SERVICE   STATUS
+db        Exited (1) 8 seconds ago
+# exit 0

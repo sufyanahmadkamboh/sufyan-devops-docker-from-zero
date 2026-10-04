@@ -1,0 +1,4 @@
+docker inspect --format '{{range .Mounts}}{{.Type}} {{.Name}} -> {{.Destination}}{{println}}{{end}}' web
+---
+volume lab14-data -> /data
+# exit 0

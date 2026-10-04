@@ -1,0 +1,5 @@
+docker logs --tail 2 web
+---
+2026/10/04 05:17:21 [error] 33#33: *3 open() "/usr/share/nginx/html/does-not-exist" failed (2: No such file or directory), client: 172.18.0.1, server: localhost, request: "GET /does-not-exist HTTP/1.1", host: "localhost:8080"
+172.18.0.1 - - [04/Oct/2026:05:17:21 +0000] "GET /does-not-exist HTTP/1.1" 404 153 "-" "curl/8.19.0" "-"
+# exit 0

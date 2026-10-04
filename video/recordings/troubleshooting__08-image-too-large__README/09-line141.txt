@@ -1,0 +1,127 @@
+docker build -f optimization/multistage.Dockerfile -t simple-app:multistage .
+---
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from multistage.Dockerfile
+#1 transferring dockerfile: 831B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14-alpine
+#2 DONE 0.7s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 295B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 63B done
+#4 DONE 0.0s
+
+#5 [builder 1/5] FROM docker.io/library/python:3.14-alpine@sha256:2e740b2c28a426e74f11396c05e38afb3191acced75045b8d62df573c1dc8ce8
+#5 resolve docker.io/library/python:3.14-alpine@sha256:2e740b2c28a426e74f11396c05e38afb3191acced75045b8d62df573c1dc8ce8 0.0s done
+#5 DONE 0.1s
+
+#5 [builder 1/5] FROM docker.io/library/python:3.14-alpine@sha256:2e740b2c28a426e74f11396c05e38afb3191acced75045b8d62df573c1dc8ce8
+#5 sha256:d486488257d0aa8b040529bcab1337e849158dafb6f28c6d79df56cce8042b48 249B / 249B 0.1s done
+#5 sha256:48f6a258842734fe23e0e4c69db9996cbaefd41c1cde2372b95449f9fc5601eb 416.27kB / 416.27kB 0.3s done
+#5 sha256:2a22c5887fa227de1798e9b92a3692c3bb96fa108c1164afe00a928c35a0986c 0B / 16.11MB 0.2s
+#5 extracting sha256:48f6a258842734fe23e0e4c69db9996cbaefd41c1cde2372b95449f9fc5601eb 0.1s done
+#5 sha256:2a22c5887fa227de1798e9b92a3692c3bb96fa108c1164afe00a928c35a0986c 2.10MB / 16.11MB 0.5s
+#5 sha256:2a22c5887fa227de1798e9b92a3692c3bb96fa108c1164afe00a928c35a0986c 5.24MB / 16.11MB 0.6s
+#5 sha256:2a22c5887fa227de1798e9b92a3692c3bb96fa108c1164afe00a928c35a0986c 8.39MB / 16.11MB 0.8s
+#5 sha256:2a22c5887fa227de1798e9b92a3692c3bb96fa108c1164afe00a928c35a0986c 11.53MB / 16.11MB 0.9s
+#5 sha256:2a22c5887fa227de1798e9b92a3692c3bb96fa108c1164afe00a928c35a0986c 14.68MB / 16.11MB 1.1s
+#5 sha256:2a22c5887fa227de1798e9b92a3692c3bb96fa108c1164afe00a928c35a0986c 16.11MB / 16.11MB 1.1s done
+#5 extracting sha256:2a22c5887fa227de1798e9b92a3692c3bb96fa108c1164afe00a928c35a0986c
+#5 extracting sha256:2a22c5887fa227de1798e9b92a3692c3bb96fa108c1164afe00a928c35a0986c 0.4s done
+#5 DONE 1.6s
+
+#5 [builder 1/5] FROM docker.io/library/python:3.14-alpine@sha256:2e740b2c28a426e74f11396c05e38afb3191acced75045b8d62df573c1dc8ce8
+#5 extracting sha256:d486488257d0aa8b040529bcab1337e849158dafb6f28c6d79df56cce8042b48 0.0s done
+#5 DONE 1.6s
+
+#6 [builder 2/5] RUN apk add --no-cache build-base
+#6 0.539 ( 1/21) Installing libgcc (15.2.0-r5)
+#6 0.552 ( 2/21) Installing jansson (2.15.0-r0)
+#6 0.563 ( 3/21) Installing libstdc++ (15.2.0-r5)
+#6 0.606 ( 4/21) Installing binutils (2.45.1-r1)
+#6 0.783 ( 5/21) Installing libmagic (5.47-r2)
+#6 0.820 ( 6/21) Installing file (5.47-r2)
+#6 0.826 ( 7/21) Installing libgcc-static (15.2.0-r5)
+#6 0.940 ( 8/21) Installing libgomp (15.2.0-r5)
+#6 0.961 ( 9/21) Installing libatomic (15.2.0-r5)
+#6 0.967 (10/21) Installing gmp (6.3.0-r4)
+#6 0.985 (11/21) Installing isl26 (0.26-r2)
+#6 1.028 (12/21) Installing mpfr4 (4.2.2-r0)
+#6 1.062 (13/21) Installing mpc1 (1.3.1-r1)
+#6 1.073 (14/21) Installing gcc (15.2.0-r5)
+#6 3.826 (15/21) Installing libstdc++-dev (15.2.0-r5)
+#6 4.086 (16/21) Installing musl-dev (1.2.6-r2)
+#6 4.247 (17/21) Installing g++ (15.2.0-r5)
+#6 5.157 (18/21) Installing make (4.4.1-r4)
+#6 5.174 (19/21) Installing fortify-headers (3.0.1-r2)
+#6 5.182 (20/21) Installing patch (2.8-r0)
+#6 5.192 (21/21) Installing build-base (0.5-r4)
+#6 5.192 Executing busybox-1.37.0-r31.trigger
+#6 5.214 OK: 278.9 MiB in 51 packages
+#6 DONE 5.7s
+
+#7 [builder 3/5] RUN python -m venv /opt/venv
+#7 DONE 4.0s
+
+#8 [builder 4/5] COPY requirements.txt .
+#8 DONE 0.1s
+
+#9 [builder 5/5] RUN /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
+#9 0.626 Collecting flask==3.1.3 (from -r requirements.txt (line 1))
+#9 0.673   Downloading flask-3.1.3-py3-none-any.whl.metadata (3.2 kB)
+#9 0.686 Collecting blinker>=1.9.0 (from flask==3.1.3->-r requirements.txt (line 1))
+#9 0.693   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#9 0.707 Collecting click>=8.1.3 (from flask==3.1.3->-r requirements.txt (line 1))
+#9 0.714   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#9 0.724 Collecting itsdangerous>=2.2.0 (from flask==3.1.3->-r requirements.txt (line 1))
+#9 0.732   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#9 0.745 Collecting jinja2>=3.1.2 (from flask==3.1.3->-r requirements.txt (line 1))
+#9 0.752   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#9 0.799 Collecting markupsafe>=2.1.1 (from flask==3.1.3->-r requirements.txt (line 1))
+#9 0.808   Downloading markupsafe-3.0.4-cp314-cp314-musllinux_1_2_x86_64.whl.metadata (2.7 kB)
+#9 0.823 Collecting werkzeug>=3.1.0 (from flask==3.1.3->-r requirements.txt (line 1))
+#9 0.832   Downloading werkzeug-3.1.9-py3-none-any.whl.metadata (4.1 kB)
+#9 0.843 Downloading flask-3.1.3-py3-none-any.whl (103 kB)
+#9 0.857 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#9 0.864 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#9 0.876 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#9 0.885 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#9 0.898 Downloading markupsafe-3.0.4-cp314-cp314-musllinux_1_2_x86_64.whl (23 kB)
+#9 0.907 Downloading werkzeug-3.1.9-py3-none-any.whl (228 kB)
+#9 0.942 Installing collected packages: markupsafe, itsdangerous, click, blinker, werkzeug, jinja2, flask
+#9 1.590 
+#9 1.591 Successfully installed blinker-1.9.0 click-8.5.0 flask-3.1.3 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.4 werkzeug-3.1.9
+#9 DONE 1.7s
+
+#10 [stage-1 2/5] COPY --from=builder /opt/venv /opt/venv
+#10 DONE 0.1s
+
+#11 [stage-1 3/5] WORKDIR /app
+#11 DONE 0.0s
+
+#12 [stage-1 4/5] COPY app.py .
+#12 DONE 0.0s
+
+#13 [stage-1 5/5] RUN adduser -D -u 10001 appuser
+#13 DONE 0.2s
+
+#14 exporting to image
+#14 exporting layers
+#14 exporting layers 0.7s done
+#14 exporting manifest sha256:372a821b108f65c5fb736d610f6125497dc635301975a9acc27b4ee58623383b 0.0s done
+#14 exporting config sha256:8f0ba804dede2b8691ff984e5c4e1ec57a304d007988210c40881af238939a24 0.0s done
+#14 exporting attestation manifest sha256:d8178430a5ee65195608030a4b6f5327e24e8d7ba4c4c14dd39fa7436edf3fbc 0.0s done
+#14 exporting manifest list sha256:4015f53c75b9dda13b149dfd50d136bea1df0c42747696ecfa2e69fe22014568 0.0s done
+#14 naming to docker.io/library/simple-app:multistage done
+#14 unpacking to docker.io/library/simple-app:multistage
+#14 unpacking to docker.io/library/simple-app:multistage 0.2s done
+#14 DONE 1.0s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/kxqvkjf8wwqyujd9rhc5867mz
+# exit 0

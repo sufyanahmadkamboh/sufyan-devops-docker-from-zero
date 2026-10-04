@@ -1,0 +1,9 @@
+diff docker-compose.yml docker-compose.fixed.yml || true
+---
+1c1
+< # Broken on purpose: the app does not work. Nothing in this file looks obviously wrong...
+---
+> # Fixed: the api gets the DB_PASSWORD it needs (the same value the database was created with).
+16a17
+>       DB_PASSWORD: board-lab-password
+# exit 0

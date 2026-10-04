@@ -33,6 +33,7 @@ MDRUN_ALLOW_CLEANUP=1 is set.
 from __future__ import annotations
 
 import argparse
+import getpass
 import os
 import re
 import shlex
@@ -134,6 +135,11 @@ def sanitize(text: str) -> str:
     for form in {home, home.replace("\\", "/"), "/" + home[0].lower() + home[2:].replace("\\", "/")}:
         if len(home) > 3:
             text = text.replace(form, "~")
+    # ... nor in the owner/group columns of `ls -l` (Git Bash shows a numeric group)
+    user = getpass.getuser()
+    if len(user) > 2:
+        text = re.sub(rf"(?<![\w.-]){re.escape(user)}(?![\w.-])(\s+(?:\d+|{re.escape(user)})(?=\s))?",
+                      lambda m: "learner" + (" learner" if m.group(1) else ""), text)
     return text.rstrip("\n")
 
 
@@ -147,7 +153,8 @@ def shell() -> list[str]:
 
 ENV = {**os.environ, "DOCKER_CLI_HINTS": "false", "NO_COLOR": "1", "BUILDKIT_PROGRESS": "plain",
        "COMPOSE_PROGRESS": "plain", "COMPOSE_ANSI": "never", "MSYS_NO_PATHCONV": "1", "TERM": "dumb"}
-PROBE = re.compile(r"\s*(curl|wget|docker exec|docker run --rm|docker logs|docker compose exec)\b")
+PROBE = re.compile(r"\s*(curl|wget|docker exec|docker run --rm|docker logs|docker compose (exec|ps|logs)|docker ps|"
+                   r"docker inspect|docker (volume|network) (ls|inspect))\b")
 STARTS = re.compile(r"docker (run|create|rm|compose (up|start|run)|network (create|connect|disconnect)|volume create)\b|"
                     r"^\s*(printf|echo|cat)\b.*>", re.M)
 # Git Bash on Windows only: its curl cannot write to "/dev/null" when path conversion is off (exit 23)
@@ -159,7 +166,7 @@ def execute(code: str, cwd: str, timeout: int) -> tuple[str, int, str]:
     """Run code with bash -e in cwd. Returns (output, exit status, working directory at the end)."""
     state = tempfile.NamedTemporaryFile(delete=False, suffix=".cwd")
     state.close()
-    script = "\n".join(["set -eo pipefail", CURL_SHIM if WINDOWS else "", f"cd {shlex.quote(cwd)}", code,
+    script = "\n".join(["set -e", CURL_SHIM if WINDOWS else "", f"cd {shlex.quote(cwd)}", code,
                         f"pwd > {shlex.quote(Path(state.name).as_posix())}", ""])
     try:
         p = subprocess.run(shell() + ["-c", script], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,

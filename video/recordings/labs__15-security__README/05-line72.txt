@@ -1,0 +1,4 @@
+docker run --rm simple-app:root sh -c "echo hacked > /etc/motd && echo wrote /etc/motd"
+---
+wrote /etc/motd
+# exit 0

@@ -1,0 +1,4 @@
+docker run --name writer alpine:3.24 sh -c 'echo "important data" > /data.txt && cat /data.txt'
+---
+important data
+# exit 0

@@ -1,0 +1,5 @@
+docker ps --filter name=simple --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'
+---
+NAMES     STATUS         PORTS
+simple    Up 3 seconds   0.0.0.0:5000->5000/tcp, [::]:5000->5000/tcp
+# exit 0

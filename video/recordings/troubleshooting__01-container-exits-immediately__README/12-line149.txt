@@ -1,0 +1,6 @@
+docker rm exits
+docker run -d --name exits-fixed -p 5000:5000 exits-demo:fixed
+---
+exits
+15012027a57bf648a8b918bfad60c7391313159ee430fd2108274c23403e2c0d
+# exit 0

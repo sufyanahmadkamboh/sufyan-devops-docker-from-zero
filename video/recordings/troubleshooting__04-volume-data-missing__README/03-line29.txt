@@ -1,0 +1,4 @@
+docker run --rm --name reader -v note:/data alpine:3.24 cat /data/todo.txt
+---
+cat: can't open '/data/todo.txt': No such file or directory
+# exit 1

@@ -1,0 +1,48 @@
+docker build -t build-demo .
+---
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 272B done
+#1 WARN: CopyIgnoredFile: Attempting to Copy file "requirements.txt" that is excluded by .dockerignore (line 4)
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14-slim
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 121B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#4 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#4 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 1.12kB done
+#5 DONE 0.0s
+
+#6 [2/5] WORKDIR /app
+#6 CACHED
+
+#7 [3/5] COPY requirements.txt .
+#7 ERROR: failed to calculate checksum of ref 3cd6gxh0d9ods5a51p5kfp9pm::rhf9h9668hujba7brahme9s5s: "/requirements.txt": not found
+------
+ > [3/5] COPY requirements.txt .:
+------
+
+ 1 warning found (use docker --debug to expand):
+ - CopyIgnoredFile: Attempting to Copy file "requirements.txt" that is excluded by .dockerignore (line 4)
+Dockerfile:4
+--------------------
+   2 |     FROM python:3.14-slim
+   3 |     WORKDIR /app
+   4 | >>> COPY requirements.txt .
+   5 |     RUN pip install --no-cache-dir -r requirements.txt
+   6 |     COPY app.py .
+--------------------
+ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref 3cd6gxh0d9ods5a51p5kfp9pm::rhf9h9668hujba7brahme9s5s: "/requirements.txt": not found
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/8jt1qqrh6r5eqqn5t6w2t4sjx
+# exit 1

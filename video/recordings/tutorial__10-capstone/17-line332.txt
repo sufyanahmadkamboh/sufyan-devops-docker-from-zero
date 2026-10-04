@@ -1,0 +1,4 @@
+curl -s -X POST -H "Content-Type: application/json" -d '{"text":"capstone persistence check"}' http://localhost:8080/api/messages
+---
+{"id":2,"text":"capstone persistence check"}
+# exit 0

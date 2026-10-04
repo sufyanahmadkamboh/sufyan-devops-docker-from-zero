@@ -1,0 +1,6 @@
+docker exec -e APP_ENV=changed demo printenv APP_ENV
+docker exec demo printenv APP_ENV
+---
+changed
+development
+# exit 0

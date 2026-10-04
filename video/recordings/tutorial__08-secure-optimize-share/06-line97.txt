@@ -1,0 +1,4 @@
+docker run -d --name secure --read-only -p 5000:5000 simple-app:1.0
+---
+c494a6ee3a5982e510e9d443cb9203c1630e1b10393ffdc71b188145c867d8c6
+# exit 0

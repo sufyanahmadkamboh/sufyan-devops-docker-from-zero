@@ -1,0 +1,14 @@
+docker run --rm simple-app:no-ignore ls -la
+---
+total 40
+drwxr-xr-x 1 root root 4096 Oct  4 04:53 .
+drwxr-xr-x 1 root root 4096 Oct  4 04:53 ..
+-rwxr-xr-x 1 root root  253 Oct  4 04:03 .dockerignore.disabled
+-rwxr-xr-x 1 root root   39 Oct  4 04:53 .env
+-rwxr-xr-x 1 root root 1013 Oct  4 03:32 Dockerfile
+-rwxr-xr-x 1 root root 1201 Oct  4 04:53 app.py
+drwxr-xr-x 2 root root 4096 Oct  4 03:32 dockerfile-steps
+drwxr-xr-x 2 root root 4096 Oct  4 04:53 junk
+drwxr-xr-x 2 root root 4096 Oct  4 03:33 optimization
+-rwxr-xr-x 1 root root   13 Oct  4 04:53 requirements.txt
+# exit 0

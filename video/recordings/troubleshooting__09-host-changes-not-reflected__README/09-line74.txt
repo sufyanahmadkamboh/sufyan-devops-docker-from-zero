@@ -1,0 +1,4 @@
+docker exec web cat /usr/share/nginx/html/index.html
+---
+<h1>Version 1</h1>
+# exit 0

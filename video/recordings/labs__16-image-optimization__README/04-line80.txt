@@ -1,0 +1,51 @@
+docker build -t simple-app:slim .
+---
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.05kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14-slim
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 295B done
+#3 DONE 0.0s
+
+#4 [1/6] FROM docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151
+#4 resolve docker.io/library/python:3.14-slim@sha256:c3e521df8b2b498a7a682e7e18676771cb80c6b75b8699af886b2d554ce40151 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 63B done
+#5 DONE 0.0s
+
+#6 [2/6] WORKDIR /app
+#6 CACHED
+
+#7 [4/6] RUN pip install --no-cache-dir -r requirements.txt
+#7 CACHED
+
+#8 [5/6] COPY app.py .
+#8 CACHED
+
+#9 [3/6] COPY requirements.txt .
+#9 CACHED
+
+#10 [6/6] RUN useradd --create-home --uid 10001 appuser
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 exporting manifest sha256:1a25ca2d9f1761d16f128541c5f01c7d4a8eac44275343873867fa34428f33e3 done
+#11 exporting config sha256:d4030c83b0ca3705932cc489e15e1daddb9bb09c2c2fcffaf806a9aca044f4fe
+#11 exporting config sha256:d4030c83b0ca3705932cc489e15e1daddb9bb09c2c2fcffaf806a9aca044f4fe done
+#11 exporting attestation manifest sha256:4ed7a5f594bd624fbc497d23d6da21a1cad8d42d4586cacb4bb67a8909065132 0.0s done
+#11 exporting manifest list sha256:3396610b83017966a1a233eddcb832e60ccffa00932f707eed16a9c634b35f71 0.0s done
+#11 naming to docker.io/library/simple-app:slim done
+#11 unpacking to docker.io/library/simple-app:slim done
+#11 DONE 0.1s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/3h1zkvf7dnptw3328mqt374y4
+# exit 0

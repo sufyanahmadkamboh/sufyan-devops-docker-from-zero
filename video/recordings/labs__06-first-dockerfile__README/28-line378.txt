@@ -1,0 +1,6 @@
+docker rm -f simple mine
+cd ../..
+---
+simple
+mine
+# exit 0

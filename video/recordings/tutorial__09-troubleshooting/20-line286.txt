@@ -1,0 +1,14 @@
+diff docker-compose.yml docker-compose.fixed.yml || true
+---
+1c1,4
+< # Broken on purpose: the web container keeps stopping. Why?
+---
+> # Fixed: the api joins BOTH networks.
+> #   frontend: web <-> api   (so nginx can find "api")
+> #   backend:  api <-> db    (so the api can find "db")
+> # The database stays on backend only: web still cannot reach it.
+17c20
+<     networks: [backend]
+---
+>     networks: [frontend, backend]
+# exit 0

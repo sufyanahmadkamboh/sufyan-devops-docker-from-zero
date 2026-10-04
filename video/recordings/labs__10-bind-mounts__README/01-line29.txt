@@ -1,0 +1,5 @@
+cd examples/nginx
+ls site
+---
+index.html
+# exit 0

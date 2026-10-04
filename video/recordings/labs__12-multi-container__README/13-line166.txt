@@ -1,0 +1,6 @@
+curl -s -X POST -H "Content-Type: application/json" \
+  -d '{"text":"Hello from the hard way"}' \
+  http://localhost:8080/api/messages
+---
+{"id":2,"text":"Hello from the hard way"}
+# exit 0

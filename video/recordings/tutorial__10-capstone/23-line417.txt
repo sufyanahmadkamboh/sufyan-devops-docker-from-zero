@@ -1,0 +1,4 @@
+docker inspect capstone-api-1 --format 'user={{.Config.User}} readonly={{.HostConfig.ReadonlyRootfs}} memory={{.HostConfig.Memory}} cpus={{.HostConfig.NanoCpus}}'
+---
+user=app readonly=true memory=268435456 cpus=500000000
+# exit 0

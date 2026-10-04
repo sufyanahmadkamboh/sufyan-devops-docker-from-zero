@@ -1,0 +1,6 @@
+docker run -d --name web -p 8080:80 nginx:1.30-alpine
+docker ps --filter name=web --format '{{.Names}}  ports: {{.Ports}}'
+---
+ce9ab6d232d65d3189b2d056ccb7326fd7afcbfb47060fdd801a180a7fea8c5b
+web  ports: 0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
+# exit 0

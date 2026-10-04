@@ -1,0 +1,4 @@
+docker volume rm pgdata
+---
+Error response from daemon: remove pgdata: volume is in use - [b46b9a2142c2c8ba2f571f79af468bee4149948a4399ba9789490d8499620798]
+# exit 1

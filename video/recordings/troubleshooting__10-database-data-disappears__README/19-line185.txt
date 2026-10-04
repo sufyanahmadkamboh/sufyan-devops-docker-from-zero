@@ -1,0 +1,16 @@
+cat docker-compose.old-tutorial.yml
+---
+# Part 2: copied from an older tutorial. The database does not even start on PostgreSQL 18.
+name: ts10b
+
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_PASSWORD: board-lab-password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
+# exit 0

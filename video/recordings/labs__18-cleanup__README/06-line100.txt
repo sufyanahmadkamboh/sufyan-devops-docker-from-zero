@@ -1,0 +1,7 @@
+docker container prune -f --filter label=course=docker-from-zero
+---
+Deleted Containers:
+7ef9d179398cd40c57494f1b0169067f2fafcc56e4e519d0edc1ebfa73aee9a4
+
+Total reclaimed space: 4.096kB
+# exit 0

@@ -1,0 +1,4 @@
+docker ps --filter name=exits-fixed --format '{{.Names}} {{.Status}}'
+---
+exits-fixed Up 3 seconds
+# exit 0

@@ -1,0 +1,6 @@
+docker ps -a --format '{{.Names}} {{.Status}}'
+---
+anon Exited (0) 3 seconds ago
+old2 Exited (0) 4 seconds ago
+old1 Exited (0) 5 seconds ago
+# exit 0

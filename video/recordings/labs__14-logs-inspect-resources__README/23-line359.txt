@@ -1,0 +1,4 @@
+docker run --name oom --memory=64m --memory-swap=64m python:3.14-slim python -c "x = bytearray(256*1024*1024)"
+---
+
+# exit 137

@@ -1,0 +1,4 @@
+docker run --rm simple-app:no-ignore cat .env
+---
+API_KEY=lab-fake-key-not-a-real-secret
+# exit 0

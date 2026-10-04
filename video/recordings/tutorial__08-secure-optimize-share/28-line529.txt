@@ -1,0 +1,7 @@
+docker container prune -f
+docker image prune -f
+docker network prune -f
+---
+Total reclaimed space: 0B
+Total reclaimed space: 0B
+# exit 0

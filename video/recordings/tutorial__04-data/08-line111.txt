@@ -1,0 +1,6 @@
+docker rm -f holder
+docker volume rm notes
+---
+holder
+notes
+# exit 0

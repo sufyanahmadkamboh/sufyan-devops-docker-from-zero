@@ -1,0 +1,6 @@
+docker run -d --name sleeper alpine:3.24 sleep 15
+docker ps --filter name=sleeper --format '{{.Names}}: {{.Status}}'
+---
+803f265508e65a18ffa1fdc2d0d8446850320902ba5bd04d50017f260027cdca
+sleeper: Up Less than a second
+# exit 0

@@ -1,0 +1,4 @@
+docker run --rm alpine:3.24 cat /data.txt
+---
+cat: can't open '/data.txt': No such file or directory
+# exit 1

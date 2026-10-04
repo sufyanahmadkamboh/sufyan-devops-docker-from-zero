@@ -1,0 +1,8 @@
+docker rm -f db olddb
+docker volume rm pgdata olddata
+---
+db
+olddb
+pgdata
+olddata
+# exit 0

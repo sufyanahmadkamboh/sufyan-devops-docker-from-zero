@@ -1,0 +1,6 @@
+docker exec simple python -c "import urllib.request; print(urllib.request.urlopen('http://127.0.0.1:5000').read().decode())"
+---
+Hello from simple-app!
+environment: production
+container hostname: d22e9006c775
+# exit 0

@@ -1,0 +1,72 @@
+docker build -t lab18-demo - <<'EOF'
+FROM alpine:3.24
+RUN echo one > /version
+EOF
+docker build -t lab18-demo - <<'EOF'
+FROM alpine:3.24
+RUN echo two > /version
+EOF
+---
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 78B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/alpine:3.24
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/2] FROM docker.io/library/alpine:3.24@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6
+#4 resolve docker.io/library/alpine:3.24@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6 0.0s done
+#4 CACHED
+
+#5 [2/2] RUN echo one > /version
+#5 DONE 0.2s
+
+#6 exporting to image
+#6 exporting layers 0.1s done
+#6 exporting manifest sha256:2d966477fd0a501bdd58941dd768e5fd738b9528a5ee8e67a3d284275dd00bb7 0.0s done
+#6 exporting config sha256:a692a26fc0eb06dbae2d11a524ae12677af75767ad74c3404d0535eac18c9583 0.0s done
+#6 exporting attestation manifest sha256:cc5ce2aa2ee3b291e6391da8c19b965a9dff6c72933ca1ce357ced33dc62f8d4 0.0s done
+#6 exporting manifest list sha256:38ec4082d0f867db5b03b9f1cfc92a96c2d889b5c5e7f81705b080ab6af02f03 0.0s done
+#6 naming to docker.io/library/lab18-demo:latest done
+#6 unpacking to docker.io/library/lab18-demo:latest 0.0s done
+#6 DONE 0.3s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/vsswoyfdmik2tj2pkwl2gjgaj
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 78B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/alpine:3.24
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/2] FROM docker.io/library/alpine:3.24@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6
+#4 resolve docker.io/library/alpine:3.24@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6 0.0s done
+#4 CACHED
+
+#5 [2/2] RUN echo two > /version
+#5 DONE 0.2s
+
+#6 exporting to image
+#6 exporting layers 0.1s done
+#6 exporting manifest sha256:046b54500b11246dc2b5ccec05d007f55f1a4c6d8cf2f972405245b235aed182 0.0s done
+#6 exporting config sha256:5412a4ec894453e3baff3767f3f17d0c4ded474d7027eb248d87b68ae8128daa 0.0s done
+#6 exporting attestation manifest sha256:f2a7a5f6eaa565ff4c8db3dab04ff59500f8ed4c4aaa8ee57c1c6855f887d0b9 0.0s done
+#6 exporting manifest list sha256:bd65f6e22ee7bf51b6517b7ddfc570547ebbc5fc07a5748d061f9d17a64bb3ef 0.0s done
+#6 naming to docker.io/library/lab18-demo:latest done
+#6 unpacking to docker.io/library/lab18-demo:latest 0.0s done
+#6 DONE 0.2s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/g2w4zljfnax99zy89zd767tk2
+# exit 0

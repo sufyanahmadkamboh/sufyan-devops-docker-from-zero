@@ -1,0 +1,9 @@
+docker rm -f web1 web2 client
+docker network rm labnet othernet
+---
+web1
+web2
+client
+labnet
+othernet
+# exit 0

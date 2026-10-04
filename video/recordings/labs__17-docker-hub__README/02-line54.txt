@@ -1,0 +1,4 @@
+docker run -d --name registry -p 5000:5000 registry:3
+---
+d3e0b279e259f21ab9667e42cbc30e25682e4bace83b9d04e2d5b8e8b2523330
+# exit 0

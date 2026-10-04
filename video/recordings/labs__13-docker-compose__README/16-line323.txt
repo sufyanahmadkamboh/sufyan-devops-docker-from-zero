@@ -1,0 +1,5 @@
+docker compose restart api
+---
+ Container multi-container-app-api-1 Restarting 
+ Container multi-container-app-api-1 Started 
+# exit 0

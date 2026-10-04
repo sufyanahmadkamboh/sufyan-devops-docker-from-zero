@@ -1,0 +1,5 @@
+docker run --name step1 simple-app:step1
+docker ps -a --filter name=step1 --format '{{.Names}}: {{.Status}}'
+---
+step1: Exited (0) Less than a second ago
+# exit 0

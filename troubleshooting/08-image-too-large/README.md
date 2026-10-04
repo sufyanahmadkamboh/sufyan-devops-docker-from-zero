@@ -40,8 +40,10 @@ docker images simple-app --format 'table {{.Repository}}:{{.Tag}}\t{{.Size}}'
 REPOSITORY:TAG     SIZE
 simple-app:fat     1.75GB
 simple-app:1.0     212MB
-simple-app:step4   212MB
+simple-app:leaky   239MB
 simple-app:fixed   212MB
+simple-app:step4   212MB
+simple-app:clean   189MB
 simple-app:step2   189MB
 simple-app:step1   189MB
 ```
@@ -99,10 +101,10 @@ docker run --rm simple-app:fat ls -la /app
 
 ```text
 total 16
-drwxr-xr-x 1 root root 4096 Oct  4 04:11 .
-drwxr-xr-x 1 root root 4096 Oct  4 04:12 ..
--rwxr-xr-x 1 root root 1087 Oct  4 04:02 app.py
--rwxr-xr-x 1 root root   13 Oct  4 04:03 requirements.txt
+drwxr-xr-x 1 root root 4096 Oct  4 04:58 .
+drwxr-xr-x 1 root root 4096 Oct  4 04:59 ..
+-rwxr-xr-x 1 root root 1201 Oct  4 04:53 app.py
+-rwxr-xr-x 1 root root   13 Oct  4 04:53 requirements.txt
 ```
 
 `.dockerignore` keeps the worst out here, but without it `COPY . .` would copy every file in the folder.
@@ -154,9 +156,11 @@ REPOSITORY:TAG          SIZE
 simple-app:multistage   108MB
 simple-app:fat          1.75GB
 simple-app:1.0          212MB
+simple-app:leaky        239MB
 simple-app:step4        212MB
 simple-app:fixed        212MB
 simple-app:step2        189MB
+simple-app:clean        189MB
 simple-app:step1        189MB
 ```
 

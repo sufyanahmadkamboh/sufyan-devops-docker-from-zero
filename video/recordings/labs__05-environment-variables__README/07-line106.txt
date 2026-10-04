@@ -1,0 +1,4 @@
+docker run -d --name demo -e APP_ENV=development -e GREETING="Hi there" alpine:3.24 sleep 300
+---
+9823cfa98b67ad2e4d8bd4ae05259495b9115312f64c96eda59b1761f5bcdb61
+# exit 0

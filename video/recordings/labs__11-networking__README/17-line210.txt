@@ -1,0 +1,4 @@
+docker run --rm --network othernet busybox:1.37 wget -qO- -T 3 http://web2
+---
+wget: bad address 'web2'
+# exit 1

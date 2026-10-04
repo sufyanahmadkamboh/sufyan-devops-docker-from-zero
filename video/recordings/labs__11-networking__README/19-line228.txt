@@ -1,0 +1,4 @@
+docker run --rm --network labnet busybox:1.37 wget -qO- -T 3 http://backend
+---
+wget: bad address 'backend'
+# exit 1

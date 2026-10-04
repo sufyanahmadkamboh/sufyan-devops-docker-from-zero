@@ -1,0 +1,11 @@
+docker rm -f web1 web2 backend store
+docker network rm labnet othernet shop
+---
+web1
+web2
+backend
+store
+labnet
+othernet
+shop
+# exit 0
