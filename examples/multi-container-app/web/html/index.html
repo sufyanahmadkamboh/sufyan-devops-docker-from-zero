@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Message Board · Docker From Zero</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>🐳 Message Board</h1>
+    <p class="sub">Browser → <b>web</b> (nginx) → <b>api</b> (Python) → <b>db</b> (PostgreSQL) → <b>volume</b></p>
+
+    <section id="info" class="card">Asking the API who it is…</section>
+
+    <form id="form" class="card">
+      <input id="text" maxlength="200" placeholder="Write a message, then remove the containers and see if it survives" required>
+      <button>Add</button>
+    </form>
+
+    <section class="card">
+      <h2>Messages <small>(stored in the database, on a Docker volume)</small></h2>
+      <ul id="messages"><li>Loading…</li></ul>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

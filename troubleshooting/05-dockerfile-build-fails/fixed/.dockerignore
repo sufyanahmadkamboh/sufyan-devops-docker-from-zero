@@ -1,0 +1,4 @@
+# Fixed: ignore only what really should stay out of the image.
+# requirements.txt is needed by the Dockerfile, so text files must not be ignored.
+*.log
+notes/

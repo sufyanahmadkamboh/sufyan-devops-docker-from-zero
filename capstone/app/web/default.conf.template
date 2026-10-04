@@ -1,0 +1,17 @@
+# Rendered at start-up: ${API_HOST} is replaced by the API_HOST environment variable.
+server {
+    listen 8080;                 # the unprivileged nginx image cannot use port 80 (no root)
+    server_tokens off;           # do not advertise the nginx version
+
+    add_header X-Content-Type-Options nosniff always;
+    add_header X-Frame-Options DENY always;
+
+    location / {
+        root  /usr/share/nginx/html;
+        index index.html;
+    }
+
+    location /api/ {
+        proxy_pass http://${API_HOST}:5000;
+    }
+}

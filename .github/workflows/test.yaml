@@ -1,0 +1,66 @@
+# Repository maintenance only (you do NOT need this to learn Docker).
+# It proves that every command in the lessons still works: each job gets a fresh Docker
+# engine on a GitHub-hosted Linux machine and runs the lessons with tests/mdrun.py.
+name: test-lessons
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 5 * * 1"     # weekly: catch base images or tools that changed
+
+permissions:
+  contents: read
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static:
+    name: Static checks (links, shell scripts, Dockerfiles, Compose files)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Relative links in every Markdown file point to files that exist
+        run: python3 tests/check_links.py
+      - name: ShellCheck
+        run: shellcheck capstone/verify.sh
+      - name: Compose files are valid
+        run: |
+          cp capstone/secrets/db_password.txt.example capstone/secrets/db_password.txt
+          find . -name 'docker-compose*.yml' -not -path './video/*' -print0 |
+            xargs -0 -I{} sh -c 'echo "== {}"; docker compose -f "{}" config --quiet'
+
+  lessons:
+    name: Run lessons (${{ matrix.part }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [labs-a, labs-b, troubleshooting, challenges, docs, tutorial-a, tutorial-b, capstone]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Run the lessons
+        env:
+          PART: ${{ matrix.part }}
+        run: |
+          case "$PART" in
+            labs-a)          files=$(ls labs/0*/README.md) ;;
+            labs-b)          files=$(ls labs/1*/README.md) ;;
+            troubleshooting) files="troubleshooting/README.md $(ls troubleshooting/*/README.md)" ;;
+            challenges)      files=challenges/README.md ;;
+            docs)            files=$(ls docs/*.md) ;;
+            tutorial-a)      files=$(ls tutorial/0[0-5]*.md) ;;
+            tutorial-b)      files=$(ls tutorial/0[6-9]*.md tutorial/1*.md) ;;
+            capstone)        files="capstone/README.md README.md" ;;
+          esac
+          python3 tests/mdrun.py $files

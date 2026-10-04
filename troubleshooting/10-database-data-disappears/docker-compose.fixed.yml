@@ -1,0 +1,17 @@
+# Fixed: the data lives on a NAMED volume (ts10_db-data).
+# "docker compose down" keeps it; only "docker compose down -v" deletes it.
+name: ts10
+
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: board
+      POSTGRES_USER: board
+      POSTGRES_PASSWORD: board-lab-password
+    volumes:
+      - db-data:/var/lib/postgresql
+      - ../../examples/multi-container-app/database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+volumes:
+  db-data:

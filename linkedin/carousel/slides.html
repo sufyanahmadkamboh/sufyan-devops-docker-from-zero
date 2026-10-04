@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LinkedIn carousel: Docker From Zero (visual)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0b1420; --panel:#13233a; --line:#284468; --ink:#f1f6fc; --muted:#a9bbd2; --blue:#3b82d6; --sky:#9cc3f0;
+          --ok:#4cc286; --bad:#ff6b6b; --amber:#ffc94d; --violet:#b48cff; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { width:1080px; height:1350px; overflow:hidden; }
+  body { background: radial-gradient(900px 600px at 100% 0%, rgba(59,130,214,.26), transparent 60%),
+         radial-gradient(700px 500px at 0% 100%, rgba(156,195,240,.10), transparent 60%), var(--bg);
+         font-family: Inter, "Segoe UI", sans-serif; color: var(--ink); position: relative; }
+  body::before { content:""; position:absolute; inset:0; background-image: linear-gradient(rgba(156,195,240,.05) 1px, transparent 1px),
+                 linear-gradient(90deg, rgba(156,195,240,.05) 1px, transparent 1px); background-size: 54px 54px; }
+  .slide { display:none; position:absolute; inset:0; padding: 74px 70px 118px; flex-direction: column; }
+  .slide.on { display:flex; }
+  .kicker { color: var(--sky); font-weight: 800; font-size: 28px; letter-spacing: 3px; text-transform: uppercase; }
+  h1 { font-size: 76px; line-height: 1.04; font-weight: 900; letter-spacing: -1.5px; margin: 16px 0 10px; }
+  h2 { font-size: 64px; line-height: 1.06; font-weight: 900; letter-spacing: -1px; margin: 14px 0 8px; }
+  .sub { font-size: 34px; color: var(--muted); line-height: 1.35; }
+  .visual { flex: 1; display:flex; align-items:center; justify-content:center; }
+  .ok { color: var(--ok); } .bad { color: var(--bad); } .amber { color: var(--amber); } .sky { color: var(--sky); }
+  svg text { font-family: Inter, "Segoe UI", sans-serif; }
+  svg .mono { font-family: "JetBrains Mono", Consolas, monospace; }
+  .footer { position:absolute; left:70px; right:70px; bottom:42px; display:flex; justify-content:space-between; font-size:25px; color:var(--muted); }
+  .footer b { color: var(--ink); } .swipe { color: var(--sky); font-weight:700; }
+</style>
+</head>
+<body>
+
+<!-- 1 · WHAT + PAIN -->
+<section class="slide" data-n="1">
+  <div class="kicker">DevOps project · explained visually</div>
+  <h1>Docker From Zero: learn it by <span class="ok">breaking</span> it</h1>
+  <div class="sub">a free hands-on lab for complete beginners</div>
+  <div class="visual">
+    <svg width="940" height="760" viewBox="0 0 940 760">
+      <rect x="10" y="20" width="420" height="120" rx="22" fill="#13233a" stroke="#284468" stroke-width="3"/>
+      <text x="40" y="70" font-size="26" fill="#a9bbd2" font-weight="700">DAY 1</text>
+      <text x="40" y="115" font-size="34" fill="#f1f6fc" class="mono">$ docker --version</text>
+      <rect x="510" y="620" width="420" height="120" rx="22" fill="#0f2a22" stroke="#4cc286" stroke-width="3"/>
+      <text x="540" y="670" font-size="26" fill="#4cc286" font-weight="700">THE END</text>
+      <text x="540" y="715" font-size="30" fill="#f1f6fc" class="mono">$ docker compose up -d</text>
+      <!-- staircase -->
+      <g fill="#1b3150" stroke="#3b82d6" stroke-width="3">
+        <rect x="60" y="500" width="160" height="70" rx="12"/>
+        <rect x="230" y="420" width="160" height="70" rx="12"/>
+        <rect x="400" y="340" width="160" height="70" rx="12"/>
+        <rect x="570" y="260" width="160" height="70" rx="12"/>
+        <rect x="740" y="180" width="160" height="70" rx="12"/>
+      </g>
+      <text x="140" y="545" font-size="26" fill="#f1f6fc" text-anchor="middle" font-weight="700">run</text>
+      <text x="310" y="465" font-size="26" fill="#f1f6fc" text-anchor="middle" font-weight="700">build</text>
+      <text x="480" y="385" font-size="26" fill="#ff6b6b" text-anchor="middle" font-weight="800">break 💥</text>
+      <text x="650" y="305" font-size="26" fill="#ffc94d" text-anchor="middle" font-weight="800">debug 🔍</text>
+      <text x="820" y="225" font-size="26" fill="#4cc286" text-anchor="middle" font-weight="800">fix ✅</text>
+      <text x="10" y="665" font-size="27" fill="#9cc3f0" font-weight="700">most tutorials stop</text>
+      <text x="10" y="705" font-size="27" fill="#9cc3f0" font-weight="700">at "hello world"</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 2 · PAIN IN DETAIL -->
+<section class="slide" data-n="2">
+  <div class="kicker">The pain</div>
+  <h2>Why Docker beginners <span class="bad">get stuck</span></h2>
+  <div class="sub">it is not the commands. It is everything around them.</div>
+  <div class="visual">
+    <svg width="940" height="760" viewBox="0 0 940 760">
+      <g>
+        <rect x="0" y="10" width="455" height="350" rx="24" fill="#2a1520" stroke="#ff6b6b" stroke-width="3"/>
+        <text x="40" y="100" font-size="70" fill="#ff6b6b">📋</text>
+        <text x="40" y="190" font-size="34" fill="#f1f6fc" font-weight="800">Copy, paste, hope</text>
+        <text x="40" y="240" font-size="27" fill="#a9bbd2">commands work, but</text>
+        <text x="40" y="280" font-size="27" fill="#a9bbd2">nobody explains why</text>
+      </g>
+      <g>
+        <rect x="485" y="10" width="455" height="350" rx="24" fill="#2a1520" stroke="#ff6b6b" stroke-width="3"/>
+        <text x="525" y="100" font-size="70" fill="#ff6b6b">🙈</text>
+        <text x="525" y="190" font-size="34" fill="#f1f6fc" font-weight="800">Failures are hidden</text>
+        <text x="525" y="240" font-size="27" fill="#a9bbd2">the happy path only,</text>
+        <text x="525" y="280" font-size="27" fill="#a9bbd2">until your first real error</text>
+      </g>
+      <g>
+        <rect x="0" y="390" width="455" height="350" rx="24" fill="#2a1520" stroke="#ff6b6b" stroke-width="3"/>
+        <text x="40" y="480" font-size="70" fill="#ff6b6b">🕰️</text>
+        <text x="40" y="570" font-size="34" fill="#f1f6fc" font-weight="800">Outdated steps</text>
+        <text x="40" y="620" font-size="27" fill="#a9bbd2">PostgreSQL 18 refuses the</text>
+        <text x="40" y="660" font-size="27" fill="#a9bbd2">volume path old guides use</text>
+      </g>
+      <g>
+        <rect x="485" y="390" width="455" height="350" rx="24" fill="#2a1520" stroke="#ff6b6b" stroke-width="3"/>
+        <text x="525" y="480" font-size="70" fill="#ff6b6b">🎲</text>
+        <text x="525" y="570" font-size="34" fill="#f1f6fc" font-weight="800">Debugging = guessing</text>
+        <text x="525" y="620" font-size="27" fill="#a9bbd2">restart it, google it,</text>
+        <text x="525" y="660" font-size="27" fill="#a9bbd2">delete everything, retry</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- 3 · IDEA + ANALOGY -->
+<section class="slide" data-n="3">
+  <div class="kicker">The idea</div>
+  <h2>Driving school, <span class="ok">not a manual</span></h2>
+  <div class="sub">nobody learns to drive by reading. You drive, stall the car, and an instructor shows you why.</div>
+  <div class="visual">
+    <svg width="940" height="720" viewBox="0 0 940 720">
+      <rect x="0" y="300" width="940" height="120" rx="14" fill="#1b2533"/>
+      <line x1="20" y1="360" x2="920" y2="360" stroke="#ffc94d" stroke-width="6" stroke-dasharray="40 30"/>
+      <g font-weight="800" text-anchor="middle">
+        <circle cx="95" cy="200" r="78" fill="#13233a" stroke="#9cc3f0" stroke-width="4"/>
+        <text x="95" y="222" font-size="60" fill="#f1f6fc">📖</text>
+        <text x="95" y="500" font-size="28" fill="#f1f6fc">Theory</text>
+        <text x="95" y="540" font-size="24" fill="#a9bbd2">23 lessons</text>
+
+        <circle cx="282" cy="200" r="78" fill="#13233a" stroke="#3b82d6" stroke-width="4"/>
+        <text x="282" y="222" font-size="60" fill="#f1f6fc">🧑‍🏫</text>
+        <text x="282" y="500" font-size="28" fill="#f1f6fc">Instructor</text>
+        <text x="282" y="540" font-size="24" fill="#a9bbd2">guided tutorial</text>
+
+        <circle cx="470" cy="200" r="78" fill="#13233a" stroke="#3b82d6" stroke-width="4"/>
+        <text x="470" y="222" font-size="60" fill="#f1f6fc">🚗</text>
+        <text x="470" y="500" font-size="28" fill="#f1f6fc">Practice</text>
+        <text x="470" y="540" font-size="24" fill="#a9bbd2">18 labs</text>
+
+        <circle cx="658" cy="200" r="78" fill="#2a1520" stroke="#ff6b6b" stroke-width="4"/>
+        <text x="658" y="222" font-size="60" fill="#f1f6fc">🚨</text>
+        <text x="658" y="500" font-size="28" fill="#f1f6fc">Emergencies</text>
+        <text x="658" y="540" font-size="24" fill="#a9bbd2">10 breakdowns</text>
+
+        <circle cx="845" cy="200" r="78" fill="#0f2a22" stroke="#4cc286" stroke-width="4"/>
+        <text x="845" y="222" font-size="60" fill="#f1f6fc">🏁</text>
+        <text x="845" y="500" font-size="28" fill="#f1f6fc">Driving test</text>
+        <text x="845" y="540" font-size="24" fill="#a9bbd2">the capstone</text>
+      </g>
+      <text x="470" y="650" font-size="30" fill="#9cc3f0" text-anchor="middle" font-weight="700">stalling the car is part of the lesson</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 4 · WHEN TO USE -->
+<section class="slide" data-n="4">
+  <div class="kicker">When to use it</div>
+  <h2>Made for the <span class="ok">first steps</span></h2>
+  <div class="sub">you know a terminal. You have never run a container.</div>
+  <div class="visual">
+    <svg width="940" height="760" viewBox="0 0 940 760">
+      <g>
+        <rect x="0" y="0" width="455" height="200" rx="22" fill="#13233a" stroke="#4cc286" stroke-width="3"/>
+        <text x="35" y="90" font-size="56" fill="#f1f6fc">🌱</text>
+        <text x="120" y="85" font-size="31" fill="#f1f6fc" font-weight="800">New to Docker</text>
+        <text x="120" y="130" font-size="25" fill="#a9bbd2">start at docker --version</text>
+      </g>
+      <g>
+        <rect x="485" y="0" width="455" height="200" rx="22" fill="#13233a" stroke="#4cc286" stroke-width="3"/>
+        <text x="520" y="90" font-size="56" fill="#f1f6fc">💼</text>
+        <text x="605" y="85" font-size="31" fill="#f1f6fc" font-weight="800">Interview prep</text>
+        <text x="605" y="130" font-size="25" fill="#a9bbd2">25 questions + answers</text>
+      </g>
+      <g>
+        <rect x="0" y="230" width="455" height="200" rx="22" fill="#13233a" stroke="#4cc286" stroke-width="3"/>
+        <text x="35" y="320" font-size="56" fill="#f1f6fc">🧑‍🎓</text>
+        <text x="120" y="315" font-size="31" fill="#f1f6fc" font-weight="800">Teaching a class</text>
+        <text x="120" y="360" font-size="25" fill="#a9bbd2">ready labs + solutions</text>
+      </g>
+      <g>
+        <rect x="485" y="230" width="455" height="200" rx="22" fill="#13233a" stroke="#4cc286" stroke-width="3"/>
+        <text x="520" y="320" font-size="56" fill="#f1f6fc">🔁</text>
+        <text x="605" y="315" font-size="31" fill="#f1f6fc" font-weight="800">A refresh</text>
+        <text x="605" y="360" font-size="25" fill="#a9bbd2">Docker 29 behaviour</text>
+      </g>
+      <rect x="0" y="480" width="940" height="270" rx="22" fill="#2b2410" stroke="#ffc94d" stroke-width="3"/>
+      <text x="40" y="545" font-size="32" fill="#ffc94d" font-weight="800">⏭️  Skip it when...</text>
+      <text x="40" y="605" font-size="28" fill="#f1f6fc">you already run containers in production every day</text>
+      <text x="40" y="655" font-size="28" fill="#f1f6fc">you want Kubernetes or CI/CD (they come next,</text>
+      <text x="40" y="700" font-size="28" fill="#f1f6fc">and they all build on what this lab teaches)</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 5 · HOW A LEARNER USES IT -->
+<section class="slide" data-n="5">
+  <div class="kicker">How you use it</div>
+  <h2>Five steps, <span class="ok">all on your laptop</span></h2>
+  <div class="sub">no cloud account, nothing to pay</div>
+  <div class="visual">
+    <svg width="940" height="780" viewBox="0 0 940 780">
+      <line x1="80" y1="60" x2="80" y2="720" stroke="#284468" stroke-width="6"/>
+      <g font-weight="800">
+        <circle cx="80" cy="70" r="46" fill="#3b82d6"/><text x="80" y="84" font-size="38" fill="#ffffff" text-anchor="middle">1</text>
+        <text x="160" y="65" font-size="34" fill="#f1f6fc">Clone the repository</text>
+        <text x="160" y="105" font-size="25" fill="#a9bbd2" font-weight="500">only Docker + Git needed</text>
+
+        <circle cx="80" cy="230" r="46" fill="#3b82d6"/><text x="80" y="244" font-size="38" fill="#ffffff" text-anchor="middle">2</text>
+        <text x="160" y="225" font-size="34" fill="#f1f6fc">Follow the tutorial</text>
+        <text x="160" y="265" font-size="25" fill="#a9bbd2" font-weight="500">12 chapters, type every command</text>
+
+        <circle cx="80" cy="390" r="46" fill="#ff6b6b"/><text x="80" y="404" font-size="38" fill="#ffffff" text-anchor="middle">3</text>
+        <text x="160" y="385" font-size="34" fill="#f1f6fc">Do the lab, then break it</text>
+        <text x="160" y="425" font-size="25" fill="#a9bbd2" font-weight="500">observe → investigate → fix → verify</text>
+
+        <circle cx="80" cy="550" r="46" fill="#ffc94d"/><text x="80" y="564" font-size="38" fill="#0b1420" text-anchor="middle">4</text>
+        <text x="160" y="545" font-size="34" fill="#f1f6fc">Solve the challenges</text>
+        <text x="160" y="585" font-size="25" fill="#a9bbd2" font-weight="500">19 tasks, solutions hidden</text>
+
+        <circle cx="80" cy="710" r="46" fill="#4cc286"/><text x="80" y="724" font-size="38" fill="#0b1420" text-anchor="middle">5</text>
+        <text x="160" y="705" font-size="34" fill="#f1f6fc">Build the capstone</text>
+        <text x="160" y="745" font-size="25" fill="#a9bbd2" font-weight="500">then tick the knowledge checklist</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- 6 · ARCHITECTURE -->
+<section class="slide" data-n="6">
+  <div class="kicker">The capstone architecture</div>
+  <h2>3 containers, 2 networks, <span class="ok">1 volume</span></h2>
+  <div class="sub">built and run with one command</div>
+  <div class="visual">
+    <svg width="940" height="800" viewBox="0 0 940 800">
+      <defs><marker id="a6" markerUnits="userSpaceOnUse" markerWidth="24" markerHeight="24" refX="18" refY="12" orient="auto"><path d="M0,0 L24,12 L0,24 z" fill="#9cc3f0"/></marker></defs>
+      <rect x="240" y="0" width="460" height="80" rx="18" fill="#13233a" stroke="#9cc3f0" stroke-width="3"/>
+      <text x="470" y="52" font-size="30" fill="#f1f6fc" text-anchor="middle" font-weight="800">🧑‍💻 Developer · Docker CLI</text>
+      <line x1="470" y1="82" x2="470" y2="122" stroke="#9cc3f0" stroke-width="5" marker-end="url(#a6)"/>
+      <rect x="0" y="130" width="940" height="560" rx="24" fill="#111c2e" stroke="#3b82d6" stroke-width="3"/>
+      <text x="30" y="178" font-size="28" fill="#9cc3f0" font-weight="800">🐳 Docker Engine</text>
+      <!-- frontend -->
+      <rect x="30" y="205" width="620" height="200" rx="18" fill="#16263f" stroke="#3b82d6" stroke-width="3" stroke-dasharray="12 8"/>
+      <text x="50" y="240" font-size="24" fill="#9cc3f0" font-weight="700">frontend network</text>
+      <rect x="60" y="260" width="240" height="120" rx="16" fill="#13233a" stroke="#4cc286" stroke-width="3"/>
+      <text x="180" y="310" font-size="30" fill="#f1f6fc" text-anchor="middle" font-weight="800">web</text>
+      <text x="180" y="350" font-size="23" fill="#a9bbd2" text-anchor="middle">nginx · :8080</text>
+      <line x1="302" y1="320" x2="372" y2="320" stroke="#9cc3f0" stroke-width="5" marker-end="url(#a6)"/>
+      <rect x="360" y="425" width="560" height="245" rx="18" fill="#1b1f33" stroke="#b48cff" stroke-width="3" stroke-dasharray="12 8"/>
+      <!-- api spans both -->
+      <rect x="380" y="260" width="240" height="320" rx="16" fill="#13233a" stroke="#ffc94d" stroke-width="3"/>
+      <text x="500" y="310" font-size="30" fill="#f1f6fc" text-anchor="middle" font-weight="800">api</text>
+      <text x="500" y="350" font-size="23" fill="#a9bbd2" text-anchor="middle">Python · non-root</text>
+      <text x="500" y="385" font-size="23" fill="#a9bbd2" text-anchor="middle">read-only</text>
+      <!-- backend -->
+      <text x="380" y="655" font-size="24" fill="#b48cff" font-weight="700">backend network</text>
+      <line x1="622" y1="520" x2="692" y2="520" stroke="#9cc3f0" stroke-width="5" marker-end="url(#a6)"/>
+      <rect x="700" y="455" width="200" height="140" rx="16" fill="#13233a" stroke="#b48cff" stroke-width="3"/>
+      <text x="800" y="510" font-size="30" fill="#f1f6fc" text-anchor="middle" font-weight="800">db</text>
+      <text x="800" y="550" font-size="23" fill="#a9bbd2" text-anchor="middle">PostgreSQL 18</text>
+      <!-- blocked -->
+      <text x="180" y="470" font-size="26" fill="#ff6b6b" text-anchor="middle" font-weight="800">web ✗ db</text>
+      <text x="180" y="505" font-size="22" fill="#a9bbd2" text-anchor="middle">cannot even resolve it</text>
+      <!-- volume -->
+      <line x1="800" y1="597" x2="800" y2="712" stroke="#9cc3f0" stroke-width="5" marker-end="url(#a6)"/>
+      <rect x="610" y="720" width="330" height="76" rx="18" fill="#0f2a22" stroke="#4cc286" stroke-width="3"/>
+      <text x="775" y="768" font-size="27" fill="#f1f6fc" text-anchor="middle" font-weight="800">💾 volume db-data</text>
+      <text x="20" y="760" font-size="24" fill="#a9bbd2">only web is published · password is a secret file</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 7 · MECHANISM -->
+<section class="slide" data-n="7">
+  <div class="kicker">How it works</div>
+  <h2>Every lesson is a loop, <span class="ok">every command is tested</span></h2>
+  <div class="visual">
+    <svg width="940" height="820" viewBox="0 0 940 820">
+      <defs><marker id="a7" markerUnits="userSpaceOnUse" markerWidth="24" markerHeight="24" refX="18" refY="12" orient="auto"><path d="M0,0 L24,12 L0,24 z" fill="#9cc3f0"/></marker></defs>
+      <circle cx="470" cy="300" r="215" fill="none" stroke="#284468" stroke-width="6"/>
+      <g font-weight="800" text-anchor="middle">
+        <rect x="390" y="40" width="160" height="66" rx="33" fill="#3b82d6"/><text x="470" y="84" font-size="28" fill="#ffffff">Learn</text>
+        <rect x="620" y="140" width="160" height="66" rx="33" fill="#3b82d6"/><text x="700" y="184" font-size="28" fill="#ffffff">Build</text>
+        <rect x="620" y="390" width="160" height="66" rx="33" fill="#3b82d6"/><text x="700" y="434" font-size="28" fill="#ffffff">Run</text>
+        <rect x="390" y="490" width="160" height="66" rx="33" fill="#ff6b6b"/><text x="470" y="534" font-size="28" fill="#ffffff">Break</text>
+        <rect x="120" y="390" width="200" height="66" rx="33" fill="#ffc94d"/><text x="220" y="434" font-size="27" fill="#0b1420">Troubleshoot</text>
+        <rect x="140" y="140" width="160" height="66" rx="33" fill="#4cc286"/><text x="220" y="184" font-size="28" fill="#0b1420">Fix</text>
+      </g>
+      <text x="470" y="290" font-size="30" fill="#f1f6fc" text-anchor="middle" font-weight="800">observe → evidence</text>
+      <text x="470" y="330" font-size="30" fill="#f1f6fc" text-anchor="middle" font-weight="800">→ root cause</text>
+      <!-- test pipeline -->
+      <rect x="0" y="620" width="270" height="150" rx="18" fill="#13233a" stroke="#9cc3f0" stroke-width="3"/>
+      <text x="135" y="680" font-size="26" fill="#f1f6fc" text-anchor="middle" font-weight="800">📄 lesson</text>
+      <text x="135" y="725" font-size="22" fill="#a9bbd2" text-anchor="middle">every bash block</text>
+      <line x1="272" y1="695" x2="325" y2="695" stroke="#9cc3f0" stroke-width="5" marker-end="url(#a7)"/>
+      <rect x="335" y="620" width="270" height="150" rx="18" fill="#13233a" stroke="#ffc94d" stroke-width="3"/>
+      <text x="470" y="680" font-size="26" fill="#f1f6fc" text-anchor="middle" font-weight="800">⚙️ executed</text>
+      <text x="470" y="725" font-size="22" fill="#a9bbd2" text-anchor="middle">on a fresh engine</text>
+      <line x1="607" y1="695" x2="660" y2="695" stroke="#9cc3f0" stroke-width="5" marker-end="url(#a7)"/>
+      <rect x="670" y="620" width="270" height="150" rx="18" fill="#0f2a22" stroke="#4cc286" stroke-width="3"/>
+      <text x="805" y="680" font-size="26" fill="#f1f6fc" text-anchor="middle" font-weight="800">✅ real output</text>
+      <text x="805" y="725" font-size="22" fill="#a9bbd2" text-anchor="middle">shown in the docs</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 8 · RESULTS (LAB) -->
+<section class="slide" data-n="8">
+  <div class="kicker">Measured results · lab</div>
+  <h2>Same app, <span class="ok">16× smaller</span> image</h2>
+  <div class="sub">and real failures, reproduced on purpose</div>
+  <div class="visual">
+    <svg width="940" height="780" viewBox="0 0 940 780">
+      <text x="0" y="40" font-size="26" fill="#9cc3f0" font-weight="800">IMAGE SIZE (disk usage)</text>
+      <g font-weight="800">
+        <text x="0" y="105" font-size="27" fill="#f1f6fc">first Dockerfile</text>
+        <rect x="260" y="72" width="560" height="50" rx="10" fill="#ff6b6b"/>
+        <text x="835" y="108" font-size="30" fill="#ff6b6b">1.75 GB</text>
+        <text x="0" y="185" font-size="27" fill="#f1f6fc">slim base</text>
+        <rect x="260" y="152" width="68" height="50" rx="10" fill="#ffc94d"/>
+        <text x="345" y="188" font-size="30" fill="#ffc94d">212 MB</text>
+        <text x="0" y="265" font-size="27" fill="#f1f6fc">multi-stage</text>
+        <rect x="260" y="232" width="35" height="50" rx="10" fill="#4cc286"/>
+        <text x="312" y="268" font-size="30" fill="#4cc286">108 MB</text>
+      </g>
+      <text x="0" y="360" font-size="26" fill="#9cc3f0" font-weight="800">FAILURES YOU WILL CAUSE (AND FIX)</text>
+      <g class="mono" font-size="23" font-weight="700">
+        <rect x="0" y="385" width="455" height="62" rx="12" fill="#2a1520" stroke="#ff6b6b" stroke-width="2"/>
+        <text x="20" y="425" fill="#ffb3b3" class="mono">Exited (2) · can't open file</text>
+        <rect x="485" y="385" width="455" height="62" rx="12" fill="#2a1520" stroke="#ff6b6b" stroke-width="2"/>
+        <text x="505" y="425" fill="#ffb3b3" class="mono">port is already allocated</text>
+        <rect x="0" y="465" width="455" height="62" rx="12" fill="#2a1520" stroke="#ff6b6b" stroke-width="2"/>
+        <text x="20" y="505" fill="#ffb3b3" class="mono">host not found in upstream</text>
+        <rect x="485" y="465" width="455" height="62" rx="12" fill="#2a1520" stroke="#ff6b6b" stroke-width="2"/>
+        <text x="505" y="505" fill="#ffb3b3" class="mono">DB_PASSWORD missing · (3)</text>
+        <rect x="0" y="545" width="455" height="62" rx="12" fill="#2a1520" stroke="#ff6b6b" stroke-width="2"/>
+        <text x="20" y="585" fill="#ffb3b3" class="mono">app bound to 127.0.0.1</text>
+        <rect x="485" y="545" width="455" height="62" rx="12" fill="#2a1520" stroke="#ff6b6b" stroke-width="2"/>
+        <text x="505" y="585" fill="#ffb3b3" class="mono">OOMKilled · exit 137</text>
+      </g>
+      <rect x="0" y="640" width="940" height="120" rx="20" fill="#0f2a22" stroke="#4cc286" stroke-width="3"/>
+      <text x="470" y="692" font-size="30" fill="#f1f6fc" text-anchor="middle" font-weight="800">capstone verify.sh: 18 checks</text>
+      <text x="470" y="735" font-size="25" fill="#a9bbd2" text-anchor="middle">incl. the data surviving docker compose down + up</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 9 · STUDY MATERIAL -->
+<section class="slide" data-n="9">
+  <div class="kicker">Study material</div>
+  <h2>Everything a beginner needs, <span class="ok">in one repo</span></h2>
+  <div class="visual">
+    <svg width="940" height="860" viewBox="0 0 940 860">
+      <g font-weight="900" text-anchor="middle">
+        <rect x="0" y="0" width="300" height="250" rx="22" fill="#13233a" stroke="#3b82d6" stroke-width="3"/>
+        <text x="150" y="120" font-size="88" fill="#9cc3f0">23</text><text x="150" y="190" font-size="28" fill="#f1f6fc">lessons</text>
+        <rect x="320" y="0" width="300" height="250" rx="22" fill="#13233a" stroke="#3b82d6" stroke-width="3"/>
+        <text x="470" y="120" font-size="88" fill="#9cc3f0">18</text><text x="470" y="190" font-size="28" fill="#f1f6fc">hands-on labs</text>
+        <rect x="640" y="0" width="300" height="250" rx="22" fill="#13233a" stroke="#3b82d6" stroke-width="3"/>
+        <text x="790" y="120" font-size="88" fill="#9cc3f0">12</text><text x="790" y="190" font-size="28" fill="#f1f6fc">tutorial chapters</text>
+        <rect x="0" y="275" width="300" height="250" rx="22" fill="#2a1520" stroke="#ff6b6b" stroke-width="3"/>
+        <text x="150" y="395" font-size="88" fill="#ff6b6b">10</text><text x="150" y="465" font-size="28" fill="#f1f6fc">failure scenarios</text>
+        <rect x="320" y="275" width="300" height="250" rx="22" fill="#2b2410" stroke="#ffc94d" stroke-width="3"/>
+        <text x="470" y="395" font-size="88" fill="#ffc94d">19</text><text x="470" y="465" font-size="28" fill="#f1f6fc">challenges</text>
+        <rect x="640" y="275" width="300" height="250" rx="22" fill="#0f2a22" stroke="#4cc286" stroke-width="3"/>
+        <text x="790" y="395" font-size="88" fill="#4cc286">1</text><text x="790" y="465" font-size="28" fill="#f1f6fc">capstone</text>
+      </g>
+      <rect x="0" y="560" width="455" height="200" rx="22" fill="#13233a" stroke="#b48cff" stroke-width="3"/>
+      <text x="40" y="650" font-size="60" fill="#f1f6fc">🎬</text>
+      <text x="130" y="640" font-size="32" fill="#f1f6fc" font-weight="800">2-part video</text>
+      <text x="130" y="685" font-size="25" fill="#a9bbd2">recorded from real runs</text>
+      <rect x="485" y="560" width="455" height="200" rx="22" fill="#13233a" stroke="#b48cff" stroke-width="3"/>
+      <text x="525" y="650" font-size="60" fill="#f1f6fc">📘</text>
+      <text x="615" y="640" font-size="32" fill="#f1f6fc" font-weight="800">PDF study guide</text>
+      <text x="615" y="685" font-size="25" fill="#a9bbd2">+ 25 interview questions</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 10 · RUN IT YOURSELF -->
+<section class="slide" data-n="10">
+  <div class="kicker">Run it yourself</div>
+  <h2>From clone to running app <span class="ok">in 5 commands</span></h2>
+  <div class="sub">needs only Docker and Git</div>
+  <div class="visual">
+    <svg width="940" height="780" viewBox="0 0 940 780">
+      <g class="mono" font-size="25" font-weight="700">
+        <rect x="0" y="0" width="760" height="100" rx="16" fill="#0f1724" stroke="#284468" stroke-width="3"/>
+        <text x="25" y="44" fill="#9cc3f0" class="mono">1</text><text x="65" y="44" fill="#f1f6fc" class="mono">$ git clone .../sufyan-devops-</text>
+        <text x="65" y="80" fill="#f1f6fc" class="mono">  docker-from-zero.git</text>
+        <rect x="45" y="125" width="760" height="80" rx="16" fill="#0f1724" stroke="#284468" stroke-width="3"/>
+        <text x="70" y="175" fill="#9cc3f0" class="mono">2</text><text x="110" y="175" fill="#f1f6fc" class="mono">$ cd sufyan-devops-docker-from-zero/capstone</text>
+        <rect x="90" y="230" width="760" height="100" rx="16" fill="#0f1724" stroke="#284468" stroke-width="3"/>
+        <text x="115" y="274" fill="#9cc3f0" class="mono">3</text><text x="155" y="274" fill="#f1f6fc" class="mono">$ cp secrets/db_password.txt.example \</text>
+        <text x="155" y="310" fill="#f1f6fc" class="mono">     secrets/db_password.txt</text>
+        <rect x="135" y="355" width="760" height="80" rx="16" fill="#0f1724" stroke="#284468" stroke-width="3"/>
+        <text x="160" y="405" fill="#9cc3f0" class="mono">4</text><text x="200" y="405" fill="#f1f6fc" class="mono">$ docker compose up -d --build</text>
+        <rect x="180" y="460" width="760" height="80" rx="16" fill="#0f1724" stroke="#4cc286" stroke-width="3"/>
+        <text x="205" y="510" fill="#9cc3f0" class="mono">5</text><text x="245" y="510" fill="#f1f6fc" class="mono">$ ./verify.sh</text>
+      </g>
+      <rect x="180" y="575" width="760" height="90" rx="16" fill="#0f2a22" stroke="#4cc286" stroke-width="3"/>
+      <text x="560" y="632" font-size="32" fill="#4cc286" text-anchor="middle" font-weight="800" class="mono">All checks passed.</text>
+      <text x="470" y="735" font-size="27" fill="#9cc3f0" text-anchor="middle" font-weight="700">then open http://localhost:8080</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 11 · LINKS + QR -->
+<section class="slide" data-n="11">
+  <div class="kicker">Free and open source</div>
+  <h2>Clone it. Break it. <span class="ok">Fix it.</span></h2>
+  <div class="sub">What was the first Docker error that confused you? 💬</div>
+  <div class="visual">
+    <svg width="940" height="760" viewBox="0 0 940 760">
+      <rect x="0" y="0" width="455" height="620" rx="26" fill="#13233a" stroke="#3b82d6" stroke-width="3"/>
+      <rect x="57" y="40" width="340" height="340" rx="14" fill="#ffffff"/>
+      <g transform="translate(77,60) scale(1)"><g transform="scale(8.10811)"><path d="M0,0H1V1H0zM1,0H2V1H1zM2,0H3V1H2zM3,0H4V1H3zM4,0H5V1H4zM5,0H6V1H5zM6,0H7V1H6zM8,0H9V1H8zM12,0H13V1H12zM15,0H16V1H15zM18,0H19V1H18zM19,0H20V1H19zM21,0H22V1H21zM24,0H25V1H24zM25,0H26V1H25zM26,0H27V1H26zM27,0H28V1H27zM28,0H29V1H28zM30,0H31V1H30zM31,0H32V1H31zM32,0H33V1H32zM33,0H34V1H33zM34,0H35V1H34zM35,0H36V1H35zM36,0H37V1H36zM0,1H1V2H0zM6,1H7V2H6zM11,1H12V2H11zM12,1H13V2H12zM13,1H14V2H13zM14,1H15V2H14zM15,1H16V2H15zM17,1H18V2H17zM18,1H19V2H18zM20,1H21V2H20zM21,1H22V2H21zM22,1H23V2H22zM26,1H27V2H26zM28,1H29V2H28zM30,1H31V2H30zM36,1H37V2H36zM0,2H1V3H0zM2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM6,2H7V3H6zM9,2H10V3H9zM12,2H13V3H12zM14,2H15V3H14zM17,2H18V3H17zM19,2H20V3H19zM20,2H21V3H20zM21,2H22V3H21zM22,2H23V3H22zM24,2H25V3H24zM26,2H27V3H26zM27,2H28V3H27zM30,2H31V3H30zM32,2H33V3H32zM33,2H34V3H33zM34,2H35V3H34zM36,2H37V3H36zM0,3H1V4H0zM2,3H3V4H2zM3,3H4V4H3zM4,3H5V4H4zM6,3H7V4H6zM8,3H9V4H8zM9,3H10V4H9zM10,3H11V4H10zM12,3H13V4H12zM14,3H15V4H14zM16,3H17V4H16zM18,3H19V4H18zM19,3H20V4H19zM25,3H26V4H25zM26,3H27V4H26zM28,3H29V4H28zM30,3H31V4H30zM32,3H33V4H32zM33,3H34V4H33zM34,3H35V4H34zM36,3H37V4H36zM0,4H1V5H0zM2,4H3V5H2zM3,4H4V5H3zM4,4H5V5H4zM6,4H7V5H6zM8,4H9V5H8zM9,4H10V5H9zM13,4H14V5H13zM18,4H19V5H18zM21,4H22V5H21zM23,4H24V5H23zM25,4H26V5H25zM26,4H27V5H26zM27,4H28V5H27zM28,4H29V5H28zM30,4H31V5H30zM32,4H33V5H32zM33,4H34V5H33zM34,4H35V5H34zM36,4H37V5H36zM0,5H1V6H0zM6,5H7V6H6zM8,5H9V6H8zM9,5H10V6H9zM11,5H12V6H11zM13,5H14V6H13zM14,5H15V6H14zM15,5H16V6H15zM18,5H19V6H18zM19,5H20V6H19zM21,5H22V6H21zM22,5H23V6H22zM30,5H31V6H30zM36,5H37V6H36zM0,6H1V7H0zM1,6H2V7H1zM2,6H3V7H2zM3,6H4V7H3zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM10,6H11V7H10zM12,6H13V7H12zM14,6H15V7H14zM16,6H17V7H16zM18,6H19V7H18zM20,6H21V7H20zM22,6H23V7H22zM24,6H25V7H24zM26,6H27V7H26zM28,6H29V7H28zM30,6H31V7H30zM31,6H32V7H31zM32,6H33V7H32zM33,6H34V7H33zM34,6H35V7H34zM35,6H36V7H35zM36,6H37V7H36zM8,7H9V8H8zM11,7H12V8H11zM12,7H13V8H12zM14,7H15V8H14zM16,7H17V8H16zM17,7H18V8H17zM18,7H19V8H18zM20,7H21V8H20zM22,7H23V8H22zM23,7H24V8H23zM0,8H1V9H0zM4,8H5V9H4zM6,8H7V9H6zM7,8H8V9H7zM8,8H9V9H8zM13,8H14V9H13zM14,8H15V9H14zM18,8H19V9H18zM22,8H23V9H22zM24,8H25V9H24zM27,8H28V9H27zM29,8H30V9H29zM30,8H31V9H30zM31,8H32V9H31zM32,8H33V9H32zM33,8H34V9H33zM36,8H37V9H36zM1,9H2V10H1zM8,9H9V10H8zM10,9H11V10H10zM11,9H12V10H11zM13,9H14V10H13zM16,9H17V10H16zM17,9H18V10H17zM19,9H20V10H19zM20,9H21V10H20zM23,9H24V10H23zM27,9H28V10H27zM32,9H33V10H32zM33,9H34V10H33zM35,9H36V10H35zM0,10H1V11H0zM1,10H2V11H1zM2,10H3V11H2zM4,10H5V11H4zM5,10H6V11H5zM6,10H7V11H6zM7,10H8V11H7zM8,10H9V11H8zM10,10H11V11H10zM11,10H12V11H11zM13,10H14V11H13zM16,10H17V11H16zM18,10H19V11H18zM20,10H21V11H20zM21,10H22V11H21zM22,10H23V11H22zM23,10H24V11H23zM25,10H26V11H25zM26,10H27V11H26zM27,10H28V11H27zM28,10H29V11H28zM31,10H32V11H31zM33,10H34V11H33zM34,10H35V11H34zM0,11H1V12H0zM3,11H4V12H3zM8,11H9V12H8zM9,11H10V12H9zM10,11H11V12H10zM11,11H12V12H11zM14,11H15V12H14zM17,11H18V12H17zM18,11H19V12H18zM21,11H22V12H21zM26,11H27V12H26zM28,11H29V12H28zM30,11H31V12H30zM31,11H32V12H31zM32,11H33V12H32zM34,11H35V12H34zM35,11H36V12H35zM0,12H1V13H0zM1,12H2V13H1zM3,12H4V13H3zM6,12H7V13H6zM9,12H10V13H9zM10,12H11V13H10zM11,12H12V13H11zM15,12H16V13H15zM17,12H18V13H17zM19,12H20V13H19zM20,12H21V13H20zM21,12H22V13H21zM22,12H23V13H22zM24,12H25V13H24zM29,12H30V13H29zM30,12H31V13H30zM31,12H32V13H31zM34,12H35V13H34zM35,12H36V13H35zM36,12H37V13H36zM2,13H3V14H2zM3,13H4V14H3zM5,13H6V14H5zM8,13H9V14H8zM9,13H10V14H9zM10,13H11V14H10zM11,13H12V14H11zM12,13H13V14H12zM13,13H14V14H13zM15,13H16V14H15zM16,13H17V14H16zM17,13H18V14H17zM18,13H19V14H18zM23,13H24V14H23zM25,13H26V14H25zM26,13H27V14H26zM27,13H28V14H27zM32,13H33V14H32zM33,13H34V14H33zM0,14H1V15H0zM2,14H3V15H2zM3,14H4V15H3zM6,14H7V15H6zM7,14H8V15H7zM9,14H10V15H9zM10,14H11V15H10zM11,14H12V15H11zM14,14H15V15H14zM15,14H16V15H15zM18,14H19V15H18zM20,14H21V15H20zM21,14H22V15H21zM22,14H23V15H22zM23,14H24V15H23zM24,14H25V15H24zM25,14H26V15H25zM27,14H28V15H27zM28,14H29V15H28zM31,14H32V15H31zM32,14H33V15H32zM33,14H34V15H33zM34,14H35V15H34zM3,15H4V16H3zM4,15H5V16H4zM5,15H6V16H5zM11,15H12V16H11zM15,15H16V16H15zM16,15H17V16H16zM21,15H22V16H21zM23,15H24V16H23zM28,15H29V16H28zM29,15H30V16H29zM31,15H32V16H31zM32,15H33V16H32zM34,15H35V16H34zM0,16H1V17H0zM1,16H2V17H1zM3,16H4V17H3zM4,16H5V17H4zM5,16H6V17H5zM6,16H7V17H6zM8,16H9V17H8zM9,16H10V17H9zM13,16H14V17H13zM15,16H16V17H15zM16,16H17V17H16zM19,16H20V17H19zM20,16H21V17H20zM23,16H24V17H23zM28,16H29V17H28zM29,16H30V17H29zM30,16H31V17H30zM31,16H32V17H31zM33,16H34V17H33zM34,16H35V17H34zM35,16H36V17H35zM0,17H1V18H0zM2,17H3V18H2zM3,17H4V18H3zM5,17H6V18H5zM7,17H8V18H7zM9,17H10V18H9zM10,17H11V18H10zM12,17H13V18H12zM14,17H15V18H14zM17,17H18V18H17zM18,17H19V18H18zM19,17H20V18H19zM21,17H22V18H21zM22,17H23V18H22zM23,17H24V18H23zM26,17H27V18H26zM27,17H28V18H27zM28,17H29V18H28zM31,17H32V18H31zM32,17H33V18H32zM33,17H34V18H33zM35,17H36V18H35zM0,18H1V19H0zM1,18H2V19H1zM2,18H3V19H2zM3,18H4V19H3zM5,18H6V19H5zM6,18H7V19H6zM10,18H11V19H10zM11,18H12V19H11zM12,18H13V19H12zM15,18H16V19H15zM17,18H18V19H17zM19,18H20V19H19zM21,18H22V19H21zM22,18H23V19H22zM23,18H24V19H23zM24,18H25V19H24zM26,18H27V19H26zM27,18H28V19H27zM29,18H30V19H29zM30,18H31V19H30zM31,18H32V19H31zM32,18H33V19H32zM34,18H35V19H34zM0,19H1V20H0zM2,19H3V20H2zM3,19H4V20H3zM4,19H5V20H4zM5,19H6V20H5zM7,19H8V20H7zM8,19H9V20H8zM10,19H11V20H10zM12,19H13V20H12zM13,19H14V20H13zM15,19H16V20H15zM16,19H17V20H16zM17,19H18V20H17zM19,19H20V20H19zM20,19H21V20H20zM21,19H22V20H21zM22,19H23V20H22zM23,19H24V20H23zM24,19H25V20H24zM26,19H27V20H26zM27,19H28V20H27zM34,19H35V20H34zM35,19H36V20H35zM5,20H6V21H5zM6,20H7V21H6zM9,20H10V21H9zM11,20H12V21H11zM13,20H14V21H13zM14,20H15V21H14zM16,20H17V21H16zM17,20H18V21H17zM18,20H19V21H18zM20,20H21V21H20zM21,20H22V21H21zM22,20H23V21H22zM26,20H27V21H26zM29,20H30V21H29zM30,20H31V21H30zM31,20H32V21H31zM33,20H34V21H33zM34,20H35V21H34zM1,21H2V22H1zM3,21H4V22H3zM5,21H6V22H5zM10,21H11V22H10zM11,21H12V22H11zM12,21H13V22H12zM14,21H15V22H14zM15,21H16V22H15zM16,21H17V22H16zM18,21H19V22H18zM21,21H22V22H21zM23,21H24V22H23zM26,21H27V22H26zM27,21H28V22H27zM28,21H29V22H28zM29,21H30V22H29zM31,21H32V22H31zM32,21H33V22H32zM3,22H4V23H3zM5,22H6V23H5zM6,22H7V23H6zM7,22H8V23H7zM9,22H10V23H9zM12,22H13V23H12zM15,22H16V23H15zM16,22H17V23H16zM17,22H18V23H17zM20,22H21V23H20zM23,22H24V23H23zM25,22H26V23H25zM26,22H27V23H26zM27,22H28V23H27zM30,22H31V23H30zM31,22H32V23H31zM32,22H33V23H32zM33,22H34V23H33zM34,22H35V23H34zM35,22H36V23H35zM0,23H1V24H0zM3,23H4V24H3zM4,23H5V24H4zM10,23H11V24H10zM11,23H12V24H11zM14,23H15V24H14zM17,23H18V24H17zM18,23H19V24H18zM19,23H20V24H19zM22,23H23V24H22zM24,23H25V24H24zM26,23H27V24H26zM27,23H28V24H27zM30,23H31V24H30zM31,23H32V24H31zM32,23H33V24H32zM34,23H35V24H34zM35,23H36V24H35zM36,23H37V24H36zM0,24H1V25H0zM2,24H3V25H2zM5,24H6V25H5zM6,24H7V25H6zM7,24H8V25H7zM9,24H10V25H9zM10,24H11V25H10zM11,24H12V25H11zM12,24H13V25H12zM18,24H19V25H18zM22,24H23V25H22zM24,24H25V25H24zM29,24H30V25H29zM30,24H31V25H30zM33,24H34V25H33zM34,24H35V25H34zM35,24H36V25H35zM0,25H1V26H0zM1,25H2V26H1zM2,25H3V26H2zM3,25H4V26H3zM5,25H6V26H5zM7,25H8V26H7zM8,25H9V26H8zM9,25H10V26H9zM11,25H12V26H11zM12,25H13V26H12zM13,25H14V26H13zM16,25H17V26H16zM17,25H18V26H17zM19,25H20V26H19zM20,25H21V26H20zM21,25H22V26H21zM23,25H24V26H23zM26,25H27V26H26zM27,25H28V26H27zM28,25H29V26H28zM32,25H33V26H32zM33,25H34V26H33zM3,26H4V27H3zM5,26H6V27H5zM6,26H7V27H6zM8,26H9V27H8zM11,26H12V27H11zM12,26H13V27H12zM13,26H14V27H13zM14,26H15V27H14zM16,26H17V27H16zM18,26H19V27H18zM20,26H21V27H20zM21,26H22V27H21zM23,26H24V27H23zM25,26H26V27H25zM26,26H27V27H26zM27,26H28V27H27zM33,26H34V27H33zM4,27H5V28H4zM7,27H8V28H7zM10,27H11V28H10zM12,27H13V28H12zM13,27H14V28H13zM17,27H18V28H17zM18,27H19V28H18zM21,27H22V28H21zM26,27H27V28H26zM28,27H29V28H28zM29,27H30V28H29zM34,27H35V28H34zM36,27H37V28H36zM0,28H1V29H0zM1,28H2V29H1zM3,28H4V29H3zM4,28H5V29H4zM5,28H6V29H5zM6,28H7V29H6zM7,28H8V29H7zM8,28H9V29H8zM13,28H14V29H13zM14,28H15V29H14zM15,28H16V29H15zM17,28H18V29H17zM19,28H20V29H19zM20,28H21V29H20zM21,28H22V29H21zM22,28H23V29H22zM23,28H24V29H23zM24,28H25V29H24zM27,28H28V29H27zM28,28H29V29H28zM29,28H30V29H29zM30,28H31V29H30zM31,28H32V29H31zM32,28H33V29H32zM34,28H35V29H34zM36,28H37V29H36zM8,29H9V30H8zM9,29H10V30H9zM10,29H11V30H10zM11,29H12V30H11zM12,29H13V30H12zM13,29H14V30H13zM14,29H15V30H14zM15,29H16V30H15zM16,29H17V30H16zM17,29H18V30H17zM23,29H24V30H23zM27,29H28V30H27zM28,29H29V30H28zM32,29H33V30H32zM0,30H1V31H0zM1,30H2V31H1zM2,30H3V31H2zM3,30H4V31H3zM4,30H5V31H4zM5,30H6V31H5zM6,30H7V31H6zM8,30H9V31H8zM11,30H12V31H11zM12,30H13V31H12zM14,30H15V31H14zM15,30H16V31H15zM18,30H19V31H18zM21,30H22V31H21zM22,30H23V31H22zM23,30H24V31H23zM24,30H25V31H24zM26,30H27V31H26zM28,30H29V31H28zM30,30H31V31H30zM32,30H33V31H32zM0,31H1V32H0zM6,31H7V32H6zM9,31H10V32H9zM11,31H12V32H11zM15,31H16V32H15zM20,31H21V32H20zM21,31H22V32H21zM23,31H24V32H23zM24,31H25V32H24zM26,31H27V32H26zM28,31H29V32H28zM32,31H33V32H32zM33,31H34V32H33zM34,31H35V32H34zM0,32H1V33H0zM2,32H3V33H2zM3,32H4V33H3zM4,32H5V33H4zM6,32H7V33H6zM8,32H9V33H8zM9,32H10V33H9zM10,32H11V33H10zM11,32H12V33H11zM12,32H13V33H12zM16,32H17V33H16zM19,32H20V33H19zM20,32H21V33H20zM26,32H27V33H26zM28,32H29V33H28zM29,32H30V33H29zM30,32H31V33H30zM31,32H32V33H31zM32,32H33V33H32zM33,32H34V33H33zM34,32H35V33H34zM36,32H37V33H36zM0,33H1V34H0zM2,33H3V34H2zM3,33H4V34H3zM4,33H5V34H4zM6,33H7V34H6zM9,33H10V34H9zM12,33H13V34H12zM13,33H14V34H13zM18,33H19V34H18zM19,33H20V34H19zM22,33H23V34H22zM23,33H24V34H23zM25,33H26V34H25zM26,33H27V34H26zM29,33H30V34H29zM30,33H31V34H30zM31,33H32V34H31zM33,33H34V34H33zM34,33H35V34H34zM36,33H37V34H36zM0,34H1V35H0zM2,34H3V35H2zM3,34H4V35H3zM4,34H5V35H4zM6,34H7V35H6zM9,34H10V35H9zM10,34H11V35H10zM11,34H12V35H11zM12,34H13V35H12zM14,34H15V35H14zM15,34H16V35H15zM19,34H20V35H19zM21,34H22V35H21zM22,34H23V35H22zM23,34H24V35H23zM24,34H25V35H24zM25,34H26V35H25zM27,34H28V35H27zM29,34H30V35H29zM30,34H31V35H30zM0,35H1V36H0zM6,35H7V36H6zM14,35H15V36H14zM15,35H16V36H15zM16,35H17V36H16zM17,35H18V36H17zM18,35H19V36H18zM19,35H20V36H19zM20,35H21V36H20zM21,35H22V36H21zM23,35H24V36H23zM24,35H25V36H24zM26,35H27V36H26zM27,35H28V36H27zM29,35H30V36H29zM32,35H33V36H32zM34,35H35V36H34zM35,35H36V36H35zM0,36H1V37H0zM1,36H2V37H1zM2,36H3V37H2zM3,36H4V37H3zM4,36H5V37H4zM5,36H6V37H5zM6,36H7V37H6zM8,36H9V37H8zM9,36H10V37H9zM13,36H14V37H13zM16,36H17V37H16zM17,36H18V37H17zM20,36H21V37H20zM21,36H22V37H21zM22,36H23V37H22zM23,36H24V37H23zM27,36H28V37H27zM29,36H30V37H29zM31,36H32V37H31zM33,36H34V37H33zM34,36H35V37H34zM35,36H36V37H35zM36,36H37V37H36z" fill="#0b1420"/></g></g>
+      <text x="227" y="450" font-size="34" fill="#f1f6fc" text-anchor="middle" font-weight="800">The repository</text>
+      <text x="227" y="500" font-size="23" fill="#a9bbd2" text-anchor="middle">github.com/sufyanahmadkamboh/</text>
+      <text x="227" y="535" font-size="23" fill="#a9bbd2" text-anchor="middle">sufyan-devops-docker-from-zero</text>
+      <rect x="485" y="0" width="455" height="620" rx="26" fill="#13233a" stroke="#4cc286" stroke-width="3"/>
+      <rect x="542" y="40" width="340" height="340" rx="14" fill="#ffffff"/>
+      <g transform="translate(562,60) scale(1)"><g transform="scale(10.34483)"><path d="M0,0H1V1H0zM1,0H2V1H1zM2,0H3V1H2zM3,0H4V1H3zM4,0H5V1H4zM5,0H6V1H5zM6,0H7V1H6zM10,0H11V1H10zM11,0H12V1H11zM12,0H13V1H12zM13,0H14V1H13zM14,0H15V1H14zM16,0H17V1H16zM18,0H19V1H18zM19,0H20V1H19zM22,0H23V1H22zM23,0H24V1H23zM24,0H25V1H24zM25,0H26V1H25zM26,0H27V1H26zM27,0H28V1H27zM28,0H29V1H28zM0,1H1V2H0zM6,1H7V2H6zM11,1H12V2H11zM12,1H13V2H12zM13,1H14V2H13zM14,1H15V2H14zM15,1H16V2H15zM20,1H21V2H20zM22,1H23V2H22zM28,1H29V2H28zM0,2H1V3H0zM2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM6,2H7V3H6zM9,2H10V3H9zM12,2H13V3H12zM13,2H14V3H13zM15,2H16V3H15zM17,2H18V3H17zM18,2H19V3H18zM20,2H21V3H20zM22,2H23V3H22zM24,2H25V3H24zM25,2H26V3H25zM26,2H27V3H26zM28,2H29V3H28zM0,3H1V4H0zM2,3H3V4H2zM3,3H4V4H3zM4,3H5V4H4zM6,3H7V4H6zM9,3H10V4H9zM10,3H11V4H10zM12,3H13V4H12zM13,3H14V4H13zM14,3H15V4H14zM18,3H19V4H18zM22,3H23V4H22zM24,3H25V4H24zM25,3H26V4H25zM26,3H27V4H26zM28,3H29V4H28zM0,4H1V5H0zM2,4H3V5H2zM3,4H4V5H3zM4,4H5V5H4zM6,4H7V5H6zM9,4H10V5H9zM10,4H11V5H10zM12,4H13V5H12zM13,4H14V5H13zM14,4H15V5H14zM15,4H16V5H15zM17,4H18V5H17zM18,4H19V5H18zM22,4H23V5H22zM24,4H25V5H24zM25,4H26V5H25zM26,4H27V5H26zM28,4H29V5H28zM0,5H1V6H0zM6,5H7V6H6zM8,5H9V6H8zM10,5H11V6H10zM11,5H12V6H11zM12,5H13V6H12zM13,5H14V6H13zM14,5H15V6H14zM15,5H16V6H15zM16,5H17V6H16zM17,5H18V6H17zM18,5H19V6H18zM19,5H20V6H19zM22,5H23V6H22zM28,5H29V6H28zM0,6H1V7H0zM1,6H2V7H1zM2,6H3V7H2zM3,6H4V7H3zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM10,6H11V7H10zM12,6H13V7H12zM14,6H15V7H14zM16,6H17V7H16zM18,6H19V7H18zM20,6H21V7H20zM22,6H23V7H22zM23,6H24V7H23zM24,6H25V7H24zM25,6H26V7H25zM26,6H27V7H26zM27,6H28V7H27zM28,6H29V7H28zM9,7H10V8H9zM11,7H12V8H11zM12,7H13V8H12zM14,7H15V8H14zM17,7H18V8H17zM18,7H19V8H18zM0,8H1V9H0zM3,8H4V9H3zM5,8H6V9H5zM6,8H7V9H6zM8,8H9V9H8zM15,8H16V9H15zM16,8H17V9H16zM21,8H22V9H21zM23,8H24V9H23zM1,9H2V10H1zM2,9H3V10H2zM3,9H4V10H3zM5,9H6V10H5zM10,9H11V10H10zM14,9H15V10H14zM16,9H17V10H16zM20,9H21V10H20zM21,9H22V10H21zM22,9H23V10H22zM25,9H26V10H25zM28,9H29V10H28zM1,10H2V11H1zM2,10H3V11H2zM4,10H5V11H4zM6,10H7V11H6zM8,10H9V11H8zM9,10H10V11H9zM10,10H11V11H10zM16,10H17V11H16zM18,10H19V11H18zM19,10H20V11H19zM23,10H24V11H23zM24,10H25V11H24zM25,10H26V11H25zM26,10H27V11H26zM27,10H28V11H27zM1,11H2V12H1zM3,11H4V12H3zM4,11H5V12H4zM5,11H6V12H5zM7,11H8V12H7zM8,11H9V12H8zM9,11H10V12H9zM11,11H12V12H11zM12,11H13V12H12zM14,11H15V12H14zM15,11H16V12H15zM20,11H21V12H20zM24,11H25V12H24zM26,11H27V12H26zM27,11H28V12H27zM0,12H1V13H0zM1,12H2V13H1zM2,12H3V13H2zM3,12H4V13H3zM5,12H6V13H5zM6,12H7V13H6zM7,12H8V13H7zM9,12H10V13H9zM11,12H12V13H11zM15,12H16V13H15zM16,12H17V13H16zM17,12H18V13H17zM18,12H19V13H18zM19,12H20V13H19zM20,12H21V13H20zM21,12H22V13H21zM22,12H23V13H22zM23,12H24V13H23zM25,12H26V13H25zM27,12H28V13H27zM28,12H29V13H28zM5,13H6V14H5zM9,13H10V14H9zM11,13H12V14H11zM19,13H20V14H19zM20,13H21V14H20zM21,13H22V14H21zM0,14H1V15H0zM1,14H2V15H1zM3,14H4V15H3zM5,14H6V15H5zM6,14H7V15H6zM8,14H9V15H8zM9,14H10V15H9zM12,14H13V15H12zM16,14H17V15H16zM21,14H22V15H21zM23,14H24V15H23zM25,14H26V15H25zM26,14H27V15H26zM27,14H28V15H27zM28,14H29V15H28zM1,15H2V16H1zM4,15H5V16H4zM5,15H6V16H5zM8,15H9V16H8zM9,15H10V16H9zM12,15H13V16H12zM13,15H14V16H13zM14,15H15V16H14zM16,15H17V16H16zM17,15H18V16H17zM19,15H20V16H19zM20,15H21V16H20zM21,15H22V16H21zM22,15H23V16H22zM25,15H26V16H25zM27,15H28V16H27zM2,16H3V17H2zM3,16H4V17H3zM4,16H5V17H4zM5,16H6V17H5zM6,16H7V17H6zM10,16H11V17H10zM12,16H13V17H12zM13,16H14V17H13zM14,16H15V17H14zM15,16H16V17H15zM17,16H18V17H17zM19,16H20V17H19zM20,16H21V17H20zM21,16H22V17H21zM27,16H28V17H27zM1,17H2V18H1zM5,17H6V18H5zM7,17H8V18H7zM9,17H10V18H9zM10,17H11V18H10zM11,17H12V18H11zM21,17H22V18H21zM22,17H23V18H22zM23,17H24V18H23zM25,17H26V18H25zM28,17H29V18H28zM0,18H1V19H0zM3,18H4V19H3zM6,18H7V19H6zM9,18H10V19H9zM11,18H12V19H11zM12,18H13V19H12zM13,18H14V19H13zM16,18H17V19H16zM17,18H18V19H17zM22,18H23V19H22zM23,18H24V19H23zM24,18H25V19H24zM27,18H28V19H27zM28,18H29V19H28zM2,19H3V20H2zM4,19H5V20H4zM7,19H8V20H7zM9,19H10V20H9zM10,19H11V20H10zM12,19H13V20H12zM13,19H14V20H13zM16,19H17V20H16zM17,19H18V20H17zM18,19H19V20H18zM22,19H23V20H22zM27,19H28V20H27zM28,19H29V20H28zM0,20H1V21H0zM6,20H7V21H6zM7,20H8V21H7zM8,20H9V21H8zM10,20H11V21H10zM11,20H12V21H11zM14,20H15V21H14zM16,20H17V21H16zM20,20H21V21H20zM21,20H22V21H21zM22,20H23V21H22zM23,20H24V21H23zM24,20H25V21H24zM26,20H27V21H26zM8,21H9V22H8zM9,21H10V22H9zM10,21H11V22H10zM11,21H12V22H11zM12,21H13V22H12zM13,21H14V22H13zM16,21H17V22H16zM19,21H20V22H19zM20,21H21V22H20zM24,21H25V22H24zM26,21H27V22H26zM27,21H28V22H27zM28,21H29V22H28zM0,22H1V23H0zM1,22H2V23H1zM2,22H3V23H2zM3,22H4V23H3zM4,22H5V23H4zM5,22H6V23H5zM6,22H7V23H6zM9,22H10V23H9zM12,22H13V23H12zM13,22H14V23H13zM14,22H15V23H14zM16,22H17V23H16zM18,22H19V23H18zM20,22H21V23H20zM22,22H23V23H22zM24,22H25V23H24zM27,22H28V23H27zM0,23H1V24H0zM6,23H7V24H6zM8,23H9V24H8zM10,23H11V24H10zM12,23H13V24H12zM13,23H14V24H13zM15,23H16V24H15zM16,23H17V24H16zM18,23H19V24H18zM20,23H21V24H20zM24,23H25V24H24zM25,23H26V24H25zM26,23H27V24H26zM27,23H28V24H27zM0,24H1V25H0zM2,24H3V25H2zM3,24H4V25H3zM4,24H5V25H4zM6,24H7V25H6zM14,24H15V25H14zM17,24H18V25H17zM20,24H21V25H20zM21,24H22V25H21zM22,24H23V25H22zM23,24H24V25H23zM24,24H25V25H24zM27,24H28V25H27zM28,24H29V25H28zM0,25H1V26H0zM2,25H3V26H2zM3,25H4V26H3zM4,25H5V26H4zM6,25H7V26H6zM8,25H9V26H8zM9,25H10V26H9zM10,25H11V26H10zM12,25H13V26H12zM14,25H15V26H14zM17,25H18V26H17zM18,25H19V26H18zM19,25H20V26H19zM22,25H23V26H22zM24,25H25V26H24zM25,25H26V26H25zM26,25H27V26H26zM27,25H28V26H27zM0,26H1V27H0zM2,26H3V27H2zM3,26H4V27H3zM4,26H5V27H4zM6,26H7V27H6zM9,26H10V27H9zM10,26H11V27H10zM11,26H12V27H11zM13,26H14V27H13zM14,26H15V27H14zM16,26H17V27H16zM17,26H18V27H17zM19,26H20V27H19zM20,26H21V27H20zM24,26H25V27H24zM25,26H26V27H25zM26,26H27V27H26zM28,26H29V27H28zM0,27H1V28H0zM6,27H7V28H6zM9,27H10V28H9zM10,27H11V28H10zM13,27H14V28H13zM14,27H15V28H14zM15,27H16V28H15zM17,27H18V28H17zM19,27H20V28H19zM20,27H21V28H20zM21,27H22V28H21zM22,27H23V28H22zM24,27H25V28H24zM27,27H28V28H27zM0,28H1V29H0zM1,28H2V29H1zM2,28H3V29H2zM3,28H4V29H3zM4,28H5V29H4zM5,28H6V29H5zM6,28H7V29H6zM8,28H9V29H8zM9,28H10V29H9zM10,28H11V29H10zM11,28H12V29H11zM13,28H14V29H13zM15,28H16V29H15zM17,28H18V29H17zM20,28H21V29H20zM24,28H25V29H24zM27,28H28V29H27z" fill="#0b1420"/></g></g>
+      <text x="712" y="450" font-size="34" fill="#f1f6fc" text-anchor="middle" font-weight="800">All my projects</text>
+      <text x="712" y="500" font-size="23" fill="#a9bbd2" text-anchor="middle">sufyanahmadkamboh.github.io</text>
+      <text x="470" y="700" font-size="28" fill="#9cc3f0" text-anchor="middle" font-weight="700">tutorial · labs · failures · capstone · video · PDF</text>
+    </svg>
+  </div>
+</section>
+
+<div class="footer"><span><b>Sufyan Ahmad</b> · DevOps Engineer</span><span id="pager"></span></div>
+
+<script>
+  const n = parseInt(new URLSearchParams(location.search).get("s") || "1", 10);
+  const slides = document.querySelectorAll(".slide");
+  slides.forEach(s => s.classList.toggle("on", +s.dataset.n === n));
+  document.getElementById("pager").innerHTML = n < slides.length ? `${n} / ${slides.length} &nbsp;<span class="swipe">swipe →</span>` : `${n} / ${slides.length}`;
+</script>
+</body>
+</html>

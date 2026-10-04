@@ -1,0 +1,3 @@
+# Someone added this to keep log files and notes out of the image...
+*.log
+*.txt

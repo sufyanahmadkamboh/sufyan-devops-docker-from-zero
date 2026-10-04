@@ -1,0 +1,3 @@
+# Your own nginx image: the official image plus your web page baked in.
+FROM nginx:1.30-alpine
+COPY site/ /usr/share/nginx/html/

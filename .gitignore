@@ -1,0 +1,17 @@
+# Local secrets and settings (never commit real secrets)
+.env
+capstone/secrets/db_password.txt
+
+# Files created while doing the labs
+junk/
+examples/simple-app/.env
+labs/**/*.env
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# Test and video output
+tests/out/
+video/out/

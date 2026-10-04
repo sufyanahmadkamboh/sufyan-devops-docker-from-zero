@@ -1,0 +1,17 @@
+# Used only if you build with the repository root as the build context
+# (for example: docker build -f examples/simple-app/Dockerfile .).
+# Everything below is never needed inside an image.
+.git
+.github
+docs
+tutorial
+labs
+troubleshooting
+challenges
+study
+linkedin
+video
+tests
+*.md
+.env
+**/secrets/*.txt

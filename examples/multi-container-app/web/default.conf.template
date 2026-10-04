@@ -1,0 +1,18 @@
+# nginx configuration template. At start-up the official nginx image replaces
+# ${API_HOST} with the value of the API_HOST environment variable.
+server {
+    listen 80;
+
+    # The web page (static files baked into the image)
+    location / {
+        root  /usr/share/nginx/html;
+        index index.html;
+    }
+
+    # Everything under /api/ is forwarded to the API container.
+    # "api" is not an IP address: it is a container (or Compose service) name,
+    # resolved by Docker's built-in DNS on the shared network.
+    location /api/ {
+        proxy_pass http://${API_HOST}:5000;
+    }
+}

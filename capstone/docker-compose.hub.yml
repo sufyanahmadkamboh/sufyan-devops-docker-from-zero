@@ -1,0 +1,76 @@
+# The same capstone, but from the images published on Docker Hub: nothing is built on your computer.
+#
+#   cp secrets/db_password.txt.example secrets/db_password.txt   # once
+#   docker compose -f docker-compose.hub.yml up -d
+#
+# Images: sufibaba6629/docker-from-zero-web:1.0.0 and sufibaba6629/docker-from-zero-api:1.0.0
+# (built for linux/amd64 and linux/arm64, so they also run on Apple Silicon Macs).
+
+name: capstone
+
+services:
+  web:
+    image: sufibaba6629/docker-from-zero-web:1.0.0
+    ports:
+      - "${WEB_PORT:-8080}:8080"        # the ONLY port published to your computer
+    networks: [frontend]
+    depends_on:
+      api:
+        condition: service_healthy      # wait until the API's HEALTHCHECK passes
+    restart: unless-stopped
+
+  api:
+    image: sufibaba6629/docker-from-zero-api:1.0.0
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      GREETING: ${GREETING:-Hello from the capstone}
+      DB_HOST: db
+      DB_NAME: board
+      DB_USER: board
+      DB_PASSWORD_FILE: /run/secrets/db_password   # the password is a file, not an env variable
+    secrets: [db_password]
+    networks: [frontend, backend]
+    depends_on:
+      db:
+        condition: service_healthy
+    read_only: true                     # the container cannot change its own files
+    tmpfs: [/tmp]                       # ...except a small in-memory /tmp
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.50"
+    restart: unless-stopped
+
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: board
+      POSTGRES_USER: board
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets: [db_password]
+    volumes:
+      - db-data:/var/lib/postgresql                                 # PostgreSQL 18+: mount the parent folder
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks: [backend]                 # not reachable from the web container
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U board -d board"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    restart: unless-stopped
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  db-data:
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt

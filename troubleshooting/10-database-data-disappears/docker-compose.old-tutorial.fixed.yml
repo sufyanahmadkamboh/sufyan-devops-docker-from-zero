@@ -1,0 +1,14 @@
+# Fixed for PostgreSQL 18+: mount the PARENT folder /var/lib/postgresql.
+# The image stores the data in a version subfolder (/var/lib/postgresql/18/docker).
+name: ts10b
+
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_PASSWORD: board-lab-password
+    volumes:
+      - db-data:/var/lib/postgresql
+
+volumes:
+  db-data:
