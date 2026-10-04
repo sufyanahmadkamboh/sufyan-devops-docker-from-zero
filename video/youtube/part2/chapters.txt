@@ -1,12 +1,12 @@
 0:00 Where we are
-0:33 Volumes: data that survives
-2:07 Bind mounts
-2:53 Networking
-4:32 Docker Compose
-5:57 Logs, inspect, resources
-6:39 Security basics
-7:20 Image optimization
-9:04 Troubleshooting like an engineer
-11:38 The capstone
-14:00 Safe cleanup
-14:38 What you can do now
+0:37 Volumes: data that survives
+2:12 Bind mounts
+2:57 Networking
+4:36 Docker Compose
+6:02 Logs, inspect, resources
+6:43 Security basics
+7:24 Image optimization
+9:08 Troubleshooting like an engineer
+11:42 The capstone
+14:04 Safe cleanup
+14:42 What you can do now

@@ -12,15 +12,15 @@ Docker From Zero, part 1 of 2: learn Docker by using it, breaking it and fixing 
 
 ⏱️ Chapters
 0:00 Why Docker
-1:57 What Docker is
-2:59 Your first container
-4:55 The container lifecycle
-7:00 Port mapping
-9:04 Environment variables
-10:40 Your first Dockerfile
-12:14 Layers and the build cache
-13:23 .dockerignore
-14:37 End of part 1
+2:01 What Docker is
+3:03 Your first container
+4:59 The container lifecycle
+7:04 Port mapping
+9:09 Environment variables
+10:45 Your first Dockerfile
+12:19 Layers and the build cache
+13:27 .dockerignore
+14:41 End of part 1
 
 📊 What you will see (all recorded)
 • docker run hello-world, nginx, logs, exec: process 1 is the main process

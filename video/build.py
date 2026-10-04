@@ -9,6 +9,10 @@ Steps:
   audio   narrate every step with the Windows speech engine (tts.ps1), measure it, build one WAV
   video   encode one clip per scene (fade in/out) with ffmpeg in Docker, join, add audio
           and write youtube/captions.srt + youtube/chapters.txt
+  post    post-production: voice clean-up, original music bed (ducked under the voice), sound effects,
+          loudness -14 LUFS; writes the two final copies:
+            docker-from-zero-partN-full.mp4    picture + voice + music + sound effects
+            docker-from-zero-partN-silent.mp4  the identical picture stream, no audio at all
 
 Requirements: Python 3 with pygments, Node.js 22+, Microsoft Edge, Windows (System.Speech), Docker.
 """
@@ -28,6 +32,7 @@ sys.path.insert(0, str(HERE))
 from pygments.formatters import HtmlFormatter  # noqa: E402
 
 from components import SVG_DEFS  # noqa: E402
+from production import CSS as PRODUCTION_CSS  # noqa: E402
 from redact import check, redact  # noqa: E402
 import importlib  # noqa: E402
 
@@ -41,7 +46,8 @@ FRAMES, AUDIO = OUT / "frames", OUT / "audio"
 YT = HERE / "youtube" / f"part{PART}" if PART else HERE / "youtube"
 THUMBNAIL = HERE / (f"thumbnail_part{PART}.html" if PART else "thumbnail.html")
 FPS = 30
-LEAD, GAP, TAIL, FADE = 0.5, 0.55, 0.7, 0.4   # seconds
+LEAD, GAP, TAIL, FADE = 0.5, 0.55, 0.7, 0.3   # seconds
+ANIM = [0.488, 0.784, 0.936, 0.992]            # eased build-in of newly revealed elements, one frame each
 RATE = 24000                                   # narration WAV: 24 kHz, 16-bit, mono
 VOICE = os.environ.get("VOICE", "Microsoft David Desktop")
 SPEED = os.environ.get("SPEED", "1")                 # speech engine rate, -10..10
@@ -152,10 +158,17 @@ img.shot{max-width:100%;max-height:745px;border-radius:16px;border:3px solid var
 
 JS = """
 const q = new URLSearchParams(location.search);
-const sc = +(q.get("sc") || 0), st = +(q.get("st") || 0);
+const sc = +(q.get("sc") || 0), st = +(q.get("st") || 0), p = q.has("p") ? +q.get("p") : 1;
 const scene = document.querySelector(`.scene[data-i="${sc}"]`);
 scene.classList.add("on");
-scene.querySelectorAll("[data-s]").forEach(e => { const s = +e.dataset.s; if (s <= st) e.classList.add("on"); if (s === st) e.classList.add("now"); });
+scene.querySelectorAll("[data-s]").forEach(e => {
+  const s = +e.dataset.s;
+  if (s <= st) e.classList.add("on");
+  if (s === st) {
+    e.classList.add("now");
+    if (p < 1) { e.style.opacity = p; e.style.transform = `translateY(${((1 - p) * 18).toFixed(1)}px)`; }
+  }
+});
 const hl = JSON.parse(scene.dataset.hl)[st];
 const code = scene.querySelector("div.code");
 if (code && hl) { code.classList.add("hlon"); for (let n = hl[0]; n <= hl[1]; n++) { const l = code.querySelector(`#L-${n}`); if (l) l.classList.add("hl"); } }
@@ -188,7 +201,7 @@ def write_page() -> Path:
 
         '<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Docker From Zero: video</title>'
         '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">'
-        f"<style>{CSS}{style}.code pre{{background:transparent}}</style></head><body>{SVG_DEFS}{''.join(parts)}<script>{JS}</script></body></html>")
+        f"<style>{CSS}{PRODUCTION_CSS}{style}.code pre{{background:transparent}}</style></head><body>{SVG_DEFS}{''.join(parts)}<script>{JS}</script></body></html>")
     problems = check(re.sub(r"<[^>]+>", " ", html_out))
     if problems:
         raise SystemExit(f"redaction check failed for the page: {problems}")
@@ -211,6 +224,8 @@ def frames() -> None:
     url = page.as_uri()
     jobs = [{"url": f"{url}?sc={i}&st={k}", "out": str(FRAMES / f"{frame_name(i, k)}.png")}
             for i, s in enumerate(SCENES) for k in range(len(s["steps"]))]
+    jobs += [{"url": f"{url}?sc={i}&st={k}&p={p}", "out": str(FRAMES / f"{frame_name(i, k)}_a{j}.png")}
+             for i, s in enumerate(SCENES) for k in range(len(s["steps"])) for j, p in enumerate(ANIM)]
     jobs.append({"url": THUMBNAIL.as_uri(), "out": str(YT / "thumbnail.png"), "w": 1280, "h": 720})
     shoot(jobs, "browser-profile")
 
@@ -221,7 +236,15 @@ def audio() -> None:
     for old in AUDIO.glob("*.wav"):
         old.unlink()
     items = [{"text": spoken(st), "out": str(AUDIO / f"{frame_name(i, k)}.wav")}
-             for i, s in enumerate(SCENES) for k, st in enumerate(s["steps"])]
+             for i, s in enumerate(SCENES) for k, st in enumerate(s["steps"]) if st["say"]]
+    for i, s in enumerate(SCENES):
+        for k, st in enumerate(s["steps"]):
+            if not st["say"]:                                   # a silent step: hold the picture
+                with wave.open(str(AUDIO / f"{frame_name(i, k)}.wav"), "wb") as w:
+                    w.setnchannels(1)
+                    w.setsampwidth(2)
+                    w.setframerate(RATE)
+                    w.writeframes(b"\0\0" * round(st.get("hold", 2.0) * RATE))
     (OUT / "tts.json").write_text(json.dumps(items, ensure_ascii=False), encoding="utf-8")
     subprocess.run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(HERE / "tts.ps1"),
                     str(OUT / "tts.json"), VOICE, str(RATE), SPEED], check=True)
@@ -243,8 +266,11 @@ def timeline() -> list[dict]:
         steps = []
         for k, st in enumerate(s["steps"]):
             speech = wav_seconds(AUDIO / f"{frame_name(i, k)}.wav")
-            n = frames_for(speech + GAP + (LEAD if k == 0 else 0) + (TAIL if k == len(s["steps"]) - 1 else 0))
-            steps.append({"k": k, "frames": n, "speech": speech, "say": st["say"]})
+            if st["say"]:
+                n = frames_for(speech + GAP + (LEAD if k == 0 else 0) + (TAIL if k == len(s["steps"]) - 1 else 0))
+            else:
+                n, speech = frames_for(speech), 0.0
+            steps.append({"k": k, "frames": n, "speech": speech, "say": st["say"], "sfx": st.get("sfx")})
         plan.append({"i": i, "steps": steps, "chapter": s["chapter"], "title": s["title"]})
     return plan
 
@@ -258,7 +284,7 @@ def build_audio(plan: list[dict]) -> Path:
         for sc in plan:
             for st in sc["steps"]:
                 total = round(st["frames"] / FPS * RATE)
-                lead = round(LEAD * RATE) if st["k"] == 0 else 0
+                lead = round(LEAD * RATE) if st["k"] == 0 and st["say"] else 0
                 with wave.open(str(AUDIO / f"{frame_name(sc['i'], st['k'])}.wav")) as r:
                     assert r.getframerate() == RATE and r.getsampwidth() == 2 and r.getnchannels() == 1
                     data = r.readframes(r.getnframes())
@@ -328,7 +354,10 @@ def video() -> None:
         lst = clips / f"scene{sc['i']:02d}.txt"
         lines = ["ffconcat version 1.0"]
         for st in sc["steps"]:
-            lines += [f"file '../frames/{frame_name(sc['i'], st['k'])}.png'", f"duration {st['frames'] / FPS:.6f}"]
+            name = frame_name(sc['i'], st['k'])
+            for j in range(len(ANIM)):                  # the new elements ease in, one frame each
+                lines += [f"file '../frames/{name}_a{j}.png'", f"duration {1 / FPS:.6f}"]
+            lines += [f"file '../frames/{name}.png'", f"duration {(st['frames'] - len(ANIM)) / FPS:.6f}"]
         lines.append(f"file '../frames/{frame_name(sc['i'], sc['steps'][-1]['k'])}.png'")   # concat demuxer needs the last file twice
         lst.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
         total = sum(st["frames"] for st in sc["steps"]) / FPS
@@ -344,6 +373,50 @@ def video() -> None:
     captions_and_chapters(plan)
 
 
+# ------------------------------------------------------------------------------------------------ post-production
+def post() -> None:
+    """Mix voice, music and sound effects, then write the full and the silent copy (identical picture)."""
+    import audio_assets
+    plan = timeline()
+    events, t = [], 0.0
+    for n, sc in enumerate(plan):
+        if n > 0:
+            events.append((t, "chapter" if sc["chapter"] else "scene"))
+        for st in sc["steps"]:
+            if st["sfx"]:
+                when = t + (LEAD if st["k"] == 0 and st["say"] else 0)
+                events.append((when, st["sfx"]))
+            t += st["frames"] / FPS
+    total = t
+    mix = OUT / "mix"
+    mix.mkdir(exist_ok=True)
+    # 1. voice clean-up: rumble filter, a little presence, gentle compression, consistent level
+    subprocess.run(["docker", "run", "--rm", "-v", f"{OUT}:/work", "--entrypoint", "ffmpeg", FFMPEG_IMAGE, "-y",
+                    "-loglevel", "error", "-i", "/work/narration.wav", "-af",
+                    "highpass=f=80,equalizer=f=3200:t=q:w=1.2:g=2.5,equalizer=f=250:t=q:w=1:g=-1.5,"
+                    "acompressor=threshold=-26dB:ratio=3:attack=5:release=160:makeup=4dB,"
+                    "loudnorm=I=-17:TP=-2:LRA=9,aresample=48000", "-ac", "1", "/work/mix/voice.wav"], check=True)
+    # 2. music + sound effects + ducking, rendered by audio_assets (all original, generated here)
+    audio_assets.render_mix(mix / "voice.wav", mix / "mix.wav", total, events, seed=int(PART or 1))
+    # 3. final loudness for YouTube (two-pass loudnorm), then the two copies
+    def ff(*args, capture=False):
+        r = subprocess.run(["docker", "run", "--rm", "-v", f"{OUT}:/work", "-w", "/work", "--entrypoint", "ffmpeg",
+                            FFMPEG_IMAGE, "-hide_banner", "-y", *args], check=True, capture_output=capture, text=True)
+        return r.stderr if capture else ""
+    measured = json.loads(re.search(r"\{[^{}]*\}", ff("-nostats", "-i", "mix/mix.wav", "-af",
+                          "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json", "-f", "null", "-", capture=True)).group(0))
+    ff("-loglevel", "error", "-i", "mix/mix.wav", "-af",
+       "loudnorm=I=-14:TP=-1.5:LRA=11:linear=true:"
+       f"measured_I={measured['input_i']}:measured_TP={measured['input_tp']}:measured_LRA={measured['input_lra']}:"
+       f"measured_thresh={measured['input_thresh']}:offset={measured['target_offset']},aresample=48000", "mix/final.wav")
+    ff("-loglevel", "error", "-i", "video.mp4", "-i", "mix/final.wav", "-map", "0:v", "-map", "1:a", "-c:v", "copy",
+       "-c:a", "aac", "-b:a", "320k", "-ar", "48000", "-ac", "2", "-shortest", "-movflags", "+faststart",
+       f"docker-from-zero-part{PART}-full.mp4")
+    ff("-loglevel", "error", "-i", "video.mp4", "-map", "0:v", "-c:v", "copy", "-an", "-movflags", "+faststart",
+       f"docker-from-zero-part{PART}-silent.mp4")
+    print(f"post: {len(events)} sound effects, {stamp(total)} -> docker-from-zero-part{PART}-full.mp4 and -silent.mp4")
+
+
 if __name__ == "__main__":
     what = sys.argv[1] if len(sys.argv) > 1 else "all"
     if what in ("page", "all"):
@@ -354,3 +427,5 @@ if __name__ == "__main__":
         audio()
     if what in ("video", "all"):
         video()
+    if what in ("post", "all"):
+        post()

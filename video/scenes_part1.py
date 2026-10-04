@@ -489,3 +489,18 @@ scene("End of part 1", "What you can do now", "Part 1 complete", grid([
       "and the capstone, a complete three container application. Before you continue, do labs one to eight in the "
       "repository. Typing the commands yourself is where the learning happens. See you in part two."),
 ])
+
+
+# ---------------------------------------------------------------- production: title card, end card, sound cues
+from production import package  # noqa: E402
+
+package(SCENES, 1, "Containers and images", ["docker run", "ports", "env vars", "Dockerfile", "layers"], {
+    "Is Docker installed?": {2: "success"},
+    "A container lives as long as its main process": {0: "error"},
+    "Publish it, then break it": {2: "error", 3: "success"},
+    "port is already allocated": {0: "error"},
+    "Read the logs first": {0: "error"},
+    "It builds. It does not run.": {0: "error", 1: "success"},
+    "Bad order vs. good order": {1: "success"},
+    "What you send to the builder ends up in the image": {1: "error", 2: "success"},
+})

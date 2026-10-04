@@ -1,1055 +1,1055 @@
 1
-00:00:00,500 --> 00:00:02,142
+00:00:04,700 --> 00:00:06,342
 It works on my machine.
 
 2
-00:00:02,142 --> 00:00:07,283
+00:00:06,342 --> 00:00:11,483
 Every developer has said it, and every operations engineer has heard it.
 
 3
-00:00:07,283 --> 00:00:09,353
+00:00:11,483 --> 00:00:13,553
 On your laptop, the app runs.
 
 4
-00:00:09,353 --> 00:00:12,851
+00:00:13,553 --> 00:00:17,051
 On your colleague's laptop, a library is missing.
 
 5
-00:00:13,400 --> 00:00:16,847
+00:00:17,600 --> 00:00:21,047
 And on the server, something else is different.
 
 6
-00:00:16,847 --> 00:00:19,415
+00:00:21,047 --> 00:00:23,614
 Same code, three different results.
 
 7
-00:00:19,967 --> 00:00:24,191
+00:00:24,167 --> 00:00:28,391
 Docker fixes this by packaging the app together with everything it needs:
 
 8
-00:00:24,191 --> 00:00:27,432
+00:00:28,391 --> 00:00:31,632
 the exact language version, the libraries, the settings.
 
 9
-00:00:27,432 --> 00:00:32,698
+00:00:31,632 --> 00:00:36,898
 That package is called an image, and it runs the same way on every machine that has Docker.
 
 10
-00:00:33,233 --> 00:00:36,750
+00:00:37,433 --> 00:00:40,950
 In this two part course you will not just read about Docker.
 
 11
-00:00:36,750 --> 00:00:39,505
+00:00:40,950 --> 00:00:43,705
 You will run containers, break them on purpose,
 
 12
-00:00:39,505 --> 00:00:45,308
+00:00:43,705 --> 00:00:49,508
 investigate like a real engineer, fix them, and finish with a complete three container application.
 
 13
-00:00:47,067 --> 00:00:51,525
+00:00:51,267 --> 00:00:55,725
 Everything in this video comes from one free repository on GitHub.
 
 14
-00:00:51,525 --> 00:00:54,159
+00:00:55,725 --> 00:00:58,359
 The tutorial folder is the guided path.
 
 15
-00:00:54,159 --> 00:00:56,996
+00:00:58,359 --> 00:01:01,196
 This video follows it, chapter by chapter.
 
 16
-00:00:57,533 --> 00:01:02,873
+00:01:01,733 --> 00:01:07,073
 The labs are short workbooks you do on your own, and the docs explain each concept in depth.
 
 17
-00:01:03,433 --> 00:01:09,293
+00:01:07,633 --> 00:01:13,493
 There are ten troubleshooting scenarios with real failures, and nineteen challenges with hidden solutions.
 
 18
-00:01:09,833 --> 00:01:12,422
+00:01:14,033 --> 00:01:16,622
 And the capstone puts everything together.
 
 19
-00:01:12,422 --> 00:01:13,346
+00:01:16,622 --> 00:01:17,546
 One more thing:
 
 20
-00:01:13,346 --> 00:01:18,215
+00:01:17,546 --> 00:01:22,415
 every command you see here was executed automatically on a fresh Docker engine,
 
 21
-00:01:18,215 --> 00:01:20,927
+00:01:22,415 --> 00:01:25,127
 and the output on screen is the real output.
 
 22
-00:01:20,927 --> 00:01:22,468
+00:01:25,127 --> 00:01:26,668
 Nothing is typed by hand.
 
 23
-00:01:24,233 --> 00:01:25,773
+00:01:28,433 --> 00:01:29,973
 You need three things.
 
 24
-00:01:25,773 --> 00:01:26,263
+00:01:29,973 --> 00:01:30,463
 Docker:
 
 25
-00:01:26,263 --> 00:01:33,190
+00:01:30,463 --> 00:01:37,390
 Docker Desktop on Windows or Mac, and on Windows use the W S L two backend and its Ubuntu terminal.
 
 26
-00:01:33,190 --> 00:01:34,869
+00:01:37,390 --> 00:01:39,069
 On Linux, Docker Engine.
 
 27
-00:01:34,869 --> 00:01:38,998
+00:01:39,069 --> 00:01:43,198
 The installation lesson in docs walks you through each one.
 
 28
-00:01:39,533 --> 00:01:42,065
+00:01:43,733 --> 00:01:46,265
 Then Git, to clone the repository.
 
 29
-00:01:42,065 --> 00:01:44,373
+00:01:46,265 --> 00:01:48,573
 The link is in the description.
 
 30
-00:01:44,933 --> 00:01:45,737
+00:01:49,133 --> 00:01:49,937
 That is all.
 
 31
-00:01:45,737 --> 00:01:47,946
+00:01:49,937 --> 00:01:52,146
 No cloud account, nothing to pay.
 
 32
-00:01:47,946 --> 00:01:51,830
+00:01:52,146 --> 00:01:56,030
 Every command in the course runs from the repository root,
 
 33
-00:01:51,830 --> 00:01:55,981
+00:01:56,030 --> 00:02:00,181
 so if a command cannot find a file, check where you are first.
 
 34
-00:01:57,733 --> 00:02:00,457
+00:02:01,933 --> 00:02:04,657
 Before the first command, the big picture.
 
 35
-00:02:00,457 --> 00:02:03,830
+00:02:04,657 --> 00:02:08,030
 You type commands into the Docker command line tool.
 
 36
-00:02:04,367 --> 00:02:09,551
+00:02:08,567 --> 00:02:13,751
 It sends each request to the Docker engine, a background service that does the real work:
 
 37
-00:02:09,551 --> 00:02:13,453
+00:02:13,751 --> 00:02:17,653
 building images, running containers, creating networks and volumes.
 
 38
-00:02:14,000 --> 00:02:17,313
+00:02:18,200 --> 00:02:21,513
 Images come from a registry, usually Docker Hub.
 
 39
-00:02:17,313 --> 00:02:21,455
+00:02:21,513 --> 00:02:25,655
 The engine pulls them down, and can push your own images up.
 
 40
-00:02:22,000 --> 00:02:24,923
+00:02:26,200 --> 00:02:29,123
 And from an image, the engine creates containers:
 
 41
-00:02:24,923 --> 00:02:28,920
+00:02:29,123 --> 00:02:33,120
 running processes, isolated from each other and from your computer.
 
 42
-00:02:30,667 --> 00:02:34,738
+00:02:34,867 --> 00:02:38,938
 If you remember one idea from this video, make it this one.
 
 43
-00:02:34,738 --> 00:02:36,946
+00:02:38,938 --> 00:02:41,146
 An image is a read-only package:
 
 44
-00:02:36,946 --> 00:02:39,775
+00:02:41,146 --> 00:02:43,975
 files, plus instructions for what to run.
 
 45
-00:02:39,775 --> 00:02:41,431
+00:02:43,975 --> 00:02:45,631
 Think of it as a recipe.
 
 46
-00:02:41,967 --> 00:02:45,034
+00:02:46,167 --> 00:02:49,234
 A container is what you get when you run an image.
 
 47
-00:02:45,034 --> 00:02:50,925
+00:02:49,234 --> 00:02:55,125
 Like meals cooked from one recipe, you can create as many containers from one image as you like.
 
 48
-00:02:50,925 --> 00:02:52,581
+00:02:55,125 --> 00:02:56,781
 Some running, some stopped.
 
 49
-00:02:53,133 --> 00:02:56,282
+00:02:57,333 --> 00:03:00,482
 And deleting a container never deletes the image.
 
 50
-00:02:56,282 --> 00:02:57,953
+00:03:00,482 --> 00:03:02,153
 You can always cook again.
 
 51
-00:02:59,700 --> 00:03:00,589
+00:03:03,900 --> 00:03:04,789
 Let's start.
 
 52
-00:03:00,589 --> 00:03:05,920
+00:03:04,789 --> 00:03:10,120
 Open a terminal in the repository folder and ask Docker for its version.
 
 53
-00:03:05,920 --> 00:03:06,586
+00:03:10,120 --> 00:03:10,786
 One line:
 
 54
-00:03:06,586 --> 00:03:09,474
+00:03:10,786 --> 00:03:13,674
 the version of the Docker command line.
 
 55
-00:03:09,474 --> 00:03:11,400
+00:03:13,674 --> 00:03:15,600
 This video uses Docker 29.
 
 56
-00:03:11,933 --> 00:03:13,733
+00:03:16,133 --> 00:03:17,933
 Compose is included too.
 
 57
-00:03:13,733 --> 00:03:15,833
+00:03:17,933 --> 00:03:20,033
 We will need it in part two.
 
 58
-00:03:16,367 --> 00:03:18,801
+00:03:20,567 --> 00:03:23,001
 Now run your very first container:
 
 59
-00:03:18,801 --> 00:03:20,448
+00:03:23,001 --> 00:03:24,648
 docker run hello world.
 
 60
-00:03:20,448 --> 00:03:21,808
+00:03:24,648 --> 00:03:26,008
 Look at the output.
 
 61
-00:03:21,808 --> 00:03:26,462
+00:03:26,008 --> 00:03:30,662
 Unable to find image locally, so Docker pulls it from Docker Hub.
 
 62
-00:03:26,462 --> 00:03:26,820
+00:03:30,662 --> 00:03:31,020
 Then:
 
 63
-00:03:26,820 --> 00:03:28,109
+00:03:31,020 --> 00:03:32,309
 Hello from Docker.
 
 64
-00:03:28,109 --> 00:03:32,548
+00:03:32,309 --> 00:03:36,748
 That line was printed by a program running inside a container.
 
 65
-00:03:32,548 --> 00:03:34,266
+00:03:36,748 --> 00:03:38,466
 Your installation works.
 
 66
-00:03:36,000 --> 00:03:38,285
+00:03:40,200 --> 00:03:42,485
 hello world exits immediately.
 
 67
-00:03:38,285 --> 00:03:41,256
+00:03:42,485 --> 00:03:45,456
 Let's run something that keeps running:
 
 68
-00:03:41,256 --> 00:03:43,389
+00:03:45,456 --> 00:03:47,589
 nginx, a popular web server.
 
 69
-00:03:43,389 --> 00:03:46,208
+00:03:47,589 --> 00:03:50,408
 docker pull only downloads the image.
 
 70
-00:03:46,208 --> 00:03:50,550
+00:03:50,408 --> 00:03:54,750
 The tag, one point thirty alpine, pins the exact version.
 
 71
-00:03:50,550 --> 00:03:51,844
+00:03:54,750 --> 00:03:56,044
 Always use a tag.
 
 72
-00:03:52,400 --> 00:03:54,632
+00:03:56,600 --> 00:03:58,832
 docker images lists what you have.
 
 73
-00:03:54,632 --> 00:03:56,537
+00:03:58,832 --> 00:04:00,737
 In Docker 29 the columns are:
 
 74
-00:03:56,537 --> 00:03:59,623
+00:04:00,737 --> 00:04:03,823
 the image name and tag, its ID, the disk usage,
 
 75
-00:03:59,623 --> 00:04:05,794
+00:04:03,823 --> 00:04:09,994
 the downloaded content size, and an extra column that shows U when a container uses the image.
 
 76
-00:04:06,333 --> 00:04:12,801
+00:04:10,533 --> 00:04:17,001
 Now docker run, with dash d for detached, so it runs in the background, and dash dash name web.
 
 77
-00:04:12,801 --> 00:04:17,499
+00:04:17,001 --> 00:04:21,699
 Docker prints the new container's ID, and docker ps shows it running:
 
 78
-00:04:17,499 --> 00:04:23,627
+00:04:21,699 --> 00:04:27,826
 the image, the command, when it was created, the status, the ports, and the name we chose.
 
 79
-00:04:25,367 --> 00:04:27,707
+00:04:29,567 --> 00:04:31,907
 Two commands you will use every day.
 
 80
-00:04:27,707 --> 00:04:31,998
+00:04:31,907 --> 00:04:36,198
 docker logs shows everything the container's main process printed.
 
 81
-00:04:31,998 --> 00:04:34,728
+00:04:36,198 --> 00:04:38,928
 Here, nginx starting its worker processes.
 
 82
-00:04:35,267 --> 00:04:39,465
+00:04:39,467 --> 00:04:43,665
 docker exec runs an extra command inside a running container.
 
 83
-00:04:39,465 --> 00:04:41,530
+00:04:43,665 --> 00:04:45,730
 ps lists the processes inside:
 
 84
-00:04:41,530 --> 00:04:44,765
+00:04:45,730 --> 00:04:48,965
 process number one is the nginx master process.
 
 85
-00:04:44,765 --> 00:04:49,033
+00:04:48,965 --> 00:04:53,233
 Inside its own world, the container's main process is P I D 1.
 
 86
-00:04:49,567 --> 00:04:52,405
+00:04:53,767 --> 00:04:56,605
 And the hostname of the container is its short ID.
 
 87
-00:04:52,405 --> 00:04:54,448
+00:04:56,605 --> 00:04:58,648
 Remember that, we will use it later.
 
 88
-00:04:56,200 --> 00:04:58,878
+00:05:00,400 --> 00:05:03,078
 Containers move through a small set of states.
 
 89
-00:04:58,878 --> 00:05:02,719
+00:05:03,078 --> 00:05:06,919
 docker create makes a container from an image without starting it.
 
 90
-00:05:03,267 --> 00:05:05,046
+00:05:07,467 --> 00:05:09,246
 Its state is Created.
 
 91
-00:05:05,600 --> 00:05:08,169
+00:05:09,800 --> 00:05:12,369
 docker start runs its main process:
 
 92
-00:05:08,169 --> 00:05:08,757
+00:05:12,369 --> 00:05:12,957
 Running.
 
 93
-00:05:08,757 --> 00:05:11,620
+00:05:12,957 --> 00:05:15,820
 docker run is simply create plus start.
 
 94
-00:05:12,167 --> 00:05:16,802
+00:05:16,367 --> 00:05:21,002
 When the main process ends, by itself or because you ran docker stop,
 
 95
-00:05:16,802 --> 00:05:19,691
+00:05:21,002 --> 00:05:23,891
 the container is Exited, with an exit code.
 
 96
-00:05:19,691 --> 00:05:23,721
+00:05:23,891 --> 00:05:27,921
 It still exists, with its files, and you can start it again.
 
 97
-00:05:24,267 --> 00:05:26,881
+00:05:28,467 --> 00:05:31,081
 Only docker rm removes it for good.
 
 98
-00:05:28,633 --> 00:05:29,949
+00:05:32,833 --> 00:05:34,149
 Let's break things.
 
 99
-00:05:29,949 --> 00:05:35,210
+00:05:34,149 --> 00:05:39,410
 docker rm on a running container fails, and the error tells you exactly why:
 
 100
-00:05:35,210 --> 00:05:39,087
+00:05:39,410 --> 00:05:43,287
 the container is running, stop it first or force remove.
 
 101
-00:05:39,087 --> 00:05:39,918
+00:05:43,287 --> 00:05:44,118
 Read errors.
 
 102
-00:05:39,918 --> 00:05:42,133
+00:05:44,118 --> 00:05:46,333
 They usually contain the answer.
 
 103
-00:05:42,667 --> 00:05:46,006
+00:05:46,867 --> 00:05:50,206
 Now a container whose main process is sleep 5.
 
 104
-00:05:46,006 --> 00:05:49,273
+00:05:50,206 --> 00:05:53,473
 Five seconds later, it is Exited with code 0.
 
 105
-00:05:49,273 --> 00:05:50,434
+00:05:53,473 --> 00:05:54,634
 Nothing crashed:
 
 106
-00:05:50,434 --> 00:05:55,443
+00:05:54,634 --> 00:05:59,643
 its only job was to sleep, and when the job ends, the container ends.
 
 107
-00:05:56,000 --> 00:05:58,612
+00:06:00,200 --> 00:06:02,812
 This one surprises every beginner.
 
 108
-00:05:58,612 --> 00:06:02,837
+00:06:02,812 --> 00:06:07,037
 docker run ubuntu, and the container exits immediately.
 
 109
-00:06:02,837 --> 00:06:03,144
+00:06:07,037 --> 00:06:07,344
 Why?
 
 110
-00:06:03,700 --> 00:06:04,862
+00:06:07,900 --> 00:06:09,062
 Inspect the image:
 
 111
-00:06:04,862 --> 00:06:06,670
+00:06:09,062 --> 00:06:10,870
 its default command is bash.
 
 112
-00:06:06,670 --> 00:06:13,385
+00:06:10,870 --> 00:06:17,585
 Without an interactive terminal, bash has nothing to read, so it exits, and the container exits with it.
 
 113
-00:06:13,385 --> 00:06:16,871
+00:06:17,585 --> 00:06:21,071
 A container lives exactly as long as its main process.
 
 114
-00:06:16,871 --> 00:06:20,616
+00:06:21,071 --> 00:06:24,816
 That one sentence explains half of all container problems.
 
 115
-00:06:22,367 --> 00:06:25,739
+00:06:26,567 --> 00:06:29,939
 You can also work inside a container interactively.
 
 116
-00:06:25,739 --> 00:06:31,360
+00:06:29,939 --> 00:06:35,560
 Dash i keeps input open, dash t gives you a terminal, and bash is the program to run.
 
 117
-00:06:31,360 --> 00:06:36,386
+00:06:35,560 --> 00:06:40,586
 You get a prompt inside Ubuntu, even if your computer runs Windows or macOS.
 
 118
-00:06:36,933 --> 00:06:39,015
+00:06:41,133 --> 00:06:43,215
 Type exit, and bash ends.
 
 119
-00:06:39,015 --> 00:06:43,512
+00:06:43,215 --> 00:06:47,712
 bash was the main process, so the container is Exited.
 
 120
-00:06:43,512 --> 00:06:45,178
+00:06:47,712 --> 00:06:49,378
 Same rule as before.
 
 121
-00:06:45,733 --> 00:06:48,498
+00:06:49,933 --> 00:06:52,698
 And for a single command, no shell needed:
 
 122
-00:06:48,498 --> 00:06:51,789
+00:06:52,698 --> 00:06:55,989
 docker run dash dash rm ubuntu cat etc os release.
 
 123
-00:06:51,789 --> 00:06:58,833
+00:06:55,989 --> 00:07:03,033
 Dash dash rm deletes the container as soon as it stops, so you do not collect dozens of stopped containers.
 
 124
-00:07:00,567 --> 00:07:04,795
+00:07:04,767 --> 00:07:08,995
 The web server is running, but can your browser reach it?
 
 125
-00:07:04,795 --> 00:07:05,389
+00:07:08,995 --> 00:07:09,589
 Not yet.
 
 126
-00:07:05,389 --> 00:07:07,762
+00:07:09,589 --> 00:07:11,962
 A container has its own network.
 
 127
-00:07:07,762 --> 00:07:10,136
+00:07:11,962 --> 00:07:14,336
 To reach it, you publish a port.
 
 128
-00:07:10,700 --> 00:07:13,800
+00:07:14,900 --> 00:07:18,000
 dash p eight zero eight zero colon eighty means:
 
 129
-00:07:13,800 --> 00:07:18,644
+00:07:18,000 --> 00:07:22,844
 traffic to port 8080 on your computer goes to port 80 inside the container.
 
 130
-00:07:19,200 --> 00:07:20,713
+00:07:23,400 --> 00:07:24,913
 The order matters.
 
 131
-00:07:20,713 --> 00:07:23,149
+00:07:24,913 --> 00:07:27,349
 Host first, container second.
 
 132
-00:07:23,149 --> 00:07:26,594
+00:07:27,349 --> 00:07:30,794
 nginx listens on 80 inside its container.
 
 133
-00:07:27,133 --> 00:07:30,993
+00:07:31,333 --> 00:07:35,193
 Without dash p, nothing outside the container can reach it.
 
 134
-00:07:32,733 --> 00:07:36,448
+00:07:36,933 --> 00:07:40,648
 Without a published port, curl gets connection refused.
 
 135
-00:07:37,000 --> 00:07:42,024
+00:07:41,200 --> 00:07:46,224
 With dash p eight zero eight one colon eighty, here is the nginx welcome page.
 
 136
-00:07:42,567 --> 00:07:44,552
+00:07:46,767 --> 00:07:48,752
 Now we break it on purpose:
 
 137
-00:07:44,552 --> 00:07:48,671
+00:07:48,752 --> 00:07:52,871
 dash p eight zero eight two colon eight zero eight zero.
 
 138
-00:07:48,671 --> 00:07:54,186
+00:07:52,871 --> 00:07:58,386
 The container starts fine, docker ps says Up, but curl gets an empty reply.
 
 139
-00:07:54,186 --> 00:07:55,069
+00:07:58,386 --> 00:07:59,269
 Don't guess.
 
 140
-00:07:55,069 --> 00:07:55,951
+00:07:59,269 --> 00:08:00,151
 Investigate.
 
 141
-00:07:56,500 --> 00:07:59,778
+00:08:00,700 --> 00:08:03,978
 Which port does the image actually use?
 
 142
-00:07:59,778 --> 00:08:01,459
+00:08:03,978 --> 00:08:05,659
 docker inspect says:
 
 143
-00:08:01,459 --> 00:08:02,720
+00:08:05,659 --> 00:08:06,920
 80 slash T C P.
 
 144
-00:08:02,720 --> 00:08:06,166
+00:08:06,920 --> 00:08:10,366
 We mapped to 8080, where nothing listens.
 
 145
-00:08:06,166 --> 00:08:08,099
+00:08:10,366 --> 00:08:12,299
 The container was fine.
 
 146
-00:08:08,099 --> 00:08:09,948
+00:08:12,299 --> 00:08:14,148
 The mapping was wrong.
 
 147
-00:08:09,948 --> 00:08:12,469
+00:08:14,148 --> 00:08:16,669
 Fix the mapping, and it works.
 
 148
-00:08:14,233 --> 00:08:16,531
+00:08:18,433 --> 00:08:20,731
 And the same page in a browser:
 
 149
-00:08:16,531 --> 00:08:18,087
+00:08:20,731 --> 00:08:22,287
 localhost, port 8080.
 
 150
-00:08:18,087 --> 00:08:23,942
+00:08:22,287 --> 00:08:28,142
 Your computer forwards it to port 80 inside the container, where nginx answers.
 
 151
-00:08:23,942 --> 00:08:26,610
+00:08:28,142 --> 00:08:30,810
 Your first containerised web server.
 
 152
-00:08:28,367 --> 00:08:29,696
+00:08:32,567 --> 00:08:33,896
 Another classic.
 
 153
-00:08:29,696 --> 00:08:32,770
+00:08:33,896 --> 00:08:36,970
 A second container on host port 8080.
 
 154
-00:08:32,770 --> 00:08:34,016
+00:08:36,970 --> 00:08:38,216
 Docker refuses:
 
 155
-00:08:34,016 --> 00:08:40,579
+00:08:38,216 --> 00:08:44,779
 Bind for 0 point 0 point 0 point 0 port 8080 failed, port is already allocated.
 
 156
-00:08:40,579 --> 00:08:44,151
+00:08:44,779 --> 00:08:48,351
 One host port can only go to one container.
 
 157
-00:08:44,700 --> 00:08:45,732
+00:08:48,900 --> 00:08:49,932
 Who has it?
 
 158
-00:08:45,732 --> 00:08:49,765
+00:08:49,932 --> 00:08:53,965
 docker ps, filtered by published port 8080:
 
 159
-00:08:49,765 --> 00:08:52,110
+00:08:53,965 --> 00:08:56,310
 our first container, web.
 
 160
-00:08:52,667 --> 00:08:53,398
+00:08:56,867 --> 00:08:57,598
 And notice:
 
 161
-00:08:53,398 --> 00:08:56,854
+00:08:57,598 --> 00:09:01,054
 the failed container still exists, in state Created.
 
 162
-00:08:56,854 --> 00:08:59,446
+00:09:01,054 --> 00:09:03,646
 Remove it, then pick another host port.
 
 163
-00:08:59,446 --> 00:09:03,566
+00:09:03,646 --> 00:09:07,766
 This is exactly the kind of problem you meet on a real server.
 
 164
-00:09:05,300 --> 00:09:07,734
+00:09:09,500 --> 00:09:11,934
 Same image, different configuration.
 
 165
-00:09:07,734 --> 00:09:10,642
+00:09:11,934 --> 00:09:14,842
 That is what environment variables are for.
 
 166
-00:09:10,642 --> 00:09:15,240
+00:09:14,842 --> 00:09:19,440
 Here is our small Python app, simple app, running with its defaults:
 
 167
-00:09:15,240 --> 00:09:16,795
+00:09:19,440 --> 00:09:20,995
 environment production.
 
 168
-00:09:16,795 --> 00:09:20,108
+00:09:20,995 --> 00:09:24,308
 The hostname line shows which container answered.
 
 169
-00:09:20,667 --> 00:09:27,734
+00:09:24,867 --> 00:09:31,934
 A second container from the exact same image, with dash e APP_ENV equals development and a different greeting.
 
 170
-00:09:27,734 --> 00:09:32,167
+00:09:31,934 --> 00:09:36,367
 Now it greets with Good morning from Docker, environment development.
 
 171
-00:09:32,167 --> 00:09:32,874
+00:09:36,367 --> 00:09:37,074
 No rebuild.
 
 172
-00:09:32,874 --> 00:09:36,022
+00:09:37,074 --> 00:09:40,222
 The image did not change, only its configuration.
 
 173
-00:09:37,767 --> 00:09:40,922
+00:09:41,967 --> 00:09:45,122
 When there are many settings, put them in a file,
 
 174
-00:09:40,922 --> 00:09:45,301
+00:09:45,122 --> 00:09:49,501
 one name equals value per line, and pass it with dash dash env file.
 
 175
-00:09:45,301 --> 00:09:49,552
+00:09:49,501 --> 00:09:53,752
 The env command inside the container shows both variables arrived,
 
 176
-00:09:49,552 --> 00:09:53,094
+00:09:53,752 --> 00:09:57,294
 next to the ones Docker sets itself, like the hostname.
 
 177
-00:09:53,094 --> 00:09:56,314
+00:09:57,294 --> 00:10:00,514
 Never commit env files with real passwords to Git.
 
 178
-00:09:56,314 --> 00:10:00,113
+00:10:00,514 --> 00:10:04,313
 The repository's dot git ignore file already excludes them.
 
 179
-00:10:01,867 --> 00:10:06,595
+00:10:06,067 --> 00:10:10,795
 Some images refuse to start without configuration, and that is a good thing.
 
 180
-00:10:06,595 --> 00:10:08,710
+00:10:10,795 --> 00:10:12,910
 Run PostgreSQL without a password:
 
 181
-00:10:08,710 --> 00:10:13,439
+00:10:12,910 --> 00:10:17,639
 it prints Database is uninitialized and superuser password is not specified,
 
 182
-00:10:13,439 --> 00:10:16,176
+00:10:17,639 --> 00:10:20,376
 and tells you exactly which variable to set.
 
 183
-00:10:16,733 --> 00:10:19,805
+00:10:20,933 --> 00:10:24,005
 docker ps dash a shows it Exited with code 1.
 
 184
-00:10:19,805 --> 00:10:23,968
+00:10:24,005 --> 00:10:28,168
 When a container stops, the logs are the first place to look.
 
 185
-00:10:24,533 --> 00:10:27,458
+00:10:28,733 --> 00:10:31,658
 With dash e POSTGRES_PASSWORD it starts.
 
 186
-00:10:27,458 --> 00:10:30,018
+00:10:31,658 --> 00:10:34,218
 But look what docker inspect shows:
 
 187
-00:10:30,018 --> 00:10:34,918
+00:10:34,218 --> 00:10:39,118
 the password, in plain text, for anyone who can run docker inspect.
 
 188
-00:10:34,918 --> 00:10:35,941
+00:10:39,118 --> 00:10:40,141
 Remember this.
 
 189
-00:10:35,941 --> 00:10:39,598
+00:10:40,141 --> 00:10:43,798
 We fix it properly in part two, with secret files.
 
 190
-00:10:41,333 --> 00:10:43,799
+00:10:45,533 --> 00:10:47,999
 So far we used other people's images.
 
 191
-00:10:43,799 --> 00:10:51,131
+00:10:47,999 --> 00:10:55,331
 Now we build our own, one instruction at a time, the way the tutorial does it in dockerfile steps one to four.
 
 192
-00:10:51,131 --> 00:10:53,930
+00:10:55,331 --> 00:10:58,130
 Every Dockerfile starts FROM a base image:
 
 193
-00:10:53,930 --> 00:10:56,663
+00:10:58,130 --> 00:11:00,863
 here the official slim Python 3.14 image.
 
 194
-00:10:57,200 --> 00:11:02,389
+00:11:01,400 --> 00:11:06,590
 WORKDIR sets the folder inside the image, and COPY copies our code into it.
 
 195
-00:11:02,933 --> 00:11:06,488
+00:11:07,133 --> 00:11:10,688
 RUN executes a command while the image is being built.
 
 196
-00:11:06,488 --> 00:11:10,043
+00:11:10,688 --> 00:11:14,243
 Here it installs Flask, the one library the app needs.
 
 197
-00:11:10,600 --> 00:11:15,175
+00:11:14,800 --> 00:11:19,375
 ENV sets a default configuration, and EXPOSE documents the port.
 
 198
-00:11:15,175 --> 00:11:19,034
+00:11:19,375 --> 00:11:23,235
 EXPOSE alone publishes nothing, you still need dash p.
 
 199
-00:11:19,600 --> 00:11:22,799
+00:11:23,800 --> 00:11:26,999
 And CMD is what runs when a container starts.
 
 200
-00:11:22,799 --> 00:11:25,855
+00:11:26,999 --> 00:11:30,055
 RUN happens at build time, CMD at run time.
 
 201
-00:11:25,855 --> 00:11:30,049
+00:11:30,055 --> 00:11:34,250
 Mixing them up is one of the most common beginner mistakes.
 
 202
-00:11:31,800 --> 00:11:35,051
+00:11:36,000 --> 00:11:39,251
 Step two of the tutorial has no RUN pip install.
 
 203
-00:11:35,051 --> 00:11:38,777
+00:11:39,251 --> 00:11:42,977
 It builds without any error, but the container crashes:
 
 204
-00:11:38,777 --> 00:11:41,690
+00:11:42,977 --> 00:11:45,890
 ModuleNotFoundError, no module named flask.
 
 205
-00:11:41,690 --> 00:11:45,483
+00:11:45,890 --> 00:11:49,683
 It works on my laptop, because Flask is installed there.
 
 206
-00:11:45,483 --> 00:11:49,345
+00:11:49,683 --> 00:11:53,545
 The image only contains what the Dockerfile puts into it.
 
 207
-00:11:49,900 --> 00:11:52,026
+00:11:54,100 --> 00:11:56,226
 Step three adds the install.
 
 208
-00:11:52,026 --> 00:11:56,430
+00:11:56,226 --> 00:12:00,630
 Build, run with dash p five thousand, and the app answers.
 
 209
-00:11:56,967 --> 00:11:58,989
+00:12:01,167 --> 00:12:03,189
 One more pair you must know:
 
 210
-00:11:58,989 --> 00:12:03,396
+00:12:03,189 --> 00:12:07,596
 ENTRYPOINT is the fixed program, CMD is its default argument.
 
 211
-00:12:03,396 --> 00:12:07,658
+00:12:07,596 --> 00:12:11,858
 This little image has ENTRYPOINT echo Hello, and CMD world.
 
 212
-00:12:07,658 --> 00:12:12,570
+00:12:11,858 --> 00:12:16,770
 Run it with the word Docker, and the argument replaces only the CMD:
 
 213
-00:12:12,570 --> 00:12:13,581
+00:12:16,770 --> 00:12:17,781
 Hello, Docker.
 
 214
-00:12:15,333 --> 00:12:21,371
+00:12:19,533 --> 00:12:25,571
 Every instruction in a Dockerfile creates a layer, and docker history shows them, newest on top.
 
 215
-00:12:21,371 --> 00:12:25,900
+00:12:25,571 --> 00:12:30,100
 Our four instructions sit on top of the layers of the Python base image.
 
 216
-00:12:25,900 --> 00:12:28,793
+00:12:30,100 --> 00:12:32,993
 Of our own layers, pip install is the big one.
 
 217
-00:12:29,333 --> 00:12:30,491
+00:12:33,533 --> 00:12:34,691
 Layers are cached.
 
 218
-00:12:30,491 --> 00:12:35,121
+00:12:34,691 --> 00:12:39,321
 When you rebuild, Docker reuses every layer whose inputs did not change.
 
 219
-00:12:35,121 --> 00:12:39,365
+00:12:39,321 --> 00:12:43,565
 But as soon as one layer changes, every layer after it is rebuilt.
 
 220
-00:12:39,365 --> 00:12:43,610
+00:12:43,565 --> 00:12:47,810
 So the order of the instructions decides how fast your builds are.
 
 221
-00:12:45,367 --> 00:12:46,394
+00:12:49,567 --> 00:12:50,594
 Let's prove it.
 
 222
-00:12:46,394 --> 00:12:50,915
+00:12:50,594 --> 00:12:55,115
 I changed one comment line in app.py, and rebuilt with step three,
 
 223
-00:12:50,915 --> 00:12:55,573
+00:12:55,115 --> 00:12:59,773
 which copies all the code first and installs the libraries after it.
 
 224
-00:12:55,573 --> 00:13:00,436
+00:12:59,773 --> 00:13:04,636
 The code changed, so the copy layer changed, so pip install runs again.
 
 225
-00:13:00,436 --> 00:13:03,998
+00:13:04,636 --> 00:13:08,198
 Successfully installed Flask, for a one line change.
 
 226
-00:13:04,533 --> 00:13:09,076
+00:13:08,733 --> 00:13:13,276
 Step five copies only the requirements file first, installs, and copies the code last.
 
 227
-00:13:09,076 --> 00:13:11,347
+00:13:13,276 --> 00:13:15,547
 Same change, and now pip install is CACHED.
 
 228
-00:13:11,347 --> 00:13:13,302
+00:13:15,547 --> 00:13:17,502
 Only the last, tiny layer is rebuilt.
 
 229
-00:13:13,302 --> 00:13:14,041
+00:13:17,502 --> 00:13:18,241
 Rule of thumb:
 
 230
-00:13:14,041 --> 00:13:16,999
+00:13:18,241 --> 00:13:21,199
 things that rarely change go first, your code goes last.
 
 231
-00:13:16,999 --> 00:13:21,965
+00:13:21,199 --> 00:13:26,165
 In a real project, that is the difference between a five second build and a five minute build.
 
 232
-00:13:23,700 --> 00:13:27,214
+00:13:27,900 --> 00:13:31,414
 The dot at the end of docker build is the build context:
 
 233
-00:13:27,214 --> 00:13:29,662
+00:13:31,414 --> 00:13:33,862
 the folder Docker sends to the builder.
 
 234
-00:13:29,662 --> 00:13:32,925
+00:13:33,862 --> 00:13:37,125
 Watch what happens without a dot docker ignore file,
 
 235
-00:13:32,925 --> 00:13:38,196
+00:13:37,125 --> 00:13:42,396
 when a 50 megabyte junk folder and a .env file with a password sit next to the code.
 
 236
-00:13:38,196 --> 00:13:39,514
+00:13:42,396 --> 00:13:43,714
 Transferring context:
 
 237
-00:13:39,514 --> 00:13:40,329
+00:13:43,714 --> 00:13:44,529
 50 megabytes.
 
 238
-00:13:40,867 --> 00:13:46,127
+00:13:45,067 --> 00:13:50,327
 And because the Dockerfile copies everything, the password is now inside the image.
 
 239
-00:13:46,127 --> 00:13:48,662
+00:13:50,327 --> 00:13:52,862
 Anyone who pulls this image can read it.
 
 240
-00:13:48,662 --> 00:13:50,626
+00:13:52,862 --> 00:13:54,826
 This happens in real companies.
 
 241
-00:13:51,167 --> 00:13:54,681
+00:13:55,367 --> 00:13:58,881
 Put the dot docker ignore file back, and rebuild:
 
 242
-00:13:54,681 --> 00:13:59,773
+00:13:58,881 --> 00:14:03,973
 63 bytes of context, and the image contains only the application files.
 
 243
-00:13:59,773 --> 00:14:04,506
+00:14:03,973 --> 00:14:08,706
 Faster builds, smaller images, and no secrets shipped by accident.
 
 244
-00:14:06,267 --> 00:14:09,266
+00:14:10,467 --> 00:14:13,466
 Where would you use this as a DevOps engineer?
 
 245
-00:14:09,266 --> 00:14:09,983
+00:14:13,466 --> 00:14:14,183
 Everywhere.
 
 246
-00:14:09,983 --> 00:14:13,113
+00:14:14,183 --> 00:14:17,313
 The image is the artifact every pipeline builds,
 
 247
-00:14:13,113 --> 00:14:17,286
+00:14:17,313 --> 00:14:21,486
 scans and ships, and the Dockerfile makes that build repeatable.
 
 248
-00:14:17,833 --> 00:14:23,051
+00:14:22,033 --> 00:14:27,251
 Ports and environment variables let the same image run in development, test and production.
 
 249
-00:14:23,051 --> 00:14:28,269
+00:14:27,251 --> 00:14:32,469
 And when something breaks, docker logs and docker exec are the first two commands you type.
 
 250
-00:14:28,833 --> 00:14:31,850
+00:14:33,033 --> 00:14:36,050
 Layer order decides how long every pipeline run takes,
 
 251
-00:14:31,850 --> 00:14:36,263
+00:14:36,050 --> 00:14:40,463
 and a dot docker ignore file keeps keys and junk out of the images you publish.
 
 252
-00:14:38,000 --> 00:14:39,347
+00:14:42,200 --> 00:14:43,547
 Let's recap part one.
 
 253
-00:14:39,347 --> 00:14:42,491
+00:14:43,547 --> 00:14:46,691
 You can pull and run containers, read their logs,
 
 254
-00:14:42,491 --> 00:14:47,625
+00:14:46,691 --> 00:14:51,825
 look inside them, and you know why a container stops when its main process ends.
 
 255
-00:14:48,167 --> 00:14:52,480
+00:14:52,367 --> 00:14:56,680
 You can publish ports, configure containers with environment variables,
 
 256
-00:14:52,480 --> 00:14:56,063
+00:14:56,680 --> 00:15:00,263
 and you can write a Dockerfile, instruction by instruction.
 
 257
-00:14:56,600 --> 00:14:58,963
+00:15:00,800 --> 00:15:03,163
 You know how layers and the build cache work,
 
 258
-00:14:58,963 --> 00:15:03,794
+00:15:03,163 --> 00:15:07,994
 and how a dot docker ignore file keeps your builds fast and your secrets out of your images.
 
 259
-00:15:04,333 --> 00:15:05,160
+00:15:08,533 --> 00:15:09,360
 In part two:
 
 260
-00:15:05,160 --> 00:15:08,261
+00:15:09,360 --> 00:15:12,461
 data that survives, networks, Docker Compose,
 
 261
-00:15:08,261 --> 00:15:15,773
+00:15:12,461 --> 00:15:19,973
 security, image optimization, real troubleshooting, and the capstone, a complete three container application.
 
 262
-00:15:15,773 --> 00:15:19,907
+00:15:19,973 --> 00:15:24,107
 Before you continue, do labs one to eight in the repository.
 
 263
-00:15:19,907 --> 00:15:23,973
+00:15:24,107 --> 00:15:28,173
 Typing the commands yourself is where the learning happens.
 
 264
-00:15:23,973 --> 00:15:25,351
+00:15:28,173 --> 00:15:29,551
 See you in part two.

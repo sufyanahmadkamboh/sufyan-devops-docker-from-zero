@@ -517,3 +517,21 @@ scene("What you can do now", "Knowledge check", "You built it, broke it, fixed i
       "fix them. When you have ticked the knowledge checklist, you can honestly say: I understand Docker, because I "
       "actually used it, broke it, fixed it, and built something with it. Thanks for watching."),
 ])
+
+
+# ---------------------------------------------------------------- production: title card, end card, sound cues
+from production import package  # noqa: E402
+
+package(SCENES, 2, "Data, networks, Compose and the capstone", ["volumes", "networks", "Compose", "security", "capstone"], {
+    "Prove it": {1: "error", 3: "success"},
+    "PostgreSQL 18 on a named volume": {0: "success", 1: "error"},
+    "Your folder, inside the container": {2: "error"},
+    "bad address, then DNS, then isolation": {0: "error", 1: "success", 3: "success"},
+    "Limits, and what happens when you hit them": {1: "error"},
+    "build → tag → push → pull → run": {2: "success"},
+    "The container exits immediately": {0: "error", 3: "success"},
+    "The containers cannot talk to each other": {1: "error"},
+    "HTTP 502, and nothing looks wrong": {1: "error"},
+    "18 checks. Proof, not hope.": {0: "success"},
+    "Stop the database. Watch. Fix. Verify.": {1: "error", 2: "success"},
+})
