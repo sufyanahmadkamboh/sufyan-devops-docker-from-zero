@@ -110,7 +110,6 @@ everything.
 
 Now connect `client` to `labnet` as well. A container can be on several networks at the same time:
 
-<!-- test: retry=10; contains=Welcome to nginx -->
 ```bash
 docker network connect labnet client
 ```
@@ -249,7 +248,7 @@ curl -s http://localhost:8080/api/info
 ```
 
 ```text
-{"app_env":"development","container_hostname":"78687023daef","database_host":"db","greeting":"Hello from a container I started by hand"}
+{"app_env":"development","container_hostname":"d91b6f162f1a","database_host":"db","greeting":"Hello from a container I started by hand"}
 ```
 
 Add a message and read them all:
@@ -265,7 +264,7 @@ curl -s http://localhost:8080/api/messages
 ```
 
 ```text
-[{"created_at":"2026-10-04T04:23:06.056819+00:00","id":1,"text":"Hello! This first message was created by database/init.sql."},{"created_at":"2026-10-04T04:23:08.989889+00:00","id":2,"text":"written by hand"}]
+[{"created_at":"2026-10-04T04:39:09.194521+00:00","id":1,"text":"Hello! This first message was created by database/init.sql."},{"created_at":"2026-10-04T04:39:11.944254+00:00","id":2,"text":"written by hand"}]
 ```
 
 Open <http://localhost:8080> in your browser: the same data, with a page around it. Add a message there too.
@@ -304,7 +303,7 @@ docker logs web
 
 ```text
 ...
-2026/10/04 04:23:10 [emerg] 1#1: host not found in upstream "api" in /etc/nginx/conf.d/default.conf:16
+2026/10/04 04:39:13 [emerg] 1#1: host not found in upstream "api" in /etc/nginx/conf.d/default.conf:16
 nginx: [emerg] host not found in upstream "api" in /etc/nginx/conf.d/default.conf:16
 ```
 

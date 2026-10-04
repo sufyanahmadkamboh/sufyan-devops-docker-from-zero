@@ -53,9 +53,9 @@ docker compose ps -a --format 'table {{.Service}}\t{{.Status}}'
 
 ```text
 SERVICE   STATUS
-api       Exited (3) About a minute ago
-db        Up About a minute
-web       Up About a minute
+api       Exited (3) 13 seconds ago
+db        Up 14 seconds
+web       Up 14 seconds
 ```
 
 `web` and `db` are up, `api` exited with code **3**. nginx is reporting the truth: there is no API to talk to.
@@ -70,11 +70,11 @@ docker compose logs api
 ```text
 ...
 api-1  | ERROR: required setting DB_PASSWORD is missing. Set the environment variable DB_PASSWORD (or DB_PASSWORD_FILE).
-api-1  | [2026-10-04 04:09:48 +0000] [7] [INFO] Worker exiting (pid: 7)
-api-1  | [2026-10-04 04:09:49 +0000] [1] [ERROR] Worker (pid:7) exited with code 3.
-api-1  | [2026-10-04 04:09:49 +0000] [1] [INFO] Worker (pid:8) was sent SIGTERM!
-api-1  | [2026-10-04 04:09:49 +0000] [1] [ERROR] Shutting down: Master
-api-1  | [2026-10-04 04:09:49 +0000] [1] [ERROR] Reason: Worker failed to boot.
+api-1  | [2026-10-04 04:35:07 +0000] [7] [INFO] Worker exiting (pid: 7)
+api-1  | [2026-10-04 04:35:07 +0000] [1] [ERROR] Worker (pid:8) exited with code 3.
+api-1  | [2026-10-04 04:35:07 +0000] [1] [INFO] Worker (pid:7) was sent SIGTERM!
+api-1  | [2026-10-04 04:35:07 +0000] [1] [ERROR] Shutting down: Master
+api-1  | [2026-10-04 04:35:07 +0000] [1] [ERROR] Reason: Worker failed to boot.
 ```
 
 Read from the bottom up. gunicorn (the Python web server) says `Worker failed to boot` and shuts down.
@@ -93,9 +93,9 @@ docker inspect ts06-api-1 --format '{{range .Config.Env}}{{println .}}{{end}}'
 ```
 
 ```text
-DB_NAME=board
 DB_USER=board
 DB_HOST=db
+DB_NAME=board
 PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 PYTHON_VERSION=3.14.8
 PYTHON_SHA256=c2215904f02b175596dc49351585104f4bc20341e1c47378b26a2c274360ce73

@@ -94,7 +94,7 @@ docker ps -a --filter name=demo --format 'table {{.Names}}\t{{.Status}}'
 ```
 
 ```text
-fda9e37a410dd6609d92c1a4127c5b714ce51bf01c2dd4969744c994db7eedb7
+606fa2f5bcdbb989a7c9a7a89cf9c7ff935f966182c3313ac9c5206782ac70fa
 NAMES     STATUS
 demo      Created
 ```

@@ -82,7 +82,7 @@ docker volume inspect notes
 ```text
 [
     {
-        "CreatedAt": "2026-10-04T04:22:27Z",
+        "CreatedAt": "2026-10-04T04:38:18Z",
         "Driver": "local",
         "Labels": null,
         "Mountpoint": "/var/lib/docker/volumes/notes/_data",
@@ -167,7 +167,10 @@ docker exec db psql -U postgres -c "SELECT * FROM notes;"
 ```
 
 ```text
-(output appears here when the tests run)
+      text      
+----------------
+ I must survive
+(1 row)
 ```
 
 The row is still there. The container is new; the data is not. This is how every database runs in Docker.

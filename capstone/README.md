@@ -101,7 +101,10 @@ docker compose ps | grep -q 'capstone-web-1.*(healthy)'
 ```
 
 ```text
-(output appears here when the tests run)
+NAME             STATUS                    PORTS
+capstone-api-1   Up 17 seconds (healthy)   5000/tcp
+capstone-db-1    Up 22 seconds (healthy)   5432/tcp
+capstone-web-1   Up 11 seconds (healthy)   0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
 ```
 
 All three containers should be `Up` and `(healthy)`. Only `capstone-web-1` shows a published port
@@ -115,7 +118,7 @@ curl -s http://localhost:8080/api/health
 ```
 
 ```text
-(output appears here when the tests run)
+{"database":"ok","status":"ok"}
 ```
 
 <!-- test: contains=Hello from the capstone; output -->
@@ -124,7 +127,7 @@ curl -s http://localhost:8080/api/info
 ```
 
 ```text
-(output appears here when the tests run)
+{"app_env":"production","container_hostname":"0b3c53393d52","database_host":"db","greeting":"Hello from the capstone"}
 ```
 
 Step 5. Add a message and read the list back:
@@ -144,7 +147,33 @@ data survives `docker compose down`):
 ```
 
 ```text
-(output appears here when the tests run)
+1. Containers (docker compose ps, docker inspect)
+  PASS  capstone-web-1 is running and healthy
+  PASS  capstone-api-1 is running and healthy
+  PASS  capstone-db-1 is running and healthy
+2. Ports (only the web container is published)
+  PASS  web page answers on http://localhost:8080
+  PASS  API is NOT published on localhost:5000
+  PASS  database is NOT published on localhost:5432
+3. Application (browser -> web -> api -> db)
+  PASS  GET /api/health says the database is ok
+  PASS  POST /api/messages stores a message
+  PASS  GET /api/messages returns it
+4. Networks (frontend: web+api, backend: api+db)
+  PASS  api can reach db (same backend network)
+  PASS  web can NOT even resolve db (different network)
+5. Security basics
+  PASS  api runs as a normal user (uid 10001, not root)
+  PASS  web runs as a normal user (not root)
+  PASS  api filesystem is read-only
+  PASS  password is not in the api's environment variables
+  PASS  api memory limit is 256 MiB
+6. Data on a volume (docker volume inspect capstone_db-data)
+  PASS  volume capstone_db-data exists
+   docker compose down  (containers and networks are removed, the volume is kept)
+  PASS  after down + up, the message verify-1791088798 is still there
+
+All checks passed.
 ```
 
 On Windows, run `verify.sh` from WSL2 or Git Bash (it is a bash script).
@@ -168,7 +197,8 @@ docker network inspect capstone_backend --format '{{range .Containers}}{{.Name}}
 ```
 
 ```text
-(output appears here when the tests run)
+capstone-web-1 capstone-api-1 
+capstone-db-1 capstone-api-1 
 ```
 
 The frontend network holds web and api; the backend network holds api and db.
@@ -182,7 +212,8 @@ docker inspect capstone-api-1 --format 'memory limit: {{.HostConfig.Memory}} byt
 ```
 
 ```text
-(output appears here when the tests run)
+uid=10001(app) gid=10001(app) groups=10001(app)
+memory limit: 268435456 bytes, read-only: true
 ```
 
 How much are they using right now?
@@ -193,7 +224,10 @@ docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}'
 ```
 
 ```text
-(output appears here when the tests run)
+NAME             CPU %     MEM USAGE / LIMIT
+capstone-web-1   0.00%     11.24MiB / 15.35GiB
+capstone-api-1   0.03%     84.24MiB / 256MiB
+capstone-db-1    2.30%     24.61MiB / 512MiB
 ```
 
 The last lines the API wrote:
@@ -204,7 +238,11 @@ docker compose logs --tail 5 api
 ```
 
 ```text
-(output appears here when the tests run)
+api-1  | [2026-10-04 04:40:15 +0000] [8] [INFO] Booting worker with pid: 8
+api-1  | [2026-10-04 04:40:15 +0000] [1] [ERROR] Control server error: [Errno 30] Read-only file system: '/home/app'
+api-1  | 127.0.0.1 - - [04/Oct/2026:04:40:20 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "Python-urllib/3.14"
+api-1  | 127.0.0.1 - - [04/Oct/2026:04:40:30 +0000] "GET /api/health HTTP/1.1" 200 32 "-" "Python-urllib/3.14"
+api-1  | 172.19.0.3 - - [04/Oct/2026:04:40:31 +0000] "GET /api/messages HTTP/1.1" 200 309 "-" "curl/8.19.0"
 ```
 
 ## Break it, then fix it

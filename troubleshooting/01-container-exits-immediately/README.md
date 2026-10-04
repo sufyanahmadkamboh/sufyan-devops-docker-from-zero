@@ -104,7 +104,7 @@ docker run --rm exits-demo ls -la /app
 ```text
 total 16
 drwxr-xr-x 1 root root 4096 Oct  4 04:08 .
-drwxr-xr-x 1 root root 4096 Oct  4 04:08 ..
+drwxr-xr-x 1 root root 4096 Oct  4 04:34 ..
 -rwxr-xr-x 1 root root 1087 Oct  4 03:44 app.py
 -rwxr-xr-x 1 root root   13 Oct  4 03:44 requirements.txt
 ```

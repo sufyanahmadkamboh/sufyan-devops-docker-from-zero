@@ -31,10 +31,10 @@ docker system df
 
 ```text
 TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
-Images          26        1         6.679GB   3.03GB (45%)
-Containers      1         0         147.5kB   147.5kB (100%)
+Images          44        0         7.894GB   6.681GB (84%)
+Containers      0         0         0B        0B
 Local Volumes   0         0         0B        0B
-Build Cache     103       0         2.874GB   2.349GB
+Build Cache     148       0         3.397GB   469.1MB
 ```
 
 | Column | Meaning |
@@ -83,10 +83,10 @@ docker ps -a
 
 ```text
 CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS                     PORTS     NAMES
-3f96efc22c7c   alpine:3.24   "echo 'I created an …"   3 seconds ago   Exited (0) 3 seconds ago             anon
-1d3ada6a04e2   alpine:3.24   "echo 'I have a labe…"   4 seconds ago   Exited (0) 3 seconds ago             labeled
-cdbde784fc8d   alpine:3.24   "echo 'me too'"          4 seconds ago   Exited (0) 4 seconds ago             old2
-adc3cd3a08f0   alpine:3.24   "echo 'I ran once'"      5 seconds ago   Exited (0) 4 seconds ago             old1
+6be26b35cc4f   alpine:3.24   "echo 'I created an …"   3 seconds ago   Exited (0) 3 seconds ago             anon
+2eaa997e70b3   alpine:3.24   "echo 'I have a labe…"   4 seconds ago   Exited (0) 3 seconds ago             labeled
+8e24955663a2   alpine:3.24   "echo 'me too'"          4 seconds ago   Exited (0) 4 seconds ago             old2
+a8ac41a11edd   alpine:3.24   "echo 'I ran once'"      5 seconds ago   Exited (0) 4 seconds ago             old1
 ```
 
 Four stopped containers, all `Exited (0)`.
@@ -103,7 +103,7 @@ docker container prune -f --filter label=course=docker-from-zero
 
 ```text
 Deleted Containers:
-1d3ada6a04e296f42e3935f277c418be091a61cd8168c4e4330518a927b8f85e
+2eaa997e70b373300c92d431b907db57cde0cf5a9537c6188555718de62272de
 
 Total reclaimed space: 4.096kB
 ```
@@ -124,12 +124,11 @@ docker container prune -f
 
 ```text
 Deleted Containers:
-3f96efc22c7c4ada67874dc1fe706f16b7e78db3c64a1475f4740f93b4273015
-cdbde784fc8d88891b9ffbd67c7ec563b1fcae68be328f897d39ab56c402af4d
-adc3cd3a08f0f3b3d445bf21a1559b1f4571c2444496fa06469dcf3292fcb22b
-4f8407918c036a6a0e3f257313b084fabdc35e2b364afaa51b29cf5b8f8cd11f
+6be26b35cc4f6e369b43c9c5eca6a4973591503069e0025c11452a2fcc80c30f
+8e24955663a2ffb5664957870399c177c22635d5bf30cc060fb49355d95470dc
+a8ac41a11eddaf7f62856b3749c8a68889201128766c8a66800a0d452b9c3fe0
 
-Total reclaimed space: 163.8kB
+Total reclaimed space: 16.38kB
 ```
 
 > A stopped container is not garbage by definition. It may be a database you stopped for the weekend, and `docker
@@ -144,7 +143,6 @@ docker images --filter dangling=true
 ```
 
 ```text
-WARNING: This output is designed for human readability. For machine-readable output, please use --format.
 IMAGE   ID             DISK USAGE   CONTENT SIZE   EXTRA
 ```
 
@@ -185,7 +183,7 @@ docker volume ls
 
 ```text
 DRIVER    VOLUME NAME
-local     db9ab4b140e8178dafcf4e576c7fe5bcd9d2077393b82d9c471b5c9db39b6cf5
+local     ab7bdd7a983fdb6323d808a7cf6c82637d367d247d0ce84c83deb7eeafae8197
 local     lab18-keep
 ```
 
@@ -200,7 +198,7 @@ docker volume prune -f
 
 ```text
 Deleted Volumes:
-db9ab4b140e8178dafcf4e576c7fe5bcd9d2077393b82d9c471b5c9db39b6cf5
+ab7bdd7a983fdb6323d808a7cf6c82637d367d247d0ce84c83deb7eeafae8197
 
 Total reclaimed space: 0B
 ```
@@ -241,9 +239,9 @@ docker system prune -f
 
 ```text
 ...
-7uxjpeok3ckhzkeihnpjj83ig
+ko05dkinupe4w8ff734lwgm6n
 
-Total reclaimed space: 2.349GB
+Total reclaimed space: 469.2MB
 ```
 
 > **⚠ WARNING: `docker system prune -a --volumes`**
@@ -295,7 +293,7 @@ docker volume inspect lab18-db
 ```text
 [
     {
-        "CreatedAt": "2026-10-04T04:08:09Z",
+        "CreatedAt": "2026-10-04T04:34:43Z",
         "Driver": "local",
         "Labels": null,
         "Mountpoint": "/var/lib/docker/volumes/lab18-db/_data",

@@ -73,7 +73,7 @@ docker run -d --name web nginx:1.30-alpine
 ```
 
 ```text
-3ee94becb4ccf9db3df92aca0d5d25da646f7838c50047f5c9d833cb82990667
+5399d05fd2508042084387b4c6dffa33de4649d1f50c8697c42ded16e3a78f57
 ```
 
 The long hexadecimal string is the full **container ID**. List running containers:
@@ -84,8 +84,8 @@ docker ps
 ```
 
 ```text
-CONTAINER ID   IMAGE               COMMAND                  CREATED        STATUS                  PORTS     NAMES
-3ee94becb4cc   nginx:1.30-alpine   "/docker-entrypoint.…"   1 second ago   Up Less than a second   80/tcp    web
+CONTAINER ID   IMAGE               COMMAND                  CREATED                  STATUS                  PORTS     NAMES
+5399d05fd250   nginx:1.30-alpine   "/docker-entrypoint.…"   Less than a second ago   Up Less than a second   80/tcp    web
 ```
 
 Start a second container from the **same** image. It is completely independent:
@@ -138,8 +138,8 @@ docker exec web2 hostname
 ```
 
 ```text
-3ee94becb4cc
-d92d3a25a511
+5399d05fd250
+76666314f6a6
 ```
 
 Compare with the CONTAINER ID column of `docker ps`: they match.

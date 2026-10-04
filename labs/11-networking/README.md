@@ -121,8 +121,8 @@ docker network inspect labnet
 [
     {
         "Name": "labnet",
-        "Id": "957292d8950bc6defdd2ac86e438f2c94920d9536423067377c71df72a15f0c6",
-        "Created": "2026-10-04T04:04:27.379458038Z",
+        "Id": "39c624bd970b1ac1db854f0359dc825029a6a22c5f5fa401c24d12679c075af2",
+        "Created": "2026-10-04T04:33:51.225766709Z",
         "Scope": "local",
         "Driver": "bridge",
         "EnableIPv4": true,
@@ -150,10 +150,10 @@ docker network inspect labnet
         },
         "Labels": {},
         "Containers": {
-            "d90707c5d9170e278f154a4e5682d94b7d0ed744916cd1e9277059da437b4963": {
+            "5703ac48e234e7931200c35d860e90eb490228f9a9463add9fa2bf5a0a9de75e": {
                 "Name": "web2",
-                "EndpointID": "d2a42e7f82c6e8cd8772656bc5ec49cdfc3c61a62f023f76c0e3cc83c60e565f",
-                "MacAddress": "ca:6b:ad:98:bc:7a",
+                "EndpointID": "b42da65b52f67ff17a7db74a94f25a0aa4ef27262bb6bc2fc51ea87efb711fe2",
+                "MacAddress": "22:e1:df:80:76:0d",
                 "IPv4Address": "172.18.0.2/16",
                 "IPv6Address": ""
             }

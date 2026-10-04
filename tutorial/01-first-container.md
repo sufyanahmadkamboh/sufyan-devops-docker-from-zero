@@ -53,42 +53,50 @@ docker images
 ```
 
 ```text
-IMAGE                            ID             DISK USAGE   CONTENT SIZE   EXTRA
-alpine:3.24                      294b683cb724         13MB         3.94MB        
-board-api:1.0                    9d6da54368f6        243MB         58.5MB        
-board-web:1.0                    37b4d6321a8d       92.8MB         26.1MB        
-busybox:1.37                     bdf57e528e45       6.77MB         2.22MB        
-docker-from-zero/api:1.0.0       7cfd494a3172        247MB         58.8MB        
-docker-from-zero/web:1.0.0       c80c81a9e7f5       81.5MB         23.1MB        
-greeter:latest                   acc561ba6f7e       12.9MB         3.85MB        
-hello-world:latest               5e2309035332       25.9kB         9.49kB        
-jitesoft/tesseract-ocr:latest    23fbc1f29a6d        401MB          129MB        
-linuxserver/ffmpeg:latest        a7182d4fe498       1.09GB          268MB        
-multi-container-app-api:latest   6bac428db361        243MB         58.5MB        
-multi-container-app-web:latest   bc959e0bc319       92.8MB         26.1MB        
-nginx:1.30-alpine                0985e772fb9f       93.6MB           27MB        
-postgres:18-alpine               77f585114c32        433MB          121MB        
-python:3.14-slim                 c3e521df8b2b        192MB         48.7MB        
-registry:3                       ddf754342cfc       86.9MB         20.7MB        
-simple-app:1.0                   a0d6cae60a15        212MB         51.9MB        
-simple-app:fat                   c2619eff3ce5       1.75GB          454MB        
-simple-app:fat-nocache           40b870a8fffa       1.74GB          453MB        
-simple-app:fixed                 18b09356d161        212MB         51.9MB        
-simple-app:mine                  99343326e3bc        212MB         51.9MB        
-simple-app:multistage            cb8c8c901b29        108MB         26.1MB        
-simple-app:slim                  929c66f80e88        212MB         51.9MB        
-simple-app:step1                 c64b54e3f2b6        189MB         46.5MB        
-simple-app:step2                 ec6dbcfb69aa        189MB         46.5MB        
-simple-app:step3                 bd079254e6f9        212MB         51.9MB        
-simple-app:step4                 a80b707a17ee        212MB         51.9MB        
-simple-app:step5                 2b87150db06c        212MB         51.9MB        
-ts01:latest                      86f535124674        212MB         51.9MB        
-ts03-api:latest                  b44d462d7e19        243MB         58.5MB        
-ts03-web:latest                  e8b8fc8f7e1c       92.8MB         26.1MB        
-ts06-api:latest                  0a194b6f7ab0        243MB         58.5MB        
-ts06-web:latest                  7fb452dc3a2a       92.8MB         26.1MB        
-typo:latest                      812ef2b3da18        189MB         46.5MB        
-ubuntu:26.04                     f144425ff09b        162MB         45.6MB        
+IMAGE                                     ID             DISK USAGE   CONTENT SIZE   EXTRA
+alpine:3.24                               294b683cb724         13MB         3.94MB        
+board-api:1.0                             9d6da54368f6        243MB         58.5MB        
+board-api:latest                          4e0d1c0cca1d        243MB         58.5MB        
+board-web:1.0                             37b4d6321a8d       92.8MB         26.1MB        
+board-web:latest                          19d1d8c20748       92.8MB         26.1MB        
+busybox:1.37                              bdf57e528e45       6.77MB         2.22MB        
+docker-from-zero/api:1.0.0                502cd60dc40f        247MB         58.8MB        
+docker-from-zero/web:1.0.0                0da114ad2400       81.5MB         23.1MB        
+greeter:latest                            58e5e5a1bb70       12.9MB         3.85MB        
+hello-world:latest                        5e2309035332       25.9kB         9.49kB        
+jitesoft/tesseract-ocr:latest             23fbc1f29a6d        401MB          129MB        
+linuxserver/ffmpeg:latest                 a7182d4fe498       1.09GB          268MB        
+localhost:5000/simple-app:1.0             8127abfae118        212MB         51.9MB        
+multi-container-app-api:latest            401160b8cb5d        243MB         58.5MB        
+multi-container-app-web:latest            3594f2d772f2       92.8MB         26.1MB        
+nginx:1.30-alpine                         0985e772fb9f       93.6MB           27MB        
+postgres:18-alpine                        77f585114c32        433MB          121MB        
+python:3.14-slim                          c3e521df8b2b        407MB         95.8MB        
+registry:3                                ddf754342cfc       86.9MB         20.7MB        
+simple-app:clean                          c21968dc4b3e        189MB         46.5MB        
+simple-app:fat                            5a68be4c0d32       1.75GB          454MB        
+simple-app:fat-nocache                    40b870a8fffa       1.74GB          453MB        
+simple-app:fixed                          18b09356d161        212MB         51.9MB        
+simple-app:leaky                          8ed0a4b5ade0        239MB         46.5MB        
+simple-app:mine                           99343326e3bc        212MB         51.9MB        
+simple-app:multistage                     986725ef8115        108MB         26.1MB        
+simple-app:root                           8ce7b2309a9f        212MB         51.9MB        
+simple-app:slim                           929c66f80e88        212MB         51.9MB        
+simple-app:step1                          1988bf99972f        189MB         46.5MB        
+simple-app:step2                          5e828c81d314        189MB         46.5MB        
+simple-app:step3                          adc2c758689e        212MB         51.9MB        
+simple-app:step4                          5d3c5c8176ee        212MB         51.9MB        
+simple-app:step5                          229e09ab9ddc        212MB         51.9MB        
+sufibaba6629/docker-from-zero-api:1.0.0   bd11d7028e0b        308MB          120MB        
+sufibaba6629/docker-from-zero-web:1.0.0   d23832ee9579        105MB         46.2MB        
+ts01:fixed                                576316c03eb6        212MB         51.9MB        
+ts01:latest                               558ecda8ad01        212MB         51.9MB        
+ts03-api:latest                           1b1358270354        243MB         58.5MB        
+ts03-web:latest                           b65ceefaa602       92.8MB         26.1MB        
+ts06-api:latest                           ebb389133ca9        243MB         58.5MB        
+ts06-web:latest                           db68da83a171       92.8MB         26.1MB        
+typo:latest                               812ef2b3da18        189MB         46.5MB        
+ubuntu:26.04                              f144425ff09b        162MB         45.6MB        
 ```
 
 The columns:
@@ -146,12 +154,12 @@ docker logs web
 
 ```text
 ...
-2026/10/04 04:21:33 [notice] 1#1: start worker process 38
-2026/10/04 04:21:33 [notice] 1#1: start worker process 39
-2026/10/04 04:21:33 [notice] 1#1: start worker process 40
-2026/10/04 04:21:33 [notice] 1#1: start worker process 41
-2026/10/04 04:21:33 [notice] 1#1: start worker process 42
-2026/10/04 04:21:33 [notice] 1#1: start worker process 43
+2026/10/04 04:37:34 [notice] 1#1: start worker process 38
+2026/10/04 04:37:34 [notice] 1#1: start worker process 39
+2026/10/04 04:37:34 [notice] 1#1: start worker process 40
+2026/10/04 04:37:34 [notice] 1#1: start worker process 41
+2026/10/04 04:37:34 [notice] 1#1: start worker process 42
+2026/10/04 04:37:34 [notice] 1#1: start worker process 43
 ```
 
 These are nginx's start-up messages. When something goes wrong, `docker logs` is the first command you run.
@@ -224,7 +232,7 @@ docker exec web cat /etc/os-release
 ```
 
 ```text
-a46b1ce979b0
+0f2f0c22f9ae
 NAME="Alpine Linux"
 ID=alpine
 VERSION_ID=3.24.2
@@ -378,7 +386,19 @@ docker run --rm ubuntu:26.04 cat /etc/os-release
 ```
 
 ```text
-(output appears here when the tests run)
+PRETTY_NAME="Ubuntu 26.04.1 LTS"
+NAME="Ubuntu"
+VERSION_ID="26.04"
+VERSION="26.04.1 LTS (Resolute Raccoon)"
+VERSION_CODENAME=resolute
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=resolute
+LOGO=ubuntu-logo
 ```
 
 `--rm` removes the container automatically when it stops, so you do not collect dead containers.
