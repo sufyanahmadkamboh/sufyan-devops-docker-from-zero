@@ -21,6 +21,17 @@ def shot(s: int, src: str, alt: str, style: str = "height:640px;width:auto") -> 
 SCENES: list[dict] = []
 
 
+def no_command_column(lines):
+    """docker compose ps is too wide for a slide: leave out the COMMAND column (nothing else changes)."""
+    import re
+    out = []
+    for s, text, kind in lines:
+        if kind != "cmd":
+            text = re.sub(r'"[^"]*"\s+', "", text) if '"' in text else re.sub(r"COMMAND\s+", "", text)
+        out.append((s, text, kind))
+    return out
+
+
 def scene(chapter, kicker, title, body, steps, layout="full"):
     SCENES.append({"chapter": chapter, "kicker": kicker, "title": title, "body": body, "steps": steps, "layout": layout})
 
@@ -124,7 +135,9 @@ scene("Networking", "How containers find each other", "Names work only on your o
     + box(1, 900, 40, 820, 330, "🌐", "your network: docker network create labnet",
           ["Docker's built-in DNS", "every container name is a host name", "wget http://web2  →  works"], "ok", "#0f2a22")
     + box(2, 900, 430, 820, 230, "🧱", "a different network: othernet", ["cannot reach labnet, cannot even resolve its names"], "amber", "#2b2410")
-    + label(2, 380, 560, "isolation is a feature: your database should not be reachable from everything", 26, "amber", "middle", 700)
+    + label(2, 30, 520, "Isolation is a feature:", 28, "amber", "start", 800)
+    + label(2, 30, 565, "your database should not be", 26, "amber", "start", 700)
+    + label(2, 30, 605, "reachable from everything.", 26, "amber", "start", 700)
 ), [
     S("How do containers talk to each other? On Docker's default network, called bridge, every container gets an IP "
       "address, but there is no name resolution. Ask for the name web, and you get bad address.",
@@ -277,7 +290,7 @@ scene("Security basics", "Recorded · tutorial chapter 08", "Least privilege, in
 scene("Image optimization", "Recorded · same app, three Dockerfiles", "1.75 GB → 212 MB → 108 MB", terminal(
     rec(T8, "docker images simple-app", grep=r"IMAGE|:fat|:1\.0 |:multistage",
         tones={"fat": "bad", "multistage": "ok", "simple-app:1.0": "warn"})
-    + rec(T8, "docker history simple-app:fat", step=1, head=6, width=118, tones={"apt-get": "bad"}),
+    + rec(T8, "docker history simple-app:fat", step=1, grep=r"apt-get update && apt-get ins|pip install -r requirements", width=118, tones={"apt-get": "bad"}),
     "bash (recorded)") + grid([
     tile(2, "🐘", "fat", "1.75 GB", "bad", "full python + build tools + bad order"),
     tile(2, "🥗", "slim", "212 MB", "amber", "slim base, deps first, no cache"),
@@ -295,12 +308,10 @@ scene(None, "Recorded · a registry on your own computer", "build → tag → pu
     rec(T8, "docker tag simple-app:1.0 localhost:5000/simple-app:1.0")
     + rec(T8, "docker push localhost:5000/simple-app:1.0", step=0, tail=2)
     + rec(T8, "curl -s http://localhost:5000/v2/_catalog", step=1, tones={"simple-app": "ok"})
-    + rec(T8, "docker rmi localhost:5000/simple-app:1.0", step=2)
+    + rec(T8, "docker rmi localhost:5000/simple-app:1.0", step=2, grep=r"Downloaded newer image|Status:", tones={"Downloaded": "ok"})
     + rec(T8, "curl -s http://localhost:8080/", step=2, cmd="docker run -d --name from-registry -p 8080:5000 localhost:5000/simple-app:1.0\ncurl -s http://localhost:8080/",
           tones={"Hello": "ok"}),
-    "bash (recorded)") + grid([
-    card(3, "🐳", "Docker Hub: the published capstone images", "sufibaba6629/docker-from-zero-web:1.0.0 and -api:1.0.0 · amd64 + arm64", "blue"),
-], cols=1), [
+    "bash (recorded)"), [
     S("Images are shared through registries. To practise without any account, run your own: the registry image, on port "
       "5000. Tag the image with the registry's address in its name, and push."),
     S("The registry now lists simple app."),
@@ -308,6 +319,15 @@ scene(None, "Recorded · a registry on your own computer", "build → tag → pu
       "that is exactly how images travel from a laptop to a server."),
     S("Docker Hub works the same way, with your user name in front of the image name. The capstone images of this "
       "course are published there, for Intel and for ARM computers like Apple Silicon Macs."),
+])
+
+scene(None, "Docker Hub", "The capstone images, published", shot(0, "docker-hub.png", "Docker Hub repository page", "height:640px;width:auto"), [
+    S("Here they are on Docker Hub: docker from zero web and API, version 1.0.0, with a description that tells you how to "
+      "run the capstone straight from these images. Anyone, anywhere, can now pull and run exactly what we built. "
+      "Docker Hub is free for public images.",
+      tts="Here they are on Docker Hub: docker from zero web and A P I, version 1 point 0 point 0, with a description that tells you how to "
+          "run the capstone straight from these images. Anyone, anywhere, can now pull and run exactly what we built. "
+          "Docker Hub is free for public images."),
 ])
 
 # ---------------------------------------------------------------- 8. Troubleshooting
@@ -409,14 +429,14 @@ scene("The capstone", "Everything together", "Built the way you would build it a
     S("And because web and db share no network, the web container cannot even resolve the database's name."),
 ])
 
-scene(None, "Recorded · tutorial chapter 10", "Up, healthy, isolated, non-root", terminal(
-    rec(T10, "docker compose ps", nth=0, width=150, tones={"healthy": "ok"})
+scene(None, "Recorded · tutorial chapter 10", "Up, healthy, isolated, non-root", '<div style="zoom:0.86">' + terminal(
+    no_command_column(rec(T10, "docker compose ps", nth=0, width=150, tones={"healthy": "ok"}))
     + rec(T10, "docker compose exec -T web wget", step=1, tones={"bad address": "ok"})
     + rec(T10, "docker inspect capstone-api-1 --format 'user=", step=2, tones={"readonly=true": "ok"})
     + rec(T10, "grep DB_", step=2, nth=0, tones={"FILE": "ok"}),
-    "bash (recorded)"), [
-    S("One command: docker compose up dash d. All three containers are up and healthy. Compose waited for each health "
-      "check before starting the next service."),
+    "bash (recorded)") + "</div>", [
+    S("One command: docker compose up dash d. The database and the API are already healthy, and the web container's "
+      "health check is just starting. Compose waited for each health check before starting the next service."),
     S("From the web container, the database is a bad address. Isolation, verified."),
     S("The API runs as user app with a read only filesystem, and its database setting is a password file, not a password. "
       "docker inspect has nothing to leak.",
@@ -424,9 +444,20 @@ scene(None, "Recorded · tutorial chapter 10", "Up, healthy, isolated, non-root"
           "docker inspect has nothing to leak."),
 ])
 
-scene(None, "Recorded · capstone/verify.sh --persistence", "18 checks. Proof, not hope.", terminal(
-    rec(CAP, "./verify.sh --persistence", head=30, width=120, tones={"PASS": "ok", "FAIL": "bad", "All checks passed": "ok"}),
-    "bash (recorded)"), [
+scene(None, "In the browser", "The message board, running on the capstone", shot(0, "message-board.png", "The message board app", "height:640px;width:auto"), [
+    S("And here it is in a browser. The page comes from the web container, the info line from one of the API's "
+      "processes, which shows the container's short ID, and the messages from PostgreSQL. These four messages survived "
+      "docker compose down, when not a single container was left, because they live on the volume.",
+      tts="And here it is in a browser. The page comes from the web container, the info line from one of the A P I's "
+          "processes, which shows the container's short I D, and the messages from postgres Q L. These four messages survived "
+          "docker compose down, when not a single container was left, because they live on the volume."),
+])
+
+VERIFY = rec(CAP, "./verify.sh --persistence", width=96, drop=r"^$", tones={"PASS": "ok", "FAIL": "bad", "All checks passed": "ok"})
+_half = next(i for i, line in enumerate(VERIFY) if line[1].startswith("4."))
+scene(None, "Recorded · capstone/verify.sh --persistence", "18 checks. Proof, not hope.",
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;zoom:0.86">'
+      + terminal(VERIFY[:_half], "bash (recorded) · part 1") + terminal(VERIFY[_half:], "bash (recorded) · part 2") + "</div>", [
     S("And then we prove it. verify dot sh runs eighteen checks, the way an engineer would check a system by hand: "
       "containers healthy, only the web port published, the application end to end, both networks, non root users, the "
       "read only filesystem, no password in the environment, the memory limit, and finally docker compose down and up "

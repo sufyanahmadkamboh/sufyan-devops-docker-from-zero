@@ -192,8 +192,9 @@ scene("The container lifecycle", "Created → Running → Exited → Removed", "
 ])
 
 scene(None, "Recorded · why containers stop", "A container lives as long as its main process", terminal(
-    rec(T1, "docker rm web", tones={"Error": "bad"})
-    + rec(T1, "docker run -d --name sleeper", step=1)
+    rec(T1, "docker rm web", tones={"Error": "bad"}, wrap=104)
+    + rec(T1, "docker run -d --name sleeper", step=1, drop=r"Unable|Pulling|Digest|Status|complete|^[0-9a-f]{12}:|^[0-9a-f]{64}$|sleeper: Up",
+          cmd="docker run -d --name sleeper alpine:3.24 sleep 5")
     + rec(T1, "docker ps -a --filter name=sleeper", step=1, tones={"Exited": "warn"})
     + rec(T1, "docker run --name quick", step=2, tones={"Exited": "warn"})
     + rec(T1, "docker inspect ubuntu", step=3, tones={"bash": "ok"}),
@@ -216,7 +217,7 @@ scene(None, "Recorded · interactive containers", "A shell inside a container", 
     [(0, "$ docker run -it --name shell ubuntu:26.04 bash", "cmd"), (0, "root@4f2c…:/# cat /etc/os-release   (you are inside)", "dim"),
      (0, "root@4f2c…:/# exit", "dim")]
     + rec(T1, "docker ps -a --filter name=shell", step=1, tones={"Exited": "warn"})
-    + rec(T1, "cat /etc/os-release", step=2, head=4, tones={"Ubuntu": "ok"}),
+    + rec(T1, "--rm ubuntu:26.04 cat /etc/os-release", step=2, head=4, tones={"Ubuntu": "ok"}),
     "bash (recorded)"), [
     S("You can also work inside a container interactively. Dash i keeps input open, dash t gives you a terminal, and "
       "bash is the program to run. You get a prompt inside Ubuntu, even if your computer runs Windows or macOS."),
@@ -263,9 +264,16 @@ scene(None, "Recorded · tutorial chapter 02", "Publish it, then break it", term
       "listens. The container was fine. The mapping was wrong. Fix the mapping, and it works."),
 ])
 
+scene(None, "In the browser", "http://localhost:8080", shot(0, "nginx-welcome.png", "nginx welcome page", "height:620px;width:auto"), [
+    S("And the same page in a browser: localhost, port 8080. Your computer forwards it to port 80 inside the container, "
+      "where nginx answers. Your first containerised web server.",
+      tts="And the same page in a browser: local host, port 8080. Your computer forwards it to port 80 inside the container, "
+          "where engine x answers. Your first containerised web server."),
+])
+
 scene(None, "Recorded · a port conflict", "port is already allocated", terminal(
-    rec(T2, "docker run -d --name web4 -p 8080:80", drop=r"^[0-9a-f]{64}$|Run 'docker run",
-        tones={"already allocated": "bad", "Error": "bad"}, width=200)
+    rec(T2, "docker run -d --name web4 -p 8080:80", drop=r"^[0-9a-f]{64}$|Run 'docker run|^$",
+        tones={"already allocated": "bad", "Error": "bad"}, wrap=104)
     + rec(T2, "docker ps --filter publish=8080", step=1, tones={"web": "ok"})
     + rec(T2, "docker ps -a --filter name=web4", step=2, tones={"Created": "warn"}),
     "bash (recorded)"), [
@@ -384,7 +392,7 @@ scene("Layers and the build cache", "Recorded · docker history", "An image is a
         tones={"pip install": "warn", "COPY . .": "warn", "WORKDIR /app": "warn", "CMD [\"python\" \"app.py\"]": "warn"}),
     "bash (recorded)"), [
     S("Every instruction in a Dockerfile creates a layer, and docker history shows them, newest on top. Our four "
-      "instructions sit on top of the layers of the Python base image. The pip install layer is the big one."),
+      "instructions sit on top of the layers of the Python base image. Of our own layers, pip install is the big one."),
     S("Layers are cached. When you rebuild, Docker reuses every layer whose inputs did not change. But as soon as one "
       "layer changes, every layer after it is rebuilt. So the order of the instructions decides how fast your builds are."),
 ])
@@ -392,11 +400,11 @@ scene("Layers and the build cache", "Recorded · docker history", "An image is a
 scene(None, "Recorded · change one line of app.py, rebuild", "Bad order vs. good order", terminal(
     [(0, "# 03.Dockerfile: COPY . .  THEN  pip install", "dim")]
     + rec(T3, "dockerfile-steps/03.Dockerfile -t simple-app:step3 . 2>&1", nth=0, width=104,
-          cmd="docker build -f dockerfile-steps/03.Dockerfile -t simple-app:step3 .",
+          cmd="docker build -f dockerfile-steps/03.Dockerfile -t simple-app:step3 .", drop="FROM docker.io",
           tones={"Successfully installed": "bad", "RUN pip": "bad", "CACHED": "ok"})
     + [(1, "# 05.Dockerfile: COPY requirements.txt, pip install, THEN COPY app.py", "dim")]
     + rec(T3, "dockerfile-steps/05.Dockerfile -t simple-app:step5 . 2>&1", step=1, width=104,
-          cmd="docker build -f dockerfile-steps/05.Dockerfile -t simple-app:step5 .",
+          cmd="docker build -f dockerfile-steps/05.Dockerfile -t simple-app:step5 .", drop="FROM docker.io",
           tones={"CACHED": "ok", "COPY app.py": "warn"}),
     "bash (recorded, build steps only)"), [
     S("Let's prove it. I changed one comment line in app.py, and rebuilt with step three, which copies all the code "

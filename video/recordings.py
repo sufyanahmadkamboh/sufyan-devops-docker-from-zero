@@ -33,7 +33,7 @@ def _load(src: str) -> list[tuple[str, str]]:
 
 def rec(src: str, match: str, step: int = 0, out_step: int | None = None, nth: int = 0, head: int | None = None,
         tail: int | None = None, grep: str | None = None, drop: str | None = None, cmd: str | None = None,
-        tones: dict | None = None, width: int = 118) -> list[tuple[int, str, str]]:
+        tones: dict | None = None, width: int = 118, wrap: int | None = None) -> list[tuple[int, str, str]]:
     """Terminal lines for the nth recorded block of `src` whose command contains `match`.
 
     head/tail/grep/drop select output lines; tones maps a substring to a line style (ok, bad, warn, dim);
@@ -60,6 +60,10 @@ def rec(src: str, match: str, step: int = 0, out_step: int | None = None, nth: i
         for key, tone in (tones or {}).items():
             if key in x:
                 kind = tone
+        if wrap and len(x) > wrap:                       # long error messages: show all of it, on several lines
+            parts = [x[i:i + wrap] for i in range(0, len(x), wrap)]
+            shown += [(o, p if n == 0 else "  " + p, kind) for n, p in enumerate(parts)]
+            continue
         if len(x) > width:
             x = x[:width - 1] + "…"
         shown.append((o, x, kind))

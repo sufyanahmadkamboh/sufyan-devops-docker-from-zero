@@ -1,0 +1,10 @@
+0:00 Why Docker
+1:57 What Docker is
+2:59 Your first container
+4:55 The container lifecycle
+7:00 Port mapping
+9:04 Environment variables
+10:40 Your first Dockerfile
+12:14 Layers and the build cache
+13:23 .dockerignore
+14:37 End of part 1
