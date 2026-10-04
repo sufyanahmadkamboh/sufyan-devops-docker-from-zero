@@ -129,6 +129,11 @@ def sanitize(text: str) -> str:
     root = str(ROOT)
     for form in {root, root.replace("\\", "/"), "/" + root[0].lower() + root[2:].replace("\\", "/")}:
         text = text.replace(form, "~/sufyan-devops-docker-from-zero")
+    # never publish the name of the machine's user (paths such as C:\Users\<name> or /home/<name>)
+    home = str(Path.home())
+    for form in {home, home.replace("\\", "/"), "/" + home[0].lower() + home[2:].replace("\\", "/")}:
+        if len(home) > 3:
+            text = text.replace(form, "~")
     return text.rstrip("\n")
 
 

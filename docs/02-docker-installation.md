@@ -226,34 +226,27 @@ a Windows path. `docker exec web ls /usr/share/nginx/html` silently becomes
 (on Docker Desktop it says "Docker Desktop"), `CPUs`, `Total Memory` and `Docker Root Dir`
 (where images and volumes are stored):
 
-<!-- test: contains=Server Version; output=head:20 -->
+It prints a long report. For now, ask only for the fields that matter here, with `--format`:
+
+<!-- test: contains=Server Version; output -->
 ```bash
-docker info
+docker info --format 'Server Version: {{.ServerVersion}}
+Operating System: {{.OperatingSystem}}
+CPUs: {{.NCPU}}
+Total Memory: {{.MemTotal}} bytes
+Docker Root Dir: {{.DockerRootDir}}'
 ```
 
 ```text
-Client:
- Version:    29.4.3
- Context:    desktop-linux
- Debug Mode: false
- Plugins:
-  agent: Docker AI Agent Runner (Docker Inc.)
-    Version:  v1.57.0
-    Path:     C:\Program Files\Docker\cli-plugins\docker-agent.exe
-  ai: Docker AI Agent - Ask Gordon (Docker Inc.)
-    Version:  v1.20.2
-    Path:     C:\Program Files\Docker\cli-plugins\docker-ai.exe
-  buildx: Docker Buildx (Docker Inc.)
-    Version:  v0.33.0-desktop.1
-    Path:     C:\Program Files\Docker\cli-plugins\docker-buildx.exe
-  compose: Docker Compose (Docker Inc.)
-    Version:  v5.1.4
-    Path:     C:\Users\sufya\.docker\cli-plugins\docker-compose.exe
-  debug: Get a shell into any image or container (Docker Inc.)
-    Version:  0.0.47
-    Path:     C:\Program Files\Docker\cli-plugins\docker-debug.exe
-...
+Server Version: 29.4.3
+Operating System: Docker Desktop
+CPUs: 14
+Total Memory: 16486322176 bytes
+Docker Root Dir: /var/lib/docker
 ```
+
+Run plain `docker info` too and scroll through it: the same fields are in there, together with the plugins your
+installation includes, the storage driver and the number of containers and images.
 
 ## Break It
 
