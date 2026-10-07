@@ -1,3 +1,0 @@
-💻 The free lab with every command from this video: https://github.com/sufyanahmadkamboh/sufyan-devops-docker-from-zero
-◀️ Part 1: {{PART1_LINK}}
-Which of the 10 troubleshooting scenarios in the repo did you solve without opening the root cause section?

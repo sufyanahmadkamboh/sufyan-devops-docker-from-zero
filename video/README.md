@@ -1,5 +1,7 @@
 # Video course
 
+> The YouTube upload package (`youtube/`) is written by the build and kept locally; it is not published in this repository.
+
 A two-part narrated walkthrough of this repository, built from code. **Every terminal in the video shows real output**:
 the commands were recorded while `tests/mdrun.py --record` ran the tutorial chapters on a fresh Docker engine, and the
 scenes look them up by command (`recordings.py`). Nothing on screen is typed by hand.

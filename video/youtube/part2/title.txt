@@ -1,5 +1,0 @@
-Docker From Zero (Part 2): Volumes, Networks, Compose, Troubleshooting + Capstone
-
-Alternatives (A/B test with YouTube "Test & compare"):
-Docker Compose, Volumes and Networks Explained by Breaking Them (Part 2)
-From 1.75 GB to 108 MB, and 10 Docker Failures You Will Meet (Part 2)
